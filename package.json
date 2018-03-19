@@ -1,7 +1,9 @@
 {
   "name": "dwv-angular",
-  "version": "0.0.0",
-  "license": "MIT",
+  "version": "0.1.0",
+  "description": "Medical viewer using DWV (DICOM Web Viewer) and Angular.",
+  "author": "ivmartel",
+  "license": "GPL-3.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -21,9 +23,12 @@
     "@angular/platform-browser": "^5.2.0",
     "@angular/platform-browser-dynamic": "^5.2.0",
     "@angular/router": "^5.2.0",
+    "@angular/cdk": "5.2.4",
+    "@angular/material": "5.2.4",
     "core-js": "^2.4.1",
     "rxjs": "^5.5.6",
-    "zone.js": "^0.8.19"
+    "zone.js": "^0.8.19",
+    "dwv": "~0.23.2"
   },
   "devDependencies": {
     "@angular/cli": "~1.7.3",
