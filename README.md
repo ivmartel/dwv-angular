@@ -4,6 +4,12 @@ Medical viewer using [DWV](https://github.com/ivmartel/dwv) (DICOM Web Viewer) a
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.3.
 
+All coding/implementation contributions and comments are welcome.
+
+dwv-angular is not certified for diagnostic use. Released under GNU GPL-3.0 license (see [license.txt](license.txt)).
+
+[![Build Status](https://travis-ci.org/ivmartel/dwv-angular.svg?branch=master)](https://travis-ci.org/ivmartel/dwv-angular)
+
 ## Available Scripts
 
 ``` bash
