@@ -32,12 +32,12 @@ myapp.init({
 myapp.loadURLs(['./assets/bbmri-53323131.dcm'])
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  selector: 'dwv-root',
+  templateUrl: './dwv.component.html',
+  styleUrls: ['./dwv.component.css']
 })
 
-export class AppComponent {
+export class DwvComponent {
   legend = 'Powered by dwv ' + dwv.getVersion() + ' and Angular ' + VERSION.full;
   onClick = function (event) {
     myapp.onChangeTool(event);

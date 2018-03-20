@@ -3,18 +3,18 @@ import { NgModule } from '@angular/core';
 
 import { MatButtonModule } from '@angular/material';
 
-import { AppComponent } from './app.component';
+import { DwvComponent } from './dwv.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    DwvComponent
   ],
   imports: [
     BrowserModule,
     MatButtonModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [DwvComponent]
 })
-export class AppModule { }
+export class DwvModule { }
