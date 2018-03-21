@@ -22,7 +22,7 @@ dwv.gui.refreshElement = dwv.gui.base.refreshElement
 })
 
 export class DwvComponent {
-  private legend: string;
+  public legend: string;
   private dwvApp: any;
 
   constructor() {
