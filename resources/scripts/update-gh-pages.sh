@@ -13,6 +13,8 @@ git config --global user.email "travis@travis-ci.org"
 git config --global user.name "Travis"
 # using token, clone gh-pages branch
 git clone --quiet --branch=gh-pages https://${GH_TOKEN}@github.com/ivmartel/dwv-angular.git gh-pages
+# clean up demo
+rm -Rf $HOME/gh-pages/demo/trunk/*
 # copy new build in demo/trunk
 cp -Rf $HOME/build/ivmartel/dwv-angular/dist/* $HOME/gh-pages/demo/trunk
 # move back to root of repo
