@@ -1,5 +1,7 @@
 # dwv-angular
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/ivmartel/dwv-angular.svg)](https://greenkeeper.io/)
+
 Medical viewer using [DWV](https://github.com/ivmartel/dwv) (DICOM Web Viewer) and [Angular](https://angular.io/).
 
 All coding/implementation contributions and comments are welcome.
