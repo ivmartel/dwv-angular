@@ -23,6 +23,9 @@ npm run build
 # run unit tests
 npm run test
 
+# run unit tests with browser
+npm run test --browsers=Chrome --single-run=false
+
 # run e2e tests
 npm run e2e
 ```
