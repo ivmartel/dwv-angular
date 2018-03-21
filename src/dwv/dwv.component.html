@@ -1,7 +1,8 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
+<div>
   <div id="dwv">
     <div class="button-row">
+      <button mat-raised-button color="primary" value="Scroll" (click)="onClick($event)">Scroll</button>
       <button mat-raised-button color="primary" value="WindowLevel" (click)="onClick($event)">WindowLevel</button>
       <button mat-raised-button color="primary" value="ZoomAndPan" (click)="onClick($event)">ZoomAndPan</button>
     </div>
@@ -9,6 +10,6 @@
       <div class="dropBox"></div>
       <canvas class="imageLayer">Only for HTML5 compatible browsers...</canvas>
     </div>
+    <div class="legend">{{ legend }}</div>
   </div>
-  <div class="legend">{{ legend }}</div>
 </div>

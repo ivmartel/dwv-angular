@@ -1,10 +1,12 @@
+#dwv { font-family: Arial, Helvetica, sans-serif; }
+
 .button-row {
-  align-items: center;
+  text-align: center;
   justify-content: space-around;
   margin: 0.2em;
 }
 .legend {
-  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
   font-size: 8pt;
 }
 
@@ -19,5 +21,5 @@
 /* drag&drop */
 .dropBox {
     border: 5px dashed #ccc;
-    margin: auto; text-align: center; }
+    margin: auto; text-align: center }
 .dropBox.hover { border: 5px dashed #cc0; }

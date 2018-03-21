@@ -1,35 +1,19 @@
 import { Component } from '@angular/core';
 import { VERSION } from '@angular/core';
-
 import * as dwv from 'dwv';
 
-// overrides (appgui.js)
+// gui overrides
 
-// Progress
+// decode query
+dwv.utils.decodeQuery = dwv.utils.base.decodeQuery
+// progress
 dwv.gui.displayProgress = function () {}
-// Window
+// window
 dwv.gui.getWindowSize = dwv.gui.base.getWindowSize
 // get element
 dwv.gui.getElement = dwv.gui.base.getElement
-
-dwv.gui.refreshElement = dwv.gui.base.refreshElement;
-
-// launch (applauncher.js)
-
-// create app
-var myapp = new dwv.App()
-
-// initialise app
-myapp.init({
-  'containerDivId': 'dwv',
-  'fitToWindow': true,
-  'tools': ['WindowLevel', 'ZoomAndPan'],
-  'shapes': ['Arrow', 'Ruler'],
-  'isMobile': true
-})
-
-// load local dicom
-myapp.loadURLs(['./assets/bbmri-53323131.dcm'])
+// refresh element
+dwv.gui.refreshElement = dwv.gui.base.refreshElement
 
 @Component({
   selector: 'dwv-root',
@@ -38,8 +22,26 @@ myapp.loadURLs(['./assets/bbmri-53323131.dcm'])
 })
 
 export class DwvComponent {
-  legend = 'Powered by dwv ' + dwv.getVersion() + ' and Angular ' + VERSION.full;
+  private legend: string;
+  private dwvApp: any;
+
+  constructor() {
+    this.legend = 'Powered by dwv ' + dwv.getVersion() + ' and Angular ' + VERSION.full;
+  }
+  ngOnInit() {
+    // create app
+    this.dwvApp = new dwv.App();
+    // initialise app
+    this.dwvApp.init({
+      'containerDivId': 'dwv',
+      'fitToWindow': true,
+      'tools': ['Scroll', 'WindowLevel', 'ZoomAndPan'],
+      'isMobile': true
+    });
+  }
   onClick = function (event) {
-    myapp.onChangeTool(event);
+    if ( this.dwvApp ) {
+        this.dwvApp.onChangeTool(event);
+    }
   };
 }
