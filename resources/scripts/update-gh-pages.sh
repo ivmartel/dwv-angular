@@ -5,7 +5,7 @@
 echo -e "Starting to update gh-pages\n"
 
 # build deploy version (result in ./dist)
-yarn run build --base-href=/dwv-angular/demo/trunk/
+yarn run build --base-href=/dwv-angular/demo/trunk/ || exit 1
 
 # go to home and setup git
 cd $HOME
