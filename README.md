@@ -12,22 +12,22 @@ dwv-angular is not certified for diagnostic use. Released under GNU GPL-3.0 lice
 
 ``` bash
 # install dependencies
-npm install
+yarn install
 
 # serve with hot reload at localhost:4200
 ng serve
 
 # build for production with minification
-npm run build
+yarn run build
 
 # run unit tests
-npm run test
+yarn run test
 
 # run unit tests with browser
-npm run test --browsers=Chrome --single-run=false
+yarn run test --browsers=Chrome --single-run=false
 
 # run e2e tests
-npm run e2e
+yarn run e2e
 ```
 
 Unit tests use [Karma](https://karma-runner.github.io) and e2e tests use [Protractor](http://www.protractortest.org/).
