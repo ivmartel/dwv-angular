@@ -20,7 +20,7 @@ before_script: greenkeeper-lockfile-update
 after_script: greenkeeper-lockfile-upload
 
 after_success:
-# update gh-page only for master
+# update gh-page only for master and not pull requests
 - if [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
     chmod +x ./resources/scripts/update-gh-pages.sh; "./resources/scripts/update-gh-pages.sh";
   else echo "Not deploying artifacts for $TRAVIS_BRANCH"; fi
