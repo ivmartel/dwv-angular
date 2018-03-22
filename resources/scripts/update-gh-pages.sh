@@ -4,9 +4,6 @@
 # we should be in /home/travis/build/ivmartel/dwv-angular
 echo -e "Starting to update gh-pages\n"
 
-# build deploy version (result in ./dist)
-yarn run build --base-href=/dwv-angular/demo/trunk/ || exit 1
-
 # go to home and setup git
 cd $HOME
 git config --global user.email "travis@travis-ci.org"
