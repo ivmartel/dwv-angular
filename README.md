@@ -15,7 +15,7 @@ dwv-angular is not certified for diagnostic use. Released under GNU GPL-3.0 lice
 yarn install
 
 # serve with hot reload at localhost:4200
-ng serve
+ng run start
 
 # build for production with minification
 yarn run build
