@@ -9,7 +9,8 @@
       "outDir": "dist",
       "assets": [
         "assets",
-        "favicon.ico"
+        "favicon.ico",
+        { "glob": "**/*", "input": "../node_modules/dwv/decoders/", "output": "assets/dwv/decoders/" }
       ],
       "index": "index.html",
       "main": "main.ts",
