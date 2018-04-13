@@ -5,10 +5,12 @@
       <button mat-raised-button color="primary" value="Scroll" (click)="onClick($event)">Scroll</button>
       <button mat-raised-button color="primary" value="WindowLevel" (click)="onClick($event)">WindowLevel</button>
       <button mat-raised-button color="primary" value="ZoomAndPan" (click)="onClick($event)">ZoomAndPan</button>
+      <button mat-raised-button color="primary" value="Draw" (click)="onClick($event)">Draw</button>
     </div>
     <div class="layerContainer">
       <div class="dropBox"></div>
       <canvas class="imageLayer">Only for HTML5 compatible browsers...</canvas>
+      <div class="drawDiv"></div>
     </div>
     <div class="legend">{{ legend }}</div>
   </div>

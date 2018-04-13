@@ -42,7 +42,8 @@ export class DwvComponent {
     this.dwvApp.init({
       'containerDivId': 'dwv',
       'fitToWindow': true,
-      'tools': ['Scroll', 'WindowLevel', 'ZoomAndPan'],
+      'tools': ['Scroll', 'WindowLevel', 'ZoomAndPan', 'Draw'],
+      'shapes': ['Ruler'],
       'isMobile': true
     });
   }
