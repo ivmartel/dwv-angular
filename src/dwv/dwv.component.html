@@ -1,6 +1,7 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div>
   <div id="dwv">
+    <mat-progress-bar mode="determinate" value="{{ loaded }}"></mat-progress-bar>
     <div class="button-row">
       <button mat-raised-button color="primary" value="Scroll" (click)="onClick($event)">Scroll</button>
       <button mat-raised-button color="primary" value="WindowLevel" (click)="onClick($event)">WindowLevel</button>

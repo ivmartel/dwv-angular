@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { MatButtonModule } from '@angular/material';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 import { DwvComponent } from './dwv.component';
 
@@ -12,7 +13,8 @@ import { DwvComponent } from './dwv.component';
   ],
   imports: [
     BrowserModule,
-    MatButtonModule
+    MatButtonModule,
+    MatProgressBarModule
   ],
   providers: [],
   bootstrap: [DwvComponent]

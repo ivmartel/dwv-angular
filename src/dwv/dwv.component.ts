@@ -30,10 +30,12 @@ dwv.image.decoderScripts = {
 
 export class DwvComponent {
   public legend: string;
+  public loaded: number ;
   private dwvApp: any;
 
   constructor() {
     this.legend = 'Powered by dwv ' + dwv.getVersion() + ' and Angular ' + VERSION.full;
+    this.loaded = 0;
   }
   ngOnInit() {
     // create app
@@ -45,6 +47,11 @@ export class DwvComponent {
       'tools': ['Scroll', 'WindowLevel', 'ZoomAndPan', 'Draw'],
       'shapes': ['Ruler'],
       'isMobile': true
+    });
+    // progress
+    var self = this;
+    this.dwvApp.addEventListener("load-progress", function (event) {
+      self.loaded = event.loaded;
     });
   }
   onClick = function (event) {
