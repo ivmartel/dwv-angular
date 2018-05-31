@@ -6,7 +6,6 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 import { DwvComponent } from './dwv.component';
 
-
 @NgModule({
   declarations: [
     DwvComponent
@@ -20,4 +19,5 @@ import { DwvComponent } from './dwv.component';
     DwvComponent
   ]
 })
-export class DwvModule { }
+
+export class DwvModule {}
