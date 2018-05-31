@@ -1,26 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { VERSION } from '@angular/core';
 import * as dwv from 'dwv';
 
 // gui overrides
 
 // decode query
-dwv.utils.decodeQuery = dwv.utils.base.decodeQuery
+dwv.utils.decodeQuery = dwv.utils.base.decodeQuery;
 // progress
-dwv.gui.displayProgress = function () {}
+dwv.gui.displayProgress = function () {};
 // window
-dwv.gui.getWindowSize = dwv.gui.base.getWindowSize
+dwv.gui.getWindowSize = dwv.gui.base.getWindowSize;
 // get element
-dwv.gui.getElement = dwv.gui.base.getElement
+dwv.gui.getElement = dwv.gui.base.getElement;
 // refresh element
-dwv.gui.refreshElement = dwv.gui.base.refreshElement
+dwv.gui.refreshElement = dwv.gui.base.refreshElement;
 
 // Image decoders (for web workers)
 dwv.image.decoderScripts = {
-    "jpeg2000": "assets/dwv/decoders/pdfjs/decode-jpeg2000.js",
-    "jpeg-lossless": "assets/dwv/decoders/rii-mango/decode-jpegloss.js",
-    "jpeg-baseline": "assets/dwv/decoders/pdfjs/decode-jpegbaseline.js"
-}
+    'jpeg2000': 'assets/dwv/decoders/pdfjs/decode-jpeg2000.js',
+    'jpeg-lossless': 'assets/dwv/decoders/rii-mango/decode-jpegloss.js',
+    'jpeg-baseline': 'assets/dwv/decoders/pdfjs/decode-jpegbaseline.js'
+};
 
 @Component({
   selector: 'app-dwv',
@@ -28,7 +28,7 @@ dwv.image.decoderScripts = {
   styleUrls: ['./dwv.component.css']
 })
 
-export class DwvComponent {
+export class DwvComponent implements OnInit {
   public legend: string;
   public loaded: number ;
   private dwvApp: any;
@@ -49,8 +49,8 @@ export class DwvComponent {
       'isMobile': true
     });
     // progress
-    var self = this;
-    this.dwvApp.addEventListener("load-progress", function (event) {
+    const self = this;
+    this.dwvApp.addEventListener('load-progress', function (event) {
       self.loaded = event.loaded;
     });
   }
