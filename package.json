@@ -8,7 +8,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --prod",
-    "test": "ng test",
+    "test": "ng lint && ng test",
+    "ngtest": "ng test --karma-config karma-live.conf.js",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
