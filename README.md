@@ -20,11 +20,11 @@ ng run start
 # build for production with minification
 yarn run build
 
-# run unit tests
+# run linting and headless unit tests
 yarn run test
 
-# run unit tests with browser
-yarn run test --browsers=Chrome --single-run=false
+# run unit tests with Chrome display and hot reload
+yarn run ngtest
 
 # run e2e tests
 yarn run e2e

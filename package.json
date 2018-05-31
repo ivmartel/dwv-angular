@@ -9,7 +9,7 @@
     "start": "ng serve",
     "build": "ng build --prod",
     "test": "ng lint && ng test",
-    "ngtest": "ng test --karma-config karma-live.conf.js",
+    "ngtest": "ng test --browsers=Chrome --single-run=false",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
