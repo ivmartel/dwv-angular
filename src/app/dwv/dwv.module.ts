@@ -16,7 +16,8 @@ import { DwvComponent } from './dwv.component';
     MatButtonModule,
     MatProgressBarModule
   ],
-  providers: [],
-  bootstrap: [DwvComponent]
+  exports : [
+    DwvComponent
+  ]
 })
 export class DwvModule { }

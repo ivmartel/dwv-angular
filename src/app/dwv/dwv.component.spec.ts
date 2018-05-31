@@ -14,7 +14,7 @@ describe('DwvComponent', () => {
     }).compileComponents();
   }));
 
-  it('should create the app', async(() => {
+  it('should create the dwv component', async(() => {
     const fixture = TestBed.createComponent(DwvComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
@@ -26,7 +26,7 @@ describe('DwvComponent', () => {
     expect(app.legend).toContain('Powered by dwv');
   }));
 
-  it('should render title in a h1 tag', async(() => {
+  it('should render legend with legend class', async(() => {
     const fixture = TestBed.createComponent(DwvComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
