@@ -23,7 +23,7 @@ dwv.image.decoderScripts = {
 }
 
 @Component({
-  selector: 'dwv-root',
+  selector: 'app-dwv',
   templateUrl: './dwv.component.html',
   styleUrls: ['./dwv.component.css']
 })
