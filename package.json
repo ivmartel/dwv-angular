@@ -9,7 +9,7 @@
     "start": "ng serve",
     "build": "ng build --prod",
     "test": "ng lint && ng test",
-    "ngtest": "ng test --browsers=Chrome --single-run=false",
+    "ngtest": "ng test --browsers=Chrome --watch=true",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
