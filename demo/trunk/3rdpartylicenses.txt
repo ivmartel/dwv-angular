@@ -48,7 +48,7 @@ jszip@3.1.5
 (MIT OR GPL-3.0)
 (MIT OR GPL-3.0)
 
-dwv@0.23.4
+dwv@0.23.5
 GPL-3.0
 GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
