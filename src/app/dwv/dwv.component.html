@@ -1,4 +1,3 @@
-<!--The content below is only a placeholder and can be replaced.-->
 <div>
   <div id="dwv">
     <mat-progress-bar mode="determinate" value="{{ loaded }}"></mat-progress-bar>
@@ -7,6 +6,7 @@
       <button mat-raised-button color="primary" value="WindowLevel" (click)="onClick($event)">WindowLevel</button>
       <button mat-raised-button color="primary" value="ZoomAndPan" (click)="onClick($event)">ZoomAndPan</button>
       <button mat-raised-button color="primary" value="Draw" (click)="onClick($event)">Draw</button>
+      <button mat-raised-button color="primary" (click)="openTagsDialog()">Tags</button>
     </div>
     <div class="layerContainer">
       <div class="dropBox"></div>

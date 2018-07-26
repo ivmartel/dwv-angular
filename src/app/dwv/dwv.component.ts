@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { VERSION } from '@angular/core';
 import * as dwv from 'dwv';
+import { MatDialog } from '@angular/material';
+import { TagsDialogComponent } from './tags-dialog.component';
 
 // gui overrides
 
@@ -32,11 +34,13 @@ export class DwvComponent implements OnInit {
   public legend: string;
   public loaded: number ;
   private dwvApp: any;
+  private tags: any[];
 
-  constructor() {
+  constructor(public dialog: MatDialog) {
     this.legend = 'Powered by dwv ' + dwv.getVersion() + ' and Angular ' + VERSION.full;
     this.loaded = 0;
   }
+
   ngOnInit() {
     // create app
     this.dwvApp = new dwv.App();
@@ -53,10 +57,24 @@ export class DwvComponent implements OnInit {
     this.dwvApp.addEventListener('load-progress', function (event) {
       self.loaded = event.loaded;
     });
+    this.dwvApp.addEventListener('load-end', function (event) {
+      self.tags = self.dwvApp.getTags();
+    });
   }
-  onClick = function (event) {
+
+  onClick(event): void {
     if ( this.dwvApp ) {
         this.dwvApp.onChangeTool(event);
     }
-  };
+  }
+
+  openTagsDialog(): void {
+    this.dialog.open(TagsDialogComponent,
+      {
+        width: '80%',
+        height: '90%',
+        data: { title: 'DICOM Tags', value: this.tags }
+      }
+    );
+  }
 }
