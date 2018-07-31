@@ -32,13 +32,15 @@ dwv.image.decoderScripts = {
 
 export class DwvComponent implements OnInit {
   public legend: string;
-  public loaded: number ;
+  public tools = ['Scroll', 'ZoomAndPan', 'WindowLevel', 'Draw'];
+  public selectedTool = 'Select Tool';
+  public loadProgress = 0;
+  public dataLoaded = false;
   private dwvApp: any;
   private tags: any[];
 
   constructor(public dialog: MatDialog) {
     this.legend = 'Powered by dwv ' + dwv.getVersion() + ' and Angular ' + VERSION.full;
-    this.loaded = 0;
   }
 
   ngOnInit() {
@@ -48,23 +50,33 @@ export class DwvComponent implements OnInit {
     this.dwvApp.init({
       'containerDivId': 'dwv',
       'fitToWindow': true,
-      'tools': ['Scroll', 'WindowLevel', 'ZoomAndPan', 'Draw'],
+      'tools': this.tools,
       'shapes': ['Ruler'],
       'isMobile': true
     });
     // progress
     const self = this;
     this.dwvApp.addEventListener('load-progress', function (event) {
-      self.loaded = event.loaded;
+      self.loadProgress = event.loaded;
     });
     this.dwvApp.addEventListener('load-end', function (event) {
+      // set data loaded flag
+      self.dataLoaded = true;
+      // set dicom tags
       self.tags = self.dwvApp.getTags();
+      // set the selected tool
+      if (self.dwvApp.isMonoSliceData() && self.dwvApp.getImage().getNumberOfFrames() === 1) {
+        self.selectedTool = 'ZoomAndPan';
+      } else {
+        self.selectedTool = 'Scroll';
+      }
     });
   }
 
-  onClick(event): void {
+  onChangeTool(tool): void {
     if ( this.dwvApp ) {
-        this.dwvApp.onChangeTool(event);
+      this.selectedTool = tool;
+      this.dwvApp.onChangeTool({ currentTarget: { value: tool } });
     }
   }
 

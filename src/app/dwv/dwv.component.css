@@ -2,8 +2,7 @@
 
 .button-row {
   text-align: center;
-  justify-content: space-around;
-  margin: 0.2em;
+  padding: 5px;;
 }
 .mat-raised-button {
   margin: 0.1em;
@@ -26,5 +25,7 @@
 /* drag&drop */
 .dropBox {
     border: 5px dashed #ccc;
-    margin: auto; text-align: center }
+    margin: auto;
+    text-align: center; vertical-align: middle;
+    background: white; color: grey;  }
 .dropBox.hover { border: 5px dashed #cc0; }

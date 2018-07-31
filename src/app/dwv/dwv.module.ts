@@ -3,8 +3,10 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatButtonModule } from '@angular/material';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatDialogModule } from '@angular/material';
+import { MatIconModule } from '@angular/material';
+import { MatMenuModule } from '@angular/material';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTableModule, MatPaginatorModule, MatSortModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 
 import { DwvComponent } from './dwv.component';
@@ -21,13 +23,15 @@ import { TagsTableComponent } from './tags-table.component';
     BrowserModule,
     BrowserAnimationsModule,
     MatButtonModule,
-    MatProgressBarModule,
     MatDialogModule,
+    MatIconModule,
+    MatMenuModule,
+    MatProgressBarModule,
+    MatInputModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
-    MatFormFieldModule,
-    MatInputModule
+    MatFormFieldModule
   ],
   entryComponents: [
     TagsDialogComponent

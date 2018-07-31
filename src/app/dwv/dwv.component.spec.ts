@@ -1,7 +1,12 @@
 import { TestBed, async } from '@angular/core/testing';
-import { DwvComponent } from './dwv.component';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
+
+import { MatButtonModule } from '@angular/material';
 import { MatDialogModule } from '@angular/material';
+import { MatIconModule } from '@angular/material';
+import { MatMenuModule } from '@angular/material';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+
+import { DwvComponent } from './dwv.component';
 
 describe('DwvComponent', () => {
   beforeEach(async(() => {
@@ -10,8 +15,11 @@ describe('DwvComponent', () => {
         DwvComponent
       ],
       imports: [
-        MatProgressBarModule,
-        MatDialogModule
+        MatButtonModule,
+        MatDialogModule,
+        MatIconModule,
+        MatMenuModule,
+        MatProgressBarModule
       ]
     }).compileComponents();
   }));
