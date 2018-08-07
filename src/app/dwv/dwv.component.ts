@@ -80,6 +80,12 @@ export class DwvComponent implements OnInit {
     }
   }
 
+  onReset(): void {
+    if ( this.dwvApp ) {
+      this.dwvApp.onDisplayReset();
+    }
+  }
+
   openTagsDialog(): void {
     this.dialog.open(TagsDialogComponent,
       {

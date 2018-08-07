@@ -9,6 +9,7 @@
         <button *ngFor="let tool of tools" mat-menu-item (value)="tool" (click)="onChangeTool(tool)">{{ tool }}</button>
       </mat-menu>
 
+      <button mat-raised-button color="primary" (click)="onReset()" [disabled]="!dataLoaded">Reset</button>
       <button mat-raised-button color="primary" (click)="openTagsDialog()" [disabled]="!dataLoaded">Tags</button>
     </div>
     <div class="layerContainer">
