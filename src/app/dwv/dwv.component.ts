@@ -40,7 +40,7 @@ export class DwvComponent implements OnInit {
   private tags: any[];
 
   constructor(public dialog: MatDialog) {
-    this.legend = 'Powered by <a href="https://github.com/ivmartel/dwv" title="dwv on github">dwv</a> ' + 
+    this.legend = 'Powered by <a href="https://github.com/ivmartel/dwv" title="dwv on github">dwv</a> ' +
       dwv.getVersion() + ' and Angular ' + VERSION.full;
   }
 
