@@ -33,13 +33,13 @@ describe('DwvComponent', () => {
   it(`should have a legend`, async(() => {
     const fixture = TestBed.createComponent(DwvComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.legend).toContain('Powered by dwv');
+    expect(app.legend).toContain('Powered by <a href="https://github.com/ivmartel/dwv" title="dwv on github">dwv</a>');
   }));
 
   it('should render legend with legend class', async(() => {
     const fixture = TestBed.createComponent(DwvComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('.legend').textContent).toContain('Powered by dwv');
+    expect(compiled.querySelector('.legend').textContent).toContain('Powered by <a href="https://github.com/ivmartel/dwv" title="dwv on github">dwv</a>');
   }));
 });
