@@ -24,24 +24,20 @@ describe('DwvComponent', () => {
     }).compileComponents();
   }));
 
-  it('should create the dwv component', async(() => {
+  // Inspect the component instance on mount
+  it('renders the component', async(() => {
     const fixture = TestBed.createComponent(DwvComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app).toBeTruthy();
+    const component = fixture.debugElement.componentInstance;
+    expect(component).toBeDefined();
+    expect(component).not.toBeNull();
   }));
 
-  it(`should have a legend`, async(() => {
-    const fixture = TestBed.createComponent(DwvComponent);
-    const app = fixture.debugElement.componentInstance;
-    expect(app.legend).toContain(
-      'Powered by <a href="https://github.com/ivmartel/dwv" title="dwv on github">dwv</a>');
-  }));
-
-  it('should render legend with legend class', async(() => {
+  // Mount an instance and inspect the render output
+  it('renders the beginning of the legend', async(() => {
     const fixture = TestBed.createComponent(DwvComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('.legend').textContent).toContain(
-      'Powered by <a href="https://github.com/ivmartel/dwv" title="dwv on github">dwv</a>');
+    const legend = compiled.querySelector('.legend');
+    expect(legend.textContent).toContain('Powered by');
   }));
 });
