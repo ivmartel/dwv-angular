@@ -31,7 +31,7 @@ dwv.image.decoderScripts = {
 })
 
 export class DwvComponent implements OnInit {
-  public legend: string;
+  public versions: any;
   public tools = ['Scroll', 'ZoomAndPan', 'WindowLevel', 'Draw'];
   public selectedTool = 'Select Tool';
   public loadProgress = 0;
@@ -40,7 +40,10 @@ export class DwvComponent implements OnInit {
   private tags: any[];
 
   constructor(public dialog: MatDialog) {
-    this.legend = 'Powered by dwv ' + dwv.getVersion() + ' and Angular ' + VERSION.full;
+    this.versions = {
+      'dwv': dwv.getVersion(),
+      'angular': VERSION.full
+    };
   }
 
   ngOnInit() {
