@@ -2119,16 +2119,16 @@ duplexify@^3.4.2, duplexify@^3.6.0:
     readable-stream "^2.0.0"
     stream-shift "^1.0.0"
 
-dwv@0.24.1:
-  version "0.24.1"
-  resolved "https://registry.yarnpkg.com/dwv/-/dwv-0.24.1.tgz#a3fcd19c15136df6e6fcbeae78066ce296ab1579"
-  integrity sha512-eyYMHpcydgMNSV7JtH+01B/dzNtp3sd8RpZEzoy+9evfnCoQ6oVXw1iNhZGEFfoYV2MsjVXfn2iNEuRZ12Bpng==
+dwv@0.25.2:
+  version "0.25.2"
+  resolved "https://registry.yarnpkg.com/dwv/-/dwv-0.25.2.tgz#ab2c98be6abae323cc1f15cfeb0b706d6373f412"
+  integrity sha512-BPL5RtxpJ9ab9kBwIZ7Kpcs7LEF/jgZhmrz+TV6JoEtfnA9WFxZ68OMs9syiS/ZgONYY80iMr7csUOdU48GJAA==
   dependencies:
-    i18next "~11.6.0"
+    i18next "~11.9.0"
     i18next-browser-languagedetector "~2.2.0"
     i18next-xhr-backend "~1.5.1"
     jszip "~3.1.3"
-    konva "~2.2.1"
+    konva "~2.4.0"
     magic-wand-js "~1.0.0"
 
 ecc-jsbn@~0.1.1:
@@ -3288,10 +3288,10 @@ i18next-xhr-backend@~1.5.1:
   resolved "https://registry.yarnpkg.com/i18next-xhr-backend/-/i18next-xhr-backend-1.5.1.tgz#50282610780c6a696d880dfa7f4ac1d01e8c3ad5"
   integrity sha512-9OLdC/9YxDvTFcgsH5t2BHCODHEotHCa6h7Ly0EUlUC7Y2GS09UeoHOGj3gWKQ3HCqXz8NlH4gOrK3NNc9vPuw==
 
-i18next@~11.6.0:
-  version "11.6.0"
-  resolved "https://registry.yarnpkg.com/i18next/-/i18next-11.6.0.tgz#e0047aa3e3a0080f6f318426f90597cbb0d6ddd5"
-  integrity sha512-+eOdu1laoPX8l3zuaEFpf0MPYqAyKeX46WEjRkpPLp0TcijP3ww6NrDCPcRwX3yKB69R+ggiLvLGzCm8ALaVXQ==
+i18next@~11.9.0:
+  version "11.9.0"
+  resolved "https://registry.yarnpkg.com/i18next/-/i18next-11.9.0.tgz#c30c0a5e0a857124923a8dd1ce8f1df603e30c70"
+  integrity sha512-NDuIoELzyJ+29kc29j9aKgzjZht4kEKh3PPdz0qCEC9ZUpgRVaWUdkMRES/NVTcpe1ei4MMwY8DNWBWCIUlAng==
 
 iconv-lite@0.4.19:
   version "0.4.19"
@@ -4035,10 +4035,10 @@ kind-of@^6.0.0, kind-of@^6.0.2:
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.2.tgz#01146b36a6218e64e58f3a8d66de5d7fc6f6d051"
   integrity sha512-s5kLOcnH0XqDO+FvuaLX8DDjZ18CGFk7VygH40QoKPUQhW4e2rvM0rwUq0t8IQDOwYSeLK01U90OjzBTme2QqA==
 
-konva@~2.2.1:
-  version "2.2.2"
-  resolved "https://registry.yarnpkg.com/konva/-/konva-2.2.2.tgz#e83c8a2ec979f31b10793f3b001554715f26b7bc"
-  integrity sha512-CrWd0PCFLxi/NPEt4ADaC9Rdpq1JoMEw//Y2VSOBF4GmUd+esupKBa3hlZDMcmLSY9VWhp84szqcjYcA+YBnTg==
+konva@~2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/konva/-/konva-2.4.0.tgz#3df5925ba69439117bf6efc0907517b0b0107e21"
+  integrity sha512-9fgKBPkPBUeOmOEUUvS9KhjDYM11CTRfpydi5Wy7ctcAhlXfP5G90xYq8Gq3lSYbvc5+7XRx/Gyb65gFlNQ1yg==
 
 lazy-cache@^1.0.3:
   version "1.0.4"

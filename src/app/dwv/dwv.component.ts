@@ -10,8 +10,6 @@ import { TagsDialogComponent } from './tags-dialog.component';
 dwv.utils.decodeQuery = dwv.utils.base.decodeQuery;
 // progress
 dwv.gui.displayProgress = function () {};
-// window
-dwv.gui.getWindowSize = dwv.gui.base.getWindowSize;
 // get element
 dwv.gui.getElement = dwv.gui.base.getElement;
 // refresh element
@@ -52,7 +50,6 @@ export class DwvComponent implements OnInit {
     // initialise app
     this.dwvApp.init({
       'containerDivId': 'dwv',
-      'fitToWindow': true,
       'tools': this.tools,
       'shapes': ['Ruler'],
       'isMobile': true
