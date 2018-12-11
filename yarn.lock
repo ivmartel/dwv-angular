@@ -9,11 +9,11 @@
     "@angular-devkit/core" "7.0.4"
     rxjs "6.3.3"
 
-"@angular-devkit/architect@0.11.1":
-  version "0.11.1"
-  resolved "https://registry.yarnpkg.com/@angular-devkit/architect/-/architect-0.11.1.tgz#fb8429b583d4d7efafe5ff551ffdd30a705b9ab0"
+"@angular-devkit/architect@0.11.0":
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/architect/-/architect-0.11.0.tgz#25b75f5d8ca00cedd414ede12db87364c6c5aa45"
   dependencies:
-    "@angular-devkit/core" "7.1.1"
+    "@angular-devkit/core" "7.1.0"
     rxjs "6.3.3"
 
 "@angular-devkit/build-angular@~0.10.4":
@@ -96,9 +96,9 @@
     rxjs "6.3.3"
     source-map "0.7.3"
 
-"@angular-devkit/core@7.1.1":
-  version "7.1.1"
-  resolved "https://registry.yarnpkg.com/@angular-devkit/core/-/core-7.1.1.tgz#ce0a674f16188072988502cc3f073b15efcfe194"
+"@angular-devkit/core@7.1.0":
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/core/-/core-7.1.0.tgz#5374736843acc2405937ad61c2c4818fad64b72d"
   dependencies:
     ajv "6.5.3"
     chokidar "2.0.4"
@@ -106,11 +106,11 @@
     rxjs "6.3.3"
     source-map "0.7.3"
 
-"@angular-devkit/schematics@7.1.1":
-  version "7.1.1"
-  resolved "https://registry.yarnpkg.com/@angular-devkit/schematics/-/schematics-7.1.1.tgz#328ec6071c5ef3b1588a9f4bc97f5edfc3620b09"
+"@angular-devkit/schematics@7.1.0":
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/schematics/-/schematics-7.1.0.tgz#ef89aaf48d995f3129c2673f5c82a9f88d2f8b61"
   dependencies:
-    "@angular-devkit/core" "7.1.1"
+    "@angular-devkit/core" "7.1.0"
     rxjs "6.3.3"
 
 "@angular/animations@^7.0.2":
@@ -120,22 +120,22 @@
     tslib "^1.9.0"
 
 "@angular/cdk@^7.0.2":
-  version "7.1.1"
-  resolved "https://registry.yarnpkg.com/@angular/cdk/-/cdk-7.1.1.tgz#6916b2303af5e0a56a9b64ff4d54642cf191c54f"
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/@angular/cdk/-/cdk-7.1.0.tgz#7e5c3e3631947ef91413a83997ec4edec92cdd1c"
   dependencies:
     tslib "^1.7.1"
   optionalDependencies:
     parse5 "^5.0.0"
 
 "@angular/cli@^7.0.4":
-  version "7.1.1"
-  resolved "https://registry.yarnpkg.com/@angular/cli/-/cli-7.1.1.tgz#c5dd2b92c5c3391f20262b5e530813e4e2d31777"
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/@angular/cli/-/cli-7.1.0.tgz#c30ed717d44e9984ae6149e7bb81fd1badad96d7"
   dependencies:
-    "@angular-devkit/architect" "0.11.1"
-    "@angular-devkit/core" "7.1.1"
-    "@angular-devkit/schematics" "7.1.1"
-    "@schematics/angular" "7.1.1"
-    "@schematics/update" "0.11.1"
+    "@angular-devkit/architect" "0.11.0"
+    "@angular-devkit/core" "7.1.0"
+    "@angular-devkit/schematics" "7.1.0"
+    "@schematics/angular" "7.1.0"
+    "@schematics/update" "0.11.0"
     inquirer "6.2.0"
     opn "5.3.0"
     semver "5.5.1"
@@ -192,8 +192,8 @@
   resolved "https://registry.yarnpkg.com/@angular/language-service/-/language-service-7.1.1.tgz#6bbe35b2430ad54618a1803f881efb5894b296c9"
 
 "@angular/material@^7.0.2":
-  version "7.1.1"
-  resolved "https://registry.yarnpkg.com/@angular/material/-/material-7.1.1.tgz#147b7565262e04d504c8dab7317632967a3db02a"
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/@angular/material/-/material-7.1.0.tgz#441f2d03a97a1fa35546b61dcde86db34f0f5efc"
   dependencies:
     tslib "^1.7.1"
 
@@ -225,20 +225,20 @@
     tree-kill "1.2.0"
     webpack-sources "1.2.0"
 
-"@schematics/angular@7.1.1":
-  version "7.1.1"
-  resolved "https://registry.yarnpkg.com/@schematics/angular/-/angular-7.1.1.tgz#4ee17a17d221eaf48009db0b991766d1074d0b4f"
+"@schematics/angular@7.1.0":
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/@schematics/angular/-/angular-7.1.0.tgz#7ff5a275be21ea020184c68837bb94637e4f47a7"
   dependencies:
-    "@angular-devkit/core" "7.1.1"
-    "@angular-devkit/schematics" "7.1.1"
+    "@angular-devkit/core" "7.1.0"
+    "@angular-devkit/schematics" "7.1.0"
     typescript "3.1.6"
 
-"@schematics/update@0.11.1":
-  version "0.11.1"
-  resolved "https://registry.yarnpkg.com/@schematics/update/-/update-0.11.1.tgz#5129a800043dc38ee1f1c879865e0df82ddac7ed"
+"@schematics/update@0.11.0":
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/@schematics/update/-/update-0.11.0.tgz#411cda77a0f82f75d05b1e5a78633d7009ead8b4"
   dependencies:
-    "@angular-devkit/core" "7.1.1"
-    "@angular-devkit/schematics" "7.1.1"
+    "@angular-devkit/core" "7.1.0"
+    "@angular-devkit/schematics" "7.1.0"
     "@yarnpkg/lockfile" "1.1.0"
     ini "1.3.5"
     pacote "9.1.1"
@@ -253,6 +253,7 @@
 "@types/jasmine@~3.3.1":
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/@types/jasmine/-/jasmine-3.3.1.tgz#b6c4f356013364e98b583647c7b3b6de6fccd2cc"
+  integrity sha512-JnKB+cEIFuQZXizZP6N0zxma+JlvowkjefWuL61otVmXN7Ebbs4ka3IbDVIz1pc+TCiT00q925jANz3gQJ9qXw==
 
 "@types/jasminewd2@~2.0.2":
   version "2.0.3"
@@ -2413,6 +2414,10 @@ find-up@^3.0.0:
   dependencies:
     locate-path "^3.0.0"
 
+flatted@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/flatted/-/flatted-2.0.0.tgz#55122b6536ea496b4b44893ee2608141d10d9916"
+
 flush-write-stream@^1.0.0:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/flush-write-stream/-/flush-write-stream-1.0.3.tgz#c5d586ef38af6097650b49bc41b55fabb19f35bd"
@@ -3394,13 +3399,13 @@ istanbul@0.4.5:
     which "^1.1.1"
     wordwrap "^1.0.0"
 
+jasmine-core@^3.3, jasmine-core@~3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/jasmine-core/-/jasmine-core-3.3.0.tgz#dea1cdc634bc93c7e0d4ad27185df30fa971b10e"
+
 jasmine-core@~2.8.0:
   version "2.8.0"
   resolved "https://registry.yarnpkg.com/jasmine-core/-/jasmine-core-2.8.0.tgz#bcc979ae1f9fd05701e45e52e65d3a5d63f1a24e"
-
-jasmine-core@~3.2.1:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/jasmine-core/-/jasmine-core-3.2.1.tgz#8e4ff5b861603ee83343f2b49eee6a0ffe9650ce"
 
 jasmine-spec-reporter@~4.2.1:
   version "4.2.1"
@@ -3519,13 +3524,16 @@ karma-coverage-istanbul-reporter@^2.0.1:
     istanbul-api "^1.3.1"
     minimatch "^3.0.4"
 
-karma-jasmine-html-reporter@~1.3.1:
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/karma-jasmine-html-reporter/-/karma-jasmine-html-reporter-1.3.1.tgz#17db92e76ecbce97b281c97c9ac3d8b1723848f9"
+karma-jasmine-html-reporter@~1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/karma-jasmine-html-reporter/-/karma-jasmine-html-reporter-1.4.0.tgz#1abbd30d4509a8c82b96707ae7d2fa4da459ca19"
 
-karma-jasmine@~1.1.0:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/karma-jasmine/-/karma-jasmine-1.1.2.tgz#394f2b25ffb4a644b9ada6f22d443e2fd08886c3"
+karma-jasmine@~2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/karma-jasmine/-/karma-jasmine-2.0.1.tgz#26e3e31f2faf272dd80ebb0e1898914cc3a19763"
+  integrity sha512-iuC0hmr9b+SNn1DaUD2QEYtUxkS1J+bSJSn7ejdEexs7P8EYvA1CWkEdrDQ+8jVH3AgWlCNwjYsT1chjcNW9lA==
+  dependencies:
+    jasmine-core "^3.3"
 
 karma-source-map-support@1.3.0:
   version "1.3.0"
@@ -3533,9 +3541,9 @@ karma-source-map-support@1.3.0:
   dependencies:
     source-map-support "^0.5.5"
 
-karma@~3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/karma/-/karma-3.0.0.tgz#6da83461a8a28d8224575c3b5b874e271b4730c3"
+karma@~3.1.3:
+  version "3.1.3"
+  resolved "https://registry.yarnpkg.com/karma/-/karma-3.1.3.tgz#6e251648e3aff900927bc1126dbcbcb92d3edd61"
   dependencies:
     bluebird "^3.3.0"
     body-parser "^1.16.1"
@@ -3547,11 +3555,12 @@ karma@~3.0.0:
     di "^0.0.1"
     dom-serialize "^2.2.0"
     expand-braces "^0.1.1"
+    flatted "^2.0.0"
     glob "^7.1.1"
     graceful-fs "^4.1.2"
     http-proxy "^1.13.0"
     isbinaryfile "^3.0.0"
-    lodash "^4.17.4"
+    lodash "^4.17.5"
     log4js "^3.0.0"
     mime "^2.3.1"
     minimatch "^3.0.2"
@@ -3563,7 +3572,7 @@ karma@~3.0.0:
     socket.io "2.1.1"
     source-map "^0.6.1"
     tmp "0.0.33"
-    useragent "2.2.1"
+    useragent "2.3.0"
 
 killable@^1.0.0:
   version "1.0.0"
@@ -3751,20 +3760,16 @@ loud-rejection@^1.0.0, loud-rejection@^1.6.0:
     currently-unhandled "^0.4.1"
     signal-exit "^3.0.0"
 
-lru-cache@2.2.x:
-  version "2.2.4"
-  resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-2.2.4.tgz#6c658619becf14031d0d0b594b16042ce4dc063d"
-
-lru-cache@^4.0.1, lru-cache@^4.1.1, lru-cache@^4.1.3:
-  version "4.1.3"
-  resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-4.1.3.tgz#a1175cf3496dfc8436c156c334b4955992bce69c"
+lru-cache@4.1.x, lru-cache@^4.1.2:
+  version "4.1.5"
+  resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-4.1.5.tgz#8bbe50ea85bed59bc9e33dcab8235ee9bcf443cd"
   dependencies:
     pseudomap "^1.0.2"
     yallist "^2.1.2"
 
-lru-cache@^4.1.2:
-  version "4.1.5"
-  resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-4.1.5.tgz#8bbe50ea85bed59bc9e33dcab8235ee9bcf443cd"
+lru-cache@^4.0.1, lru-cache@^4.1.1, lru-cache@^4.1.3:
+  version "4.1.3"
+  resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-4.1.3.tgz#a1175cf3496dfc8436c156c334b4955992bce69c"
   dependencies:
     pseudomap "^1.0.2"
     yallist "^2.1.2"
@@ -6399,11 +6404,11 @@ use@^3.1.0:
   dependencies:
     kind-of "^6.0.2"
 
-useragent@2.2.1:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/useragent/-/useragent-2.2.1.tgz#cf593ef4f2d175875e8bb658ea92e18a4fd06d8e"
+useragent@2.3.0:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/useragent/-/useragent-2.3.0.tgz#217f943ad540cb2128658ab23fc960f6a88c9972"
   dependencies:
-    lru-cache "2.2.x"
+    lru-cache "4.1.x"
     tmp "0.0.x"
 
 util-deprecate@~1.0.1:
