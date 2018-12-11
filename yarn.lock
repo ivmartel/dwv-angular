@@ -5866,7 +5866,6 @@ spdy@^3.4.1:
 speed-measure-webpack-plugin@1.2.3:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/speed-measure-webpack-plugin/-/speed-measure-webpack-plugin-1.2.3.tgz#de170b5cefbfa1c039d95e639edd3ad50cfc7c48"
-  integrity sha512-p+taQ69VkRUXYMoZOx2nxV/Tz8tt79ahctoZJyJDHWP7fEYvwFNf5Pd73k5kZ6auu0pTsPNLEUwWpM8mCk85Zw==
   dependencies:
     chalk "^2.0.1"
 
