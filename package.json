@@ -7,10 +7,10 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --prod",
-    "test": "ng lint && ng test",
-    "ngtest": "ng test --browsers=Chrome --watch=true",
+    "build": "ng build",
     "lint": "ng lint",
+    "test": "ng test",
+    "test-ci": "ng test --browsers=ChromeHeadless --watch=false --progress=false",
     "e2e": "ng e2e"
   },
   "private": true,

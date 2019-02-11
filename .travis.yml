@@ -21,8 +21,9 @@ after_script: greenkeeper-lockfile-upload
 
 # main
 script:
-- yarn run build --base-href=/dwv-angular/demo/trunk/
-- yarn run test
+- yarn run lint
+- yarn run test-ci
+- yarn run build --prod --base-href=/dwv-angular/demo/trunk/
 
 after_success:
 # update gh-page only for master and not pull requests

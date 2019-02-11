@@ -17,14 +17,14 @@ yarn install
 # serve with hot reload at localhost:4200
 ng run start
 
-# build for production with minification
+# build (add --prod for production)
 yarn run build
 
-# run linting and headless unit tests
-yarn run test
+# run linting
+yarn run lint
 
-# run unit tests with Chrome display and hot reload
-yarn run ngtest
+# run unit tests
+yarn run test
 
 # run e2e tests
 yarn run e2e
