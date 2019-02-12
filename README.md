@@ -17,17 +17,17 @@ yarn install
 # serve with hot reload at localhost:4200
 ng run start
 
-# build (add --prod for production)
-yarn run build
-
 # run linting
 yarn run lint
 
-# run unit tests
+# run unit tests with hot reload
 yarn run test
 
 # run e2e tests
 yarn run e2e
+
+# build (add --prod for production)
+yarn run build
 ```
 
 Unit tests use [Karma](https://karma-runner.github.io) and e2e tests use [Protractor](http://www.protractortest.org/).
