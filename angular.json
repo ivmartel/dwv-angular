@@ -26,6 +26,7 @@
               }
             ],
             "styles": [
+              "src/assets/theme.scss",
               "src/styles.css"
             ],
             "scripts": []
@@ -76,6 +77,7 @@
             "tsConfig": "src/tsconfig.spec.json",
             "scripts": [],
             "styles": [
+              "src/assets/theme.scss",
               "src/styles.css"
             ],
             "assets": [

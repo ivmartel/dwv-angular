@@ -25,7 +25,7 @@ dwv.image.decoderScripts = {
 @Component({
   selector: 'app-dwv',
   templateUrl: './dwv.component.html',
-  styleUrls: ['./dwv.component.css']
+  styleUrls: ['./dwv.component.scss']
 })
 
 export class DwvComponent implements OnInit {
