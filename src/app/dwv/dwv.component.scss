@@ -1,0 +1,44 @@
+@import 'src/assets/theme';
+$primary: map-get($theme, primary);
+$accent: map-get($theme, accent);
+
+#dwv {
+  height: 90%; }
+
+a {
+    color: mat-color($accent);
+}
+a:hover {
+    color: mat-color($primary);
+}
+
+.button-row {
+  text-align: center;
+  padding: 5px;;
+}
+.mat-raised-button {
+  margin: 0.1em;
+}
+.legend {
+  text-align: center;
+  font-size: 8pt;
+  margin: 1em;
+}
+
+/* Layers */
+.layerContainer {
+    position: relative; padding: 0;
+    margin: auto; text-align: center; }
+.imageLayer {
+    position: absolute;
+    left: 0px; }
+.drawDiv {
+    position: absolute; pointer-events: none; }
+
+/* drag&drop */
+.dropBox {
+    border: 5px dashed mat-color($primary, lighter);
+    margin: auto;
+    text-align: center; vertical-align: middle;  }
+.dropBox.hover {
+    border: 5px dashed mat-color($primary); }
