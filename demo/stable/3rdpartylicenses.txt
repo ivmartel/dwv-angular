@@ -87,6 +87,9 @@ THE SOFTWARE.
 @angular/platform-browser
 MIT
 
+@angular/service-worker
+MIT
+
 core-js
 MIT
 Copyright (c) 2014-2018 Denis Pushkarev
