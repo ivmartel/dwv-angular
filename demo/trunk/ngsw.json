@@ -1,0 +1,100 @@
+{
+  "configVersion": 1,
+  "timestamp": 1558820000978,
+  "index": "/dwv-angular/demo/trunk/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "urls": [
+        "/dwv-angular/demo/trunk/favicon.ico",
+        "/dwv-angular/demo/trunk/index.html",
+        "/dwv-angular/demo/trunk/main.a3be64f9e655dbc355af.js",
+        "/dwv-angular/demo/trunk/polyfills.4c247ab2b7ec63a2384c.js",
+        "/dwv-angular/demo/trunk/runtime.26209474bfa8dc87a77c.js",
+        "/dwv-angular/demo/trunk/styles.28bb7131fabbc7b91fd2.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "urls": [
+        "/dwv-angular/demo/trunk/assets/dwv/decoders/dwv/decode-rle.js",
+        "/dwv-angular/demo/trunk/assets/dwv/decoders/dwv/rle.js",
+        "/dwv-angular/demo/trunk/assets/dwv/decoders/pdfjs/arithmetic_decoder.js",
+        "/dwv-angular/demo/trunk/assets/dwv/decoders/pdfjs/decode-jpeg2000.js",
+        "/dwv-angular/demo/trunk/assets/dwv/decoders/pdfjs/decode-jpegbaseline.js",
+        "/dwv-angular/demo/trunk/assets/dwv/decoders/pdfjs/jpg.js",
+        "/dwv-angular/demo/trunk/assets/dwv/decoders/pdfjs/jpx.js",
+        "/dwv-angular/demo/trunk/assets/dwv/decoders/pdfjs/readme.md",
+        "/dwv-angular/demo/trunk/assets/dwv/decoders/pdfjs/util.js",
+        "/dwv-angular/demo/trunk/assets/dwv/decoders/rii-mango/decode-jpegloss.js",
+        "/dwv-angular/demo/trunk/assets/dwv/decoders/rii-mango/lossless-min.js",
+        "/dwv-angular/demo/trunk/assets/dwv/decoders/rii-mango/lossless.js",
+        "/dwv-angular/demo/trunk/assets/dwv/decoders/rii-mango/readme.md",
+        "/dwv-angular/demo/trunk/assets/icons/icon-128x128.png",
+        "/dwv-angular/demo/trunk/assets/icons/icon-144x144.png",
+        "/dwv-angular/demo/trunk/assets/icons/icon-152x152.png",
+        "/dwv-angular/demo/trunk/assets/icons/icon-192x192.png",
+        "/dwv-angular/demo/trunk/assets/icons/icon-384x384.png",
+        "/dwv-angular/demo/trunk/assets/icons/icon-512x512.png",
+        "/dwv-angular/demo/trunk/assets/icons/icon-72x72.png",
+        "/dwv-angular/demo/trunk/assets/icons/icon-96x96.png",
+        "/dwv-angular/demo/trunk/assets/theme.scss"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/dwv-angular/demo/trunk/assets/dwv/decoders/dwv/decode-rle.js": "9628b95fc809b5755e1f1c7325094fed2efd02e6",
+    "/dwv-angular/demo/trunk/assets/dwv/decoders/dwv/rle.js": "e8bbf26f926d10a29e14f3fe1716cff021df5da3",
+    "/dwv-angular/demo/trunk/assets/dwv/decoders/pdfjs/arithmetic_decoder.js": "3e210fcc723b17a9d9ff2ef0ee0370b16dcff22c",
+    "/dwv-angular/demo/trunk/assets/dwv/decoders/pdfjs/decode-jpeg2000.js": "ce9c6591056c2a1bc1e7be1a7718467a0275b5d4",
+    "/dwv-angular/demo/trunk/assets/dwv/decoders/pdfjs/decode-jpegbaseline.js": "678656f24aa5f9bc9fdcd88fbb9f17a0f0363e33",
+    "/dwv-angular/demo/trunk/assets/dwv/decoders/pdfjs/jpg.js": "9a9584b232307d42ef7391d8b957a745768fcf91",
+    "/dwv-angular/demo/trunk/assets/dwv/decoders/pdfjs/jpx.js": "321f4bf5a991b3f97662ddb900b2d58eac6623b4",
+    "/dwv-angular/demo/trunk/assets/dwv/decoders/pdfjs/readme.md": "85e3f3be3426e27fe0c4f106559f1717ed8e3be3",
+    "/dwv-angular/demo/trunk/assets/dwv/decoders/pdfjs/util.js": "a703b7cc1595f1e5d511860f2187ee21385179b3",
+    "/dwv-angular/demo/trunk/assets/dwv/decoders/rii-mango/decode-jpegloss.js": "930bc844678b574622592fd6589daad37d682d1f",
+    "/dwv-angular/demo/trunk/assets/dwv/decoders/rii-mango/lossless-min.js": "9dd871394617876f1b8f3de3520df4d389c5daeb",
+    "/dwv-angular/demo/trunk/assets/dwv/decoders/rii-mango/lossless.js": "d67e6d9137be79594598b593dfa01f4accd04376",
+    "/dwv-angular/demo/trunk/assets/dwv/decoders/rii-mango/readme.md": "4654ea62d8363a91fccb7029d724645e91bff6b3",
+    "/dwv-angular/demo/trunk/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
+    "/dwv-angular/demo/trunk/assets/icons/icon-144x144.png": "b0bd89982e08f9bd2b642928f5391915b74799a7",
+    "/dwv-angular/demo/trunk/assets/icons/icon-152x152.png": "7479a9477815dfd9668d60f8b3b2fba709b91310",
+    "/dwv-angular/demo/trunk/assets/icons/icon-192x192.png": "1abd80d431a237a853ce38147d8c63752f10933b",
+    "/dwv-angular/demo/trunk/assets/icons/icon-384x384.png": "329749cd6393768d3131ed6304c136b1ca05f2fd",
+    "/dwv-angular/demo/trunk/assets/icons/icon-512x512.png": "559d9c4318b45a1f2b10596bbb4c960fe521dbcc",
+    "/dwv-angular/demo/trunk/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
+    "/dwv-angular/demo/trunk/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
+    "/dwv-angular/demo/trunk/assets/theme.scss": "dc1ef0b1d31feaf1a7583dbdc37c51a4ace8e510",
+    "/dwv-angular/demo/trunk/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
+    "/dwv-angular/demo/trunk/index.html": "1360c390c27083bd0384819f54ba619a5f55dbfc",
+    "/dwv-angular/demo/trunk/main.a3be64f9e655dbc355af.js": "dc728cf71670b4f29501d391ce55db38ed5ebb04",
+    "/dwv-angular/demo/trunk/polyfills.4c247ab2b7ec63a2384c.js": "6fdf5e33ec5e1342440b1ecc94915166d9cd0007",
+    "/dwv-angular/demo/trunk/runtime.26209474bfa8dc87a77c.js": "b62956c2192bfe5516d6374e753773901ed50ec5",
+    "/dwv-angular/demo/trunk/styles.28bb7131fabbc7b91fd2.css": "06914df58e67c651296de6a855e9c6408bda3200"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ]
+}
