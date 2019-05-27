@@ -4,8 +4,8 @@
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",
-  "scope": "/dwv-angular/demo/trunk/index.html",
-  "start_url": "/dwv-angular/demo/trunk",
+  "start_url": "/dwv-angular/demo/trunk/index.html",
+  "scope": "/dwv-angular/demo/trunk",
   "icons": [
     {
       "src": "assets/icons/icon-16.png",
