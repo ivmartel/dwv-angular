@@ -10,8 +10,8 @@ export class TagsTableComponent implements OnInit {
 
     @Input() data: any;
 
-    @ViewChild(MatPaginator) paginator: MatPaginator;
-    @ViewChild(MatSort) sort: MatSort;
+    @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+    @ViewChild(MatSort, { static: true }) sort: MatSort;
 
     displayedColumns: string[] = ['name', 'value'];
 
