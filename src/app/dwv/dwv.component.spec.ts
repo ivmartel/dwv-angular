@@ -1,9 +1,9 @@
 import { TestBed, async } from '@angular/core/testing';
 
-import { MatButtonModule } from '@angular/material';
-import { MatDialogModule } from '@angular/material';
-import { MatIconModule } from '@angular/material';
-import { MatMenuModule } from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 import { DwvComponent } from './dwv.component';

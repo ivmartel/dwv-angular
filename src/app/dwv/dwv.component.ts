@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { VERSION } from '@angular/core';
 import * as dwv from 'dwv';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { TagsDialogComponent } from './tags-dialog.component';
 
 // gui overrides
