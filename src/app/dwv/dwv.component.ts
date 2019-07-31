@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { VERSION } from '@angular/core';
 import * as dwv from 'dwv';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { TagsDialogComponent } from './tags-dialog.component';
 
 // gui overrides
@@ -19,13 +19,14 @@ dwv.gui.refreshElement = dwv.gui.base.refreshElement;
 dwv.image.decoderScripts = {
     'jpeg2000': 'assets/dwv/decoders/pdfjs/decode-jpeg2000.js',
     'jpeg-lossless': 'assets/dwv/decoders/rii-mango/decode-jpegloss.js',
-    'jpeg-baseline': 'assets/dwv/decoders/pdfjs/decode-jpegbaseline.js'
+    'jpeg-baseline': 'assets/dwv/decoders/pdfjs/decode-jpegbaseline.js',
+    'rle': 'assets/dwv/decoders/dwv/decode-rle.js'
 };
 
 @Component({
   selector: 'app-dwv',
   templateUrl: './dwv.component.html',
-  styleUrls: ['./dwv.component.css']
+  styleUrls: ['./dwv.component.scss']
 })
 
 export class DwvComponent implements OnInit {

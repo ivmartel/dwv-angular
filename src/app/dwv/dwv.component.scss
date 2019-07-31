@@ -1,6 +1,16 @@
+@import 'src/assets/theme';
+$primary: map-get($theme, primary);
+$accent: map-get($theme, accent);
+
 #dwv {
-  font-family: Arial, Helvetica, sans-serif;
   height: 90%; }
+
+a {
+    color: mat-color($accent);
+}
+a:hover {
+    color: mat-color($primary);
+}
 
 .button-row {
   text-align: center;
@@ -27,8 +37,8 @@
 
 /* drag&drop */
 .dropBox {
-    border: 5px dashed #ccc;
+    border: 5px dashed mat-color($primary, lighter);
     margin: auto;
-    text-align: center; vertical-align: middle;
-    background: white; color: grey;  }
-.dropBox.hover { border: 5px dashed #cc0; }
+    text-align: center; vertical-align: middle;  }
+.dropBox.hover {
+    border: 5px dashed mat-color($primary); }

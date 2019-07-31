@@ -23,9 +23,11 @@
                 "glob": "**/*",
                 "input": "node_modules/dwv/decoders",
                 "output": "/assets/dwv/decoders"
-              }
+              },
+              "src/manifest.json"
             ],
             "styles": [
+              "src/assets/theme.scss",
               "src/styles.css"
             ],
             "scripts": []
@@ -46,7 +48,8 @@
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
                 }
-              ]
+              ],
+              "serviceWorker": true
             }
           }
         },
@@ -76,6 +79,7 @@
             "tsConfig": "src/tsconfig.spec.json",
             "scripts": [],
             "styles": [
+              "src/assets/theme.scss",
               "src/styles.css"
             ],
             "assets": [
@@ -85,7 +89,8 @@
                 "glob": "**/*",
                 "input": "node_modules/dwv/decoders",
                 "output": "/assets/dwv/decoders"
-              }
+              },
+              "src/manifest.json"
             ]
           }
         },
