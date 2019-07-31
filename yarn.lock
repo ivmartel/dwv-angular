@@ -101,18 +101,28 @@
     rxjs "6.4.0"
     source-map "0.7.3"
 
-"@angular-devkit/schematics@7.2.4":
-  version "7.2.4"
-  resolved "https://registry.yarnpkg.com/@angular-devkit/schematics/-/schematics-7.2.4.tgz#d92b2b8b9114135806d593ea6a2b376c777354dc"
+"@angular-devkit/core@8.2.0":
+  version "8.2.0"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/core/-/core-8.2.0.tgz#aaeb8d05e3a45fcff6309159fa6aa7a20665d53f"
   dependencies:
-    "@angular-devkit/core" "7.2.4"
-    rxjs "6.3.3"
+    ajv "6.10.2"
+    fast-json-stable-stringify "2.0.0"
+    magic-string "0.25.3"
+    rxjs "6.4.0"
+    source-map "0.7.3"
 
 "@angular-devkit/schematics@8.0.1":
   version "8.0.1"
   resolved "https://registry.yarnpkg.com/@angular-devkit/schematics/-/schematics-8.0.1.tgz#1f0f616681eb451de31fa5f2d848f5ecbc6226d4"
   dependencies:
     "@angular-devkit/core" "8.0.1"
+    rxjs "6.4.0"
+
+"@angular-devkit/schematics@8.2.0":
+  version "8.2.0"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/schematics/-/schematics-8.2.0.tgz#cd7e1fc0bbe2f18f9eb86d65afd942c9b3858d2a"
+  dependencies:
+    "@angular-devkit/core" "8.2.0"
     rxjs "6.4.0"
 
 "@angular/animations@^8.0.0":
@@ -213,13 +223,13 @@
   dependencies:
     tslib "^1.9.0"
 
-"@angular/pwa@0.12":
-  version "0.12.4"
-  resolved "https://registry.yarnpkg.com/@angular/pwa/-/pwa-0.12.4.tgz#37dece5ef3e8df419bf97a3cd478802314976d4d"
+"@angular/pwa@~0.802.0":
+  version "0.802.0"
+  resolved "https://registry.yarnpkg.com/@angular/pwa/-/pwa-0.802.0.tgz#0de90ec4704c59bf21a3236064bfb7863d6bd539"
   dependencies:
-    "@angular-devkit/core" "7.2.4"
-    "@angular-devkit/schematics" "7.2.4"
-    "@schematics/angular" "7.2.4"
+    "@angular-devkit/core" "8.2.0"
+    "@angular-devkit/schematics" "8.2.0"
+    "@schematics/angular" "8.2.0"
     parse5-html-rewriting-stream "5.1.0"
     rxjs "6.3.3"
 
@@ -337,6 +347,13 @@
   dependencies:
     "@angular-devkit/core" "8.0.1"
     "@angular-devkit/schematics" "8.0.1"
+
+"@schematics/angular@8.2.0":
+  version "8.2.0"
+  resolved "https://registry.yarnpkg.com/@schematics/angular/-/angular-8.2.0.tgz#1ac24ed3708a197088119ca419e421a161ad2fd9"
+  dependencies:
+    "@angular-devkit/core" "8.2.0"
+    "@angular-devkit/schematics" "8.2.0"
 
 "@schematics/update@0.800.1":
   version "0.800.1"
@@ -607,9 +624,9 @@ ajv@6.10.0:
     json-schema-traverse "^0.4.1"
     uri-js "^4.2.2"
 
-ajv@6.6.2:
-  version "6.6.2"
-  resolved "https://registry.yarnpkg.com/ajv/-/ajv-6.6.2.tgz#caceccf474bf3fc3ce3b147443711a24063cc30d"
+ajv@6.10.2:
+  version "6.10.2"
+  resolved "https://registry.yarnpkg.com/ajv/-/ajv-6.10.2.tgz#d3cea04d6b017b2894ad69040fec8b623eb4bd52"
   dependencies:
     fast-deep-equal "^2.0.1"
     fast-json-stable-stringify "^2.0.0"

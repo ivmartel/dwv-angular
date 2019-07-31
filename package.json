@@ -24,7 +24,7 @@
     "@angular/material": "^8.0.0",
     "@angular/platform-browser": "^8.0.0",
     "@angular/platform-browser-dynamic": "^8.0.0",
-    "@angular/pwa": "~0.801.2",
+    "@angular/pwa": "~0.802.0",
     "@angular/router": "^8.0.0",
     "@angular/service-worker": "^8.0.0",
     "dwv": "0.26.0",
