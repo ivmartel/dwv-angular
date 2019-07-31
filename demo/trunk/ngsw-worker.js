@@ -47,9 +47,7 @@
          * Extract the pathname of a URL.
          */
         parseUrl(url, relativeTo) {
-            // Workaround a Safari bug, see
-            // https://github.com/angular/angular/issues/31061#issuecomment-503637978
-            const parsed = !relativeTo ? new URL(url) : new URL(url, relativeTo);
+            const parsed = new URL(url, relativeTo);
             return { origin: parsed.origin, path: parsed.pathname, search: parsed.search };
         }
         /**
@@ -1121,10 +1119,8 @@
                     // Cache the network response eventually.
                     ctx.waitUntil(this.safeCacheResponse(req, networkFetch));
                 }
-                else {
-                    // The request completed in time, so cache it inline with the response flow.
-                    yield this.cacheResponse(req, res, lru);
-                }
+                // The request completed in time, so cache it inline with the response flow.
+                yield this.cacheResponse(req, res, lru);
                 return res;
             });
         }
@@ -1142,7 +1138,7 @@
                 }
                 // If the network fetch times out or errors, fall back on the cache.
                 if (res === undefined) {
-                    ctx.waitUntil(this.safeCacheResponse(req, networkFetch, true));
+                    ctx.waitUntil(this.safeCacheResponse(req, networkFetch));
                     // Ignore the age, the network response will be cached anyway due to the
                     // behavior of freshness.
                     const fromCache = yield this.loadFromCache(req, lru);
@@ -1157,7 +1153,9 @@
                     return res;
                 }
                 // No response in the cache. No choice but to fall back on the full network fetch.
-                return networkFetch;
+                res = yield networkFetch;
+                yield this.cacheResponse(req, res, lru, true);
+                return res;
             });
         }
         networkFetchWithTimeout(req) {
@@ -1196,10 +1194,10 @@
                 return [networkFetch, networkFetch];
             }
         }
-        safeCacheResponse(req, res, okToCacheOpaque) {
+        safeCacheResponse(req, res) {
             return __awaiter$1(this, void 0, void 0, function* () {
                 try {
-                    yield this.cacheResponse(req, yield res, yield this.lru(), okToCacheOpaque);
+                    yield this.cacheResponse(req, yield res, yield this.lru());
                 }
                 catch (_a) {
                     // TODO: handle this error somehow?
@@ -1246,7 +1244,7 @@
         cacheResponse(req, res, lru, okToCacheOpaque = false) {
             return __awaiter$1(this, void 0, void 0, function* () {
                 // Only cache successful responses.
-                if (!(res.ok || (okToCacheOpaque && res.type === 'opaque'))) {
+                if (!res.ok || (okToCacheOpaque && res.type === 'opaque')) {
                     return;
                 }
                 // If caching this response would make the cache exceed its maximum size, evict something
