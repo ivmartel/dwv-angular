@@ -9,7 +9,7 @@ import { TagsDialogComponent } from './tags-dialog.component';
 // decode query
 dwv.utils.decodeQuery = dwv.utils.base.decodeQuery;
 // progress
-dwv.gui.displayProgress = function () {};
+dwv.gui.displayProgress = () => {};
 // get element
 dwv.gui.getElement = dwv.gui.base.getElement;
 // refresh element
@@ -17,10 +17,10 @@ dwv.gui.refreshElement = dwv.gui.base.refreshElement;
 
 // Image decoders (for web workers)
 dwv.image.decoderScripts = {
-    'jpeg2000': 'assets/dwv/decoders/pdfjs/decode-jpeg2000.js',
+    jpeg2000: 'assets/dwv/decoders/pdfjs/decode-jpeg2000.js',
     'jpeg-lossless': 'assets/dwv/decoders/rii-mango/decode-jpegloss.js',
     'jpeg-baseline': 'assets/dwv/decoders/pdfjs/decode-jpegbaseline.js',
-    'rle': 'assets/dwv/decoders/dwv/decode-rle.js'
+    rle: 'assets/dwv/decoders/dwv/decode-rle.js'
 };
 
 @Component({
@@ -40,8 +40,8 @@ export class DwvComponent implements OnInit {
 
   constructor(public dialog: MatDialog) {
     this.versions = {
-      'dwv': dwv.getVersion(),
-      'angular': VERSION.full
+      dwv: dwv.getVersion(),
+      angular: VERSION.full
     };
   }
 
@@ -50,17 +50,17 @@ export class DwvComponent implements OnInit {
     this.dwvApp = new dwv.App();
     // initialise app
     this.dwvApp.init({
-      'containerDivId': 'dwv',
-      'tools': this.tools,
-      'shapes': ['Ruler'],
-      'isMobile': true
+      containerDivId: 'dwv',
+      tools: this.tools,
+      shapes: ['Ruler'],
+      isMobile: true
     });
     // progress
     const self = this;
-    this.dwvApp.addEventListener('load-progress', function (event) {
+    this.dwvApp.addEventListener('load-progress', (event) => {
       self.loadProgress = event.loaded;
     });
-    this.dwvApp.addEventListener('load-end', function (event) {
+    this.dwvApp.addEventListener('load-end', (event) => {
       // set data loaded flag
       self.dataLoaded = true;
       // set dicom tags
