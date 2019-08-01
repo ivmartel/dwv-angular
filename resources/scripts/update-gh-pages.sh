@@ -13,7 +13,7 @@ git clone --quiet --branch=gh-pages https://${GH_TOKEN}@github.com/ivmartel/dwv-
 # clean up demo
 rm -Rf $HOME/gh-pages/demo/trunk/*
 # copy new build in demo/trunk
-cp -Rf $HOME/build/ivmartel/dwv-angular/dist/* $HOME/gh-pages/demo/trunk
+cp -Rf $HOME/build/ivmartel/dwv-angular/dist/dwv-angular/* $HOME/gh-pages/demo/trunk
 # move back to root of repo
 cd $HOME/gh-pages
 # add, commit and push files
