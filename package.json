@@ -13,7 +13,7 @@
     "lint": "ng lint",
     "test": "ng test",
     "test-hl": "ng test --browsers ChromeHeadless",
-    "test-ci": "ng test --browsers=ChromeHeadless --watch=false --progress=false",
+    "test-ci": "ng test --browsers=ChromeHeadless --code-coverage --watch=false --progress=false",
     "e2e": "ng e2e"
   },
   "private": true,

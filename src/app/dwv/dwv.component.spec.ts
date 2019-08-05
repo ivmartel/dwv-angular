@@ -1,4 +1,4 @@
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed, ComponentFixture, async } from '@angular/core/testing';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -9,6 +9,9 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { DwvComponent } from './dwv.component';
 
 describe('DwvComponent', () => {
+  let component: DwvComponent;
+  let fixture: ComponentFixture<DwvComponent>;
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
@@ -24,18 +27,22 @@ describe('DwvComponent', () => {
     }).compileComponents();
   }));
 
-  // Inspect the component instance on mount
-  it('renders the component', async(() => {
-    const fixture = TestBed.createComponent(DwvComponent);
-    const component = fixture.debugElement.componentInstance;
-    expect(component).toBeDefined();
-    expect(component).not.toBeNull();
-  }));
+  beforeEach(() => {
+      fixture = TestBed.createComponent(DwvComponent);
+      component = fixture.debugElement.componentInstance;
+  });
 
-  // Mount an instance and inspect the render output
+  it('should create', () => {
+      expect(component).toBeTruthy();
+  });
+
+  it('should init', () => {
+      expect(() => fixture.detectChanges()).not.toThrow();
+  });
+
   it('renders the beginning of the legend', async(() => {
-    const fixture = TestBed.createComponent(DwvComponent);
     fixture.detectChanges();
+
     const compiled = fixture.debugElement.nativeElement;
     const legend = compiled.querySelector('.legend');
     expect(legend.textContent).toContain('Powered by');

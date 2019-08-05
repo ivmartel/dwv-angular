@@ -5,7 +5,11 @@
   "projects": {
     "dwv-angular": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -31,7 +35,7 @@
             ],
             "styles": [
               "src/assets/theme.scss",
-              "src/styles.css"
+              "src/styles.scss"
             ],
             "scripts": []
           },
@@ -105,7 +109,7 @@
             ],
             "styles": [
               "src/assets/theme.scss",
-              "src/styles.css"
+              "src/styles.scss"
             ],
             "scripts": []
           }
