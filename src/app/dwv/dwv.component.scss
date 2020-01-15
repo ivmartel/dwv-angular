@@ -37,8 +37,9 @@ a:hover {
 
 /* drag&drop */
 .dropBox {
-    border: 5px dashed mat-color($primary, lighter);
     margin: auto;
-    text-align: center; vertical-align: middle;  }
-.dropBox.hover {
+    text-align: center; vertical-align: middle; }
+.dropBoxBorder {
+    border: 5px dashed mat-color($primary, lighter); }
+.dropBoxBorder.hover {
     border: 5px dashed mat-color($primary); }
