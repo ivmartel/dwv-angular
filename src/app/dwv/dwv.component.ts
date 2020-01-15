@@ -34,9 +34,9 @@ export class DwvComponent implements OnInit {
   private metaData: any[];
 
   // drop box class name
-  private dropboxClassName = "dropBox";
-  private borderClassName = "dropBoxBorder";
-  private hoverClassName = "hover";
+  private dropboxClassName = 'dropBox';
+  private borderClassName = 'dropBoxBorder';
+  private hoverClassName = 'hover';
 
   constructor(public dialog: MatDialog) {
     this.versions = {
@@ -80,24 +80,26 @@ export class DwvComponent implements OnInit {
    */
   setupDropbox = () => {
       // start listening to drag events on the layer container
-      var layerContainer = this.dwvApp.getElement("layerContainer");
+      const layerContainer = this.dwvApp.getElement('layerContainer');
       if (layerContainer) {
-        layerContainer.addEventListener("dragover", this.onDragOver);
-        layerContainer.addEventListener("dragleave", this.onDragLeave);
-        layerContainer.addEventListener("drop", this.onDrop);
+        layerContainer.addEventListener('dragover', this.onDragOver);
+        layerContainer.addEventListener('dragleave', this.onDragLeave);
+        layerContainer.addEventListener('drop', this.onDrop);
       }
       // set the initial drop box size
-      var box = this.dwvApp.getElement(this.dropboxClassName);
+      const box = this.dwvApp.getElement(this.dropboxClassName);
       if (box) {
-        var size = this.dwvApp.getLayerContainerSize();
-        var dropBoxSize = 2 * size.height / 3;
-        box.setAttribute("style","width:"+dropBoxSize+"px;height:"+dropBoxSize+"px");
+        const size = this.dwvApp.getLayerContainerSize();
+        const dropBoxSize = 2 * size.height / 3;
+        box.setAttribute(
+          'style',
+          'width:' + dropBoxSize + 'px;height:' + dropBoxSize + 'px');
       }
   }
 
   hideDropbox = () => {
     // remove box
-    var box = this.dwvApp.getElement(this.dropboxClassName);
+    const box = this.dwvApp.getElement(this.dropboxClassName);
     if (box) {
       box.parentNode.removeChild(box);
     }
@@ -105,7 +107,7 @@ export class DwvComponent implements OnInit {
 
   /**
    * Handle a change tool event.
-   * @param {String} tool The new tool.
+   * @param tool The new tool.
    */
   onChangeTool = (tool) => {
     if ( this.dwvApp ) {
@@ -119,7 +121,7 @@ export class DwvComponent implements OnInit {
 
   /**
    * Handle a change draw shape event.
-   * @param {String} shape The new shape.
+   * @param shape The new shape.
    */
   onChangeShape = (shape) => {
     if ( this.dwvApp && this.selectedTool === 'Draw') {
@@ -151,37 +153,37 @@ export class DwvComponent implements OnInit {
 
   /**
    * Handle a drag over.
-   * @param {Object} event The event to handle.
-  */
+   * @param event The event to handle.
+   */
   onDragOver = (event) => {
     // prevent default handling
     event.stopPropagation();
     event.preventDefault();
     // update box border
-    var box = this.dwvApp.getElement(this.borderClassName);
+    const box = this.dwvApp.getElement(this.borderClassName);
     if (box && box.className.indexOf(this.hoverClassName) === -1) {
-        box.className += " " + this.hoverClassName;
+        box.className += ' ' + this.hoverClassName;
     }
   }
 
   /**
-    * Handle a drag leave.
-    * @param {Object} event The event to handle.
+   * Handle a drag leave.
+   * @param event The event to handle.
    */
   onDragLeave = (event) => {
     // prevent default handling
     event.stopPropagation();
     event.preventDefault();
     // update box class
-    var box = this.dwvApp.getElement(this.borderClassName + " hover");
+    const box = this.dwvApp.getElement(this.borderClassName + ' hover');
     if (box && box.className.indexOf(this.hoverClassName) !== -1) {
-        box.className = box.className.replace(" " + this.hoverClassName, "");
+        box.className = box.className.replace(' ' + this.hoverClassName, '');
     }
   }
 
   /**
    * Handle a drop event.
-   * @param {Object} event The event to handle.
+   * @param event The event to handle.
    */
   onDrop = (event) => {
     // prevent default handling
@@ -194,20 +196,20 @@ export class DwvComponent implements OnInit {
   }
 
   isObject = (unknown) => {
-      var type = typeof unknown;
+      const type = typeof unknown;
       return type === 'function' || type === 'object' && !!unknown;
   }
 
   objectToArray = (obj) => {
-      var array = [];
-      var keys = Object.keys(obj);
-      for (var i = 0; i < keys.length; ++i ) {
-          var key = keys[i];
-          var row = {name: key};
-          var innerKeys = Object.keys(obj[key]);
-          for (var j = 0; j < innerKeys.length; ++j ) {
-              var innerKey = innerKeys[j];
-              var value = obj[key][innerKey];
+      const array = [];
+      const keys = Object.keys(obj);
+      for (let i = 0; i < keys.length; ++i ) {
+          const key = keys[i];
+          const row = {name: key};
+          const innerKeys = Object.keys(obj[key]);
+          for (let j = 0; j < innerKeys.length; ++j ) {
+              const innerKey = innerKeys[j];
+              let value = obj[key][innerKey];
               if (this.isObject(value)) {
                   value = JSON.stringify(value);
               }
