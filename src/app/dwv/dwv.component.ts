@@ -76,7 +76,7 @@ export class DwvComponent implements OnInit {
   }
 
   /**
-   * Setup the drop box: add event listeners and set initial size.
+   * Setup the data load drop box: add event listeners and set initial size.
    */
   setupDropbox = () => {
       // start listening to drag events on the layer container
@@ -97,19 +97,11 @@ export class DwvComponent implements OnInit {
       }
   }
 
-  hideDropbox = () => {
-    // remove box
-    const box = this.dwvApp.getElement(this.dropboxClassName);
-    if (box) {
-      box.parentNode.removeChild(box);
-    }
-  }
-
   /**
    * Handle a change tool event.
    * @param tool The new tool.
    */
-  onChangeTool = (tool) => {
+  onChangeTool = (tool: string) => {
     if ( this.dwvApp ) {
       this.selectedTool = tool;
       this.dwvApp.setTool(tool);
@@ -123,7 +115,7 @@ export class DwvComponent implements OnInit {
    * Handle a change draw shape event.
    * @param shape The new shape.
    */
-  onChangeShape = (shape) => {
+  onChangeShape = (shape: string) => {
     if ( this.dwvApp && this.selectedTool === 'Draw') {
       this.dwvApp.setDrawShape(shape);
     }
@@ -155,7 +147,7 @@ export class DwvComponent implements OnInit {
    * Handle a drag over.
    * @param event The event to handle.
    */
-  onDragOver = (event) => {
+  onDragOver = (event: DragEvent) => {
     // prevent default handling
     event.stopPropagation();
     event.preventDefault();
@@ -170,7 +162,7 @@ export class DwvComponent implements OnInit {
    * Handle a drag leave.
    * @param event The event to handle.
    */
-  onDragLeave = (event) => {
+  onDragLeave = (event: DragEvent) => {
     // prevent default handling
     event.stopPropagation();
     event.preventDefault();
@@ -182,10 +174,21 @@ export class DwvComponent implements OnInit {
   }
 
   /**
+   * Hide the data load drop box.
+   */
+  hideDropbox = () => {
+    // remove box
+    const box = this.dwvApp.getElement(this.dropboxClassName);
+    if (box) {
+      box.parentNode.removeChild(box);
+    }
+  }
+
+  /**
    * Handle a drop event.
    * @param event The event to handle.
    */
-  onDrop = (event) => {
+  onDrop = (event: DragEvent) => {
     // prevent default handling
     event.stopPropagation();
     event.preventDefault();
@@ -195,25 +198,31 @@ export class DwvComponent implements OnInit {
     this.hideDropbox();
   }
 
-  isObject = (unknown) => {
-      const type = typeof unknown;
-      return type === 'function' || type === 'object' && !!unknown;
+  /**
+   * Check if an input data is an object.
+   * @param data The data to check.
+   */
+  isObject = (data: any) => {
+      const type = typeof data;
+      return type === 'function' || type === 'object' && !!data;
   }
 
-  objectToArray = (obj) => {
+  /**
+   * Convert an input object to an array.
+   * Used to display meta data.
+   * @param object The object to convert.
+   */
+  objectToArray = (obj: object) => {
       const array = [];
-      const keys = Object.keys(obj);
-      for (let i = 0; i < keys.length; ++i ) {
-          const key = keys[i];
+      for (const key of Object.keys(obj)) {
+          const value = obj[key];
           const row = {name: key};
-          const innerKeys = Object.keys(obj[key]);
-          for (let j = 0; j < innerKeys.length; ++j ) {
-              const innerKey = innerKeys[j];
-              let value = obj[key][innerKey];
-              if (this.isObject(value)) {
-                  value = JSON.stringify(value);
+          for (const innerKey of Object.keys(value)) {
+              let innerValue = obj[key][innerKey];
+              if (this.isObject(innerValue)) {
+                  innerValue = JSON.stringify(innerValue);
               }
-              row[innerKey] = value;
+              row[innerKey] = innerValue;
           }
           array.push(row);
       }
