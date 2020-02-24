@@ -26,13 +26,13 @@ dwv.image.decoderScripts = {
 export class DwvComponent implements OnInit {
   public versions: any;
   public tools = {
-      'Scroll': {},
-      'ZoomAndPan': {},
-      'WindowLevel': {},
-      'Draw': {
+      Scroll: {},
+      ZoomAndPan: {},
+      WindowLevel: {},
+      Draw: {
           options: ['Ruler'],
-          type: "factory",
-          events: ["draw-create", "draw-change", "draw-move", "draw-delete"]
+          type: 'factory',
+          events: ['draw-create', 'draw-change', 'draw-move', 'draw-delete']
       }
   };
   public shapes = ['Ruler'];
@@ -92,11 +92,11 @@ export class DwvComponent implements OnInit {
     this.dwvApp.addEventListener('load-end', (event) => {
       if (nReceivedError) {
         this.loadProgress = 0;
-        alert("Received errors during load. Check log for details.");
+        alert('Received errors during load. Check log for details.');
       }
       if (nReceivedAbort) {
         this.loadProgress = 0;
-        alert("Load was aborted.");
+        alert('Load was aborted.');
       }
     });
     this.dwvApp.addEventListener('error', (event) => {
@@ -106,7 +106,7 @@ export class DwvComponent implements OnInit {
     this.dwvApp.addEventListener('abort', (event) => {
       ++nReceivedAbort;
     });
-    this.dwvApp.addEventListener("keydown", (event) => {
+    this.dwvApp.addEventListener('keydown', (event) => {
         this.dwvApp.defaultOnKeydown(event);
     });
     // listen to window resize
