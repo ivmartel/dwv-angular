@@ -25,7 +25,16 @@ dwv.image.decoderScripts = {
 
 export class DwvComponent implements OnInit {
   public versions: any;
-  public tools = ['Scroll', 'ZoomAndPan', 'WindowLevel', 'Draw'];
+  public tools = {
+      'Scroll': {},
+      'ZoomAndPan': {},
+      'WindowLevel': {},
+      'Draw': {
+          options: ['Ruler'],
+          type: "factory",
+          events: ["draw-create", "draw-change", "draw-move", "draw-delete"]
+      }
+  };
   public shapes = ['Ruler'];
   public selectedTool = 'Select Tool';
   public loadProgress = 0;
@@ -51,34 +60,69 @@ export class DwvComponent implements OnInit {
     // initialise app
     this.dwvApp.init({
       containerDivId: 'dwv',
-      tools: this.tools,
-      shapes: this.shapes
+      tools: this.tools
     });
-    // progress
+
+    let nReceivedError = null;
+    let nReceivedAbort = null;
+
+    this.dwvApp.addEventListener('load-start', (event) => {
+      nReceivedError = 0;
+      nReceivedAbort = 0;
+    });
     this.dwvApp.addEventListener('load-progress', (event) => {
       this.loadProgress = event.loaded;
     });
-    this.dwvApp.addEventListener('load-end', (event) => {
-      // set data loaded flag
-      this.dataLoaded = true;
+    this.dwvApp.addEventListener('load', (event) => {
       // set dicom tags
       this.metaData = this.objectToArray(this.dwvApp.getMetaData());
       // set the selected tool
-      if (this.dwvApp.isMonoSliceData() && this.dwvApp.getImage().getNumberOfFrames() === 1) {
+      if (this.dwvApp.isMonoSliceData() &&
+        this.dwvApp.getImage().getNumberOfFrames() === 1) {
         this.selectedTool = 'ZoomAndPan';
       } else {
         this.selectedTool = 'Scroll';
       }
       this.onChangeTool(this.selectedTool);
+      // hide dropBox
+      this.hideDropbox();
+      // set data loaded flag
+      this.dataLoaded = true;
     });
+    this.dwvApp.addEventListener('load-end', (event) => {
+      if (nReceivedError) {
+        this.loadProgress = 0;
+        alert("Received errors during load. Check log for details.");
+      }
+      if (nReceivedAbort) {
+        this.loadProgress = 0;
+        alert("Load was aborted.");
+      }
+    });
+    this.dwvApp.addEventListener('error', (event) => {
+      console.error(event.error);
+      ++nReceivedError;
+    });
+    this.dwvApp.addEventListener('abort', (event) => {
+      ++nReceivedAbort;
+    });
+    this.dwvApp.addEventListener("keydown", (event) => {
+        this.dwvApp.defaultOnKeydown(event);
+    });
+    // listen to window resize
+    window.addEventListener('resize', this.dwvApp.onResize);
+
     // setup drop box
     this.setupDropbox();
+
+    // possible load from location
+    dwv.utils.loadFromUri(window.location.href, this.dwvApp);
   }
 
   /**
    * Setup the data load drop box: add event listeners and set initial size.
    */
-  setupDropbox = () => {
+  private setupDropbox = () => {
       // start listening to drag events on the layer container
       const layerContainer = this.dwvApp.getElement('layerContainer');
       if (layerContainer) {
@@ -98,10 +142,17 @@ export class DwvComponent implements OnInit {
   }
 
   /**
+   * Get the tool names as a string array.
+   */
+  get toolNames(): string[] {
+      return Object.keys(this.tools);
+  }
+
+  /**
    * Handle a change tool event.
    * @param tool The new tool.
    */
-  onChangeTool = (tool: string) => {
+  private onChangeTool = (tool: string) => {
     if ( this.dwvApp ) {
       this.selectedTool = tool;
       this.dwvApp.setTool(tool);
@@ -115,7 +166,7 @@ export class DwvComponent implements OnInit {
    * Handle a change draw shape event.
    * @param shape The new shape.
    */
-  onChangeShape = (shape: string) => {
+  private onChangeShape = (shape: string) => {
     if ( this.dwvApp && this.selectedTool === 'Draw') {
       this.dwvApp.setDrawShape(shape);
     }
@@ -124,7 +175,7 @@ export class DwvComponent implements OnInit {
   /**
    * Handle a reset event.
    */
-  onReset = () => {
+  private onReset = () => {
     if ( this.dwvApp ) {
       this.dwvApp.resetDisplay();
     }
@@ -133,12 +184,15 @@ export class DwvComponent implements OnInit {
   /**
    * Open the DICOM tags dialog.
    */
-  openTagsDialog = () => {
+  private openTagsDialog = () => {
     this.dialog.open(TagsDialogComponent,
       {
         width: '80%',
         height: '90%',
-        data: { title: 'DICOM Tags', value: this.metaData }
+        data: {
+          title: 'DICOM Tags',
+          value: this.metaData
+        }
       }
     );
   }
@@ -147,7 +201,7 @@ export class DwvComponent implements OnInit {
    * Handle a drag over.
    * @param event The event to handle.
    */
-  onDragOver = (event: DragEvent) => {
+  private onDragOver = (event: DragEvent) => {
     // prevent default handling
     event.stopPropagation();
     event.preventDefault();
@@ -162,7 +216,7 @@ export class DwvComponent implements OnInit {
    * Handle a drag leave.
    * @param event The event to handle.
    */
-  onDragLeave = (event: DragEvent) => {
+  private onDragLeave = (event: DragEvent) => {
     // prevent default handling
     event.stopPropagation();
     event.preventDefault();
@@ -176,7 +230,7 @@ export class DwvComponent implements OnInit {
   /**
    * Hide the data load drop box.
    */
-  hideDropbox = () => {
+  private hideDropbox = () => {
     // remove box
     const box = this.dwvApp.getElement(this.dropboxClassName);
     if (box) {
@@ -188,7 +242,7 @@ export class DwvComponent implements OnInit {
    * Handle a drop event.
    * @param event The event to handle.
    */
-  onDrop = (event: DragEvent) => {
+  private onDrop = (event: DragEvent) => {
     // prevent default handling
     event.stopPropagation();
     event.preventDefault();
@@ -202,7 +256,7 @@ export class DwvComponent implements OnInit {
    * Check if an input data is an object.
    * @param data The data to check.
    */
-  isObject = (data: any) => {
+  private isObject = (data: any): boolean => {
       const type = typeof data;
       return type === 'function' || type === 'object' && !!data;
   }
@@ -212,7 +266,7 @@ export class DwvComponent implements OnInit {
    * Used to display meta data.
    * @param object The object to convert.
    */
-  objectToArray = (obj: object) => {
+  private objectToArray = (obj: object): any => {
       const array = [];
       for (const key of Object.keys(obj)) {
           const value = obj[key];
