@@ -35,10 +35,10 @@ export class DwvComponent implements OnInit {
           events: ['draw-create', 'draw-change', 'draw-move', 'draw-delete']
       }
   };
-  public shapes = ['Ruler'];
   public selectedTool = 'Select Tool';
   public loadProgress = 0;
   public dataLoaded = false;
+
   private dwvApp: any;
   private metaData: any[];
 
@@ -62,34 +62,33 @@ export class DwvComponent implements OnInit {
       containerDivId: 'dwv',
       tools: this.tools
     });
-
+    // handle load events
     let nReceivedError = null;
     let nReceivedAbort = null;
-
-    this.dwvApp.addEventListener('load-start', (event) => {
+    this.dwvApp.addEventListener('load-start', (/*event*/) => {
+      this.dataLoaded = false;
       nReceivedError = 0;
       nReceivedAbort = 0;
     });
     this.dwvApp.addEventListener('load-progress', (event) => {
       this.loadProgress = event.loaded;
     });
-    this.dwvApp.addEventListener('load', (event) => {
+    this.dwvApp.addEventListener('load', (/*event*/) => {
       // set dicom tags
-      this.metaData = this.objectToArray(this.dwvApp.getMetaData());
+      this.metaData = dwv.utils.objectToArray(this.dwvApp.getMetaData());
       // set the selected tool
+      let selectedTool = 'Scroll';
       if (this.dwvApp.isMonoSliceData() &&
         this.dwvApp.getImage().getNumberOfFrames() === 1) {
         this.selectedTool = 'ZoomAndPan';
-      } else {
-        this.selectedTool = 'Scroll';
       }
-      this.onChangeTool(this.selectedTool);
+      this.onChangeTool(selectedTool);
       // hide dropBox
       this.hideDropbox();
       // set data loaded flag
       this.dataLoaded = true;
     });
-    this.dwvApp.addEventListener('load-end', (event) => {
+    this.dwvApp.addEventListener('load-end', (/*event*/) => {
       if (nReceivedError) {
         this.loadProgress = 0;
         alert('Received errors during load. Check log for details.');
@@ -103,13 +102,15 @@ export class DwvComponent implements OnInit {
       console.error(event.error);
       ++nReceivedError;
     });
-    this.dwvApp.addEventListener('abort', (event) => {
+    this.dwvApp.addEventListener('abort', (/*event*/) => {
       ++nReceivedAbort;
     });
+
+    // handle key events
     this.dwvApp.addEventListener('keydown', (event) => {
         this.dwvApp.defaultOnKeydown(event);
     });
-    // listen to window resize
+    // handle window resize
     window.addEventListener('resize', this.dwvApp.onResize);
 
     // setup drop box
@@ -117,28 +118,6 @@ export class DwvComponent implements OnInit {
 
     // possible load from location
     dwv.utils.loadFromUri(window.location.href, this.dwvApp);
-  }
-
-  /**
-   * Setup the data load drop box: add event listeners and set initial size.
-   */
-  private setupDropbox = () => {
-      // start listening to drag events on the layer container
-      const layerContainer = this.dwvApp.getElement('layerContainer');
-      if (layerContainer) {
-        layerContainer.addEventListener('dragover', this.onDragOver);
-        layerContainer.addEventListener('dragleave', this.onDragLeave);
-        layerContainer.addEventListener('drop', this.onDrop);
-      }
-      // set the initial drop box size
-      const box = this.dwvApp.getElement(this.dropboxClassName);
-      if (box) {
-        const size = this.dwvApp.getLayerContainerSize();
-        const dropBoxSize = 2 * size.height / 3;
-        box.setAttribute(
-          'style',
-          'width:' + dropBoxSize + 'px;height:' + dropBoxSize + 'px');
-      }
   }
 
   /**
@@ -150,21 +129,21 @@ export class DwvComponent implements OnInit {
 
   /**
    * Handle a change tool event.
-   * @param tool The new tool.
+   * @param tool The new tool name.
    */
   private onChangeTool = (tool: string) => {
     if ( this.dwvApp ) {
       this.selectedTool = tool;
       this.dwvApp.setTool(tool);
       if (tool === 'Draw') {
-        this.onChangeShape(this.shapes[0]);
+        this.onChangeShape(this.tools.Draw.options[0]);
       }
     }
   }
 
   /**
    * Handle a change draw shape event.
-   * @param shape The new shape.
+   * @param shape The new shape name.
    */
   private onChangeShape = (shape: string) => {
     if ( this.dwvApp && this.selectedTool === 'Draw') {
@@ -195,6 +174,30 @@ export class DwvComponent implements OnInit {
         }
       }
     );
+  }
+
+  // drag and drop [begin] -----------------------------------------------------
+
+  /**
+   * Setup the data load drop box: add event listeners and set initial size.
+   */
+  private setupDropbox = () => {
+      // start listening to drag events on the layer container
+      const layerContainer = this.dwvApp.getElement('layerContainer');
+      if (layerContainer) {
+        layerContainer.addEventListener('dragover', this.onDragOver);
+        layerContainer.addEventListener('dragleave', this.onDragLeave);
+        layerContainer.addEventListener('drop', this.onDrop);
+      }
+      // set the initial drop box size
+      const box = this.dwvApp.getElement(this.dropboxClassName);
+      if (box) {
+        const size = this.dwvApp.getLayerContainerSize();
+        const dropBoxSize = 2 * size.height / 3;
+        box.setAttribute(
+          'style',
+          'width:' + dropBoxSize + 'px;height:' + dropBoxSize + 'px');
+      }
   }
 
   /**
@@ -252,35 +255,6 @@ export class DwvComponent implements OnInit {
     this.hideDropbox();
   }
 
-  /**
-   * Check if an input data is an object.
-   * @param data The data to check.
-   */
-  private isObject = (data: any): boolean => {
-      const type = typeof data;
-      return type === 'function' || type === 'object' && !!data;
-  }
-
-  /**
-   * Convert an input object to an array.
-   * Used to display meta data.
-   * @param object The object to convert.
-   */
-  private objectToArray = (obj: object): any => {
-      const array = [];
-      for (const key of Object.keys(obj)) {
-          const value = obj[key];
-          const row = {name: key};
-          for (const innerKey of Object.keys(value)) {
-              let innerValue = obj[key][innerKey];
-              if (this.isObject(innerValue)) {
-                  innerValue = JSON.stringify(innerValue);
-              }
-              row[innerKey] = innerValue;
-          }
-          array.push(row);
-      }
-      return array;
-  }
+  // drag and drop [end] -------------------------------------------------------
 
 }
