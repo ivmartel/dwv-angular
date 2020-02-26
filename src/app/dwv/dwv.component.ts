@@ -80,7 +80,7 @@ export class DwvComponent implements OnInit {
       let selectedTool = 'Scroll';
       if (this.dwvApp.isMonoSliceData() &&
         this.dwvApp.getImage().getNumberOfFrames() === 1) {
-        this.selectedTool = 'ZoomAndPan';
+        selectedTool = 'ZoomAndPan';
       }
       this.onChangeTool(selectedTool);
       // hide dropBox
