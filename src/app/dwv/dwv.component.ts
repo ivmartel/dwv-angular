@@ -131,7 +131,7 @@ export class DwvComponent implements OnInit {
    * Handle a change tool event.
    * @param tool The new tool name.
    */
-  private onChangeTool = (tool: string) => {
+  onChangeTool = (tool: string) => {
     if ( this.dwvApp ) {
       this.selectedTool = tool;
       this.dwvApp.setTool(tool);
@@ -154,7 +154,7 @@ export class DwvComponent implements OnInit {
   /**
    * Handle a reset event.
    */
-  private onReset = () => {
+  onReset = () => {
     if ( this.dwvApp ) {
       this.dwvApp.resetDisplay();
     }
@@ -163,7 +163,7 @@ export class DwvComponent implements OnInit {
   /**
    * Open the DICOM tags dialog.
    */
-  private openTagsDialog = () => {
+  openTagsDialog = () => {
     this.dialog.open(TagsDialogComponent,
       {
         width: '80%',
