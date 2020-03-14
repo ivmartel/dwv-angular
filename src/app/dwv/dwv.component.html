@@ -5,14 +5,14 @@
       <mat-icon>arrow_drop_down</mat-icon>
     </button>
     <mat-menu #menu="matMenu" [overlapTrigger]="false" yPosition="below">
-      <button *ngFor="let tool of tools" mat-menu-item (value)="tool" (click)="onChangeTool(tool)">{{ tool }}</button>
+      <button *ngFor="let tool of toolNames" mat-menu-item (value)="tool" (click)="onChangeTool(tool)">{{ tool }}</button>
     </mat-menu>
 
     <button mat-raised-button color="primary" (click)="onReset()" [disabled]="!dataLoaded">Reset</button>
     <button mat-raised-button color="primary" (click)="openTagsDialog()" [disabled]="!dataLoaded">Tags</button>
   </div>
   <div class="layerContainer">
-    <div class="dropBox">Drag and drop data here.</div>
+    <div class="dropBox dropBoxBorder">Drag and drop data here.</div>
     <canvas class="imageLayer">Only for HTML5 compatible browsers...</canvas>
     <div class="drawDiv"></div>
   </div>
