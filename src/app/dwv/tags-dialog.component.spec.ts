@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { TestBed, ComponentFixture, async } from '@angular/core/testing';
-import { MatDialogModule } from '@angular/material';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 import { TagsDialogComponent } from './tags-dialog.component';
