@@ -1,0 +1,60 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.14.1
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  SNYK-JS-LODASH-567746:
+    - karma > lodash:
+        patched: '2020-05-02T02:14:02.637Z'
+    - '@angular-devkit/build-angular > @babel/generator > lodash':
+        patched: '2020-05-02T02:14:02.637Z'
+    - '@angular-devkit/build-angular > webpack-merge > lodash':
+        patched: '2020-05-02T02:14:02.637Z'
+    - '@angular/cli > inquirer > lodash':
+        patched: '2020-05-02T02:14:02.637Z'
+    - '@angular-devkit/build-angular > @babel/preset-env > @babel/plugin-transform-block-scoping > lodash':
+        patched: '2020-05-02T02:14:02.637Z'
+    - '@angular-devkit/build-angular > source-map-loader > async > lodash':
+        patched: '2020-05-02T02:14:02.637Z'
+    - karma-coverage-istanbul-reporter > istanbul-api > async > lodash:
+        patched: '2020-05-02T02:14:02.637Z'
+    - '@angular-devkit/build-angular > webpack-dev-server > http-proxy-middleware > lodash':
+        patched: '2020-05-02T02:14:02.637Z'
+    - karma > log4js > streamroller > lodash:
+        patched: '2020-05-02T02:14:02.637Z'
+    - '@angular-devkit/build-angular > @babel/preset-env > @babel/preset-modules > @babel/types > lodash':
+        patched: '2020-05-02T02:14:02.637Z'
+    - '@angular-devkit/build-angular > @jsdevtools/coverage-istanbul-loader > istanbul-lib-instrument > @babel/core > lodash':
+        patched: '2020-05-02T02:14:02.637Z'
+    - karma-coverage-istanbul-reporter > istanbul-api > istanbul-lib-instrument > @babel/traverse > lodash:
+        patched: '2020-05-02T02:14:02.637Z'
+    - '@angular-devkit/build-angular > webpack-dev-server > portfinder > async > lodash':
+        patched: '2020-05-02T02:14:02.637Z'
+    - karma > log4js > streamroller > async > lodash:
+        patched: '2020-05-02T02:14:02.637Z'
+    - '@angular-devkit/build-angular > @babel/preset-env > @babel/plugin-transform-unicode-regex > @babel/helper-create-regexp-features-plugin > @babel/helper-regex > lodash':
+        patched: '2020-05-02T02:14:02.637Z'
+    - '@angular-devkit/build-angular > @jsdevtools/coverage-istanbul-loader > istanbul-lib-instrument > @babel/core > @babel/traverse > lodash':
+        patched: '2020-05-02T02:14:02.637Z'
+    - karma-coverage-istanbul-reporter > istanbul-api > istanbul-lib-instrument > @babel/traverse > @babel/generator > lodash:
+        patched: '2020-05-02T02:14:02.637Z'
+    - '@angular-devkit/build-angular > @babel/preset-env > @babel/preset-modules > @babel/plugin-transform-dotall-regex > @babel/helper-create-regexp-features-plugin > @babel/helper-regex > lodash':
+        patched: '2020-05-02T02:14:02.637Z'
+    - '@angular-devkit/build-angular > @jsdevtools/coverage-istanbul-loader > istanbul-lib-instrument > @babel/core > @babel/helpers > @babel/traverse > lodash':
+        patched: '2020-05-02T02:14:02.637Z'
+    - karma-coverage-istanbul-reporter > istanbul-api > istanbul-lib-instrument > @babel/traverse > @babel/helper-split-export-declaration > @babel/types > lodash:
+        patched: '2020-05-02T02:14:02.637Z'
+    - '@angular-devkit/build-angular > @babel/preset-env > @babel/plugin-transform-exponentiation-operator > @babel/helper-builder-binary-assignment-operator-visitor > @babel/helper-explode-assignable-expression > @babel/traverse > @babel/generator > lodash':
+        patched: '2020-05-02T02:14:02.637Z'
+    - '@angular-devkit/build-angular > @jsdevtools/coverage-istanbul-loader > istanbul-lib-instrument > @babel/core > @babel/helpers > @babel/traverse > @babel/generator > lodash':
+        patched: '2020-05-02T02:14:02.637Z'
+    - karma-coverage-istanbul-reporter > istanbul-api > istanbul-lib-instrument > @babel/traverse > @babel/helper-function-name > @babel/helper-get-function-arity > @babel/types > lodash:
+        patched: '2020-05-02T02:14:02.637Z'
+    - '@angular-devkit/build-angular > @babel/preset-env > @babel/plugin-transform-exponentiation-operator > @babel/helper-builder-binary-assignment-operator-visitor > @babel/helper-explode-assignable-expression > @babel/traverse > @babel/helper-split-export-declaration > @babel/types > lodash':
+        patched: '2020-05-02T02:14:02.637Z'
+    - '@angular-devkit/build-angular > @jsdevtools/coverage-istanbul-loader > istanbul-lib-instrument > @babel/core > @babel/helpers > @babel/traverse > @babel/helper-split-export-declaration > @babel/types > lodash':
+        patched: '2020-05-02T02:14:02.637Z'
+    - '@angular-devkit/build-angular > @babel/preset-env > @babel/plugin-transform-exponentiation-operator > @babel/helper-builder-binary-assignment-operator-visitor > @babel/helper-explode-assignable-expression > @babel/traverse > @babel/helper-function-name > @babel/template > @babel/types > lodash':
+        patched: '2020-05-02T02:14:02.637Z'
+    - '@angular-devkit/build-angular > @jsdevtools/coverage-istanbul-loader > istanbul-lib-instrument > @babel/core > @babel/helpers > @babel/traverse > @babel/helper-function-name > @babel/template > @babel/types > lodash':
+        patched: '2020-05-02T02:14:02.637Z'
