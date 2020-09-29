@@ -2453,7 +2453,11 @@ ${msgIdle}`, { headers: this.adapter.newHeaders({ 'Content-Type': 'text/plain' }
         deleteAllCaches() {
             return __awaiter(this, void 0, void 0, function* () {
                 yield (yield this.scope.caches.keys())
-                    .filter(key => key.startsWith(`${this.adapter.cacheNamePrefix}:`))
+                    // The Chrome debugger is not able to render the syntax properly when the
+                    // code contains backticks. This is a known issue in Chrome and they have an
+                    // open [issue](https://bugs.chromium.org/p/chromium/issues/detail?id=659515) for that.
+                    // As a work-around for the time being, we can use \\ ` at the end of the line.
+                    .filter(key => key.startsWith(`${this.adapter.cacheNamePrefix}:`)) // `
                     .reduce((previous, key) => __awaiter(this, void 0, void 0, function* () {
                     yield Promise.all([
                         previous,
