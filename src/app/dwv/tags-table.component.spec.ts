@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TestBed, ComponentFixture, async } from '@angular/core/testing';
+import { TestBed, ComponentFixture, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -18,7 +18,7 @@ describe('TagsTableComponent', () => {
       @Input() pageSizeOptions: any;
   }
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
           imports: [
               BrowserAnimationsModule,

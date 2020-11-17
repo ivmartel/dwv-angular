@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { TestBed, ComponentFixture, async } from '@angular/core/testing';
+import { TestBed, ComponentFixture, waitForAsync } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
@@ -17,7 +17,7 @@ describe('TagsDialogComponent', () => {
       @Input() data: any;
   }
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
           imports: [
               MatDialogModule
