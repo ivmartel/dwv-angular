@@ -1,4 +1,4 @@
-import { TestBed, ComponentFixture, async } from '@angular/core/testing';
+import { TestBed, ComponentFixture, waitForAsync } from '@angular/core/testing';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -12,7 +12,7 @@ describe('DwvComponent', () => {
   let component: DwvComponent;
   let fixture: ComponentFixture<DwvComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [
         DwvComponent
@@ -40,7 +40,7 @@ describe('DwvComponent', () => {
       expect(() => fixture.detectChanges()).not.toThrow();
   });
 
-  it('renders the beginning of the legend', async(() => {
+  it('renders the beginning of the legend', waitForAsync(() => {
     fixture.detectChanges();
 
     const compiled = fixture.debugElement.nativeElement;
