@@ -32,7 +32,7 @@ export class DwvComponent implements OnInit {
       Draw: {
           options: ['Ruler'],
           type: 'factory',
-          events: ['draw-create', 'draw-change', 'draw-move', 'draw-delete']
+          events: ['drawcreate', 'drawchange', 'drawmove', 'drawdelete']
       }
   };
   public selectedTool = 'Select Tool';
@@ -66,7 +66,7 @@ export class DwvComponent implements OnInit {
     let nLoadItem = null;
     let nReceivedError = null;
     let nReceivedAbort = null;
-    this.dwvApp.addEventListener('load-start', (/*event*/) => {
+    this.dwvApp.addEventListener('loadstart', (/*event*/) => {
       // reset flags
       this.dataLoaded = false;
       nLoadItem = 0;
@@ -75,7 +75,7 @@ export class DwvComponent implements OnInit {
       // hide drop box
       this.showDropbox(false);
     });
-    this.dwvApp.addEventListener('load-progress', (event) => {
+    this.dwvApp.addEventListener('loadprogress', (event) => {
       this.loadProgress = event.loaded;
     });
     this.dwvApp.addEventListener('load', (/*event*/) => {
@@ -91,7 +91,7 @@ export class DwvComponent implements OnInit {
       // set data loaded flag
       this.dataLoaded = true;
     });
-    this.dwvApp.addEventListener('load-end', (/*event*/) => {
+    this.dwvApp.addEventListener('loadend', (/*event*/) => {
       if (nReceivedError) {
         this.loadProgress = 0;
         alert('Received errors during load. Check log for details.');
@@ -106,7 +106,7 @@ export class DwvComponent implements OnInit {
         this.showDropbox(true);
       }
     });
-    this.dwvApp.addEventListener('load-item', (/*event*/) => {
+    this.dwvApp.addEventListener('loaditem', (/*event*/) => {
       ++nLoadItem;
     });
     this.dwvApp.addEventListener('error', (event) => {
