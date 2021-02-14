@@ -235,9 +235,10 @@ export class DwvComponent implements OnInit {
   }
 
   /**
-   * Hide the data load drop box.
+   * Show/hide the data load drop box.
+   * @param show True to show the drop box.
    */
-  private showDropbox = (show) => {
+  private showDropbox = (show: boolean) => {
     const box = this.dwvApp.getElement(this.dropboxClassName);
     if (box) {
       if (show) {
