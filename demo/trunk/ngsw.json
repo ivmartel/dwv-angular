@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1614511216890,
+  "timestamp": 1614812908466,
   "index": "/dwv-angular/demo/trunk/index.html",
   "assetGroups": [
     {
@@ -13,8 +13,8 @@
       "urls": [
         "/dwv-angular/demo/trunk/favicon.ico",
         "/dwv-angular/demo/trunk/index.html",
-        "/dwv-angular/demo/trunk/main-es2015.59f3b530696aa67885df.js",
-        "/dwv-angular/demo/trunk/main-es5.59f3b530696aa67885df.js",
+        "/dwv-angular/demo/trunk/main-es2015.f111c87b6f62ef51be5b.js",
+        "/dwv-angular/demo/trunk/main-es5.f111c87b6f62ef51be5b.js",
         "/dwv-angular/demo/trunk/polyfills-es2015.1acfd26c36af79e1485a.js",
         "/dwv-angular/demo/trunk/polyfills-es5.a17a907ed8f906743385.js",
         "/dwv-angular/demo/trunk/runtime-es2015.eda0487c9407c2ad789d.js",
@@ -78,9 +78,9 @@
     "/dwv-angular/demo/trunk/assets/icons/icon-64.png": "af9d093864475123077d9ff5a5b38328b61aed76",
     "/dwv-angular/demo/trunk/assets/theme.scss": "dc1ef0b1d31feaf1a7583dbdc37c51a4ace8e510",
     "/dwv-angular/demo/trunk/favicon.ico": "f2c13e666b0fd4a3239df69e908221fb37ea24ed",
-    "/dwv-angular/demo/trunk/index.html": "bb724d01b1922a8fdc43e28338385d66e708d7f8",
-    "/dwv-angular/demo/trunk/main-es2015.59f3b530696aa67885df.js": "a5b45907e068b3ca91aa95446fa131126ba1befc",
-    "/dwv-angular/demo/trunk/main-es5.59f3b530696aa67885df.js": "3e9ea1aa75861fc47b88fedb5f17af46eb634ffd",
+    "/dwv-angular/demo/trunk/index.html": "83afa7c20193952129d655b1e5eb716e22013cc6",
+    "/dwv-angular/demo/trunk/main-es2015.f111c87b6f62ef51be5b.js": "e456b70f648e74c2084449295a6fb9a549bc68a0",
+    "/dwv-angular/demo/trunk/main-es5.f111c87b6f62ef51be5b.js": "6de4f09c0c02887f09051d3642d47b2431d680df",
     "/dwv-angular/demo/trunk/polyfills-es2015.1acfd26c36af79e1485a.js": "b781f6723ec3a789640a4e9f9108b22c6cef4684",
     "/dwv-angular/demo/trunk/polyfills-es5.a17a907ed8f906743385.js": "e5cafdceff4f0cd98f65b730dba74c1ba1dc39d2",
     "/dwv-angular/demo/trunk/runtime-es2015.eda0487c9407c2ad789d.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
