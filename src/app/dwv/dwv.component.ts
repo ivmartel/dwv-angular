@@ -35,6 +35,7 @@ export class DwvComponent implements OnInit {
           events: ['drawcreate', 'drawchange', 'drawmove', 'drawdelete']
       }
   };
+  public toolNames: string[];
   public selectedTool = 'Select Tool';
   public loadProgress = 0;
   public dataLoaded = false;
@@ -81,13 +82,16 @@ export class DwvComponent implements OnInit {
     this.dwvApp.addEventListener('load', (/*event*/) => {
       // set dicom tags
       this.metaData = dwv.utils.objectToArray(this.dwvApp.getMetaData());
-      // set the selected tool
-      let selectedTool = 'Scroll';
-      if (this.dwvApp.isMonoSliceData() &&
-        this.dwvApp.getImage().getNumberOfFrames() === 1) {
-        selectedTool = 'ZoomAndPan';
+      // available tools
+      this.toolNames = [];
+      for (const key in this.tools) {
+        if ((key === 'Scroll' && this.dwvApp.canScroll()) ||
+          (key === 'WindowLevel' && this.dwvApp.canWindowLevel()) ||
+          (key !== 'Scroll' && key !== 'WindowLevel')) {
+          this.toolNames.push(key);
+        }
       }
-      this.onChangeTool(selectedTool);
+      this.onChangeTool(this.toolNames[0]);
       // set data loaded flag
       this.dataLoaded = true;
     });
@@ -129,13 +133,6 @@ export class DwvComponent implements OnInit {
 
     // possible load from location
     dwv.utils.loadFromUri(window.location.href, this.dwvApp);
-  }
-
-  /**
-   * Get the tool names as a string array.
-   */
-  get toolNames(): string[] {
-      return Object.keys(this.tools);
   }
 
   /**
