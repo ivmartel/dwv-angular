@@ -169,6 +169,20 @@ export class DwvComponent implements OnInit {
   }
 
   /**
+   * handle an undo event
+   */
+  onUndo(){
+    this.dwvApp.undo();
+  }
+
+  /**
+   * handle a redo event
+   */
+  onRedo(){
+    this.dwvApp.redo();
+  }
+
+  /**
    * Open the DICOM tags dialog.
    */
   openTagsDialog = () => {

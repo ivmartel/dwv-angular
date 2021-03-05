@@ -5,10 +5,13 @@
       <mat-icon>arrow_drop_down</mat-icon>
     </button>
     <mat-menu #menu="matMenu" [overlapTrigger]="false" yPosition="below">
-      <button *ngFor="let tool of toolNames" mat-menu-item (value)="tool" (click)="onChangeTool(tool)">{{ tool }}</button>
+      <button *ngFor="let tool of toolNames" mat-menu-item (value)="tool" (click)="onChangeTool(tool)">{{ tool
+        }}</button>
     </mat-menu>
 
     <button mat-raised-button color="primary" (click)="onReset()" [disabled]="!dataLoaded">Reset</button>
+    <button mat-raised-button color="primary" (click)="onUndo()" [disabled]="!dataLoaded">undo</button>
+    <button mat-raised-button color="primary" (click)="onRedo()" [disabled]="!dataLoaded">redo</button>
     <button mat-raised-button color="primary" (click)="openTagsDialog()" [disabled]="!dataLoaded">Tags</button>
   </div>
   <div class="layerContainer">
@@ -18,7 +21,9 @@
   </div>
   <div class="legend mat-small">
     <p>Powered by
-    <a href="https://github.com/ivmartel/dwv">dwv</a>
-    {{ versions.dwv }}
-    and Angular {{ versions.angular }}</p></div>
+      <a href="https://github.com/ivmartel/dwv">dwv</a>
+      {{ versions.dwv }}
+      and Angular {{ versions.angular }}
+    </p>
+  </div>
 </div>
