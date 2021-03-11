@@ -8,6 +8,8 @@ import { TagsDialogComponent } from './tags-dialog.component';
 
 // get element
 dwv.gui.getElement = dwv.gui.base.getElement;
+// prompt
+dwv.gui.prompt = prompt;
 
 // Image decoders (for web workers)
 dwv.image.decoderScripts = {
