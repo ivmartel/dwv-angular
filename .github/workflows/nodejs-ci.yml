@@ -35,7 +35,7 @@ jobs:
           yarn run build-ci
         fi
     - name: Push to gh-pages (if tag or master branch)
-      if: env.IS_PUSH_MASTER} || env.IS_PUSH_TAG
+      if: env.IS_PUSH_MASTER || env.IS_PUSH_TAG
       run: |
         git config user.email github-actions@github.com
         git config user.name github-actions
