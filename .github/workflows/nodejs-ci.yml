@@ -8,8 +8,8 @@ on: [push, pull_request]
 
 jobs:
   env:
-    IS_PUSH_MASTER = ${{ github.ref == 'refs/heads/master' }}
-    IS_PUSH_TAG = ${{ startsWith(github.ref, 'refs/tags/') }}
+    IS_PUSH_MASTER: ${{ github.ref == 'refs/heads/master' }}
+    IS_PUSH_TAG: ${{ startsWith(github.ref, 'refs/tags/') }}
   build:
     runs-on: ubuntu-latest
     steps:
