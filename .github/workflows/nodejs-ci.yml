@@ -1,6 +1,6 @@
 # Node.js CI workflow
 
-# build: base href is set in the build-ci script
+# build: base href is set in the npm build script
 
 name: Node.js CI
 
@@ -37,18 +37,16 @@ jobs:
     - name: Push to gh-pages (if tag or master branch)
       if: env.IS_PUSH_MASTER == 'true' || env.IS_PUSH_TAG == 'true'
       run: |
+        DEPLOY_DIR=./demo/trunk
+        if ${{ env.IS_PUSH_TAG }}; then
+          DEPLOY_DIR=./demo/stable
+        fi
         git config user.email github-actions@github.com
         git config user.name github-actions
         git checkout gh-pages
-        if ${{ env.IS_PUSH_MASTER }}; then
-          rm -Rf ./demo/trunk/*
-          cp -Rf ./dist/dwv-angular/* ./demo/trunk
-          git add ./demo/trunk/*
-        else
-          rm -Rf ./demo/stable/*
-          cp -Rf ./dist/dwv-angular/* ./demo/stable
-          git add ./demo/stable/*
-        fi
+        rm -Rf $DEPLOY_DIR'/*'
+        cp -Rf ./dist/dwv-angular/* $DEPLOY_DIR
+        git add $DEPLOY_DIR'/*'
         git diff-index --quiet HEAD ||
           git commit -m "CI run ${{ github.run_number }} pushed to gh-pages"
         git push -fq origin gh-pages
