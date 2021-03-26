@@ -29,7 +29,7 @@ jobs:
       run: yarn run test-ci
     - name: Build
       run: |
-        if ${{env.IS_PUSH_TAG}}; then
+        if ${{ env.IS_PUSH_TAG }}; then
           yarn run build-stable
         else
           yarn run build-ci
@@ -40,7 +40,7 @@ jobs:
         git config user.email github-actions@github.com
         git config user.name github-actions
         git checkout gh-pages
-        if ${{env.IS_PUSH_MASTER}}; then
+        if ${{ env.IS_PUSH_MASTER }}; then
           rm -Rf ./demo/trunk/*
           cp -Rf ./dist/dwv-angular/* ./demo/trunk
           git add ./demo/trunk/*
@@ -49,5 +49,6 @@ jobs:
           cp -Rf ./dist/dwv-angular/* ./demo/stable
           git add ./demo/stable/*
         fi
-        git diff-index --quiet HEAD || git commit -m "CI run ${{ github.run_number }} pushed to gh-pages"
+        git diff-index --quiet HEAD ||
+          git commit -m "CI run ${{ github.run_number }} pushed to gh-pages"
         git push -fq origin gh-pages
