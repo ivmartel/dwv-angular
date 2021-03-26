@@ -23,7 +23,7 @@ before_install:
 script:
 - yarn run lint
 - yarn run test-ci
-- yarn run build-ci
+- yarn run build-trunk
 
 after_success:
 # update gh-page only for master and not pull requests

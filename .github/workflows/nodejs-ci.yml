@@ -32,7 +32,7 @@ jobs:
         if ${{ env.IS_PUSH_TAG }}; then
           yarn run build-stable
         else
-          yarn run build-ci
+          yarn run build-trunk
         fi
     - name: Push to gh-pages (if tag or master branch)
       if: env.IS_PUSH_MASTER == 'true' || env.IS_PUSH_TAG == 'true'
