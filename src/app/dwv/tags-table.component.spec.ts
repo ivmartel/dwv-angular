@@ -12,7 +12,7 @@ describe('TagsTableComponent', () => {
   let component: TagsTableComponent;
   let fixture: ComponentFixture<TagsTableComponent>;
 
-  // tslint:disable-next-line
+  // eslint-disable-next-line
   @Component({ selector: 'mat-paginator', template: '' })
   class FakePaginatorComponent {
       @Input() pageSizeOptions: any;
