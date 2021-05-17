@@ -1,3 +1,4 @@
+@use '~@angular/material' as mat;
 @import 'src/assets/theme';
 $primary: map-get($theme, primary);
 $accent: map-get($theme, accent);
@@ -6,10 +7,10 @@ $accent: map-get($theme, accent);
   height: 90%; }
 
 a {
-    color: mat-color($accent);
+    color: mat.get-color-from-palette($accent);
 }
 a:hover {
-    color: mat-color($primary);
+    color: mat.get-color-from-palette($primary);
 }
 
 .button-row {
@@ -40,6 +41,6 @@ a:hover {
     margin: auto;
     text-align: center; vertical-align: middle; }
 .dropBoxBorder {
-    border: 5px dashed mat-color($primary, lighter); }
+    border: 5px dashed mat.get-color-from-palette($primary, lighter); }
 .dropBoxBorder.hover {
-    border: 5px dashed mat-color($primary); }
+    border: 5px dashed mat.get-color-from-palette($primary); }
