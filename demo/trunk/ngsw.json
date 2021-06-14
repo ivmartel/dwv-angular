@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1623685668549,
+  "timestamp": 1623686765018,
   "index": "/dwv-angular/demo/trunk/index.html",
   "assetGroups": [
     {
@@ -13,8 +13,8 @@
       "urls": [
         "/dwv-angular/demo/trunk/favicon.ico",
         "/dwv-angular/demo/trunk/index.html",
-        "/dwv-angular/demo/trunk/main-es2015.702ba1bc8e8babcfb47f.js",
-        "/dwv-angular/demo/trunk/main-es5.702ba1bc8e8babcfb47f.js",
+        "/dwv-angular/demo/trunk/main-es2015.e8e51e9407eedb60cea8.js",
+        "/dwv-angular/demo/trunk/main-es5.e8e51e9407eedb60cea8.js",
         "/dwv-angular/demo/trunk/polyfills-es2015.f72a8b2f9cddd449218d.js",
         "/dwv-angular/demo/trunk/polyfills-es5.6ac5643f0371b5bb06c2.js",
         "/dwv-angular/demo/trunk/runtime-es2015.7db3f18a0948b0b562c5.js",
@@ -78,9 +78,9 @@
     "/dwv-angular/demo/trunk/assets/icons/icon-64.png": "af9d093864475123077d9ff5a5b38328b61aed76",
     "/dwv-angular/demo/trunk/assets/theme.scss": "c0101dc984fef35799c02a5f9caea8a06d405e2e",
     "/dwv-angular/demo/trunk/favicon.ico": "f2c13e666b0fd4a3239df69e908221fb37ea24ed",
-    "/dwv-angular/demo/trunk/index.html": "012612e4cb6966e94b4b8bfe8e6791199502c3b2",
-    "/dwv-angular/demo/trunk/main-es2015.702ba1bc8e8babcfb47f.js": "2850212e48c436cbf40df946c944c75749c2188a",
-    "/dwv-angular/demo/trunk/main-es5.702ba1bc8e8babcfb47f.js": "f2c9d23ed5f336d1f1463a26415f2c8f7ba9f9f0",
+    "/dwv-angular/demo/trunk/index.html": "0db315c2e99c3508c844e65096962c0bce3092f3",
+    "/dwv-angular/demo/trunk/main-es2015.e8e51e9407eedb60cea8.js": "9347c45e9f3cff86ccf96f29e3c33096b5ed7cce",
+    "/dwv-angular/demo/trunk/main-es5.e8e51e9407eedb60cea8.js": "c518c58d1a909bb4d796b6e74b96c3e717c37890",
     "/dwv-angular/demo/trunk/polyfills-es2015.f72a8b2f9cddd449218d.js": "83da8af17e77870ed2cffa2a0565f88bb0c7f39c",
     "/dwv-angular/demo/trunk/polyfills-es5.6ac5643f0371b5bb06c2.js": "9d6ba83f49dd5b6b6665109751c8df98b80c97a0",
     "/dwv-angular/demo/trunk/runtime-es2015.7db3f18a0948b0b562c5.js": "80fadc9bdbaa74d672667adbfc596e5918cf0ad2",
