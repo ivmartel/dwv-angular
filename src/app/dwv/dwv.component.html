@@ -11,11 +11,8 @@
     <button mat-raised-button color="primary" (click)="onReset()" [disabled]="!dataLoaded">Reset</button>
     <button mat-raised-button color="primary" (click)="openTagsDialog()" [disabled]="!dataLoaded">Tags</button>
   </div>
-  <div class="layerContainer">
-    <div class="dropBox"></div>
-    <canvas class="imageLayer">Only for HTML5 compatible browsers...</canvas>
-    <div class="drawDiv"></div>
-  </div>
+  <div id="dropBox"></div>
+  <div class="layerContainer"></div>
   <div class="legend mat-small">
     <p>Powered by
     <a href="https://github.com/ivmartel/dwv">dwv</a>

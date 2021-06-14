@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { VERSION } from '@angular/core';
 import * as dwv from 'dwv';
 import { MatDialog } from '@angular/material/dialog';
@@ -22,7 +22,8 @@ dwv.image.decoderScripts = {
 @Component({
   selector: 'app-dwv',
   templateUrl: './dwv.component.html',
-  styleUrls: ['./dwv.component.scss']
+  styleUrls: ['./dwv.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 
 export class DwvComponent implements OnInit {
@@ -46,6 +47,7 @@ export class DwvComponent implements OnInit {
   private metaData: any[];
 
   // drop box class name
+  private dropboxDivId = 'dropBox';
   private dropboxClassName = 'dropBox';
   private borderClassName = 'dropBoxBorder';
   private hoverClassName = 'hover';
@@ -192,25 +194,25 @@ export class DwvComponent implements OnInit {
    * Setup the data load drop box: add event listeners and set initial size.
    */
   private setupDropbox = () => {
-      const layerContainer = this.dwvApp.getElement('layerContainer');
-      if (layerContainer) {
-        // show drop box
-        this.showDropbox(true);
-        // start listening to drag events on the layer container
-        layerContainer.addEventListener('dragover', this.onDragOver);
-        layerContainer.addEventListener('dragleave', this.onDragLeave);
-        layerContainer.addEventListener('drop', this.onDrop);
-      }
+    this.showDropbox(true);
+  }
+
+  /**
+   * Default drag event handling.
+   * @param event The event to handle.
+   */
+  private defaultHandleDragEvent = (event: DragEvent) => {
+    // prevent default handling
+    event.stopPropagation();
+    event.preventDefault();
   }
 
   /**
    * Handle a drag over.
    * @param event The event to handle.
    */
-  private onDragOver = (event: DragEvent) => {
-    // prevent default handling
-    event.stopPropagation();
-    event.preventDefault();
+  private onBoxDragOver = (event: DragEvent) => {
+    this.defaultHandleDragEvent(event);
     // update box border
     const box = this.dwvApp.getElement(this.borderClassName);
     if (box && box.className.indexOf(this.hoverClassName) === -1) {
@@ -222,47 +224,12 @@ export class DwvComponent implements OnInit {
    * Handle a drag leave.
    * @param event The event to handle.
    */
-  private onDragLeave = (event: DragEvent) => {
-    // prevent default handling
-    event.stopPropagation();
-    event.preventDefault();
-    // update box class
+  private onBoxDragLeave = (event: DragEvent) => {
+    this.defaultHandleDragEvent(event);
+    // update box border
     const box = this.dwvApp.getElement(this.borderClassName + ' hover');
     if (box && box.className.indexOf(this.hoverClassName) !== -1) {
         box.className = box.className.replace(' ' + this.hoverClassName, '');
-    }
-  }
-
-  /**
-   * Show/hide the data load drop box.
-   * @param show True to show the drop box.
-   */
-  private showDropbox = (show: boolean) => {
-    const box = this.dwvApp.getElement(this.dropboxClassName);
-    if (box) {
-      if (show) {
-        // reset css class
-        box.className = this.dropboxClassName + ' ' + this.borderClassName;
-        // check content
-        if (box.innerHTML === '') {
-          box.innerHTML = 'Drag and drop data here.';
-        }
-        const size = this.dwvApp.getLayerContainerSize();
-        // set the initial drop box size
-        const dropBoxSize = 2 * size.height / 3;
-        box.setAttribute(
-          'style',
-          'width:' + dropBoxSize + 'px;height:' + dropBoxSize + 'px');
-      } else {
-        // remove border css class
-        box.className = this.dropboxClassName;
-        // remove content
-        box.innerHTML = '';
-        // make not visible
-        box.setAttribute(
-          'style',
-          'visible:false;');
-      }
     }
   }
 
@@ -271,11 +238,61 @@ export class DwvComponent implements OnInit {
    * @param event The event to handle.
    */
   private onDrop = (event: DragEvent) => {
-    // prevent default handling
-    event.stopPropagation();
-    event.preventDefault();
+    this.defaultHandleDragEvent(event);
     // load files
     this.dwvApp.loadFiles(event.dataTransfer.files);
+  }
+  
+  /**
+   * Show/hide the data load drop box.
+   * @param show True to show the drop box.
+   */
+  private showDropbox = (show: boolean) => {
+    const box = document.getElementById(this.dropboxDivId);
+    const isBoxShown = box && box.offsetHeight !== 0;
+    const layerDiv = this.dwvApp?.getElement('layerContainer');
+
+    if (box) {
+      if (show && !isBoxShown) {
+        // reset css class
+        box.className = this.dropboxClassName + ' ' + this.borderClassName;
+        // check content
+        if (box.innerHTML === '') {
+          const p = document.createElement('p');
+          p.appendChild(document.createTextNode('Drag and drop data here'));
+          box.appendChild(p);
+        }
+        // show box
+        box.setAttribute('style', 'visible:true;width:50%;height:75%');
+        // stop layer listening
+        if (layerDiv) {
+          layerDiv.removeEventListener('dragover', this.defaultHandleDragEvent);
+          layerDiv.removeEventListener('dragleave', this.defaultHandleDragEvent);
+          layerDiv.removeEventListener('drop', this.onDrop);
+        }
+        // listen to box events
+        box.addEventListener('dragover', this.onBoxDragOver);
+        box.addEventListener('dragleave', this.onBoxDragLeave);
+        box.addEventListener('drop', this.onDrop);
+      } else {
+        // remove border css class
+        box.className = this.dropboxClassName;
+        // remove content
+        box.innerHTML = '';
+        // hide box
+        box.setAttribute('style', 'visible:false;width:0;height:0');
+        // stop box listening
+        box.removeEventListener('dragover', this.onBoxDragOver);
+        box.removeEventListener('dragleave', this.onBoxDragLeave);
+        box.removeEventListener('drop', this.onDrop);
+        // listen to layer events
+        if (layerDiv) {
+          layerDiv.addEventListener('dragover', this.defaultHandleDragEvent);
+          layerDiv.addEventListener('dragleave', this.defaultHandleDragEvent);
+          layerDiv.addEventListener('drop', this.onDrop);
+        }
+      }
+    }
   }
 
   // drag and drop [end] -------------------------------------------------------
