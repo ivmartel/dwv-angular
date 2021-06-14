@@ -7,17 +7,17 @@ $accent: map-get($theme, accent);
   height: 90%; }
 
 a {
-    color: mat.get-color-from-palette($accent);
+  color: mat.get-color-from-palette($accent);
 }
 a:hover {
-    color: mat.get-color-from-palette($primary);
+  color: mat.get-color-from-palette($primary);
 }
 
 .button-row {
   text-align: center;
-  padding: 5px;;
+  padding: 5px;
 }
-.mat-raised-button {
+#dwv .mat-raised-button {
   margin: 0.1em;
 }
 .legend {
@@ -28,19 +28,18 @@ a:hover {
 
 /* Layers */
 .layerContainer {
-    position: relative; padding: 0;
-    margin: auto; text-align: center; }
-.imageLayer {
-    position: absolute;
-    left: 0px; }
-.drawDiv {
-    position: absolute; pointer-events: none; }
+  position: relative; padding: 0;
+  margin: auto; text-align: center; }
+.layer {
+  position: absolute;
+  pointer-events: none; }
 
 /* drag&drop */
 .dropBox {
-    margin: auto;
-    text-align: center; vertical-align: middle; }
+  margin: auto;
+  text-align: center; vertical-align: middle;
+  width: 50%; height: 75%; }
 .dropBoxBorder {
-    border: 5px dashed mat.get-color-from-palette($primary, lighter); }
+  border: 5px dashed mat.get-color-from-palette($primary, lighter); }
 .dropBoxBorder.hover {
-    border: 5px dashed mat.get-color-from-palette($primary); }
+  border: 5px dashed mat.get-color-from-palette($primary); }
