@@ -214,7 +214,7 @@ export class DwvComponent implements OnInit {
   private onBoxDragOver = (event: DragEvent) => {
     this.defaultHandleDragEvent(event);
     // update box border
-    const box = this.dwvApp.getElement(this.borderClassName);
+    const box = document.getElementById(this.dropboxDivId);
     if (box && box.className.indexOf(this.hoverClassName) === -1) {
         box.className += ' ' + this.hoverClassName;
     }
@@ -227,7 +227,7 @@ export class DwvComponent implements OnInit {
   private onBoxDragLeave = (event: DragEvent) => {
     this.defaultHandleDragEvent(event);
     // update box border
-    const box = this.dwvApp.getElement(this.borderClassName + ' hover');
+    const box = document.getElementById(this.dropboxDivId);
     if (box && box.className.indexOf(this.hoverClassName) !== -1) {
         box.className = box.className.replace(' ' + this.hoverClassName, '');
     }
