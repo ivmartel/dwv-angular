@@ -6,11 +6,6 @@ import { TagsDialogComponent } from './tags-dialog.component';
 
 // gui overrides
 
-// get element
-dwv.gui.getElement = dwv.gui.base.getElement;
-// prompt
-dwv.gui.prompt = prompt;
-
 // Image decoders (for web workers)
 dwv.image.decoderScripts = {
     jpeg2000: 'assets/dwv/decoders/pdfjs/decode-jpeg2000.js',
@@ -64,38 +59,45 @@ export class DwvComponent implements OnInit {
     this.dwvApp = new dwv.App();
     // initialise app
     this.dwvApp.init({
-      containerDivId: 'dwv',
+      dataViewConfigs: {'*': [{divId: 'layerGroup0'}]},
       tools: this.tools
     });
     // handle load events
     let nLoadItem = null;
     let nReceivedError = null;
     let nReceivedAbort = null;
+    let isFirstRender = null;
     this.dwvApp.addEventListener('loadstart', (/*event*/) => {
       // reset flags
       this.dataLoaded = false;
       nLoadItem = 0;
       nReceivedError = 0;
       nReceivedAbort = 0;
+      isFirstRender = true;
       // hide drop box
       this.showDropbox(false);
     });
     this.dwvApp.addEventListener('loadprogress', (event) => {
       this.loadProgress = event.loaded;
     });
+    this.dwvApp.addEventListener('renderend', (/*event*/) => {
+      if (isFirstRender) {
+        isFirstRender = false;
+        // available tools
+        this.toolNames = [];
+        for (const key in this.tools) {
+          if ((key === 'Scroll' && this.dwvApp.canScroll()) ||
+            (key === 'WindowLevel' && this.dwvApp.canWindowLevel()) ||
+            (key !== 'Scroll' && key !== 'WindowLevel')) {
+            this.toolNames.push(key);
+          }
+        }
+        this.onChangeTool(this.toolNames[0]);
+      }
+    });
     this.dwvApp.addEventListener('load', (/*event*/) => {
       // set dicom tags
-      this.metaData = dwv.utils.objectToArray(this.dwvApp.getMetaData());
-      // available tools
-      this.toolNames = [];
-      for (const key in this.tools) {
-        if ((key === 'Scroll' && this.dwvApp.canScroll()) ||
-          (key === 'WindowLevel' && this.dwvApp.canWindowLevel()) ||
-          (key !== 'Scroll' && key !== 'WindowLevel')) {
-          this.toolNames.push(key);
-        }
-      }
-      this.onChangeTool(this.toolNames[0]);
+      this.metaData = dwv.utils.objectToArray(this.dwvApp.getMetaData(0));
       // set data loaded flag
       this.dataLoaded = true;
     });
@@ -242,7 +244,7 @@ export class DwvComponent implements OnInit {
     // load files
     this.dwvApp.loadFiles(event.dataTransfer.files);
   }
-  
+
   /**
    * Show/hide the data load drop box.
    * @param show True to show the drop box.
