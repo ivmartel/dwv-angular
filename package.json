@@ -30,7 +30,7 @@
     "@angular/platform-browser-dynamic": "^13.0.3",
     "@angular/router": "^13.0.3",
     "@angular/service-worker": "^13.0.3",
-    "dwv": "0.29.1",
+    "dwv": "0.30.3",
     "rxjs": "^6.6.6",
     "stream": "^0.0.2",
     "tslib": "^2.3.1",

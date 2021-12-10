@@ -27,12 +27,17 @@ a:hover {
 }
 
 /* Layers */
-.layerContainer {
-  position: relative; padding: 0;
-  margin: auto; text-align: center; }
+.layerGroup {
+  position: relative;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  height: 90%;
+}
 .layer {
   position: absolute;
-  pointer-events: none; }
+  pointer-events: none;
+}
 
 /* drag&drop */
 .dropBox {
