@@ -31,7 +31,7 @@
     "@angular/router": "^13.2.6",
     "@angular/service-worker": "^13.2.6",
     "dwv": "0.30.8",
-    "rxjs": "^7.5.4",
+    "rxjs": "^7.5.5",
     "stream": "^0.0.2",
     "tslib": "^2.3.1",
     "zone.js": "~0.11.5"
@@ -55,7 +55,7 @@
     "jasmine-core": "~4.0.1",
     "jasmine-spec-reporter": "~7.0.0",
     "karma": "~6.3.17",
-    "karma-chrome-launcher": "~3.1.0",
+    "karma-chrome-launcher": "~3.1.1",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~4.0.1",
     "karma-jasmine-html-reporter": "^1.7.0",
