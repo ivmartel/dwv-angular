@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1645286364418,
+  "timestamp": 1646987639071,
   "index": "/dwv-angular/demo/trunk/index.html",
   "assetGroups": [
     {
@@ -75,7 +75,7 @@
     "/dwv-angular/demo/trunk/assets/icons/icon-64.png": "af9d093864475123077d9ff5a5b38328b61aed76",
     "/dwv-angular/demo/trunk/assets/theme.scss": "34510f3b7c76eec352c8d9eb80d3035567675132",
     "/dwv-angular/demo/trunk/favicon.ico": "f2c13e666b0fd4a3239df69e908221fb37ea24ed",
-    "/dwv-angular/demo/trunk/index.html": "a893223b3dcc96d8458979e9e947873d55e8d8d7",
+    "/dwv-angular/demo/trunk/index.html": "eefa289df874944bc55afe9f82420b98e6e601cb",
     "/dwv-angular/demo/trunk/main.f5d59e34769056ba.js": "8f109eb64738d1c455b545bfbf4824a4259f2ac0",
     "/dwv-angular/demo/trunk/polyfills.f331b47b315251c4.js": "bef2b1dbd62ce9a64a57b60fac99d4727c8fc368",
     "/dwv-angular/demo/trunk/runtime.cd12b88d752e0bae.js": "2e4d613501bbfeb06adae99f91d91951ef1fa240",
