@@ -18,31 +18,28 @@ import { TagsDialogComponent } from './tags-dialog.component';
 import { TagsTableComponent } from './tags-table.component';
 
 @NgModule({
-  declarations: [
-    DwvComponent,
-    TagsDialogComponent,
-    TagsTableComponent
-  ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    MatButtonModule,
-    MatDialogModule,
-    MatIconModule,
-    MatMenuModule,
-    MatProgressBarModule,
-    MatInputModule,
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatFormFieldModule
-  ],
-  entryComponents: [
-    TagsDialogComponent
-  ],
-  exports : [
-    DwvComponent
-  ]
+    declarations: [
+        DwvComponent,
+        TagsDialogComponent,
+        TagsTableComponent
+    ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        MatButtonModule,
+        MatDialogModule,
+        MatIconModule,
+        MatMenuModule,
+        MatProgressBarModule,
+        MatInputModule,
+        MatTableModule,
+        MatPaginatorModule,
+        MatSortModule,
+        MatFormFieldModule
+    ],
+    exports: [
+        DwvComponent
+    ]
 })
 
 export class DwvModule {}
