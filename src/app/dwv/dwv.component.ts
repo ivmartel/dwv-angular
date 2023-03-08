@@ -28,9 +28,7 @@ export class DwvComponent implements OnInit {
       ZoomAndPan: {},
       WindowLevel: {},
       Draw: {
-          options: ['Ruler'],
-          type: 'factory',
-          events: ['drawcreate', 'drawchange', 'drawmove', 'drawdelete']
+          options: ['Ruler']
       }
   };
   public toolNames: string[];
@@ -64,15 +62,15 @@ export class DwvComponent implements OnInit {
     });
     // handle load events
     let nLoadItem = null;
-    let nReceivedError = null;
-    let nReceivedAbort = null;
+    let nReceivedLoadError = null;
+    let nReceivedLoadAbort = null;
     let isFirstRender = null;
     this.dwvApp.addEventListener('loadstart', (/*event*/) => {
       // reset flags
       this.dataLoaded = false;
       nLoadItem = 0;
-      nReceivedError = 0;
-      nReceivedAbort = 0;
+      nReceivedLoadError = 0;
+      nReceivedLoadAbort = 0;
       isFirstRender = true;
       // hide drop box
       this.showDropbox(false);
@@ -102,7 +100,7 @@ export class DwvComponent implements OnInit {
       this.dataLoaded = true;
     });
     this.dwvApp.addEventListener('loadend', (/*event*/) => {
-      if (nReceivedError) {
+      if (nReceivedLoadError) {
         this.loadProgress = 0;
         alert('Received errors during load. Check log for details.');
         // show drop box if nothing has been loaded
@@ -110,7 +108,7 @@ export class DwvComponent implements OnInit {
           this.showDropbox(true);
         }
       }
-      if (nReceivedAbort) {
+      if (nReceivedLoadAbort) {
         this.loadProgress = 0;
         alert('Load was aborted.');
         this.showDropbox(true);
@@ -119,12 +117,12 @@ export class DwvComponent implements OnInit {
     this.dwvApp.addEventListener('loaditem', (/*event*/) => {
       ++nLoadItem;
     });
-    this.dwvApp.addEventListener('error', (event) => {
+    this.dwvApp.addEventListener('loaderror', (event) => {
       console.error(event.error);
-      ++nReceivedError;
+      ++nReceivedLoadError;
     });
-    this.dwvApp.addEventListener('abort', (/*event*/) => {
-      ++nReceivedAbort;
+    this.dwvApp.addEventListener('loadabort', (/*event*/) => {
+      ++nReceivedLoadAbort;
     });
 
     // handle key events
@@ -161,7 +159,7 @@ export class DwvComponent implements OnInit {
    */
   private onChangeShape = (shape: string) => {
     if ( this.dwvApp && this.selectedTool === 'Draw') {
-      this.dwvApp.setDrawShape(shape);
+      this.dwvApp.setToolFeatures({shapeName: shape});
     }
   }
 
