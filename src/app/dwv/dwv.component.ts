@@ -35,7 +35,6 @@ export class DwvComponent implements OnInit {
   public selectedTool = 'Select Tool';
   public loadProgress = 0;
   public dataLoaded = false;
-  public nDataLoaded = 0;
 
   private dwvApp: any;
   private metaData: any[];
@@ -97,7 +96,6 @@ export class DwvComponent implements OnInit {
       this.metaData = dwv.utils.objectToArray(this.dwvApp.getMetaData(0));
       // set data loaded flag
       this.dataLoaded = true;
-      ++this.nDataLoaded;
     });
     this.dwvApp.addEventListener('loadend', (/*event*/) => {
       if (nReceivedLoadError) {
@@ -228,7 +226,7 @@ export class DwvComponent implements OnInit {
     };
     this.dwvApp.setDataViewConfig(config);
     // render data
-    for (let i = 0; i < this.nDataLoaded; ++i) {
+    for (let i = 0; i < this.dwvApp.getNumberOfLoadedData(); ++i) {
       this.dwvApp.render(i);
     }
   }
