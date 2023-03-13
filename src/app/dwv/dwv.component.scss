@@ -1,7 +1,7 @@
 @use '@angular/material' as mat;
 @import 'src/assets/theme';
-$primary: map-get($theme, primary);
-$accent: map-get($theme, accent);
+$primary: map-get($dark-theme, primary);
+$accent: map-get($dark-theme, accent);
 
 #dwv {
   height: 90%; }
@@ -21,6 +21,10 @@ a:hover {
   align-items: center;
   margin: 0.2em;
 }
+#dwv .mat-button-toggle-checked {
+  color: mat.get-color-from-palette($primary);
+}
+
 .legend {
   text-align: center;
   font-size: 8pt;
