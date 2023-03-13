@@ -31,7 +31,7 @@ export class DwvComponent implements OnInit {
           options: ['Ruler']
       }
   };
-  public toolNames: string[];
+  public toolNames: string[] = Object.keys(this.tools);
   public selectedTool = 'Select Tool';
   public loadProgress = 0;
   public dataLoaded = false;
@@ -82,15 +82,11 @@ export class DwvComponent implements OnInit {
       if (isFirstRender) {
         isFirstRender = false;
         // available tools
-        this.toolNames = [];
-        for (const key in this.tools) {
-          if ((key === 'Scroll' && this.dwvApp.canScroll()) ||
-            (key === 'WindowLevel' && this.dwvApp.canWindowLevel()) ||
-            (key !== 'Scroll' && key !== 'WindowLevel')) {
-            this.toolNames.push(key);
-          }
+        var selectedTool = 'ZoomAndPan';
+        if (this.dwvApp.canScroll()) {
+          selectedTool = 'Scroll';
         }
-        this.onChangeTool(this.toolNames[0]);
+        this.onChangeTool(selectedTool);
       }
     });
     this.dwvApp.addEventListener('load', (/*event*/) => {
@@ -140,6 +136,26 @@ export class DwvComponent implements OnInit {
   }
 
   /**
+   * Get the icon of a tool.
+   *
+   * @param tool The tool name.
+   * @returns The associated icon string.
+   */
+  getToolIcon = (tool: string) => {
+    var res: string;
+    if (tool === 'Scroll') {
+      res = 'menu';
+    } else if (tool === 'ZoomAndPan') {
+      res = 'search';
+    } else if (tool === 'WindowLevel') {
+      res = 'contrast';
+    } else if (tool === 'Draw') {
+      res = 'straighten';
+    }
+    return res;
+  }
+
+  /**
    * Handle a change tool event.
    * @param tool The new tool name.
    */
@@ -151,6 +167,34 @@ export class DwvComponent implements OnInit {
         this.onChangeShape(this.tools.Draw.options[0]);
       }
     }
+  }
+
+  /**
+   * Check if a tool can be run.
+   *
+   * @param tool The tool name.
+   * @returns True if the tool can be run.
+   */
+  canRunTool = (tool: string) => {
+    let res: boolean;
+    if (tool === 'Scroll') {
+      res = this.dwvApp.canScroll();
+    } else if (tool === 'WindowLevel') {
+      res = this.dwvApp.canWindowLevel();
+    } else {
+      res = true;
+    }
+    return res;
+  }
+
+  /**
+   * For toogle button to not get selected.
+   *
+   * @param event The toogle change.
+   */
+  onSingleToogleChange = (event) => {
+    // unset value -> do not select button
+    event.source.buttonToggleGroup.value = '';
   }
 
   /**

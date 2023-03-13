@@ -3,9 +3,9 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatButtonModule } from '@angular/material/button';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
-import { MatMenuModule } from '@angular/material/menu';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -27,9 +27,9 @@ import { TagsTableComponent } from './tags-table.component';
         BrowserModule,
         BrowserAnimationsModule,
         MatButtonModule,
+        MatButtonToggleModule,
         MatDialogModule,
         MatIconModule,
-        MatMenuModule,
         MatProgressBarModule,
         MatInputModule,
         MatTableModule,
