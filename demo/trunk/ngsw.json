@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1678698662553,
+  "timestamp": 1678699903928,
   "index": "/dwv-angular/demo/trunk/index.html",
   "assetGroups": [
     {
@@ -13,10 +13,10 @@
       "urls": [
         "/dwv-angular/demo/trunk/favicon.ico",
         "/dwv-angular/demo/trunk/index.html",
-        "/dwv-angular/demo/trunk/main.75a53ab7e0c4c4e6.js",
+        "/dwv-angular/demo/trunk/main.c20cddf237575bb0.js",
         "/dwv-angular/demo/trunk/polyfills.105c2896228a5617.js",
         "/dwv-angular/demo/trunk/runtime.261c7e0237014790.js",
-        "/dwv-angular/demo/trunk/styles.6166436e931feb63.css"
+        "/dwv-angular/demo/trunk/styles.ad3ed731e850e6c0.css"
       ],
       "patterns": []
     },
@@ -73,13 +73,13 @@
     "/dwv-angular/demo/trunk/assets/icons/icon-32.png": "26fdde7c6e7057a3cbe11f4dd87db5af0a2e5ef8",
     "/dwv-angular/demo/trunk/assets/icons/icon-512.png": "3e086483941d8d5570287a83fe754b2347033f29",
     "/dwv-angular/demo/trunk/assets/icons/icon-64.png": "af9d093864475123077d9ff5a5b38328b61aed76",
-    "/dwv-angular/demo/trunk/assets/theme.scss": "c402b79fae18f22e382858cf14a699d63670d63d",
+    "/dwv-angular/demo/trunk/assets/theme.scss": "fe9c371f59df9bb9fab23f5c0308ede182edb05e",
     "/dwv-angular/demo/trunk/favicon.ico": "f2c13e666b0fd4a3239df69e908221fb37ea24ed",
-    "/dwv-angular/demo/trunk/index.html": "085b4bbce0c21465a7d46f7bd93080b984d7585f",
-    "/dwv-angular/demo/trunk/main.75a53ab7e0c4c4e6.js": "5df0500ae3738f6c4b99c9d6468a4cebaaa45b8f",
+    "/dwv-angular/demo/trunk/index.html": "96f14e3b1b90390b8c4b60a9b3d6e600cef0828d",
+    "/dwv-angular/demo/trunk/main.c20cddf237575bb0.js": "8fbd2f752f311838e2070f728bfd165dcf13b210",
     "/dwv-angular/demo/trunk/polyfills.105c2896228a5617.js": "c9a6202077d15303aef879b400c142bba9b1c6fb",
     "/dwv-angular/demo/trunk/runtime.261c7e0237014790.js": "25afbdca9185bfb735320f08703b6e710a0db364",
-    "/dwv-angular/demo/trunk/styles.6166436e931feb63.css": "80447d9b18af75673d94053958f8a04ee7cf524e"
+    "/dwv-angular/demo/trunk/styles.ad3ed731e850e6c0.css": "0e0e1673df98afb2df07ec4fcdcf3bd1fb50b034"
   },
   "navigationUrls": [
     {
