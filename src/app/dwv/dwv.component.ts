@@ -82,7 +82,7 @@ export class DwvComponent implements OnInit {
       if (isFirstRender) {
         isFirstRender = false;
         // available tools
-        var selectedTool = 'ZoomAndPan';
+        let selectedTool = 'ZoomAndPan';
         if (this.dwvApp.canScroll()) {
           selectedTool = 'Scroll';
         }
@@ -142,7 +142,7 @@ export class DwvComponent implements OnInit {
    * @returns The associated icon string.
    */
   getToolIcon = (tool: string) => {
-    var res: string;
+    let res: string;
     if (tool === 'Scroll') {
       res = 'menu';
     } else if (tool === 'ZoomAndPan') {
