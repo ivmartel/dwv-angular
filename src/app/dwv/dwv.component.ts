@@ -35,9 +35,12 @@ export class DwvComponent implements OnInit {
   public selectedTool = 'Select Tool';
   public loadProgress = 0;
   public dataLoaded = false;
+  public nDataLoaded = 0;
 
   private dwvApp: any;
   private metaData: any[];
+
+  private orientation: string;
 
   // drop box class name
   private dropboxDivId = 'dropBox';
@@ -94,6 +97,7 @@ export class DwvComponent implements OnInit {
       this.metaData = dwv.utils.objectToArray(this.dwvApp.getMetaData(0));
       // set data loaded flag
       this.dataLoaded = true;
+      ++this.nDataLoaded;
     });
     this.dwvApp.addEventListener('loadend', (/*event*/) => {
       if (nReceivedLoadError) {
@@ -195,6 +199,38 @@ export class DwvComponent implements OnInit {
   onSingleToogleChange = (event) => {
     // unset value -> do not select button
     event.source.buttonToggleGroup.value = '';
+  }
+
+  /**
+   * Toogle the viewer orientation.
+   */
+  toggleOrientation = () => {
+    if (typeof this.orientation !== 'undefined') {
+      if (this.orientation === 'axial') {
+        this.orientation = 'coronal'
+      } else if (this.orientation === 'coronal') {
+        this.orientation = 'sagittal'
+      } else if (this.orientation === 'sagittal') {
+        this.orientation = 'axial'
+      }
+    } else {
+      // default is most probably axial
+      this.orientation = 'coronal';
+    }
+    // update data view config
+    const config = {
+      '*': [
+        {
+          divId: 'layerGroup0',
+          orientation: this.orientation
+        }
+      ]
+    };
+    this.dwvApp.setDataViewConfig(config);
+    // render data
+    for (let i = 0; i < this.nDataLoaded; ++i) {
+      this.dwvApp.render(i);
+    }
   }
 
   /**
