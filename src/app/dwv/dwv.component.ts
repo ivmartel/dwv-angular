@@ -207,11 +207,11 @@ export class DwvComponent implements OnInit {
   toggleOrientation = () => {
     if (typeof this.orientation !== 'undefined') {
       if (this.orientation === 'axial') {
-        this.orientation = 'coronal'
+        this.orientation = 'coronal';
       } else if (this.orientation === 'coronal') {
-        this.orientation = 'sagittal'
+        this.orientation = 'sagittal';
       } else if (this.orientation === 'sagittal') {
-        this.orientation = 'axial'
+        this.orientation = 'axial';
       }
     } else {
       // default is most probably axial
