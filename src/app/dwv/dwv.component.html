@@ -4,6 +4,7 @@
     <mat-button-toggle-group name="tool" [disabled]="!dataLoaded">
       <mat-button-toggle value="{{ tool }}" color="primary"
         *ngFor="let tool of toolNames"
+        title="{{ tool }}"
         (click)="onChangeTool(tool)"
         [disabled]="!dataLoaded || !canRunTool(tool)">
         <mat-icon>{{ getToolIcon(tool) }}</mat-icon>
@@ -13,6 +14,7 @@
     <mat-button-toggle-group name="reset" [disabled]="!dataLoaded"
       (change)="onSingleToogleChange($event)">
       <mat-button-toggle color="primary"
+        title="Reset"
         (click)="onReset()">
         <mat-icon>refresh</mat-icon>
       </mat-button-toggle>
@@ -21,6 +23,7 @@
     <mat-button-toggle-group name="reset" [disabled]="!dataLoaded"
       (change)="onSingleToogleChange($event)">
       <mat-button-toggle color="primary"
+        title="Toggle orientation"
         (click)="toggleOrientation()">
         <mat-icon>cameraswitch</mat-icon>
       </mat-button-toggle>
@@ -29,6 +32,7 @@
     <mat-button-toggle-group name="tags" [disabled]="!dataLoaded"
       (change)="onSingleToogleChange($event)">
       <mat-button-toggle color="primary"
+        title="Tags"
         (click)="openTagsDialog()">
         <mat-icon>library_books</mat-icon>
       </mat-button-toggle>
