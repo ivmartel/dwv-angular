@@ -3,6 +3,7 @@ import { VERSION } from '@angular/core';
 import * as dwv from 'dwv';
 import { MatDialog } from '@angular/material/dialog';
 import { TagsDialogComponent } from './tags-dialog.component';
+import { MatButtonToggleChange } from '@angular/material/button-toggle';
 
 // gui overrides
 
@@ -37,9 +38,9 @@ export class DwvComponent implements OnInit {
   public dataLoaded = false;
 
   private dwvApp: any;
-  private metaData: any[];
+  private metaData!: any[];
 
-  private orientation: string;
+  private orientation!: string;
 
   // drop box class name
   private dropboxDivId = 'dropBox';
@@ -63,10 +64,10 @@ export class DwvComponent implements OnInit {
       tools: this.tools
     });
     // handle load events
-    let nLoadItem = null;
-    let nReceivedLoadError = null;
-    let nReceivedLoadAbort = null;
-    let isFirstRender = null;
+    let nLoadItem = 0;
+    let nReceivedLoadError = 0;
+    let nReceivedLoadAbort = 0;
+    let isFirstRender = false;
     this.dwvApp.addEventListener('loadstart', (/*event*/) => {
       // reset flags
       this.dataLoaded = false;
@@ -124,7 +125,7 @@ export class DwvComponent implements OnInit {
     });
 
     // handle key events
-    this.dwvApp.addEventListener('keydown', (event) => {
+    this.dwvApp.addEventListener('keydown', (event: KeyboardEvent) => {
         this.dwvApp.defaultOnKeydown(event);
     });
     // handle window resize
@@ -144,7 +145,7 @@ export class DwvComponent implements OnInit {
    * @returns The associated icon string.
    */
   getToolIcon = (tool: string) => {
-    let res: string;
+    let res!: string;
     if (tool === 'Scroll') {
       res = 'menu';
     } else if (tool === 'ZoomAndPan') {
@@ -194,7 +195,7 @@ export class DwvComponent implements OnInit {
    *
    * @param event The toogle change.
    */
-  onSingleToogleChange = (event) => {
+  onSingleToogleChange = (event: MatButtonToggleChange) => {
     // unset value -> do not select button
     event.source.buttonToggleGroup.value = '';
   }
@@ -318,7 +319,7 @@ export class DwvComponent implements OnInit {
   private onDrop = (event: DragEvent) => {
     this.defaultHandleDragEvent(event);
     // load files
-    this.dwvApp.loadFiles(event.dataTransfer.files);
+    this.dwvApp.loadFiles(event.dataTransfer?.files);
   }
 
   /**
