@@ -94,7 +94,7 @@ export class DwvComponent implements OnInit {
     });
     this.dwvApp.addEventListener('load', (/*event*/) => {
       // set dicom tags
-      this.metaData = dwv.utils.objectToArray(this.dwvApp.getMetaData(0));
+      this.metaData = this.dwvApp.getMetaData(0);
       // set data loaded flag
       this.dataLoaded = true;
     });
