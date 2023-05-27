@@ -84,7 +84,7 @@ export class TagsTableComponent {
 
   private getTagReducer(tagData: any, instanceNumber: number, prefix: string) {
     return (accumulator: any[], currentValue: string) => {
-      let name = currentValue
+      let name = currentValue;
       const element = tagData[currentValue];
       let value = element.value;
       // possible 'merged' object
