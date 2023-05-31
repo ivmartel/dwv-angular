@@ -1,5 +1,4 @@
 import { Component, Input, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import * as dwv from 'dwv';
@@ -33,7 +32,6 @@ export class TagsTableComponent {
     this.setDataSource(this.min);
   }
 
-  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
 
   public displayedColumns: string[] = ['name', 'value'];
@@ -59,7 +57,6 @@ export class TagsTableComponent {
     }
     // create data source
     this.dataSource = new MatTableDataSource<DicomTags>(metaData);
-    this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     this.dataSource.filter = filter;
   }

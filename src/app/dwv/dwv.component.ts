@@ -257,8 +257,6 @@ export class DwvComponent implements OnInit {
   openTagsDialog = () => {
     this.dialog.open(TagsDialogComponent,
       {
-        width: '80%',
-        height: '90%',
         data: {
           title: 'DICOM Tags',
           value: this.metaData
