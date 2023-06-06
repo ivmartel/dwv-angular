@@ -1,7 +1,7 @@
 import { Component, Input, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import * as dwv from 'dwv';
+import { getTagFromKey } from 'dwv';
 
 @Component({
   selector: 'app-dwv-tags-table',
@@ -18,7 +18,7 @@ export class TagsTableComponent {
     // store keys (to not recreate them)
     this.keys = Object.keys(this._fullMetaData);
     // set slider with instance numbers ('00200013')
-    let instanceNumbers = this._fullMetaData['InstanceNumber'].value;
+    let instanceNumbers = this._fullMetaData['00200013'].value;
     if (typeof instanceNumbers === 'string') {
       instanceNumbers = [instanceNumbers];
     }
@@ -81,11 +81,19 @@ export class TagsTableComponent {
 
   private getTagReducer(tagData: any, instanceNumber: number, prefix: string) {
     return (accumulator: any[], currentValue: string) => {
-      let name = currentValue;
+      const tag = getTagFromKey(currentValue);
+      let key = tag.getNameFromDictionary();
+      if (typeof key === 'undefined') {
+        // add 'x' to help sorting
+        key = 'x' + tag.getKey();
+      }
+      const name = key;
       const element = tagData[currentValue];
       let value = element.value;
       // possible 'merged' object
-      if (typeof value[instanceNumber] !== 'undefined') {
+      // (use slice method as test for array and typed array)
+      if (typeof value.slice === 'undefined' &&
+        typeof value[instanceNumber] !== 'undefined') {
         value = value[instanceNumber];
       }
       // force instance number (otherwise takes value in non indexed array)
@@ -109,9 +117,13 @@ export class TagsTableComponent {
           accumulator = accumulator.concat(res);
         }
       } else {
+        // shorten long 'o'ther data
+        if (element.vr[0] === 'O' && value.length > 10) {
+          value = value.slice(0, 10).toString() + ', ...'
+        }
         accumulator.push({
           name: (prefix ? prefix + ' ' : '') + name,
-          value: value
+          value: value.toString()
         });
       }
       return accumulator;
