@@ -1,22 +1,16 @@
-import { Component, Input } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TestBed, ComponentFixture, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTableModule } from '@angular/material/table';
+import { MatSliderModule } from '@angular/material/slider';
 
 import { TagsTableComponent } from './tags-table.component';
 
 describe('TagsTableComponent', () => {
   let component: TagsTableComponent;
   let fixture: ComponentFixture<TagsTableComponent>;
-
-  // eslint-disable-next-line
-  @Component({ selector: 'mat-paginator', template: '' })
-  class FakePaginatorComponent {
-      @Input() pageSizeOptions: any;
-  }
 
   beforeEach(waitForAsync(() => {
       TestBed.configureTestingModule({
@@ -25,11 +19,11 @@ describe('TagsTableComponent', () => {
               FormsModule,
               MatInputModule,
               MatFormFieldModule,
-              MatTableModule
+              MatTableModule,
+              MatSliderModule
           ],
           declarations: [
-              TagsTableComponent,
-              FakePaginatorComponent
+              TagsTableComponent
           ]
       }).compileComponents();
   }));
