@@ -1,6 +1,10 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { VERSION } from '@angular/core';
-import * as dwv from 'dwv';
+import {
+  App,
+  decoderScripts,
+  getDwvVersion
+} from 'dwv';
 import { MatDialog } from '@angular/material/dialog';
 import { TagsDialogComponent } from './tags-dialog.component';
 import { MatButtonToggleChange } from '@angular/material/button-toggle';
@@ -8,12 +12,10 @@ import { MatButtonToggleChange } from '@angular/material/button-toggle';
 // gui overrides
 
 // Image decoders (for web workers)
-dwv.image.decoderScripts = {
-    jpeg2000: 'assets/dwv/decoders/pdfjs/decode-jpeg2000.js',
-    'jpeg-lossless': 'assets/dwv/decoders/rii-mango/decode-jpegloss.js',
-    'jpeg-baseline': 'assets/dwv/decoders/pdfjs/decode-jpegbaseline.js',
-    rle: 'assets/dwv/decoders/dwv/decode-rle.js'
-};
+decoderScripts.jpeg2000 = 'assets/dwv/decoders/pdfjs/decode-jpeg2000.js';
+decoderScripts['jpeg-lossless'] = 'assets/dwv/decoders/rii-mango/decode-jpegloss.js';
+decoderScripts['jpeg-baseline'] = 'assets/dwv/decoders/pdfjs/decode-jpegbaseline.js';
+decoderScripts.rle = 'assets/dwv/decoders/dwv/decode-rle.js';
 
 @Component({
   selector: 'app-dwv',
@@ -37,8 +39,8 @@ export class DwvComponent implements OnInit {
   public loadProgress = 0;
   public dataLoaded = false;
 
-  private dwvApp: any;
-  private metaData!: any[];
+  private dwvApp!: App;
+  private metaData!: any;
 
   private orientation!: string;
 
@@ -50,14 +52,14 @@ export class DwvComponent implements OnInit {
 
   constructor(public dialog: MatDialog) {
     this.versions = {
-      dwv: dwv.getVersion(),
+      dwv: getDwvVersion(),
       angular: VERSION.full
     };
   }
 
   ngOnInit() {
     // create app
-    this.dwvApp = new dwv.App();
+    this.dwvApp = new App();
     // initialise app
     this.dwvApp.init({
       dataViewConfigs: {'*': [{divId: 'layerGroup0'}]},
@@ -135,7 +137,7 @@ export class DwvComponent implements OnInit {
     this.setupDropbox();
 
     // possible load from location
-    dwv.utils.loadFromUri(window.location.href, this.dwvApp);
+    this.dwvApp.loadFromUri(window.location.href);
   }
 
   /**
