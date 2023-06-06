@@ -10,7 +10,7 @@ import { getTagFromKey } from 'dwv';
 })
 
 export class TagsTableComponent {
-  _fullMetaData: any;
+  private _fullMetaData: any;
 
   @Input()
   set data(value: any) {
@@ -24,7 +24,7 @@ export class TagsTableComponent {
     }
     // convert string to numbers
     const numbers = instanceNumbers.map(Number);
-    numbers.sort((a, b) => a - b);
+    numbers.sort((a: number, b: number) => a - b);
     // store
     this.min = numbers[0];
     this.max = numbers[numbers.length - 1];
@@ -38,10 +38,10 @@ export class TagsTableComponent {
 
   public dataSource: any;
 
-  public min: number;
-  public max: number;
-  public instanceNumber: number;
-  private keys: string[];
+  public min!: number;
+  public max!: number;
+  public instanceNumber!: number;
+  private keys!: string[];
 
   constructor() {}
 

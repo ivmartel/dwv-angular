@@ -80,7 +80,7 @@ export class DwvComponent implements OnInit {
       // hide drop box
       this.showDropbox(false);
     });
-    this.dwvApp.addEventListener('loadprogress', (event) => {
+    this.dwvApp.addEventListener('loadprogress', (event: ProgressEvent) => {
       this.loadProgress = event.loaded;
     });
     this.dwvApp.addEventListener('renderend', (/*event*/) => {
@@ -118,7 +118,7 @@ export class DwvComponent implements OnInit {
     this.dwvApp.addEventListener('loaditem', (/*event*/) => {
       ++nLoadItem;
     });
-    this.dwvApp.addEventListener('loaderror', (event) => {
+    this.dwvApp.addEventListener('loaderror', (event: ErrorEvent) => {
       console.error(event.error);
       ++nReceivedLoadError;
     });
@@ -319,7 +319,9 @@ export class DwvComponent implements OnInit {
   private onDrop = (event: DragEvent) => {
     this.defaultHandleDragEvent(event);
     // load files
-    this.dwvApp.loadFiles(event.dataTransfer?.files);
+    if (event.dataTransfer) {
+      this.dwvApp.loadFiles(event.dataTransfer.files);
+    }
   }
 
   /**
