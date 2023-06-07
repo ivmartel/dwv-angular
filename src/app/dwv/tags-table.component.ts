@@ -17,17 +17,21 @@ export class TagsTableComponent {
     this._fullMetaData = value;
     // store keys (to not recreate them)
     this.keys = Object.keys(this._fullMetaData);
-    // set slider with instance numbers ('00200013')
-    let instanceNumbers = this._fullMetaData['00200013'].value;
-    if (typeof instanceNumbers === 'string') {
-      instanceNumbers = [instanceNumbers];
+
+    const instanceElement = this._fullMetaData['00200013'];
+    if (typeof instanceElement !== 'undefined') {
+      // set slider with instance numbers ('00200013')
+      let instanceNumbers = instanceElement.value;
+      if (typeof instanceNumbers === 'string') {
+        instanceNumbers = [instanceNumbers];
+      }
+      // convert string to numbers
+      const numbers = instanceNumbers.map(Number);
+      numbers.sort((a: number, b: number) => a - b);
+      // store
+      this.min = numbers[0];
+      this.max = numbers[numbers.length - 1];
     }
-    // convert string to numbers
-    const numbers = instanceNumbers.map(Number);
-    numbers.sort((a: number, b: number) => a - b);
-    // store
-    this.min = numbers[0];
-    this.max = numbers[numbers.length - 1];
     // set data source
     this.setDataSource(this.min);
   }
@@ -75,11 +79,30 @@ export class TagsTableComponent {
   }
 
   getMetaArray(instanceNumber: number): any[] {
-    const reducer = this.getTagReducer(this._fullMetaData, instanceNumber, '');
+    let reducer;
+    if (this.isDicomMeta(this._fullMetaData)) {
+      reducer = this.getDicomTagReducer(this._fullMetaData, instanceNumber, '');
+    } else {
+      reducer = this.getTagReducer(this._fullMetaData);
+    }
     return this.keys.reduce(reducer, []);
   }
 
-  private getTagReducer(tagData: any, instanceNumber: number, prefix: string) {
+  private isDicomMeta(meta: any) {
+    return typeof meta['00020010'] !== 'undefined';
+  }
+
+  private getTagReducer(tagData: any) {
+    return function (accumulator: any[], currentValue: string) {
+      accumulator.push({
+        name: currentValue,
+        value: tagData[currentValue].value
+      });
+      return accumulator;
+    };
+  }
+
+  private getDicomTagReducer(tagData: any, instanceNumber: number, prefix: string) {
     return (accumulator: any[], currentValue: string) => {
       const tag = getTagFromKey(currentValue);
       let key = tag.getNameFromDictionary();
@@ -112,7 +135,7 @@ export class TagsTableComponent {
           const sqItems = value[i];
           const keys = Object.keys(sqItems);
           const res = keys.reduce(
-            this.getTagReducer(sqItems, instanceNumber, prefix + '[' + i + ']'), []
+            this.getDicomTagReducer(sqItems, instanceNumber, prefix + '[' + i + ']'), []
           );
           accumulator = accumulator.concat(res);
         }
