@@ -2,7 +2,7 @@
 # The base href is set in the npm build script
 
 name: Node.js CI
-on: [push, pull_request]
+on: [push, pull_request, merge_group]
 
 jobs:
   build:
