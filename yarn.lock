@@ -133,7 +133,7 @@
   resolved "https://registry.yarnpkg.com/@angular-eslint/bundled-angular-compiler/-/bundled-angular-compiler-16.0.3.tgz#52db355eb2794e5407bfd045c64e102a0c078fbe"
   integrity sha512-8zwY6ustiPXBEF3+jELKVwGk6j2HJn7GHbqAhDFR02YiE27iRMSGTHIAWGs6ZI7F1JgfrIsOHrUgzC1x95K6rg==
 
-"@angular-eslint/eslint-plugin-template@16.0.3", "@angular-eslint/eslint-plugin-template@~16.0.2":
+"@angular-eslint/eslint-plugin-template@16.0.3", "@angular-eslint/eslint-plugin-template@~16.0.3":
   version "16.0.3"
   resolved "https://registry.yarnpkg.com/@angular-eslint/eslint-plugin-template/-/eslint-plugin-template-16.0.3.tgz#513c6b675f0feb5c77d3de1f7daa5484ca1b62a3"
   integrity sha512-OKTMWOjC7F5tdv7gm2tlmgyr/uVyS1RWJZn4X/6D6p0kOpiDXmajtbYHD5tzbshX2Ep62Nt+rg8+1XGHrU0ScA==
@@ -145,7 +145,7 @@
     aria-query "5.1.3"
     axobject-query "3.1.1"
 
-"@angular-eslint/eslint-plugin@16.0.3", "@angular-eslint/eslint-plugin@~16.0.2":
+"@angular-eslint/eslint-plugin@16.0.3", "@angular-eslint/eslint-plugin@~16.0.3":
   version "16.0.3"
   resolved "https://registry.yarnpkg.com/@angular-eslint/eslint-plugin/-/eslint-plugin-16.0.3.tgz#ecd95c7efccf164c23b5fb3a5c49b8d3b708a1d6"
   integrity sha512-1c+dFytcQDOA2wJ8/rtydMV6UYq1BgVfOcBXOr0WJxC9g8Cad9czcUOkW41WGrTp5kICMliV0ypH5eEaCM2WDQ==
