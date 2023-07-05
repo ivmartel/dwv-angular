@@ -364,6 +364,7 @@ export class DwvComponent implements OnInit {
         label.htmlFor = 'input-file';
         const link = document.createElement('a');
         link.appendChild(document.createTextNode('click here'));
+        link.id = 'input-file-link';
         label.appendChild(link);
         p.appendChild(input);
         p.appendChild(label);
