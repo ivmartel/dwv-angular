@@ -325,6 +325,17 @@ export class DwvComponent implements OnInit {
   }
 
   /**
+   * Handle a an input[type:file] change event.
+   * @param event The event to handle.
+   */
+  private onInputFile = (event: Event) => {
+    const target = event.target as HTMLInputElement;
+    if (target && target.files) {
+      this.dwvApp.loadFiles(target.files);
+    }
+  }
+
+  /**
    * Show/hide the data load drop box.
    * @param show True to show the drop box.
    */
@@ -341,7 +352,22 @@ export class DwvComponent implements OnInit {
       // check content
       if (box.innerHTML === '') {
         const p = document.createElement('p');
-        p.appendChild(document.createTextNode('Drag and drop data here'));
+        p.appendChild(document.createTextNode('Drag and drop data here or '));
+        // input file
+        const input = document.createElement('input');
+        input.onchange = this.onInputFile;
+        input.type = 'file';
+        input.multiple = true;
+        input.id = 'input-file';
+        input.style.display = 'none';
+        const label = document.createElement('label');
+        label.htmlFor = 'input-file';
+        const link = document.createElement('a');
+        link.appendChild(document.createTextNode('click here'));
+        label.appendChild(link);
+        p.appendChild(input);
+        p.appendChild(label);
+
         box.appendChild(p);
       }
       // show box
