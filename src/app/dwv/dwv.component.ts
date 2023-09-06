@@ -222,7 +222,7 @@ export class DwvComponent implements OnInit {
       this.orientation = 'coronal';
     }
     // update data view config
-    const viewConfig0 = new ViewConfig('layerGroup0')
+    const viewConfig0 = new ViewConfig('layerGroup0');
     viewConfig0.orientation = this.orientation;
     const viewConfigs = {'*': [viewConfig0]};
     this.dwvApp.setDataViewConfigs(viewConfigs);
