@@ -2,6 +2,9 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { VERSION } from '@angular/core';
 import {
   App,
+  AppOptions,
+  ViewConfig,
+  ToolConfig,
   decoderScripts,
   getDwvVersion
 } from 'dwv';
@@ -27,12 +30,10 @@ decoderScripts.rle = 'assets/dwv/decoders/dwv/decode-rle.js';
 export class DwvComponent implements OnInit {
   public versions: any;
   public tools = {
-      Scroll: {},
-      ZoomAndPan: {},
-      WindowLevel: {},
-      Draw: {
-          options: ['Ruler']
-      }
+      Scroll: new ToolConfig(),
+      ZoomAndPan: new ToolConfig(),
+      WindowLevel: new ToolConfig(),
+      Draw: new ToolConfig(['Ruler']),
   };
   public toolNames: string[] = Object.keys(this.tools);
   public selectedTool = 'Select Tool';
@@ -61,10 +62,11 @@ export class DwvComponent implements OnInit {
     // create app
     this.dwvApp = new App();
     // initialise app
-    this.dwvApp.init({
-      dataViewConfigs: {'*': [{divId: 'layerGroup0'}]},
-      tools: this.tools
-    });
+    const viewConfig0 = new ViewConfig('layerGroup0');
+    const viewConfigs = {'*': [viewConfig0]};
+    const options = new AppOptions(viewConfigs);
+    options.tools = this.tools;
+    this.dwvApp.init(options);
     // handle load events
     let nLoadItem = 0;
     let nReceivedLoadError = 0;
@@ -168,7 +170,8 @@ export class DwvComponent implements OnInit {
     if ( this.dwvApp ) {
       this.selectedTool = tool;
       this.dwvApp.setTool(tool);
-      if (tool === 'Draw') {
+      if (tool === 'Draw' &&
+        typeof this.tools.Draw.options !== 'undefined') {
         this.onChangeShape(this.tools.Draw.options[0]);
       }
     }
@@ -219,15 +222,10 @@ export class DwvComponent implements OnInit {
       this.orientation = 'coronal';
     }
     // update data view config
-    const config = {
-      '*': [
-        {
-          divId: 'layerGroup0',
-          orientation: this.orientation
-        }
-      ]
-    };
-    this.dwvApp.setDataViewConfig(config);
+    const viewConfig0 = new ViewConfig('layerGroup0')
+    viewConfig0.orientation = this.orientation;
+    const viewConfigs = {'*': [viewConfig0]};
+    this.dwvApp.setDataViewConfigs(viewConfigs);
     // render data
     for (let i = 0; i < this.dwvApp.getNumberOfLoadedData(); ++i) {
       this.dwvApp.render(i);
@@ -320,7 +318,8 @@ export class DwvComponent implements OnInit {
     this.defaultHandleDragEvent(event);
     // load files
     if (event.dataTransfer) {
-      this.dwvApp.loadFiles(event.dataTransfer.files);
+      const files = Array.from(event.dataTransfer.files);
+      this.dwvApp.loadFiles(files);
     }
   }
 
@@ -331,7 +330,8 @@ export class DwvComponent implements OnInit {
   private onInputFile = (event: Event) => {
     const target = event.target as HTMLInputElement;
     if (target && target.files) {
-      this.dwvApp.loadFiles(target.files);
+      const files = Array.from(target.files);
+      this.dwvApp.loadFiles(files);
     }
   }
 
