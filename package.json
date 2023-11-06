@@ -48,7 +48,7 @@
     "@angular/compiler-cli": "^16.2.12",
     "@angular/language-service": "^16.2.12",
     "@types/jasmine": "~4.3.5",
-    "@types/jasminewd2": "~2.0.10",
+    "@types/jasminewd2": "~2.0.12",
     "@types/node": "^20.8.10",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.62.0",
