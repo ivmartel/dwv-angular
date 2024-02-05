@@ -270,10 +270,10 @@
   dependencies:
     tslib "^2.3.0"
 
-"@angular/language-service@^16.2.12":
-  version "16.2.12"
-  resolved "https://registry.yarnpkg.com/@angular/language-service/-/language-service-16.2.12.tgz#e81d9667ec96eac214b0dd54275bdfb835db3f3f"
-  integrity sha512-sZwB+ZEjChx9EYcqPaS4OnhC/q5RcedZjIdM9mCxuU/MtseURRYRI/8Hnm1RHo9qyc5PmsQpg7p9Vp/5hXLUjw==
+"@angular/language-service@^17.1.2":
+  version "17.1.2"
+  resolved "https://registry.yarnpkg.com/@angular/language-service/-/language-service-17.1.2.tgz#a9754adc2250fdfb44d22c0712bbd811c0ec2e86"
+  integrity sha512-EqmbDT696a1KC04l5I4dilf86IJnj0jPxw8OXI9dlSQhsWYp8Egkc5+C0Hd7wmuHt/BeqSuMSJfk7DhfzKbx1w==
 
 "@angular/material@^16.2.11":
   version "16.2.11"
