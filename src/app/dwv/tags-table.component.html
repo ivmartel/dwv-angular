@@ -2,11 +2,11 @@
   <mat-form-field class="searchfield">
     <input class="searchinput" matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
   </mat-form-field>
-  <mat-slider class="instanceslider"
+  <mat-slider class="instanceslider" id="instanceslider"
     [min]="min" [max]="max" step="1" showTickMarks="true" matTooltip="Instance number">
     <input class="instanceinput" matSliderThumb (input)="onsliderchange($event)">
   </mat-slider>
-  <label class="instancelabel" matTooltip="Instance number">{{instanceNumber}}</label>
+  <label for="instanceslider" class="instancelabel" matTooltip="Instance number">{{instanceNumber}}</label>
 
   <section class="container mat-elevation-z8">
     <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z4">
