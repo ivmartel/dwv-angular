@@ -79,18 +79,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "dwv-angular:build"
+            "buildTarget": "dwv-angular:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "dwv-angular:build:production"
+              "buildTarget": "dwv-angular:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "dwv-angular:build"
+            "buildTarget": "dwv-angular:build"
           }
         },
         "test": {
