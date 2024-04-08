@@ -21,19 +21,19 @@ export class TagsTableComponent {
     const instanceElement = this._fullMetaData['00200013'];
     if (typeof instanceElement !== 'undefined') {
       // set slider with instance numbers ('00200013')
-      let instanceNumbers = instanceElement.value;
-      if (typeof instanceNumbers === 'string') {
-        instanceNumbers = [instanceNumbers];
+      let instanceNumberValue = instanceElement.value;
+      if (typeof instanceNumberValue === 'string') {
+        instanceNumberValue = [instanceNumberValue];
       }
       // convert string to numbers
-      const numbers = instanceNumbers.map(Number);
-      numbers.sort((a: number, b: number) => a - b);
+      this.instanceNumbers = instanceNumberValue.map(Number);
+      this.instanceNumbers.sort((a: number, b: number) => a - b);
       // store
-      this.min = numbers[0];
-      this.max = numbers[numbers.length - 1];
+      this.min = 0;
+      this.max = this.instanceNumbers.length - 1;
     }
     // set data source
-    this.setDataSource(this.min);
+    this.setDataSource(this.instanceNumbers[this.min]);
   }
 
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
@@ -45,6 +45,7 @@ export class TagsTableComponent {
   public min!: number;
   public max!: number;
   public instanceNumber!: number;
+  private instanceNumbers!: number[];
   private keys!: string[];
 
   constructor() {}
@@ -75,7 +76,7 @@ export class TagsTableComponent {
 
   onsliderchange(event: Event) {
     const sliderValue = parseInt((event.target as HTMLInputElement).value, 10);
-    this.setDataSource(sliderValue);
+    this.setDataSource(this.instanceNumbers[sliderValue]);
   }
 
   getMetaArray(instanceNumber: number): any[] {
