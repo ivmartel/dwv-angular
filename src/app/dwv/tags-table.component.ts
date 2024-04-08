@@ -12,6 +12,12 @@ import { getTagFromKey } from 'dwv';
 export class TagsTableComponent {
   private _fullMetaData: any;
 
+  public min!: number;
+  public max!: number;
+  public instanceNumber: number = 0;
+  private instanceNumbers!: number[];
+  private keys!: string[];
+
   @Input()
   set data(value: any) {
     this._fullMetaData = value;
@@ -31,9 +37,10 @@ export class TagsTableComponent {
       // store
       this.min = 0;
       this.max = this.instanceNumbers.length - 1;
+      this.instanceNumber = this.instanceNumbers[this.min];
     }
     // set data source
-    this.setDataSource(this.instanceNumbers[this.min]);
+    this.setDataSource(this.instanceNumber);
   }
 
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
@@ -41,12 +48,6 @@ export class TagsTableComponent {
   public displayedColumns: string[] = ['name', 'value'];
 
   public dataSource: any;
-
-  public min!: number;
-  public max!: number;
-  public instanceNumber!: number;
-  private instanceNumbers!: number[];
-  private keys!: string[];
 
   constructor() {}
 
