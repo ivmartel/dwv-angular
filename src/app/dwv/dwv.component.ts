@@ -98,7 +98,7 @@ export class DwvComponent implements OnInit {
     });
     this.dwvApp.addEventListener('load', (event: any) => {
       // set dicom tags
-      this.metaData = this.dwvApp.getMetaData(event.loadid);
+      this.metaData = this.dwvApp.getMetaData(event.dataid);
       // set data loaded flag
       this.dataLoaded = true;
     });
@@ -227,8 +227,9 @@ export class DwvComponent implements OnInit {
     const viewConfigs = {'*': [viewConfig0]};
     this.dwvApp.setDataViewConfigs(viewConfigs);
     // render data
-    for (let i = 0; i < this.dwvApp.getNumberOfLoadedData(); ++i) {
-      this.dwvApp.render(i);
+    const dataIds = this.dwvApp.getDataIds();
+    for (const dataId of dataIds) {
+      this.dwvApp.render(dataId);
     }
   }
 
