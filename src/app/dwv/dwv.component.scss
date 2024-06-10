@@ -7,10 +7,10 @@ $accent: map-get($dark-theme, accent);
   height: 90%; }
 
 a {
-  color: mat.get-color-from-palette($accent);
+  color: mat.m2-get-color-from-palette($accent);
 }
 a:hover {
-  color: mat.get-color-from-palette($primary);
+  color: mat.m2-get-color-from-palette($primary);
 }
 
 .button-row {
@@ -22,7 +22,7 @@ a:hover {
   margin: 0.2em;
 }
 #dwv .mat-button-toggle-checked {
-  color: mat.get-color-from-palette($primary);
+  color: mat.m2-get-color-from-palette($primary);
 }
 
 .legend {
@@ -50,6 +50,6 @@ a:hover {
   text-align: center; vertical-align: middle;
   width: 50%; height: 75%; }
 .dropBoxBorder {
-  border: 5px dashed mat.get-color-from-palette($primary, lighter); }
+  border: 5px dashed mat.m2-get-color-from-palette($primary, lighter); }
 .dropBoxBorder.hover {
-  border: 5px dashed mat.get-color-from-palette($primary); }
+  border: 5px dashed mat.m2-get-color-from-palette($primary); }
