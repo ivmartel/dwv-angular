@@ -33,7 +33,7 @@
     "@angular/service-worker": "^18.0.2",
     "dwv": "0.33.1",
     "rxjs": "^7.8.1",
-    "stream": "^0.0.2",
+    "stream": "^0.0.3",
     "tslib": "^2.6.2",
     "zone.js": "~0.14.6"
   },
