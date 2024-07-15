@@ -46,7 +46,7 @@
     "@angular-eslint/template-parser": "~18.1.0",
     "@angular/cli": "^18.1.0",
     "@angular/compiler-cli": "^18.0.2",
-    "@angular/language-service": "^18.0.5",
+    "@angular/language-service": "^18.1.0",
     "@types/jasmine": "~5.1.1",
     "@types/jasminewd2": "~2.0.12",
     "@types/node": "^20.14.10",
