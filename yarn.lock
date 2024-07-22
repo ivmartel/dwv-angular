@@ -148,27 +148,12 @@
     "@nx/devkit" "^19.0.6"
     nx "^19.0.6"
 
-"@angular-eslint/bundled-angular-compiler@18.0.1":
-  version "18.0.1"
-  resolved "https://registry.yarnpkg.com/@angular-eslint/bundled-angular-compiler/-/bundled-angular-compiler-18.0.1.tgz#94c53b8193de1d630c9f45af2acbcd64757b6b2e"
-  integrity sha512-lr4Ysoo28FBOKcJFQUGTMpbWDcak+gyuYvyggp37ERvazE6EDomPFxzEHNqVT9EI9sZ+GDBOoPR+EdFh0ALGNw==
-
 "@angular-eslint/bundled-angular-compiler@18.1.0":
   version "18.1.0"
   resolved "https://registry.yarnpkg.com/@angular-eslint/bundled-angular-compiler/-/bundled-angular-compiler-18.1.0.tgz#8949a95ec10804512211db41a270efd349bb4023"
   integrity sha512-2JNlMEnCvLz8q1Qa4sWR9BddtpDWMKYguMzHJKm5zUDwH90CgWHolQlXumtpqbL8r78xd57t35IkbEFLF3UsQw==
 
-"@angular-eslint/eslint-plugin-template@18.0.1":
-  version "18.0.1"
-  resolved "https://registry.yarnpkg.com/@angular-eslint/eslint-plugin-template/-/eslint-plugin-template-18.0.1.tgz#ec740a2381f9745f8bca57b4123370434ffb00c0"
-  integrity sha512-u/eov/CFBb8l35D8dW78Dx5fBLd8FZFibKN9XQknhzXnDMpISuUOMny5g5/wvYYjqLgqEySXMiHKEAxEup7xtA==
-  dependencies:
-    "@angular-eslint/bundled-angular-compiler" "18.0.1"
-    "@angular-eslint/utils" "18.0.1"
-    aria-query "5.3.0"
-    axobject-query "4.0.0"
-
-"@angular-eslint/eslint-plugin-template@~18.1.0":
+"@angular-eslint/eslint-plugin-template@18.1.0", "@angular-eslint/eslint-plugin-template@~18.1.0":
   version "18.1.0"
   resolved "https://registry.yarnpkg.com/@angular-eslint/eslint-plugin-template/-/eslint-plugin-template-18.1.0.tgz#89a069412e94408824e9657423377ccf0b90c6ea"
   integrity sha512-k7Zq2JRd4jjg6PB0M24UnnmdhCeRFQ7Q4GlMGmeJLQGan+HFKDBu973yN2/Vmk4RYi+rTVuin0gy4HBeiGiiaw==
@@ -178,15 +163,7 @@
     aria-query "5.3.0"
     axobject-query "4.0.0"
 
-"@angular-eslint/eslint-plugin@18.0.1":
-  version "18.0.1"
-  resolved "https://registry.yarnpkg.com/@angular-eslint/eslint-plugin/-/eslint-plugin-18.0.1.tgz#10e8b6da23628513c88a48ed976e3942c233d938"
-  integrity sha512-pS3SYLa9DA+ENklGxEUlcw6/xCxgDk9fgjyaheuSjDxL3TIh1pTa4V2TptODdcPh7XCYXiVmy+e/w79mXlGzOw==
-  dependencies:
-    "@angular-eslint/bundled-angular-compiler" "18.0.1"
-    "@angular-eslint/utils" "18.0.1"
-
-"@angular-eslint/eslint-plugin@~18.1.0":
+"@angular-eslint/eslint-plugin@18.1.0", "@angular-eslint/eslint-plugin@~18.1.0":
   version "18.1.0"
   resolved "https://registry.yarnpkg.com/@angular-eslint/eslint-plugin/-/eslint-plugin-18.1.0.tgz#6458b78d24e28697eec10708cf5354b26dacd2b1"
   integrity sha512-rV1RLhcg9TTNE5hB7pMddkJvnH0+q3FnhhWVE+IJNkzlGxEktDwVx7hG17sy8YkRS2CxR0P6Dr5C6wMBdEwAsw==
@@ -194,13 +171,13 @@
     "@angular-eslint/bundled-angular-compiler" "18.1.0"
     "@angular-eslint/utils" "18.1.0"
 
-"@angular-eslint/schematics@~18.0.1":
-  version "18.0.1"
-  resolved "https://registry.yarnpkg.com/@angular-eslint/schematics/-/schematics-18.0.1.tgz#66c21023e845fa6cd89f9ee555d76acdfd91323a"
-  integrity sha512-G9PgFrjyvBaQR8enMnP2scnQDLk99GMpifh3voiOmdEkxaQHRWqhCWncV7GATwpXDzeyj9J9XT9iHGJjnZTpJQ==
+"@angular-eslint/schematics@~18.1.0":
+  version "18.1.0"
+  resolved "https://registry.yarnpkg.com/@angular-eslint/schematics/-/schematics-18.1.0.tgz#4f1a7fe6abdaf5f67801eaf01d4a23901ff29442"
+  integrity sha512-wZll/9/RSER1Vl6m9fXA/866OAUz2DSWYufvHEpJUoDPug/uZ+l9jOMZwlSk4PeMrF+/fNXoWx5HK2ZEwTv2qw==
   dependencies:
-    "@angular-eslint/eslint-plugin" "18.0.1"
-    "@angular-eslint/eslint-plugin-template" "18.0.1"
+    "@angular-eslint/eslint-plugin" "18.1.0"
+    "@angular-eslint/eslint-plugin-template" "18.1.0"
     "@nx/devkit" "^19.0.6"
     ignore "5.3.1"
     nx "^19.0.6"
@@ -214,13 +191,6 @@
   dependencies:
     "@angular-eslint/bundled-angular-compiler" "18.1.0"
     eslint-scope "^8.0.0"
-
-"@angular-eslint/utils@18.0.1":
-  version "18.0.1"
-  resolved "https://registry.yarnpkg.com/@angular-eslint/utils/-/utils-18.0.1.tgz#8033830e4faec7f5fb462456868da0e4e4c89cab"
-  integrity sha512-Q9lCySqg+9h2cz08+SoWj48cY1i04tL1k3bsQJmF2TsylAw2mSsNGX2X3h9WkdxY7sUoY0mP7MVW1iU54Gobcg==
-  dependencies:
-    "@angular-eslint/bundled-angular-compiler" "18.0.1"
 
 "@angular-eslint/utils@18.1.0":
   version "18.1.0"
