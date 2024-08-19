@@ -183,13 +183,21 @@
     aria-query "5.3.0"
     axobject-query "4.1.0"
 
-"@angular-eslint/eslint-plugin@18.1.0", "@angular-eslint/eslint-plugin@~18.1.0":
+"@angular-eslint/eslint-plugin@18.1.0":
   version "18.1.0"
   resolved "https://registry.yarnpkg.com/@angular-eslint/eslint-plugin/-/eslint-plugin-18.1.0.tgz#6458b78d24e28697eec10708cf5354b26dacd2b1"
   integrity sha512-rV1RLhcg9TTNE5hB7pMddkJvnH0+q3FnhhWVE+IJNkzlGxEktDwVx7hG17sy8YkRS2CxR0P6Dr5C6wMBdEwAsw==
   dependencies:
     "@angular-eslint/bundled-angular-compiler" "18.1.0"
     "@angular-eslint/utils" "18.1.0"
+
+"@angular-eslint/eslint-plugin@~18.3.0":
+  version "18.3.0"
+  resolved "https://registry.yarnpkg.com/@angular-eslint/eslint-plugin/-/eslint-plugin-18.3.0.tgz#db4b63d095398b81b515e0bbc7b20a74642bf749"
+  integrity sha512-Vl7gfPMXxvtHTjYdlzR161aj5xrqW6T57wd8ToQ7Gqzm0qHGfY6kE4SQobUa2LCYckTNSlv+zXe48C4ah/dSjw==
+  dependencies:
+    "@angular-eslint/bundled-angular-compiler" "18.3.0"
+    "@angular-eslint/utils" "18.3.0"
 
 "@angular-eslint/schematics@~18.1.0":
   version "18.1.0"
