@@ -18,6 +18,14 @@
     "@angular-devkit/core" "18.2.2"
     rxjs "7.8.1"
 
+"@angular-devkit/architect@0.1802.3":
+  version "0.1802.3"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/architect/-/architect-0.1802.3.tgz#1938f2ad994b2c9693273fab0be4461351590fe0"
+  integrity sha512-WQ2AmkUKy1bqrDlNfozW8+VT2Tv/Fdmu4GIXps3ytZANyAKiIvTzmmql2cRCXXraa9FNMjLWNvz+qolDxWVdYQ==
+  dependencies:
+    "@angular-devkit/core" "18.2.3"
+    rxjs "7.8.1"
+
 "@angular-devkit/build-angular@^18.2.2":
   version "18.2.2"
   resolved "https://registry.yarnpkg.com/@angular-devkit/build-angular/-/build-angular-18.2.2.tgz#ab6f3300575b88a65945f480f1f4ee54174fa588"
@@ -108,12 +116,24 @@
     rxjs "7.8.1"
     source-map "0.7.4"
 
-"@angular-devkit/schematics@18.2.2":
-  version "18.2.2"
-  resolved "https://registry.yarnpkg.com/@angular-devkit/schematics/-/schematics-18.2.2.tgz#9dd4f8e24a073bd960c963d27dab09d80c2d2348"
-  integrity sha512-PU6+3nX+gQ3gofR7BGwXuvNUNeeV2raURaZjlPfGpBqjyTBxukMV71QsTTWptAZT4WibCWkTFp6X1gvsOGbjMg==
+"@angular-devkit/core@18.2.3":
+  version "18.2.3"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/core/-/core-18.2.3.tgz#3b35a8fc2c5722d6da90e6b73ec92cbb70db0626"
+  integrity sha512-vbFs+ofNK9OWeMIcFarFjegXVklhtSdLTEFKZ9trDVr8alTJdjI9AiYa6OOUTDAyq0hqYxV26xlCisWAPe7s5w==
   dependencies:
-    "@angular-devkit/core" "18.2.2"
+    ajv "8.17.1"
+    ajv-formats "3.0.1"
+    jsonc-parser "3.3.1"
+    picomatch "4.0.2"
+    rxjs "7.8.1"
+    source-map "0.7.4"
+
+"@angular-devkit/schematics@18.2.3":
+  version "18.2.3"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/schematics/-/schematics-18.2.3.tgz#686f4ac6ae8740c5ef01bf967b8620dd34fe2036"
+  integrity sha512-N3tRAzBW2yWQhebvc1Ha18XTMSXOQTfr8HNjx7Fasx0Fg1tNyGR612MJNZw6je/PqyItKeUHOhztvFMfCQjRyg==
+  dependencies:
+    "@angular-devkit/core" "18.2.3"
     jsonc-parser "3.3.1"
     magic-string "0.30.11"
     ora "5.4.1"
@@ -220,17 +240,17 @@
   optionalDependencies:
     parse5 "^7.1.2"
 
-"@angular/cli@^18.2.2":
-  version "18.2.2"
-  resolved "https://registry.yarnpkg.com/@angular/cli/-/cli-18.2.2.tgz#a385c75bda907a855629183e8cace7e888a4d019"
-  integrity sha512-HVVaMxnbID0q+V3KE+JqzGbPHcBUFo1RKhBZ/jxY7USZNzgtyYbRc0IYqPWNdr99UT5QefTJrjVazJo1nqQZvQ==
+"@angular/cli@^18.2.3":
+  version "18.2.3"
+  resolved "https://registry.yarnpkg.com/@angular/cli/-/cli-18.2.3.tgz#56bdb1a52a1a612bf6e0e27e95e1f5a5d91a223d"
+  integrity sha512-40258vuliH6+p8QSByZe5EcIXSj0iR3PNF6yuusClR/ByToHOnmuPw7WC+AYr0ooozmqlim/EjQe4/037OUB3w==
   dependencies:
-    "@angular-devkit/architect" "0.1802.2"
-    "@angular-devkit/core" "18.2.2"
-    "@angular-devkit/schematics" "18.2.2"
+    "@angular-devkit/architect" "0.1802.3"
+    "@angular-devkit/core" "18.2.3"
+    "@angular-devkit/schematics" "18.2.3"
     "@inquirer/prompts" "5.3.8"
     "@listr2/prompt-adapter-inquirer" "2.0.15"
-    "@schematics/angular" "18.2.2"
+    "@schematics/angular" "18.2.3"
     "@yarnpkg/lockfile" "1.1.0"
     ini "4.1.3"
     jsonc-parser "3.3.1"
@@ -2336,13 +2356,13 @@
   resolved "https://registry.yarnpkg.com/@rollup/rollup-win32-x64-msvc/-/rollup-win32-x64-msvc-4.20.0.tgz#601fffee719a1e8447f908aca97864eec23b2784"
   integrity sha512-aJ1EJSuTdGnM6qbVC4B5DSmozPTqIag9fSzXRNNo+humQLG89XpPgdt16Ia56ORD7s+H8Pmyx44uczDQ0yDzpg==
 
-"@schematics/angular@18.2.2":
-  version "18.2.2"
-  resolved "https://registry.yarnpkg.com/@schematics/angular/-/angular-18.2.2.tgz#21b5e847918ab4632c385a6092905b3b0686f7f7"
-  integrity sha512-0uPA1kQ38RnbNrzMlveX/QAqQIDu2INl5IYd3EUbJZRfYSp1VVyOSyuIBJ+1iUl5Y5VUa2uylaVZXhFdKWprXw==
+"@schematics/angular@18.2.3":
+  version "18.2.3"
+  resolved "https://registry.yarnpkg.com/@schematics/angular/-/angular-18.2.3.tgz#3455e871f269a7977ea63df6c5537ea3209ee1b6"
+  integrity sha512-whSON70z9HYb4WboVXmPFE/RLKJJQLWNzNcUyi8OSDZkQbJnYgPp0///n738m26Y/XeJDv11q1gESy+Zl2AdUw==
   dependencies:
-    "@angular-devkit/core" "18.2.2"
-    "@angular-devkit/schematics" "18.2.2"
+    "@angular-devkit/core" "18.2.3"
+    "@angular-devkit/schematics" "18.2.3"
     jsonc-parser "3.3.1"
 
 "@sigstore/bundle@^2.3.2":
