@@ -10,14 +10,6 @@
     "@jridgewell/gen-mapping" "^0.3.5"
     "@jridgewell/trace-mapping" "^0.3.24"
 
-"@angular-devkit/architect@0.1802.2":
-  version "0.1802.2"
-  resolved "https://registry.yarnpkg.com/@angular-devkit/architect/-/architect-0.1802.2.tgz#e099cb195169fc05c56c9ac2e1d7bf815c8e0bbb"
-  integrity sha512-LPRl9jhcf0NgshaL6RoUy1uL/cAyNt7oxctoZ9EHUu8eh5E9W/jZGhVowjOLpirwqYhmEzKJJIeS49Ssqs3RQg==
-  dependencies:
-    "@angular-devkit/core" "18.2.2"
-    rxjs "7.8.1"
-
 "@angular-devkit/architect@0.1802.3":
   version "0.1802.3"
   resolved "https://registry.yarnpkg.com/@angular-devkit/architect/-/architect-0.1802.3.tgz#1938f2ad994b2c9693273fab0be4461351590fe0"
@@ -26,16 +18,16 @@
     "@angular-devkit/core" "18.2.3"
     rxjs "7.8.1"
 
-"@angular-devkit/build-angular@^18.2.2":
-  version "18.2.2"
-  resolved "https://registry.yarnpkg.com/@angular-devkit/build-angular/-/build-angular-18.2.2.tgz#ab6f3300575b88a65945f480f1f4ee54174fa588"
-  integrity sha512-7HEnTN2T1jnjuItXKcApOsoYGgfou4+POju3ZbwIQukDZ3B2COskvQkVTxqPNrQ0ZjT2mxZYoVlmGW9M+7N25g==
+"@angular-devkit/build-angular@^18.2.3":
+  version "18.2.3"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/build-angular/-/build-angular-18.2.3.tgz#c0da96de10e308c45d11e6c3c51364cc78abc7ec"
+  integrity sha512-uUQba0SIskKORHcPayt7LpqPRKD//48EW92SgGHEArn2KklM+FSYBOA9OtrJeZ/UAcoJpdLDtvyY4+S7oFzomg==
   dependencies:
     "@ampproject/remapping" "2.3.0"
-    "@angular-devkit/architect" "0.1802.2"
-    "@angular-devkit/build-webpack" "0.1802.2"
-    "@angular-devkit/core" "18.2.2"
-    "@angular/build" "18.2.2"
+    "@angular-devkit/architect" "0.1802.3"
+    "@angular-devkit/build-webpack" "0.1802.3"
+    "@angular-devkit/core" "18.2.3"
+    "@angular/build" "18.2.3"
     "@babel/core" "7.25.2"
     "@babel/generator" "7.25.0"
     "@babel/helper-annotate-as-pure" "7.24.7"
@@ -46,7 +38,7 @@
     "@babel/preset-env" "7.25.3"
     "@babel/runtime" "7.25.0"
     "@discoveryjs/json-ext" "0.6.1"
-    "@ngtools/webpack" "18.2.2"
+    "@ngtools/webpack" "18.2.3"
     "@vitejs/plugin-basic-ssl" "1.1.0"
     ansi-colors "4.1.3"
     autoprefixer "10.4.20"
@@ -89,32 +81,20 @@
     vite "5.4.0"
     watchpack "2.4.1"
     webpack "5.94.0"
-    webpack-dev-middleware "7.3.0"
+    webpack-dev-middleware "7.4.2"
     webpack-dev-server "5.0.4"
     webpack-merge "6.0.1"
     webpack-subresource-integrity "5.1.0"
   optionalDependencies:
     esbuild "0.23.0"
 
-"@angular-devkit/build-webpack@0.1802.2":
-  version "0.1802.2"
-  resolved "https://registry.yarnpkg.com/@angular-devkit/build-webpack/-/build-webpack-0.1802.2.tgz#484eda952968815a6b6ac6fc67d4a90dcfc65359"
-  integrity sha512-Pj+YmKh0nJOKl6QAsqYh3SqfuVJrFqjyp5WrG9BgfsMD9GCMD+5teMHNYJlp+vG/C8e7VdZp4rqOon8K9Xn4Mw==
+"@angular-devkit/build-webpack@0.1802.3":
+  version "0.1802.3"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/build-webpack/-/build-webpack-0.1802.3.tgz#fe30d8aea91d5092b4a843a5d193b85cf08fd871"
+  integrity sha512-/Nixv9uAg6v/OPoZa0PB0zi+iezzBkgLrnrJnestny5B536l9WRtsw97RjeQDu+x2BClQsxNe8NL2A7EvjVD6w==
   dependencies:
-    "@angular-devkit/architect" "0.1802.2"
+    "@angular-devkit/architect" "0.1802.3"
     rxjs "7.8.1"
-
-"@angular-devkit/core@18.2.2":
-  version "18.2.2"
-  resolved "https://registry.yarnpkg.com/@angular-devkit/core/-/core-18.2.2.tgz#ca0b5127d7b4d4ab43da756490b7e8edcac29bfd"
-  integrity sha512-Zz0tGptI/QQnUBDdp+1G5wGwQWMjpfe2oO+UohkrDVgFS71yVj4VDnOy51kMTxBvzw+36evTgthPpmzqPIfxBw==
-  dependencies:
-    ajv "8.17.1"
-    ajv-formats "3.0.1"
-    jsonc-parser "3.3.1"
-    picomatch "4.0.2"
-    rxjs "7.8.1"
-    source-map "0.7.4"
 
 "@angular-devkit/core@18.2.3":
   version "18.2.3"
@@ -200,13 +180,13 @@
   dependencies:
     tslib "^2.3.0"
 
-"@angular/build@18.2.2":
-  version "18.2.2"
-  resolved "https://registry.yarnpkg.com/@angular/build/-/build-18.2.2.tgz#fe1dc094a04c0a23092821243262f7ee303615e4"
-  integrity sha512-okaDdTMXnDhvnnnih6rPQnexL6htfEAPr19bB1Ci9d31gEjVuKZCjlcw2sPZ6BUyilwC9nZlCI5vbH1Ljf6mzA==
+"@angular/build@18.2.3":
+  version "18.2.3"
+  resolved "https://registry.yarnpkg.com/@angular/build/-/build-18.2.3.tgz#974a32dbe917ebc3786a008eeb9979beaabb56a9"
+  integrity sha512-USrD2Zvcb1te2dnqhH7JZ5XeJDg/t7fjUHR4f93vvMrnrncwCjLoHbHpz01HCHfcIVRgsYUdAmAi1iG7vpak7w==
   dependencies:
     "@ampproject/remapping" "2.3.0"
-    "@angular-devkit/architect" "0.1802.2"
+    "@angular-devkit/architect" "0.1802.3"
     "@babel/core" "7.25.2"
     "@babel/helper-annotate-as-pure" "7.24.7"
     "@babel/helper-split-export-declaration" "7.24.7"
@@ -2083,10 +2063,10 @@
   resolved "https://registry.yarnpkg.com/@msgpackr-extract/msgpackr-extract-win32-x64/-/msgpackr-extract-win32-x64-3.0.3.tgz#0aa5502d547b57abfc4ac492de68e2006e417242"
   integrity sha512-x0fWaQtYp4E6sktbsdAqnehxDgEc/VwM7uLsRCYWaiGu0ykYdZPiS8zCWdnjHwyiumousxfBm4SO31eXqwEZhQ==
 
-"@ngtools/webpack@18.2.2":
-  version "18.2.2"
-  resolved "https://registry.yarnpkg.com/@ngtools/webpack/-/webpack-18.2.2.tgz#acc8f2438fd7af2651e3266f4c43fb81649563cc"
-  integrity sha512-YhADmc+lVjLt3kze07A+yLry2yzcghdclu+7D3EDfa6fG2Pk33HK3MY2I0Z0BO+Ivoq7cV7yxm+naR+Od0Y5ng==
+"@ngtools/webpack@18.2.3":
+  version "18.2.3"
+  resolved "https://registry.yarnpkg.com/@ngtools/webpack/-/webpack-18.2.3.tgz#81056a6f83818caf6acb0f4d385543912a9f30cd"
+  integrity sha512-DDuBHcu23qckt43SexBJaPEIeMc/HKaFOidILZM9D4gU4C9VroMActdR218dvQ802QfL0S46t5Ykz8ENprIfjA==
 
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
@@ -8110,10 +8090,10 @@ webdriver-manager@^12.1.7:
     semver "^5.3.0"
     xml2js "^0.4.17"
 
-webpack-dev-middleware@7.3.0, webpack-dev-middleware@^7.1.0:
-  version "7.3.0"
-  resolved "https://registry.yarnpkg.com/webpack-dev-middleware/-/webpack-dev-middleware-7.3.0.tgz#5975ea41271083dc5678886b99d4c058382fb311"
-  integrity sha512-xD2qnNew+F6KwOGZR7kWdbIou/ud7cVqLEXeK1q0nHcNsX/u7ul/fSdlOTX4ntSL5FNFy7ZJJXbf0piF591JYw==
+webpack-dev-middleware@7.4.2, webpack-dev-middleware@^7.1.0:
+  version "7.4.2"
+  resolved "https://registry.yarnpkg.com/webpack-dev-middleware/-/webpack-dev-middleware-7.4.2.tgz#40e265a3d3d26795585cff8207630d3a8ff05877"
+  integrity sha512-xOO8n6eggxnwYpy1NlzUKpvrjfJTvae5/D6WOK0S2LSo7vjmo5gCM1DbLUmFqrMTJP+W/0YZNctm7jasWvLuBA==
   dependencies:
     colorette "^2.0.10"
     memfs "^4.6.0"
