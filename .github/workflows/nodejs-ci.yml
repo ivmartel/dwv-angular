@@ -23,11 +23,12 @@ jobs:
       run: yarn install --frozen-lockfile
     - name: Run lint
       run: yarn run lint
+    - name: Build lib
+      run: yarn run build-lib
     - name: Run tests
       run: yarn run test-ci
-    - name: Build
+    - name: Build app
       run: |
-        yarn run build-lib
         BUILD_APP_SCRIPT=build-app-trunk
         if ${{ env.IS_PUSH_TAG }}; then
           BUILD_APP_SCRIPT=build-app-stable
