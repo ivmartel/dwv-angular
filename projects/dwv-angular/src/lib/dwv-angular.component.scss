@@ -1,0 +1,31 @@
+#dwv {
+  height: 90%; }
+
+.legend {
+  text-align: center;
+  font-size: 8pt;
+  margin: 1em;
+}
+
+/* Layers */
+.layerGroup {
+  position: relative;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  height: 90%;
+}
+.layer {
+  position: absolute;
+  pointer-events: none;
+}
+
+/* drag&drop */
+.dropBox {
+  margin: auto;
+  text-align: center; vertical-align: middle;
+  width: 50%; height: 75%; }
+// .dropBoxBorder {
+//   border: 5px dashed; }
+// .dropBoxBorder:hover {
+//   border: 5px dashed; }
