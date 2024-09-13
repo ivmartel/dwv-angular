@@ -27,11 +27,12 @@ jobs:
       run: yarn run test-ci
     - name: Build
       run: |
-        BUILD_SCRIPT=build-trunk
+        yarn run build-lib
+        BUILD_APP_SCRIPT=build-app-trunk
         if ${{ env.IS_PUSH_TAG }}; then
-          BUILD_SCRIPT=build-stable
+          BUILD_APP_SCRIPT=build-app-stable
         fi
-        yarn run $BUILD_SCRIPT
+        yarn run $BUILD_APP_SCRIPT
     - name: Push to gh-pages (if tag or main branch)
       if: env.IS_PUSH_MAIN == 'true' || env.IS_PUSH_TAG == 'true'
       run: |
