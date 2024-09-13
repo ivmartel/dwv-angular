@@ -1,24 +1,18 @@
-# DwvAngular
+# dwv-angular
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.0.
+Medical viewer [Angular](https://angular.io/) component using [DWV](https://github.com/ivmartel/dwv) (DICOM Web Viewer).
 
-## Code scaffolding
+All coding/implementation contributions and comments are welcome. Releases should be ready for deployment otherwise download the code and install dependencies with a `yarn` or `npm` `install`.
 
-Run `ng generate component component-name --project dwv-angular` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project dwv-angular`.
-> Note: Don't forget to add `--project dwv-angular` or else it will be added to the default project in your `angular.json` file.
+dwv-angular is not certified for diagnostic use. Released under GNU GPL-3.0 license (see [license.txt](license.txt)).
 
-## Build
+[![Node.js CI](https://github.com/ivmartel/dwv-angular/actions/workflows/nodejs-ci.yml/badge.svg)](https://github.com/ivmartel/dwv-angular/actions/workflows/nodejs-ci.yml)
 
-Run `ng build dwv-angular` to build the project. The build artifacts will be stored in the `dist/` directory. Run `ng build dwv-angular --watch` to build and rebuild if a file changes.
+## Available Scripts
 
-## Publishing
+ - `install`: install dependencies
+ - `lint`: run linting
+ - `test`:  run unit tests with hot reload
+ - `build`: build (add --prod for production)
 
-After building your library with `ng build dwv-angular`, go to the dist folder `cd dist/dwv-angular` and run `npm publish`.
-
-## Running unit tests
-
-Run `ng test dwv-angular` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+This project was generated with [Angular CLI](https://angular.dev/cli) version 18.2.0.
