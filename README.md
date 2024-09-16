@@ -15,8 +15,8 @@ dwv-angular is not certified for diagnostic use. Released under GNU GPL-3.0 lice
  - `install`: install dependencies
  - `start`: serve with hot reload at localhost:4200
  - `lint`: run linting
- - `test`:  run unit tests with hot reload
- - `build`: build (add the project you want to build)
+ - `test`:  run unit tests with hot reload for the project specified as argument
+ - `build`: build the project specified as argument
 
 This project was generated with [Angular CLI](https://angular.dev/cli) version 18.2.0.
 
