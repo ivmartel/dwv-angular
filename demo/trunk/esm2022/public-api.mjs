@@ -1,0 +1,5 @@
+/*
+ * Public API Surface of dwv-angular
+ */
+export * from './lib/dwv-angular.component';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHVibGljLWFwaS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uL3Byb2plY3RzL2R3di1hbmd1bGFyL3NyYy9wdWJsaWMtYXBpLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOztHQUVHO0FBRUgsY0FBYyw2QkFBNkIsQ0FBQyIsInNvdXJjZXNDb250ZW50IjpbIi8qXG4gKiBQdWJsaWMgQVBJIFN1cmZhY2Ugb2YgZHd2LWFuZ3VsYXJcbiAqL1xuXG5leHBvcnQgKiBmcm9tICcuL2xpYi9kd3YtYW5ndWxhci5jb21wb25lbnQnO1xuIl19
