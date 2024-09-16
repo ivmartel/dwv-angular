@@ -1,6 +1,8 @@
 # dwv-angular project
 
-Medical viewer using the [dwv-angular](https://github.com/ivmartel/dwv-angular/porjects/dwv-angular) component.
+Medical viewer using [DWV](https://github.com/ivmartel/dwv) (DICOM Web Viewer) and [Angular](https://angular.io/):
+ - [dwv-angular](https://github.com/ivmartel/dwv-angular/projects/dwv-angular): Angular component
+ - [dwv-angular-app](https://github.com/ivmartel/dwv-angular/projects/dwv-angular-app): example Angular application integrating the dwv-angular compoment
 
 All coding/implementation contributions and comments are welcome. Releases should be ready for deployment otherwise download the code and install dependencies with a `yarn` or `npm` `install`.
 
@@ -14,7 +16,7 @@ dwv-angular is not certified for diagnostic use. Released under GNU GPL-3.0 lice
  - `start`: serve with hot reload at localhost:4200
  - `lint`: run linting
  - `test`:  run unit tests with hot reload
- - `build`: build (add --prod for production)
+ - `build`: build (add the project you want to build)
 
 This project was generated with [Angular CLI](https://angular.dev/cli) version 18.2.0.
 
