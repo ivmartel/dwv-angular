@@ -1,6 +1,6 @@
 # dwv-angular-app
 
-Medical viewer using the [dwv-angular](https://github.com/ivmartel/dwv-angular/tree/main/projects/dwv-angular) component.
+Medical viewer using the [dwv-angular](../dwv-angular) component.
 
 All coding/implementation contributions and comments are welcome.
 
