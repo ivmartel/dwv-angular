@@ -4,120 +4,138 @@
   "newProjectRoot": "projects",
   "projects": {
     "dwv-angular": {
+      "projectType": "library",
+      "root": "projects/dwv-angular",
+      "sourceRoot": "projects/dwv-angular/src",
+      "prefix": "dwv",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/dwv-angular/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/dwv-angular/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/dwv-angular/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "tsConfig": "projects/dwv-angular/tsconfig.spec.json",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/dwv-angular/**/*.ts",
+              "projects/dwv-angular/**/*.html"
+            ],
+            "eslintConfig": "projects/dwv-angular/eslint.config.js"
+          }
+        }
+      }
+    },
+    "dwv-angular-app": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss"
         }
       },
-      "root": "",
-      "sourceRoot": "src",
+      "root": "projects/dwv-angular-app",
+      "sourceRoot": "projects/dwv-angular-app/src",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": {
-              "base": "dist/dwv-angular",
-              "browser": ""
-            },
-            "index": "src/index.html",
+            "outputPath": "dist/dwv-angular-app",
+            "index": "projects/dwv-angular-app/src/index.html",
+            "browser": "projects/dwv-angular-app/src/main.ts",
             "polyfills": [
-              "src/polyfills.ts"
+              "zone.js"
             ],
-            "tsConfig": "tsconfig.app.json",
+            "tsConfig": "projects/dwv-angular-app/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
             "assets": [
-              "src/favicon.ico",
-              "src/assets",
-              "src/manifest.json",
               {
                 "glob": "**/*",
-                "input": "node_modules/dwv/decoders",
-                "output": "/assets/dwv/decoders"
+                "input": "projects/dwv-angular-app/public"
               }
             ],
             "styles": [
-              "src/assets/theme.scss",
-              "src/styles.scss"
+              "projects/dwv-angular-app/src/styles.scss"
             ],
-            "scripts": [],
-            "extractLicenses": false,
-            "sourceMap": true,
-            "optimization": false,
-            "namedChunks": true,
-            "browser": "src/main.ts",
-            "stylePreprocessorOptions": {
-              "includePaths": [
-                "."
-              ]
-            }
+            "scripts": []
           },
           "configurations": {
             "production": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "namedChunks": false,
-              "extractLicenses": true,
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
+                  "maximumWarning": "2MB",
+                  "maximumError": "3MB"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "200kb",
-                  "maximumError": "300kb"
+                  "maximumWarning": "2kB",
+                  "maximumError": "4kB"
                 }
               ],
-              "serviceWorker": "ngsw-config.json"
+              "outputHashing": "all",
+              "serviceWorker": "projects/dwv-angular-app/ngsw-config.json"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
             }
-          }
+          },
+          "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "buildTarget": "dwv-angular:build"
-          },
           "configurations": {
             "production": {
-              "buildTarget": "dwv-angular:build:production"
+              "buildTarget": "dwv-angular-app:build:production"
+            },
+            "development": {
+              "buildTarget": "dwv-angular-app:build:development"
             }
-          }
+          },
+          "defaultConfiguration": "development"
         },
         "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "buildTarget": "dwv-angular:build"
-          }
+          "builder": "@angular-devkit/build-angular:extract-i18n"
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.spec.json",
-            "karmaConfig": "karma.conf.js",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
+            "tsConfig": "projects/dwv-angular-app/tsconfig.spec.json",
+            "inlineStyleLanguage": "scss",
             "assets": [
-              "src/favicon.ico",
-              "src/assets",
-              "src/manifest.json",
               {
                 "glob": "**/*",
-                "input": "node_modules/dwv/decoders",
-                "output": "/assets/dwv/decoders"
+                "input": "projects/dwv-angular-app/public"
               }
             ],
             "styles": [
-              "src/assets/theme.scss",
-              "src/styles.scss"
+              "projects/dwv-angular-app/src/styles.scss"
             ],
             "scripts": []
           }
@@ -126,21 +144,10 @@
           "builder": "@angular-eslint/builder:lint",
           "options": {
             "lintFilePatterns": [
-              "src/**/*.ts",
-              "src/**/*.html"
-            ]
-          }
-        },
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "options": {
-            "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "dwv-angular:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "dwv-angular:serve:production"
-            }
+              "projects/dwv-angular-app/**/*.ts",
+              "projects/dwv-angular-app/**/*.html"
+            ],
+            "eslintConfig": "projects/dwv-angular-app/eslint.config.js"
           }
         }
       }
@@ -149,15 +156,6 @@
   "cli": {
     "schematicCollections": [
       "@angular-eslint/schematics"
-    ],
-    "analytics": false
-  },
-  "schematics": {
-    "@angular-eslint/schematics:application": {
-      "setParserOptionsProject": true
-    },
-    "@angular-eslint/schematics:library": {
-      "setParserOptionsProject": true
-    }
+    ]
   }
 }

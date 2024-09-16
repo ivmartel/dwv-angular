@@ -23,15 +23,17 @@ jobs:
       run: yarn install --frozen-lockfile
     - name: Run lint
       run: yarn run lint
+    - name: Build lib
+      run: yarn run build-lib
     - name: Run tests
       run: yarn run test-ci
-    - name: Build
+    - name: Build app
       run: |
-        BUILD_SCRIPT=build-trunk
+        BUILD_APP_SCRIPT=build-app-trunk
         if ${{ env.IS_PUSH_TAG }}; then
-          BUILD_SCRIPT=build-stable
+          BUILD_APP_SCRIPT=build-app-stable
         fi
-        yarn run $BUILD_SCRIPT
+        yarn run $BUILD_APP_SCRIPT
     - name: Push to gh-pages (if tag or main branch)
       if: env.IS_PUSH_MAIN == 'true' || env.IS_PUSH_TAG == 'true'
       run: |
