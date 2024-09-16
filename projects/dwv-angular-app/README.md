@@ -4,4 +4,4 @@ Medical viewer using the [dwv-angular](https://github.com/ivmartel/dwv-angular/t
 
 All coding/implementation contributions and comments are welcome.
 
-dwv-angular is not certified for diagnostic use. Released under GNU GPL-3.0 license (see [license.txt](license.txt)).
+dwv-angular is not certified for diagnostic use. Released under GNU GPL-3.0 license (see [license.txt](../../license.txt)).

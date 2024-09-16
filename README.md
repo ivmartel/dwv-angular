@@ -1,8 +1,8 @@
 # dwv-angular project
 
 Medical viewer using [DWV](https://github.com/ivmartel/dwv) (DICOM Web Viewer) and [Angular](https://angular.io/):
- - [dwv-angular](https://github.com/ivmartel/dwv-angular/tree/main/projects/dwv-angular): Angular component
- - [dwv-angular-app](https://github.com/ivmartel/dwv-angular/tree/main/projects/dwv-angular-app): example Angular application integrating the dwv-angular compoment
+ - [dwv-angular](./projects/dwv-angular): Angular component
+ - [dwv-angular-app](./projects/dwv-angular-app): example Angular application integrating the dwv-angular compoment
 
 All coding/implementation contributions and comments are welcome. Releases should be ready for deployment otherwise download the code and install dependencies with a `yarn` or `npm` `install`.
 
