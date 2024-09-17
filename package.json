@@ -2,8 +2,13 @@
   "name": "dwv-angular",
   "version": "0.9.0-beta.3",
   "description": "Medical viewer using DWV (DICOM Web Viewer) and Angular.",
-  "author": "ivmartel",
   "license": "GPL-3.0",
+  "author": "ivmartel",
+  "homepage": "https://ivmartel.github.io/dwv-angular/",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ivmartel/dwv-angular.git"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
