@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1726734549411,
+  "timestamp": 1726735034763,
   "index": "/dwv-angular/demo/trunk/index.html",
   "assetGroups": [
     {
@@ -42,7 +42,7 @@
   ],
   "dataGroups": [],
   "hashTable": {
-    "/dwv-angular/demo/trunk/favicon.ico": "9c39f434fe1261f68c5e3eefdf734630d99c5670",
+    "/dwv-angular/demo/trunk/favicon.ico": "f2c13e666b0fd4a3239df69e908221fb37ea24ed",
     "/dwv-angular/demo/trunk/icons/icon-128x128.png": "b4746aec2b696dfd0f5165ba3bb8c390e0448091",
     "/dwv-angular/demo/trunk/icons/icon-144x144.png": "ba625ff74384bb7702bd2f6efede482ddde32c75",
     "/dwv-angular/demo/trunk/icons/icon-152x152.png": "796db29c23c39bd67a8f29d0f40beeeb57ab801c",
