@@ -31,6 +31,34 @@ class DwvEvent {
   dataid!: string;
 }
 
+/**
+ * DWV component: display DICOM data using DWV (DICOM Web Viewer). Default
+ * (no arguments) shows a dropbox to manually load dicom data from the
+ * local system. The arguments are
+ * - uri: string, an input URI to load the data from
+ * - urls: string[], a list of urls to load the data from
+ * - showLegend: boolean, defaults to false
+ *
+ * The dropbox is shown if no uri nor urls are provided.
+ *
+ * ref: {@link https://github.com/ivmartel/dwv}.
+ *
+ * Usage example:
+ * @example
+ * <dwv-angular [showLegend]="true"></dwv-angular>
+ * @example
+ * <dwv-angular
+ *   [uri]="https://www.demo.com/index.html?input=file.dcm">
+ * </dwv-angular>
+ * @example
+ * <dwv-angular
+ *   [urls]="[
+ *     'https://www.demo.com/file0.dcm',
+ *     'https://www.demo.com/file1.dcm'
+ *   ]">
+ * </dwv-angular>
+ */
+
 @Component({
   selector: 'dwv-angular',
   standalone: true,
@@ -49,6 +77,9 @@ class DwvEvent {
 
 export class DwvComponent implements OnInit {
   @Input() showLegend = false;
+  @Input() uri!: string;
+  @Input() urls!: string[];
+
   public versions = {
     dwv: getDwvVersion(),
     angular: VERSION.full
@@ -154,11 +185,14 @@ export class DwvComponent implements OnInit {
     // handle window resize
     window.addEventListener('resize', this.dwvApp.onResize);
 
-    // setup drop box
-    this.setupDropbox();
-
-    // possible load from location
-    this.dwvApp.loadFromUri(window.location.href);
+    // load or dropbox
+    if (this.uri !== undefined) {
+      this.dwvApp.loadFromUri(this.uri);
+    } else if (this.urls !== undefined) {
+      this.dwvApp.loadURLs(this.urls);
+    } else {
+      this.setupDropbox();
+    }
   }
 
   /**
