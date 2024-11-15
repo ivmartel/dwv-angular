@@ -72,6 +72,11 @@
               {
                 "glob": "**/*",
                 "input": "projects/dwv-angular-app/public"
+              },
+              {
+                "glob": "**/*",
+                "input": "node_modules/dwv/decoders",
+                "output": "/assets/dwv/decoders"
               }
             ],
             "styles": [
