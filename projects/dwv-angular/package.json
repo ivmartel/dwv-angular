@@ -16,7 +16,7 @@
     "@angular/material": "^18.2.0"
   },
   "dependencies": {
-    "dwv": "0.33.1",
+    "dwv": "^0.34.0",
     "tslib": "^2.3.0"
   },
   "sideEffects": false
