@@ -1,6 +1,6 @@
 {
   "name": "dwv-angular",
-  "version": "0.9.0-beta.4",
+  "version": "0.9.0",
   "description": "Medical viewer using DWV (DICOM Web Viewer) and Angular.",
   "license": "GPL-3.0",
   "author": "ivmartel",
