@@ -61,7 +61,6 @@ class DwvEvent {
 
 @Component({
   selector: 'dwv-angular',
-  standalone: true,
   imports: [
     CommonModule,
     MatButtonModule,

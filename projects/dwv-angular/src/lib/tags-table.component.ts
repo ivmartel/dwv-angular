@@ -11,7 +11,6 @@ import { MatSliderModule } from '@angular/material/slider';
 
 @Component({
   selector: 'dwv-tags-table',
-  standalone: true,
   imports: [
     FormsModule,
     MatInputModule,

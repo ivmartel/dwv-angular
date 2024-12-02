@@ -12,7 +12,6 @@ class DialogData {
 
 @Component({
   selector: 'dwv-tags-dialog',
-  standalone: true,
   imports: [
     MatDialogTitle,
     MatDialogContent,

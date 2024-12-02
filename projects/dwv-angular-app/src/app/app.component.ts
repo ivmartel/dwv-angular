@@ -3,7 +3,6 @@ import { DwvComponent } from 'dwv-angular';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
   imports: [
     DwvComponent
   ],
