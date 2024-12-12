@@ -1,19 +1,12 @@
-@use '@angular/material' as mat;
-@import './assets/theme';
-$primary: map-get($dark-theme, primary);
-$accent: map-get($dark-theme, accent);
+@use './assets/theme';
 
 html, body {
   height: 100%;
 }
 
-body { margin: 0 }
-
-a {
-  color: mat.m2-get-color-from-palette($accent);
-}
-a:hover {
-  color: mat.m2-get-color-from-palette($primary);
+body {
+  margin: 0;
+  font-family: sans-serif;
 }
 
 /* dwv-angular overrides */
@@ -22,15 +15,13 @@ a:hover {
   padding: 5px;
 }
 .mat-button-toggle-group {
-  align-items: center;
   margin: 0.2em;
 }
-.mat-button-toggle-checked {
-  color: mat.m2-get-color-from-palette($primary);
-}
+
+/* themed drop box */
 .dropBoxBorder {
-  border: 5px dashed mat.m2-get-color-from-palette($primary, lighter);
+  border: 5px dashed var(--mat-sys-outline);
 }
 .dropBoxBorder:hover {
-  border: 5px dashed mat.m2-get-color-from-palette($primary);
+  border: 5px dashed var(--mat-sys-primary);
 }

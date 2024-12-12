@@ -1,45 +1,8 @@
 @use '@angular/material' as mat;
 
-// Include the common styles for Angular Material. We include this here so that you only
-// have to load a single css file for Angular Material in your app.
-// Be sure that you only ever include this mixin once!
-@include mat.all-component-typographies();
-@include mat.elevation-classes();
-@include mat.app-background();
-
-// Define the palettes for your theme using the Material Design palettes available in palette.scss
-// (imported above). For each palette, you can optionally specify a default, lighter, and darker
-// hue. Available color palettes: https://material.io/design/color/
-// prebuild themes:
-// - light: deeppurple-amber, indigo-pink
-// - dark: pink-bluegrey, purple-green
-// (see https://github.com/angular/components/tree/7.3.7/src/lib/core/theming/prebuilt)
-$primary: mat.m2-define-palette(mat.$m2-indigo-palette);
-$accent: mat.m2-define-palette(mat.$m2-pink-palette, A200, A100, A400);
-
-// The warn palette is optional (defaults to red).
-$warn: mat.m2-define-palette(mat.$m2-red-palette);
-
-// Create the theme object (a Sass map containing all of the palettes).
-$light-theme: mat.m2-define-light-theme((
-  color: (
-    primary: $primary,
-    accent: $accent,
-    warn: $warn)
-));
-
-$dark-theme: mat.m2-define-dark-theme((
-  color: (
-    primary: $primary,
-    accent: $accent,
-    warn: $warn)
-));
-
-// Include theme styles for core and each component used in your app.
-// Alternatively, you can import and @include the theme mixins for each component
-// that you are using.
-@include mat.all-component-themes($light-theme);
-
-@media (prefers-color-scheme: dark) {
-  @include mat.all-component-colors($dark-theme);
+html {
+  color-scheme: light dark;
+  @include mat.theme((
+    color: mat.$azure-palette
+  ));
 }
