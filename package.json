@@ -35,7 +35,7 @@
     "@angular/platform-browser-dynamic": "^19.0.1",
     "@angular/service-worker": "^19.0.1",
     "add": "2.0.6",
-    "dwv": "^0.34.0",
+    "dwv": "^0.34.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.8.1",
     "zone.js": "~0.15.0"
