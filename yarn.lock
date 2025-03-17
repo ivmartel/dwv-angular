@@ -2748,10 +2748,10 @@
   dependencies:
     "@types/node" "*"
 
-"@types/jasmine@~5.1.5":
-  version "5.1.5"
-  resolved "https://registry.yarnpkg.com/@types/jasmine/-/jasmine-5.1.5.tgz#bba343c504f48e596837415f0558e10b8a0e5f7d"
-  integrity sha512-SaCZ3kM5NjOiJqMRYwHpLbTfUC2Dyk1KS3QanNFsUYPGTk70CWVK/J9ueun6zNhw/UkgV7xl8V4ZLQZNRbfnNw==
+"@types/jasmine@~5.1.7":
+  version "5.1.7"
+  resolved "https://registry.yarnpkg.com/@types/jasmine/-/jasmine-5.1.7.tgz#b9f68cf05463717bbe36d53221839e7630a24d22"
+  integrity sha512-DVOfk9FaClQfNFpSfaML15jjB5cjffDMvjtph525sroR5BEAW2uKnTOYUTqTFuZFjNvH0T5XMIydvIctnUKufw==
 
 "@types/json-schema@*", "@types/json-schema@^7.0.15", "@types/json-schema@^7.0.9":
   version "7.0.15"
