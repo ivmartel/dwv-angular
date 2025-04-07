@@ -5712,10 +5712,10 @@ neo-async@^2.6.2:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
-ng-packagr@^19.2.0:
-  version "19.2.0"
-  resolved "https://registry.yarnpkg.com/ng-packagr/-/ng-packagr-19.2.0.tgz#887d46eeea42ff8e5ad1d1336d67209a69830653"
-  integrity sha512-bDyB9tmXMCL/4IhKcX84zGQlQrZhPhdCaomdJocz6EN57cZWdTP7SGhrswzpdGJY+y89855detet27oJLgR3IQ==
+ng-packagr@^19.2.1:
+  version "19.2.1"
+  resolved "https://registry.yarnpkg.com/ng-packagr/-/ng-packagr-19.2.1.tgz#8afc84955b302a95ef645121d8112475bf55aeed"
+  integrity sha512-IVyI0a1BV8Ct4Q3bCtlMRyYxNt22RBVJ0P4dnmhLXV6mxwoNwQaYGR48DxkTc/ZMcMGri8O6ZwytbTQni1vcPA==
   dependencies:
     "@rollup/plugin-json" "^6.1.0"
     "@rollup/wasm-node" "^4.24.0"
