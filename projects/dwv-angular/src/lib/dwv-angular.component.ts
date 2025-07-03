@@ -6,7 +6,6 @@ import {
   DataElement,
   ViewConfig,
   ToolConfig,
-  decoderScripts,
   getDwvVersion
 } from 'dwv';
 import { MatDialog } from '@angular/material/dialog';
@@ -20,12 +19,6 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-
-// Image decoders (for web workers)
-decoderScripts.jpeg2000 = 'assets/dwv/decoders/pdfjs/decode-jpeg2000.js';
-decoderScripts['jpeg-lossless'] = 'assets/dwv/decoders/rii-mango/decode-jpegloss.js';
-decoderScripts['jpeg-baseline'] = 'assets/dwv/decoders/pdfjs/decode-jpegbaseline.js';
-decoderScripts.rle = 'assets/dwv/decoders/dwv/decode-rle.js';
 
 class DwvEvent {
   dataid!: string;
@@ -84,12 +77,14 @@ export class DwvComponent implements OnInit {
     angular: VERSION.full
   };
   public tools = {
-      Scroll: new ToolConfig(),
-      ZoomAndPan: new ToolConfig(),
-      WindowLevel: new ToolConfig(),
-      Draw: new ToolConfig(['Ruler']),
+    Scroll: new ToolConfig(),
+    ZoomAndPan: new ToolConfig(),
+    WindowLevel: new ToolConfig(),
+    Draw: new ToolConfig(['Ruler']),
   };
   public toolNames: string[] = Object.keys(this.tools);
+  public canScroll = false;
+  public canWindowLevel = false;
   public selectedTool = 'Select Tool';
   public loadProgress = 0;
   public dataLoaded = false;
@@ -134,12 +129,21 @@ export class DwvComponent implements OnInit {
     this.dwvApp.addEventListener('loadprogress', (event: ProgressEvent) => {
       this.loadProgress = event.loaded;
     });
-    this.dwvApp.addEventListener('renderend', (/*event*/) => {
+    this.dwvApp.addEventListener('renderend', (event: DwvEvent) => {
       if (isFirstRender) {
         isFirstRender = false;
+        const vl = this.dwvApp.getViewLayersByDataId(event.dataid)[0];
+        const vc = vl.getViewController();
         // available tools
+        if (vc.canScroll()) {
+          this.canScroll = true;
+        }
+        if (vc.isMonochrome()) {
+          this.canWindowLevel = true;
+        }
+        // selected tool
         let selectedTool = 'ZoomAndPan';
-        if (this.dwvApp.canScroll()) {
+        if (this.canScroll) {
           selectedTool = 'Scroll';
         }
         this.onChangeTool(selectedTool);
@@ -219,12 +223,18 @@ export class DwvComponent implements OnInit {
    * @param tool The new tool name.
    */
   onChangeTool = (tool: string) => {
-    if ( this.dwvApp ) {
+    if (this.dwvApp) {
       this.selectedTool = tool;
       this.dwvApp.setTool(tool);
-      if (tool === 'Draw' &&
-        typeof this.tools.Draw.options !== 'undefined') {
-        this.onChangeShape(this.tools.Draw.options[0]);
+      if (tool === 'Draw') {
+        if (typeof this.tools.Draw.options !== 'undefined') {
+          this.onChangeShape(this.tools.Draw.options[0]);
+        }
+      } else {
+        // if draw was created, active is now a draw layer...
+        // reset to view layer
+        const lg = this.dwvApp.getActiveLayerGroup();
+        lg?.setActiveLayer(0);
       }
     }
   }
@@ -238,9 +248,9 @@ export class DwvComponent implements OnInit {
   canRunTool = (tool: string) => {
     let res: boolean;
     if (tool === 'Scroll') {
-      res = this.dwvApp.canScroll();
+      res = this.canScroll;
     } else if (tool === 'WindowLevel') {
-      res = this.dwvApp.canWindowLevel();
+      res = this.canWindowLevel;
     } else {
       res = true;
     }
@@ -300,7 +310,7 @@ export class DwvComponent implements OnInit {
    */
   onReset = () => {
     if ( this.dwvApp ) {
-      this.dwvApp.resetDisplay();
+      this.dwvApp.resetLayout();
     }
   }
 
