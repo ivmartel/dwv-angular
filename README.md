@@ -40,3 +40,7 @@ yarn run start
 ```
 
 You can now open a browser at http://localhost:4200 and enjoy!
+
+## DWVs' Web workers
+Web workers used in dwv need to be available in the `./assets/workers` folder (relative to the calling html). Angular copies them in the build
+of the dwv-angular-app (not the lib).
