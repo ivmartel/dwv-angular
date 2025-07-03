@@ -75,8 +75,8 @@
               },
               {
                 "glob": "**/*",
-                "input": "node_modules/dwv/decoders",
-                "output": "/assets/dwv/decoders"
+                "input": "node_modules/dwv/dist/assets",
+                "output": "/assets"
               }
             ],
             "styles": [
