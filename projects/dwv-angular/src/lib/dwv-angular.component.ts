@@ -1,4 +1,11 @@
-import { Component, Input, OnInit, ViewEncapsulation, inject } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnInit,
+  ViewEncapsulation,
+  ChangeDetectorRef,
+  inject
+} from '@angular/core';
 import { VERSION } from '@angular/core';
 import {
   App,
@@ -68,6 +75,7 @@ class DwvEvent {
 
 export class DwvComponent implements OnInit {
   dialog = inject(MatDialog);
+  changeDetectorRef = inject(ChangeDetectorRef);
 
   @Input() showLegend = false;
   @Input() uri!: string;
@@ -146,6 +154,9 @@ export class DwvComponent implements OnInit {
           selectedTool = 'Scroll';
         }
         this.onChangeTool(selectedTool);
+
+        // trigger angular update
+        this.changeDetectorRef.markForCheck();
       }
     });
     this.dwvApp.addEventListener('load', (event: DwvEvent) => {

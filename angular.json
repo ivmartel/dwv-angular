@@ -28,10 +28,7 @@
           "builder": "@angular/build:karma",
           "options": {
             "tsConfig": "projects/dwv-angular/tsconfig.spec.json",
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ]
+            "polyfills": []
           }
         },
         "lint": {
@@ -63,9 +60,7 @@
             "outputPath": "dist/dwv-angular-app",
             "index": "projects/dwv-angular-app/src/index.html",
             "browser": "projects/dwv-angular-app/src/main.ts",
-            "polyfills": [
-              "zone.js"
-            ],
+            "polyfills": [],
             "tsConfig": "projects/dwv-angular-app/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -127,10 +122,7 @@
         "test": {
           "builder": "@angular/build:karma",
           "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
+            "polyfills": [],
             "tsConfig": "projects/dwv-angular-app/tsconfig.spec.json",
             "inlineStyleLanguage": "scss",
             "assets": [
