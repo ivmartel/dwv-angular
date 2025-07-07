@@ -13,7 +13,7 @@ import { MatButtonToggleChange } from '@angular/material/button-toggle';
 
 import { TagsDialogComponent } from './tags-dialog.component';
 
-import { CommonModule } from '@angular/common';
+
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -55,13 +55,12 @@ class DwvEvent {
 @Component({
   selector: 'dwv-angular',
   imports: [
-    CommonModule,
     MatButtonModule,
     MatButtonToggleModule,
     MatDialogModule,
     MatIconModule,
     MatProgressBarModule
-  ],
+],
   templateUrl: './dwv-angular.component.html',
   styleUrls: ['./dwv-angular.component.scss'],
   encapsulation: ViewEncapsulation.None

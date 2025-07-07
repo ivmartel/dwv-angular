@@ -2,13 +2,14 @@
   <mat-progress-bar mode="determinate" value="{{ loadProgress }}"></mat-progress-bar>
   <div class="button-row">
     <mat-button-toggle-group name="tool" [disabled]="!dataLoaded">
-      <mat-button-toggle value="{{ tool }}" color="primary"
-        *ngFor="let tool of toolNames"
-        title="{{ tool }}"
-        (click)="onChangeTool(tool)"
-        [disabled]="!dataLoaded || !canRunTool(tool)">
-        <mat-icon>{{ getToolIcon(tool) }}</mat-icon>
-      </mat-button-toggle>
+      @for (tool of toolNames; track tool) {
+        <mat-button-toggle value="{{ tool }}" color="primary"
+          title="{{ tool }}"
+          (click)="onChangeTool(tool)"
+          [disabled]="!dataLoaded || !canRunTool(tool)">
+          <mat-icon>{{ getToolIcon(tool) }}</mat-icon>
+        </mat-button-toggle>
+      }
     </mat-button-toggle-group>
 
     <mat-button-toggle-group name="reset" [disabled]="!dataLoaded"
@@ -37,17 +38,19 @@
         <mat-icon>library_books</mat-icon>
       </mat-button-toggle>
     </mat-button-toggle-group>
-</div>
+  </div>
   <div id="layerGroup0" class="layerGroup">
     <div id="dropBox"></div>
   </div>
-  <div class="legend mat-small" *ngIf="showLegend">
-    <p>Powered by
-    <a href="https://github.com/ivmartel/dwv">dwv</a>
-    {{ versions.dwv }}
-    and
-    <a href="https://github.com/angular/angular">Angular</a>
-    {{ versions.angular }}
-    </p>
-  </div>
+  @if (showLegend) {
+    <div class="legend mat-small">
+      <p>Powered by
+        <a href="https://github.com/ivmartel/dwv">dwv</a>
+        {{ versions.dwv }}
+        and
+        <a href="https://github.com/angular/angular">Angular</a>
+        {{ versions.angular }}
+      </p>
+    </div>
+  }
 </div>
