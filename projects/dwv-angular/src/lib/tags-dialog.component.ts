@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DataElement } from 'dwv';
 
@@ -21,9 +21,7 @@ class DialogData {
 })
 
 export class TagsDialogComponent {
-
-  constructor(
-    public dialogRef: MatDialogRef<TagsDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+  dialogRef = inject<MatDialogRef<TagsDialogComponent>>(MatDialogRef);
+  data = inject<DialogData>(MAT_DIALOG_DATA);
 
 }
