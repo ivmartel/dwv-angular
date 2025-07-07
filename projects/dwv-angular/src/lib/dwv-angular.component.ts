@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation, inject } from '@angular/core';
 import { VERSION } from '@angular/core';
 import {
   App,
@@ -68,6 +68,8 @@ class DwvEvent {
 })
 
 export class DwvComponent implements OnInit {
+  dialog = inject(MatDialog);
+
   @Input() showLegend = false;
   @Input() uri!: string;
   @Input() urls!: string[];
@@ -99,8 +101,6 @@ export class DwvComponent implements OnInit {
   private dropboxClassName = 'dropBox';
   private borderClassName = 'dropBoxBorder';
   private hoverClassName = 'hover';
-
-  constructor(public dialog: MatDialog) {}
 
   ngOnInit() {
     // create app
