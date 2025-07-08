@@ -1,4 +1,5 @@
-import { TestBed, ComponentFixture, waitForAsync } from '@angular/core/testing';
+import { provideZonelessChangeDetection } from '@angular/core';
+import { TestBed, ComponentFixture } from '@angular/core/testing';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
@@ -12,7 +13,7 @@ describe('DwvComponent', () => {
   let component: DwvComponent;
   let fixture: ComponentFixture<DwvComponent>;
 
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         MatButtonModule,
@@ -20,14 +21,15 @@ describe('DwvComponent', () => {
         MatDialogModule,
         MatIconModule,
         MatProgressBarModule
+      ],
+      providers: [
+        provideZonelessChangeDetection()
       ]
-    }).compileComponents();
-  }));
-
-  beforeEach(() => {
+    });
     fixture = TestBed.createComponent(DwvComponent);
-    component = fixture.debugElement.componentInstance;
-    component.showLegend = true;
+    component = fixture.componentInstance;
+
+    fixture.componentRef.setInput('showLegend', true);
   });
 
   it('should create', () => {
@@ -38,11 +40,11 @@ describe('DwvComponent', () => {
     expect(() => fixture.detectChanges()).not.toThrow();
   });
 
-  it('renders the beginning of the legend', waitForAsync(() => {
+  it('renders the beginning of the legend', () => {
     fixture.detectChanges();
 
-    const compiled = fixture.debugElement.nativeElement;
+    const compiled = fixture.nativeElement as HTMLElement;
     const legend = compiled.querySelector('.legend');
-    expect(legend.textContent).toContain('Powered by');
-  }));
+    expect(legend?.textContent).toContain('Powered by');
+  });
 });
