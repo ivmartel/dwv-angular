@@ -1069,7 +1069,7 @@ ${error.stack}`;
   };
 
   // bazel-out/k8-fastbuild/bin/packages/service-worker/worker/src/debug.js
-  var SW_VERSION = "20.0.6";
+  var SW_VERSION = "20.1.0";
   var DEBUG_LOG_BUFFER_SIZE = 100;
   var DebugHandler = class {
     constructor(driver, adapter2) {
@@ -1304,6 +1304,8 @@ ${msgIdle}`, { headers: this.adapter.newHeaders({ "Content-Type": "text/plain" }
       this.scope.addEventListener("message", (event) => this.onMessage(event));
       this.scope.addEventListener("push", (event) => this.onPush(event));
       this.scope.addEventListener("notificationclick", (event) => this.onClick(event));
+      this.scope.addEventListener("notificationclose", (event) => this.onClose(event));
+      this.scope.addEventListener("pushsubscriptionchange", (event) => this.onPushSubscriptionChange(event));
       this.debugger = new DebugHandler(this, this.adapter);
       this.idle = new IdleScheduler(this.adapter, IDLE_DELAY, MAX_IDLE_DELAY, this.debugger);
     }
@@ -1312,10 +1314,6 @@ ${msgIdle}`, { headers: this.adapter.newHeaders({ "Content-Type": "text/plain" }
       const scopeUrl = this.scope.registration.scope;
       const requestUrlObj = this.adapter.parseUrl(req.url, scopeUrl);
       if (req.headers.has("ngsw-bypass") || /[?&]ngsw-bypass(?:[=&]|$)/i.test(requestUrlObj.search)) {
-        return;
-      }
-      if (req.headers.has("range")) {
-        event.respondWith(this.handleRangeRequest(req));
         return;
       }
       if (requestUrlObj.path === this.ngswStatePath) {
@@ -1338,49 +1336,6 @@ ${msgIdle}`, { headers: this.adapter.newHeaders({ "Content-Type": "text/plain" }
         return;
       }
       event.respondWith(this.handleFetch(event));
-    }
-    async handleRangeRequest(req) {
-      try {
-        const response = await fetch(req);
-        const contentType = response.headers.get("Content-Type");
-        if (!contentType || !contentType.startsWith("video/")) {
-          return response;
-        }
-        const rangeHeader = req.headers.get("range");
-        if (!rangeHeader) {
-          return new Response(null, {
-            status: 416,
-            statusText: "Range Not Satisfiable"
-          });
-        }
-        const rangeMatch = /bytes=(\d+)-(\d+)?/.exec(rangeHeader);
-        if (!rangeMatch) {
-          return new Response(null, {
-            status: 416,
-            statusText: "Range Not Satisfiable"
-          });
-        }
-        const start = Number(rangeMatch[1]);
-        const end = rangeMatch[2] ? Number(rangeMatch[2]) : void 0;
-        const buffer = await response.arrayBuffer();
-        const contentLength = buffer.byteLength;
-        const chunk = buffer.slice(start, end ? end + 1 : contentLength);
-        const chunkLength = chunk.byteLength;
-        const headers = new Headers(response.headers);
-        headers.set("Content-Range", `bytes ${start}-${end ? end : contentLength - 1}/${contentLength}`);
-        headers.set("Content-Length", chunkLength.toString());
-        headers.set("Accept-Ranges", "bytes");
-        return new Response(chunk, {
-          status: 206,
-          statusText: "Partial Content",
-          headers
-        });
-      } catch (error) {
-        return new Response(null, {
-          status: 500,
-          statusText: "Internal Server Error"
-        });
-      }
     }
     onMessage(event) {
       if (this.state === DriverReadyState.SAFE_MODE) {
@@ -1409,6 +1364,12 @@ ${msgIdle}`, { headers: this.adapter.newHeaders({ "Content-Type": "text/plain" }
     }
     onClick(event) {
       event.waitUntil(this.handleClick(event.notification, event.action));
+    }
+    onClose(event) {
+      event.waitUntil(this.handleClose(event.notification, event.action));
+    }
+    onPushSubscriptionChange(event) {
+      event.waitUntil(this.handlePushSubscriptionChange(event));
     }
     async ensureInitialized(event) {
       if (this.initialized !== null) {
@@ -1488,6 +1449,21 @@ ${msgIdle}`, { headers: this.adapter.newHeaders({ "Content-Type": "text/plain" }
       await this.broadcast({
         type: "NOTIFICATION_CLICK",
         data: { action, notification: options }
+      });
+    }
+    async handleClose(notification, action) {
+      const options = {};
+      NOTIFICATION_OPTION_NAMES.filter((name) => name in notification).forEach((name) => options[name] = notification[name]);
+      await this.broadcast({
+        type: "NOTIFICATION_CLOSE",
+        data: { action, notification: options }
+      });
+    }
+    async handlePushSubscriptionChange(event) {
+      const { oldSubscription, newSubscription } = event;
+      await this.broadcast({
+        type: "PUSH_SUBSCRIPTION_CHANGE",
+        data: { oldSubscription, newSubscription }
       });
     }
     async getLastFocusedMatchingClient(scope2) {
