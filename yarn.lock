@@ -3733,10 +3733,10 @@ negotiator@^1.0.0:
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-1.0.0.tgz#b6c91bb47172d69f93cfd7c357bbb529019b5f6a"
   integrity sha512-8Ofs/AUQh8MaEcrlq5xOX0CQ9ypTF5dl78mjlMNfOK08fzpgTHQRQPBxcPlEtIw0yRpws+Zo/3r+5WRby7u3Gg==
 
-ng-packagr@^20.0.1:
-  version "20.0.1"
-  resolved "https://registry.yarnpkg.com/ng-packagr/-/ng-packagr-20.0.1.tgz#4d739708e1c01afc812d6a678d400401186a20eb"
-  integrity sha512-MDqUwAg5tXpbOmt7DJH+qvycgNgxEPchwWUy7//1p6lOl2VvbF/XxrC4kAt948YQIkn1UhPxLXHIIcpZt5rt9g==
+ng-packagr@^20.1.0:
+  version "20.1.0"
+  resolved "https://registry.yarnpkg.com/ng-packagr/-/ng-packagr-20.1.0.tgz#0aba2b7d7cedf6bb248108220cf154eeec9414f8"
+  integrity sha512-objHk39HWnSSv54KD0Ct4A02rug6HiqbmXo1KJW39npzuVc37QWfiZy94afltH1zIx+mQqollmGaCmwibmagvQ==
   dependencies:
     "@ampproject/remapping" "^2.3.0"
     "@rollup/plugin-json" "^6.1.0"
