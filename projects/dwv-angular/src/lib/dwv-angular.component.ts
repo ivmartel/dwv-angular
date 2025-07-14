@@ -135,6 +135,8 @@ export class DwvComponent implements OnInit {
     });
     this.dwvApp.addEventListener('loadprogress', (event: ProgressEvent) => {
       this.loadProgress = event.loaded;
+      // trigger angular update
+      this.changeDetectorRef.markForCheck();
     });
     this.dwvApp.addEventListener('renderend', (event: DwvEvent) => {
       if (isFirstRender) {
@@ -154,14 +156,13 @@ export class DwvComponent implements OnInit {
           selectedTool = 'Scroll';
         }
         this.onChangeTool(selectedTool);
-
-        // trigger angular update
-        this.changeDetectorRef.markForCheck();
       }
     });
     this.dwvApp.addEventListener('load', (event: DwvEvent) => {
       // set dicom tags
       this.metaData = this.dwvApp.getMetaData(event.dataid) as Record<string, DataElement>;
+      // force progress
+      this.loadProgress = 100;
       // set data loaded flag
       this.dataLoaded = true;
     });
