@@ -1,7 +1,7 @@
 <div id="dwv">
   <mat-progress-bar mode="determinate" value="{{ loadProgress }}"></mat-progress-bar>
   <div class="button-row">
-    <mat-button-toggle-group name="tool" [disabled]="!dataLoaded">
+    <mat-button-toggle-group name="tool" [disabled]="!dataLoaded" [value]="selectedTool">
       @for (tool of toolNames; track tool) {
         <mat-button-toggle value="{{ tool }}" color="primary"
           title="{{ tool }}"
