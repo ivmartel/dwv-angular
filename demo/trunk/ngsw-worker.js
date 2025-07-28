@@ -18,12 +18,9 @@
     return a;
   };
   var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
-  var __publicField = (obj, key, value) => {
-    __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
-    return value;
-  };
+  var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
 
-  // bazel-out/k8-fastbuild/bin/packages/service-worker/worker/src/named-cache-storage.js
+  // packages/service-worker/worker/src/named-cache-storage.js
   var NamedCacheStorage = class {
     constructor(original, cacheNamePrefix) {
       __publicField(this, "original");
@@ -52,7 +49,7 @@
     }
   };
 
-  // bazel-out/k8-fastbuild/bin/packages/service-worker/worker/src/adapter.js
+  // packages/service-worker/worker/src/adapter.js
   var Adapter = class {
     constructor(scopeUrl, caches) {
       __publicField(this, "scopeUrl");
@@ -63,29 +60,62 @@
       this.origin = parsedScopeUrl.origin;
       this.caches = new NamedCacheStorage(caches, `ngsw:${parsedScopeUrl.path}`);
     }
+    /**
+     * Wrapper around the `Request` constructor.
+     */
     newRequest(input, init) {
       return new Request(input, init);
     }
+    /**
+     * Wrapper around the `Response` constructor.
+     */
     newResponse(body, init) {
       return new Response(body, init);
     }
+    /**
+     * Wrapper around the `Headers` constructor.
+     */
     newHeaders(headers) {
       return new Headers(headers);
     }
+    /**
+     * Test if a given object is an instance of `Client`.
+     */
     isClient(source) {
       return source instanceof Client;
     }
+    /**
+     * Read the current UNIX time in milliseconds.
+     */
     get time() {
       return Date.now();
     }
+    /**
+     * Get a normalized representation of a URL such as those found in the ServiceWorker's `ngsw.json`
+     * configuration.
+     *
+     * More specifically:
+     * 1. Resolve the URL relative to the ServiceWorker's scope.
+     * 2. If the URL is relative to the ServiceWorker's own origin, then only return the path part.
+     *    Otherwise, return the full URL.
+     *
+     * @param url The raw request URL.
+     * @return A normalized representation of the URL.
+     */
     normalizeUrl(url) {
       const parsed = this.parseUrl(url, this.scopeUrl);
       return parsed.origin === this.origin ? parsed.path : url;
     }
+    /**
+     * Parse a URL into its different parts, such as `origin`, `path` and `search`.
+     */
     parseUrl(url, relativeTo) {
       const parsed = !relativeTo ? new URL(url) : new URL(url, relativeTo);
       return { origin: parsed.origin, path: parsed.pathname, search: parsed.search };
     }
+    /**
+     * Wait for a given amount of time before completing a Promise.
+     */
     timeout(ms) {
       return new Promise((resolve) => {
         setTimeout(() => resolve(), ms);
@@ -93,7 +123,7 @@
     }
   };
 
-  // bazel-out/k8-fastbuild/bin/packages/service-worker/worker/src/database.js
+  // packages/service-worker/worker/src/database.js
   var NotFound = class {
     constructor(table, key) {
       __publicField(this, "table");
@@ -103,7 +133,7 @@
     }
   };
 
-  // bazel-out/k8-fastbuild/bin/packages/service-worker/worker/src/db-cache.js
+  // packages/service-worker/worker/src/db-cache.js
   var CacheDatabase = class {
     constructor(adapter2) {
       __publicField(this, "adapter");
@@ -167,7 +197,7 @@
     }
   };
 
-  // bazel-out/k8-fastbuild/bin/packages/service-worker/worker/src/api.js
+  // packages/service-worker/worker/src/api.js
   var UpdateCacheStatus;
   (function(UpdateCacheStatus2) {
     UpdateCacheStatus2[UpdateCacheStatus2["NOT_CACHED"] = 0] = "NOT_CACHED";
@@ -175,7 +205,7 @@
     UpdateCacheStatus2[UpdateCacheStatus2["CACHED"] = 2] = "CACHED";
   })(UpdateCacheStatus || (UpdateCacheStatus = {}));
 
-  // bazel-out/k8-fastbuild/bin/packages/service-worker/worker/src/error.js
+  // packages/service-worker/worker/src/error.js
   var SwCriticalError = class extends Error {
     constructor() {
       super(...arguments);
@@ -197,7 +227,7 @@ ${error.stack}`;
     }
   };
 
-  // bazel-out/k8-fastbuild/bin/packages/service-worker/worker/src/sha1.js
+  // packages/service-worker/worker/src/sha1.js
   function sha1(str) {
     const utf8 = str;
     const words32 = stringToWords32(utf8, Endian.Big);
@@ -312,7 +342,7 @@ ${error.stack}`;
     return hex.toLowerCase();
   }
 
-  // bazel-out/k8-fastbuild/bin/packages/service-worker/worker/src/assets.js
+  // packages/service-worker/worker/src/assets.js
   var AssetGroup = class {
     constructor(scope2, adapter2, idle, config, hashes, db, cacheNamePrefix) {
       __publicField(this, "scope");
@@ -321,11 +351,31 @@ ${error.stack}`;
       __publicField(this, "config");
       __publicField(this, "hashes");
       __publicField(this, "db");
+      /**
+       * A deduplication cache, to make sure the SW never makes two network requests
+       * for the same resource at once. Managed by `fetchAndCacheOnce`.
+       */
       __publicField(this, "inFlightRequests", /* @__PURE__ */ new Map());
+      /**
+       * Normalized resource URLs.
+       */
       __publicField(this, "urls", []);
+      /**
+       * Regular expression patterns.
+       */
       __publicField(this, "patterns", []);
+      /**
+       * A Promise which resolves to the `Cache` used to back this asset group. This
+       * is opened from the constructor.
+       */
       __publicField(this, "cache");
+      /**
+       * Group name from the configuration.
+       */
       __publicField(this, "name");
+      /**
+       * Metadata associated with specific cache entries.
+       */
       __publicField(this, "metadata");
       this.scope = scope2;
       this.adapter = adapter2;
@@ -356,10 +406,16 @@ ${error.stack}`;
       }
       return UpdateCacheStatus.CACHED;
     }
+    /**
+     * Return a list of the names of all caches used by this group.
+     */
     async getCacheNames() {
       const [cache, metadata] = await Promise.all([this.cache, this.metadata]);
       return [cache.name, metadata.cacheName];
     }
+    /**
+     * Process a request for a given resource and return it, or return null if it's not available.
+     */
     async handleFetch(req, _event) {
       const url = this.adapter.normalizeUrl(req.url);
       if (this.urls.indexOf(url) !== -1 || this.patterns.some((pattern) => pattern.test(url))) {
@@ -388,6 +444,11 @@ ${error.stack}`;
         return null;
       }
     }
+    /**
+     * Some resources are cached without a hash, meaning that their expiration is controlled
+     * by HTTP caching headers. Check whether the given request/response pair is still valid
+     * per the caching headers.
+     */
     async needToRevalidate(req, res) {
       if (res.headers.has("Cache-Control")) {
         const cacheControl = res.headers.get("Cache-Control");
@@ -427,6 +488,9 @@ ${error.stack}`;
         return true;
       }
     }
+    /**
+     * Fetch the complete state of a cached resource, or return null if it's not found.
+     */
     async fetchFromCacheOnly(url) {
       const cache = await this.cache;
       const metaTable = await this.metadata;
@@ -442,10 +506,16 @@ ${error.stack}`;
       }
       return { response, metadata };
     }
+    /**
+     * Lookup all resources currently stored in the cache which have no associated hash.
+     */
     async unhashedResources() {
       const cache = await this.cache;
       return (await cache.keys()).map((request) => this.adapter.normalizeUrl(request.url)).filter((url) => !this.hashes.has(url));
     }
+    /**
+     * Fetch the given resource from the network, and cache it if able.
+     */
     async fetchAndCacheOnce(req, used = true) {
       if (this.inFlightRequests.has(req.url)) {
         return this.inFlightRequests.get(req.url);
@@ -483,6 +553,9 @@ ${error.stack}`;
       }
       return res;
     }
+    /**
+     * Load a particular asset from the network, accounting for hash validation.
+     */
     async cacheBustedFetchFromNetwork(req) {
       const url = this.adapter.normalizeUrl(req.url);
       if (this.hashes.has(url)) {
@@ -511,6 +584,9 @@ ${error.stack}`;
         return this.safeFetch(req);
       }
     }
+    /**
+     * Possibly update a resource, if it's expired and needs to be updated. A no-op otherwise.
+     */
     async maybeUpdate(updateFrom, req, cache) {
       const url = this.adapter.normalizeUrl(req.url);
       if (this.hashes.has(url)) {
@@ -523,9 +599,26 @@ ${error.stack}`;
       }
       return false;
     }
+    /**
+     * Create a new `Request` based on the specified URL and `RequestInit` options, preserving only
+     * metadata that are known to be safe.
+     *
+     * Currently, only headers are preserved.
+     *
+     * NOTE:
+     *   Things like credential inclusion are intentionally omitted to avoid issues with opaque
+     *   responses.
+     *
+     * TODO(gkalpak):
+     *   Investigate preserving more metadata. See, also, discussion on preserving `mode`:
+     *   https://github.com/angular/angular/issues/41931#issuecomment-1227601347
+     */
     newRequestWithMetadata(url, options) {
       return this.adapter.newRequest(url, { headers: options.headers });
     }
+    /**
+     * Construct a cache-busting URL for a given URL.
+     */
     cacheBust(url) {
       return url + (url.indexOf("?") === -1 ? "?" : "&") + "ngsw-cache-bust=" + Math.random();
     }
@@ -609,7 +702,7 @@ ${error.stack}`;
     }
   };
 
-  // bazel-out/k8-fastbuild/bin/packages/service-worker/worker/src/data.js
+  // packages/service-worker/worker/src/data.js
   var LruList = class {
     constructor(state) {
       __publicField(this, "state");
@@ -623,9 +716,15 @@ ${error.stack}`;
       }
       this.state = state;
     }
+    /**
+     * The current count of URLs in the list.
+     */
     get size() {
       return this.state.count;
     }
+    /**
+     * Remove the tail.
+     */
     pop() {
       if (this.state.tail === null) {
         return null;
@@ -695,10 +794,26 @@ ${error.stack}`;
       __publicField(this, "config");
       __publicField(this, "db");
       __publicField(this, "debugHandler");
+      /**
+       * Compiled regular expression set used to determine which resources fall under the purview
+       * of this group.
+       */
       __publicField(this, "patterns");
+      /**
+       * The `Cache` instance in which resources belonging to this group are cached.
+       */
       __publicField(this, "cache");
+      /**
+       * Tracks the LRU state of resources in this cache.
+       */
       __publicField(this, "_lru", null);
+      /**
+       * Database table used to store the state of the LRU cache.
+       */
       __publicField(this, "lruTable");
+      /**
+       * Database table used to store metadata for resources in the cache.
+       */
       __publicField(this, "ageTable");
       this.scope = scope2;
       this.adapter = adapter2;
@@ -710,6 +825,9 @@ ${error.stack}`;
       this.lruTable = this.db.open(`${cacheNamePrefix}:${config.name}:lru`, config.cacheQueryOptions);
       this.ageTable = this.db.open(`${cacheNamePrefix}:${config.name}:age`, config.cacheQueryOptions);
     }
+    /**
+     * Lazily initialize/load the LRU chain.
+     */
     async lru() {
       if (this._lru === null) {
         const table = await this.lruTable;
@@ -721,6 +839,9 @@ ${error.stack}`;
       }
       return this._lru;
     }
+    /**
+     * Sync the LRU chain to non-volatile storage.
+     */
     async syncLru() {
       if (this._lru === null) {
         return;
@@ -732,6 +853,10 @@ ${error.stack}`;
         this.debugHandler.log(err, `DataGroup(${this.config.name}@${this.config.version}).syncLru()`);
       }
     }
+    /**
+     * Process a fetch event and return a `Response` if the resource is covered by this group,
+     * or `null` otherwise.
+     */
     async handleFetch(req, event) {
       if (!this.patterns.some((pattern) => pattern.test(req.url))) {
         return null;
@@ -862,6 +987,13 @@ ${error.stack}`;
       }
       return null;
     }
+    /**
+     * Operation for caching the response from the server. This has to happen all
+     * at once, so that the cache and LRU tracking remain in sync. If the network request
+     * completes before the timeout, this logic will be run inline with the response flow.
+     * If the request times out on the server, an error will be returned but the real network
+     * request will still be running in the background, to be cached when it completes.
+     */
     async cacheResponse(req, res, lru, okToCacheOpaque = false) {
       if (!(res.ok || okToCacheOpaque && res.type === "opaque")) {
         return;
@@ -878,6 +1010,9 @@ ${error.stack}`;
       await ageTable.write(req.url, { age: this.adapter.time });
       await this.syncLru();
     }
+    /**
+     * Delete all of the saved state which this group uses to track resources.
+     */
     async cleanup() {
       await Promise.all([
         this.cache.then((cache) => this.adapter.caches.delete(cache.name)),
@@ -885,6 +1020,9 @@ ${error.stack}`;
         this.lruTable.then((table) => this.db.delete(table.name))
       ]);
     }
+    /**
+     * Return a list of the names of all caches used by this group.
+     */
     async getCacheNames() {
       const [cache, ageTable, lruTable] = await Promise.all([
         this.cache,
@@ -893,6 +1031,13 @@ ${error.stack}`;
       ]);
       return [cache.name, ageTable.cacheName, lruTable.cacheName];
     }
+    /**
+     * Clear the state of the cache for a particular resource.
+     *
+     * This doesn't remove the resource from the LRU table, that is assumed to have
+     * been done already. This clears the GET and HEAD versions of the request from
+     * the cache itself, as well as the metadata stored in the age table.
+     */
     async clearCacheForUrl(url) {
       const [cache, ageTable] = await Promise.all([this.cache, this.ageTable]);
       await Promise.all([
@@ -913,7 +1058,7 @@ ${error.stack}`;
     }
   };
 
-  // bazel-out/k8-fastbuild/bin/packages/service-worker/worker/src/app-version.js
+  // packages/service-worker/worker/src/app-version.js
   var AppVersion = class {
     constructor(scope2, adapter2, database, idle, debugHandler, manifest, manifestHash) {
       __publicField(this, "scope");
@@ -922,11 +1067,31 @@ ${error.stack}`;
       __publicField(this, "debugHandler");
       __publicField(this, "manifest");
       __publicField(this, "manifestHash");
+      /**
+       * A Map of absolute URL paths (`/foo.txt`) to the known hash of their contents (if available).
+       */
       __publicField(this, "hashTable", /* @__PURE__ */ new Map());
+      /**
+       * All of the asset groups active in this version of the app.
+       */
       __publicField(this, "assetGroups");
+      /**
+       * All of the data groups active in this version of the app.
+       */
       __publicField(this, "dataGroups");
+      /**
+       * Requests to URLs that match any of the `include` RegExps and none of the `exclude` RegExps
+       * are considered navigation requests and handled accordingly.
+       */
       __publicField(this, "navigationUrls");
+      /**
+       * The normalized URL to the file that serves as the index page to satisfy navigation requests.
+       * Usually this is `/index.html`.
+       */
       __publicField(this, "indexUrl");
+      /**
+       * Tracks whether the manifest has encountered any inconsistencies.
+       */
       __publicField(this, "_okay", true);
       this.scope = scope2;
       this.adapter = adapter2;
@@ -958,6 +1123,11 @@ ${error.stack}`;
     get okay() {
       return this._okay;
     }
+    /**
+     * Fully initialize this version of the application. If this Promise resolves successfully, all
+     * required
+     * data has been safely downloaded.
+     */
     async initializeFully(updateFrom) {
       try {
         await this.assetGroups.reduce(async (previous, group) => {
@@ -1001,6 +1171,10 @@ ${error.stack}`;
       }
       return null;
     }
+    /**
+     * Determine whether the request is a navigation request.
+     * Takes into account: Request method and mode, `Accept` header, `navigationUrls` patterns.
+     */
     isNavigationRequest(req) {
       if (req.method !== "GET" || req.mode !== "navigate") {
         return false;
@@ -1013,6 +1187,9 @@ ${error.stack}`;
       const urlWithoutQueryOrHash = url.replace(/[?#].*$/, "");
       return this.navigationUrls.include.some((regex) => regex.test(urlWithoutQueryOrHash)) && !this.navigationUrls.exclude.some((regex) => regex.test(urlWithoutQueryOrHash));
     }
+    /**
+     * Check this version for a given resource with a particular hash.
+     */
     async lookupResourceWithHash(url, hash) {
       if (!this.hashTable.has(url)) {
         return null;
@@ -1023,6 +1200,9 @@ ${error.stack}`;
       const cacheState = await this.lookupResourceWithoutHash(url);
       return cacheState && cacheState.response;
     }
+    /**
+     * Check this version for a given resource regardless of its hash.
+     */
     lookupResourceWithoutHash(url) {
       return this.assetGroups.reduce(async (potentialResponse, group) => {
         const resp = await potentialResponse;
@@ -1032,6 +1212,9 @@ ${error.stack}`;
         return group.fetchFromCacheOnly(url);
       }, Promise.resolve(null));
     }
+    /**
+     * List all unhashed resources from all asset groups.
+     */
     previouslyCachedResources() {
       return this.assetGroups.reduce(async (resources, group) => (await resources).concat(await group.unhashedResources()), Promise.resolve([]));
     }
@@ -1048,6 +1231,9 @@ ${error.stack}`;
         return groupStatus;
       }, Promise.resolve(UpdateCacheStatus.NOT_CACHED));
     }
+    /**
+     * Return a list of the names of all caches used by this version.
+     */
     async getCacheNames() {
       const allGroupCacheNames = await Promise.all([
         ...this.assetGroups.map((group) => group.getCacheNames()),
@@ -1055,9 +1241,15 @@ ${error.stack}`;
       ]);
       return [].concat(...allGroupCacheNames);
     }
+    /**
+     * Get the opaque application data which was provided with the manifest.
+     */
     get appData() {
       return this.manifest.appData || null;
     }
+    /**
+     * Check whether a request accepts `text/html` (based on the `Accept` header).
+     */
     acceptsTextHtml(req) {
       const accept = req.headers.get("Accept");
       if (accept === null) {
@@ -1068,13 +1260,18 @@ ${error.stack}`;
     }
   };
 
-  // bazel-out/k8-fastbuild/bin/packages/service-worker/worker/src/debug.js
-  var SW_VERSION = "20.1.0";
+  // packages/service-worker/worker/src/debug.js
+  var SW_VERSION = "20.1.3";
   var DEBUG_LOG_BUFFER_SIZE = 100;
   var DebugHandler = class {
     constructor(driver, adapter2) {
       __publicField(this, "driver");
       __publicField(this, "adapter");
+      // There are two debug log message arrays. debugLogA records new debugging messages.
+      // Once it reaches DEBUG_LOG_BUFFER_SIZE, the array is moved to debugLogB and a new
+      // array is assigned to debugLogA. This ensures that insertion to the debug log is
+      // always O(1) no matter the number of logged messages, and that the total number
+      // of messages in the log never exceeds 2 * DEBUG_LOG_BUFFER_SIZE.
       __publicField(this, "debugLogA", []);
       __publicField(this, "debugLogB", []);
       this.driver = driver;
@@ -1144,7 +1341,7 @@ ${msgIdle}`, { headers: this.adapter.newHeaders({ "Content-Type": "text/plain" }
     }
   };
 
-  // bazel-out/k8-fastbuild/bin/packages/service-worker/worker/src/idle.js
+  // packages/service-worker/worker/src/idle.js
   var IdleScheduler = class {
     constructor(adapter2, delay, maxDelay, debug) {
       __publicField(this, "adapter");
@@ -1226,12 +1423,12 @@ ${msgIdle}`, { headers: this.adapter.newHeaders({ "Content-Type": "text/plain" }
     }
   };
 
-  // bazel-out/k8-fastbuild/bin/packages/service-worker/worker/src/manifest.js
+  // packages/service-worker/worker/src/manifest.js
   function hashManifest(manifest) {
     return sha1(JSON.stringify(manifest));
   }
 
-  // bazel-out/k8-fastbuild/bin/packages/service-worker/worker/src/msg.js
+  // packages/service-worker/worker/src/msg.js
   function isMsgCheckForUpdates(msg) {
     return msg.action === "CHECK_FOR_UPDATES";
   }
@@ -1239,7 +1436,7 @@ ${msgIdle}`, { headers: this.adapter.newHeaders({ "Content-Type": "text/plain" }
     return msg.action === "ACTIVATE_UPDATE";
   }
 
-  // bazel-out/k8-fastbuild/bin/packages/service-worker/worker/src/driver.js
+  // packages/service-worker/worker/src/driver.js
   var IDLE_DELAY = 5e3;
   var MAX_IDLE_DELAY = 3e4;
   var SUPPORTED_CONFIG_VERSION = 1;
@@ -1271,18 +1468,52 @@ ${msgIdle}`, { headers: this.adapter.newHeaders({ "Content-Type": "text/plain" }
       __publicField(this, "scope");
       __publicField(this, "adapter");
       __publicField(this, "db");
+      /**
+       * Tracks the current readiness condition under which the SW is operating. This controls
+       * whether the SW attempts to respond to some or all requests.
+       */
       __publicField(this, "state", DriverReadyState.NORMAL);
       __publicField(this, "stateMessage", "(nominal)");
+      /**
+       * Tracks whether the SW is in an initialized state or not. Before initialization,
+       * it's not legal to respond to requests.
+       */
       __publicField(this, "initialized", null);
+      /**
+       * Maps client IDs to the manifest hash of the application version being used to serve
+       * them. If a client ID is not present here, it has not yet been assigned a version.
+       *
+       * If a ManifestHash appears here, it is also present in the `versions` map below.
+       */
       __publicField(this, "clientVersionMap", /* @__PURE__ */ new Map());
+      /**
+       * Maps manifest hashes to instances of `AppVersion` for those manifests.
+       */
       __publicField(this, "versions", /* @__PURE__ */ new Map());
+      /**
+       * The latest version fetched from the server.
+       *
+       * Valid after initialization has completed.
+       */
       __publicField(this, "latestHash", null);
       __publicField(this, "lastUpdateCheck", null);
+      /**
+       * Whether there is a check for updates currently scheduled due to navigation.
+       */
       __publicField(this, "scheduledNavUpdateCheck", false);
+      /**
+       * Keep track of whether we have logged an invalid `only-if-cached` request.
+       * (See `.onFetch()` for details.)
+       */
       __publicField(this, "loggedInvalidOnlyIfCachedRequest", false);
       __publicField(this, "ngswStatePath");
+      /**
+       * A scheduler which manages a queue of tasks that need to be executed when the SW is
+       * not doing any other work (not processing any other requests).
+       */
       __publicField(this, "idle");
       __publicField(this, "debugger");
+      // A promise resolving to the control DB table.
       __publicField(this, "controlTable");
       this.scope = scope2;
       this.adapter = adapter2;
@@ -1305,10 +1536,20 @@ ${msgIdle}`, { headers: this.adapter.newHeaders({ "Content-Type": "text/plain" }
       this.scope.addEventListener("push", (event) => this.onPush(event));
       this.scope.addEventListener("notificationclick", (event) => this.onClick(event));
       this.scope.addEventListener("notificationclose", (event) => this.onClose(event));
-      this.scope.addEventListener("pushsubscriptionchange", (event) => this.onPushSubscriptionChange(event));
+      this.scope.addEventListener("pushsubscriptionchange", (event) => (
+        // This is a bug in TypeScript, where they removed `PushSubscriptionChangeEvent`
+        // based on the incorrect assumption that browsers don't support it.
+        this.onPushSubscriptionChange(event)
+      ));
       this.debugger = new DebugHandler(this, this.adapter);
       this.idle = new IdleScheduler(this.adapter, IDLE_DELAY, MAX_IDLE_DELAY, this.debugger);
     }
+    /**
+     * The handler for fetch events.
+     *
+     * This is the transition point between the synchronous event handler and the
+     * asynchronous execution that eventually resolves for respondWith() and waitUntil().
+     */
     onFetch(event) {
       const req = event.request;
       const scopeUrl = this.scope.registration.scope;
@@ -1337,6 +1578,9 @@ ${msgIdle}`, { headers: this.adapter.newHeaders({ "Content-Type": "text/plain" }
       }
       event.respondWith(this.handleFetch(event));
     }
+    /**
+     * The handler for message events.
+     */
     onMessage(event) {
       if (this.state === DriverReadyState.SAFE_MODE) {
         return;
@@ -1451,6 +1695,17 @@ ${msgIdle}`, { headers: this.adapter.newHeaders({ "Content-Type": "text/plain" }
         data: { action, notification: options }
       });
     }
+    /**
+     * Handles the closing of a notification by extracting its options and
+     * broadcasting a `NOTIFICATION_CLOSE` message.
+     *
+     * This is typically called when a notification is dismissed by the user
+     * or closed programmatically, and it relays that information to clients
+     * listening for service worker events.
+     *
+     * @param notification - The original `Notification` object that was closed.
+     * @param action - The action string associated with the close event, if any (usually an empty string).
+     */
     async handleClose(notification, action) {
       const options = {};
       NOTIFICATION_OPTION_NAMES.filter((name) => name in notification).forEach((name) => options[name] = notification[name]);
@@ -1459,6 +1714,17 @@ ${msgIdle}`, { headers: this.adapter.newHeaders({ "Content-Type": "text/plain" }
         data: { action, notification: options }
       });
     }
+    /**
+     * Handles changes to the push subscription by capturing the old and new
+     * subscription details and broadcasting a `PUSH_SUBSCRIPTION_CHANGE` message.
+     *
+     * This method is triggered when the browser invalidates an existing push
+     * subscription and creates a new one, which can happen without user interaction.
+     * It ensures that clients listening for service worker events are informed
+     * of the subscription update.
+     *
+     * @param event - The `PushSubscriptionChangeEvent` containing the old and new subscriptions.
+     */
     async handlePushSubscriptionChange(event) {
       const { oldSubscription, newSubscription } = event;
       await this.broadcast({
@@ -1537,6 +1803,9 @@ ${msgIdle}`, { headers: this.adapter.newHeaders({ "Content-Type": "text/plain" }
         event.waitUntil(this.idle.trigger());
       }
     }
+    /**
+     * Attempt to quickly reach a state where it's safe to serve responses.
+     */
     async initialize() {
       const table = await this.controlTable;
       let manifests, assignments, latest;
@@ -1601,6 +1870,9 @@ ${msgIdle}`, { headers: this.adapter.newHeaders({ "Content-Type": "text/plain" }
       }
       return this.versions.get(hash);
     }
+    /**
+     * Decide which version of the manifest to use for the event.
+     */
     async assignVersion(event) {
       const isWorkerScriptRequest = event.request.destination === "worker" && event.resultingClientId && event.clientId;
       const clientId = isWorkerScriptRequest ? event.clientId : event.resultingClientId || event.clientId;
@@ -1673,6 +1945,11 @@ ${msgIdle}`, { headers: this.adapter.newHeaders({ "Content-Type": "text/plain" }
       const cacheNames = await this.adapter.caches.keys();
       await Promise.all(cacheNames.map((name) => this.adapter.caches.delete(name)));
     }
+    /**
+     * Schedule the SW's attempt to reach a fully prefetched state for the given AppVersion
+     * when the SW is not busy and has connectivity. This returns a Promise which must be
+     * awaited, as under some conditions the AppVersion might be initialized immediately.
+     */
     async scheduleInitialization(appVersion) {
       const initialize = async () => {
         try {
@@ -1743,6 +2020,9 @@ ${msgIdle}`, { headers: this.adapter.newHeaders({ "Content-Type": "text/plain" }
         return false;
       }
     }
+    /**
+     * Synchronize the existing state to the underlying database.
+     */
     async sync() {
       const table = await this.controlTable;
       const manifests = {};
@@ -1780,6 +2060,10 @@ ${msgIdle}`, { headers: this.adapter.newHeaders({ "Content-Type": "text/plain" }
         this.debugger.log(err, "cleanupCaches");
       }
     }
+    /**
+     * Determine if a specific version of the given resource is cached anywhere within the SW,
+     * and fetch it if so.
+     */
     lookupResourceWithHash(url, hash) {
       return Array.from(this.versions.values()).reduce(async (prev, version) => {
         if (await prev !== null) {
@@ -1929,7 +2213,7 @@ ${msgIdle}`, { headers: this.adapter.newHeaders({ "Content-Type": "text/plain" }
     }
   };
 
-  // bazel-out/k8-fastbuild/bin/packages/service-worker/worker/main.js
+  // packages/service-worker/worker/main.ts
   var scope = self;
   var adapter = new Adapter(scope.registration.scope, self.caches);
   new Driver(scope, adapter, new CacheDatabase(adapter));
