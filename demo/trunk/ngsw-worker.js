@@ -18,7 +18,10 @@
     return a;
   };
   var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
-  var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
+  var __publicField = (obj, key, value) => {
+    __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
+    return value;
+  };
 
   // packages/service-worker/worker/src/named-cache-storage.js
   var NamedCacheStorage = class {
@@ -851,6 +854,7 @@ ${error.stack}`;
         return table.write("lru", this._lru.state);
       } catch (err) {
         this.debugHandler.log(err, `DataGroup(${this.config.name}@${this.config.version}).syncLru()`);
+        await this.detectStorageFull();
       }
     }
     /**
@@ -964,6 +968,7 @@ ${error.stack}`;
           await this.cacheResponse(req, res, lru, okToCacheOpaque);
         } catch (err) {
           this.debugHandler.log(err, `DataGroup(${this.config.name}@${this.config.version}).safeCacheResponse(${req.url}, status: ${res.status})`);
+          await this.detectStorageFull();
         }
       } catch (e) {
       }
@@ -1054,6 +1059,25 @@ ${error.stack}`;
           status: 504,
           statusText: "Gateway Timeout"
         });
+      }
+    }
+    /**
+     * Detect if storage is full or approaching capacity.
+     * Returns true if storage is at or near capacity.
+     */
+    async detectStorageFull() {
+      try {
+        const estimate = await navigator.storage.estimate();
+        const { quota, usage } = estimate;
+        if (typeof quota !== "number" || typeof usage !== "number") {
+          return;
+        }
+        const usagePercentage = usage / quota * 100;
+        const isStorageFull = usagePercentage >= 95;
+        if (isStorageFull) {
+          this.debugHandler.log("Storage is full or nearly full", `DataGroup(${this.config.name}@${this.config.version}).detectStorageFull()`);
+        }
+      } catch (e) {
       }
     }
   };
@@ -1261,7 +1285,7 @@ ${error.stack}`;
   };
 
   // packages/service-worker/worker/src/debug.js
-  var SW_VERSION = "20.1.3";
+  var SW_VERSION = "20.2.1";
   var DEBUG_LOG_BUFFER_SIZE = 100;
   var DebugHandler = class {
     constructor(driver, adapter2) {
@@ -1457,6 +1481,9 @@ ${msgIdle}`, { headers: this.adapter.newHeaders({ "Content-Type": "text/plain" }
     "title",
     "vibrate"
   ];
+  function isLocalhost(scope2) {
+    return /(?:^https?:\/\/)?(?:(?:^|[^\w.])localhost|\[::1\]|127(?:\.\d{1,3}){3})(?::\d+)?(?:\/.*)?$/.test(scope2);
+  }
   var DriverReadyState;
   (function(DriverReadyState2) {
     DriverReadyState2[DriverReadyState2["NORMAL"] = 0] = "NORMAL";
@@ -1541,6 +1568,8 @@ ${msgIdle}`, { headers: this.adapter.newHeaders({ "Content-Type": "text/plain" }
         // based on the incorrect assumption that browsers don't support it.
         this.onPushSubscriptionChange(event)
       ));
+      this.scope.addEventListener("messageerror", (event) => this.onMessageError(event));
+      this.scope.addEventListener("unhandledrejection", (event) => this.onUnhandledRejection(event));
       this.debugger = new DebugHandler(this, this.adapter);
       this.idle = new IdleScheduler(this.adapter, IDLE_DELAY, MAX_IDLE_DELAY, this.debugger);
     }
@@ -1614,6 +1643,12 @@ ${msgIdle}`, { headers: this.adapter.newHeaders({ "Content-Type": "text/plain" }
     }
     onPushSubscriptionChange(event) {
       event.waitUntil(this.handlePushSubscriptionChange(event));
+    }
+    onMessageError(event) {
+      this.debugger.log(`Message error occurred - data could not be deserialized`, `Driver.onMessageError(origin: ${event.origin})`);
+    }
+    onUnhandledRejection(event) {
+      this.debugger.log(`Unhandled promise rejection occurred`, `Driver.onUnhandledRejection(reason: ${event.reason})`);
     }
     async ensureInitialized(event) {
       if (this.initialized !== null) {
@@ -1959,7 +1994,7 @@ ${msgIdle}`, { headers: this.adapter.newHeaders({ "Content-Type": "text/plain" }
           await this.versionFailed(appVersion, err);
         }
       };
-      if (this.scope.registration.scope.indexOf("://localhost") > -1) {
+      if (isLocalhost(this.scope.registration.scope)) {
         return initialize();
       }
       this.idle.schedule(`initialization(${appVersion.manifestHash})`, initialize);
@@ -1970,6 +2005,7 @@ ${msgIdle}`, { headers: this.adapter.newHeaders({ "Content-Type": "text/plain" }
         return;
       }
       const brokenHash = broken[0];
+      await this.notifyClientsAboutVersionFailure(brokenHash, err);
       if (this.latestHash === brokenHash) {
         this.state = DriverReadyState.EXISTING_CLIENTS_ONLY;
         this.stateMessage = `Degraded due to: ${errorToString(err)}`;
@@ -2159,6 +2195,21 @@ ${msgIdle}`, { headers: this.adapter.newHeaders({ "Content-Type": "text/plain" }
           latestVersion: this.mergeHashWithAppData(manifest, hash)
         };
         client.postMessage(notice);
+      }));
+    }
+    async notifyClientsAboutVersionFailure(brokenHash, error) {
+      await this.initialized;
+      const affectedClients = Array.from(this.clientVersionMap.entries()).filter(([clientId, hash]) => hash === brokenHash).map(([clientId]) => clientId);
+      await Promise.all(affectedClients.map(async (clientId) => {
+        const client = await this.scope.clients.get(clientId);
+        if (client) {
+          const brokenVersion = this.versions.get(brokenHash);
+          client.postMessage({
+            type: "VERSION_FAILED",
+            version: this.mergeHashWithAppData(brokenVersion.manifest, brokenHash),
+            error: errorToString(error)
+          });
+        }
       }));
     }
     async broadcast(msg) {
