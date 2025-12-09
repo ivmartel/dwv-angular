@@ -2948,13 +2948,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/jasmine@npm:~5.1.12":
-  version: 5.1.13
-  resolution: "@types/jasmine@npm:5.1.13"
-  checksum: 10c0/f162b7949f44e1e68391711772e6e19ad8db77318dbff8068f79e06f9532956f4e762a814797a48abf3356786830cb23487623eb9bf1dd55624e21a1935bc09f
-  languageName: node
-  linkType: hard
-
 "@types/jsdom@npm:^27":
   version: 27.0.0
   resolution: "@types/jsdom@npm:27.0.0"
@@ -4099,7 +4092,6 @@ __metadata:
     "@angular/platform-browser": "npm:^21.0.3"
     "@angular/platform-browser-dynamic": "npm:^21.0.3"
     "@angular/service-worker": "npm:^21.0.3"
-    "@types/jasmine": "npm:~5.1.12"
     "@types/jsdom": "npm:^27"
     "@vitest/coverage-v8": "npm:^4.0.15"
     add: "npm:2.0.6"
@@ -4107,7 +4099,6 @@ __metadata:
     canvas: "npm:^3.2.0"
     dwv: "npm:^0.35.1"
     eslint: "npm:^9.37.0"
-    jasmine-core: "npm:~5.12.1"
     jsdom: "npm:^27.3.0"
     ng-packagr: "npm:^21.0.0"
     rxjs: "npm:~7.8.2"
@@ -5462,13 +5453,6 @@ __metadata:
     html-escaper: "npm:^2.0.0"
     istanbul-lib-report: "npm:^3.0.0"
   checksum: 10c0/d596317cfd9c22e1394f22a8d8ba0303d2074fe2e971887b32d870e4b33f8464b10f8ccbe6847808f7db485f084eba09e6c2ed706b3a978e4b52f07085b8f9bc
-  languageName: node
-  linkType: hard
-
-"jasmine-core@npm:~5.12.1":
-  version: 5.12.1
-  resolution: "jasmine-core@npm:5.12.1"
-  checksum: 10c0/35d83a91176e68960b4aa62d9a18bbeabed09cec42a138a70125a1952c0df6849d721d7e032101a3bd2ef17f1244fac166aaca8353cac7aa221831e005b84760
   languageName: node
   linkType: hard
 
