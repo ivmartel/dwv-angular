@@ -25,10 +25,10 @@
           "defaultConfiguration": "production"
         },
         "test": {
-          "builder": "@angular/build:karma",
+          "builder": "@angular/build:unit-test",
           "options": {
-            "tsConfig": "projects/dwv-angular/tsconfig.spec.json",
-            "polyfills": []
+            "coverageReporters": ["html", "text-summary"],
+            "tsConfig": "projects/dwv-angular/tsconfig.spec.json"
           }
         },
         "lint": {
@@ -120,21 +120,10 @@
           "builder": "@angular/build:extract-i18n"
         },
         "test": {
-          "builder": "@angular/build:karma",
+          "builder": "@angular/build:unit-test",
           "options": {
-            "polyfills": [],
-            "tsConfig": "projects/dwv-angular-app/tsconfig.spec.json",
-            "inlineStyleLanguage": "scss",
-            "assets": [
-              {
-                "glob": "**/*",
-                "input": "projects/dwv-angular-app/public"
-              }
-            ],
-            "styles": [
-              "projects/dwv-angular-app/src/styles.scss"
-            ],
-            "scripts": []
+            "coverageReporters": ["html", "text-summary"],
+            "tsConfig": "projects/dwv-angular-app/tsconfig.spec.json"
           }
         },
         "lint": {
