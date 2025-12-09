@@ -55,5 +55,6 @@
     "ng-packagr": "^20.3.2",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.46.2"
-  }
+  },
+  "packageManager": "yarn@4.12.0"
 }
