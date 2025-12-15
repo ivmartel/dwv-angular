@@ -31,7 +31,7 @@
     "@angular/forms": "^21.0.3",
     "@angular/material": "^21.0.2",
     "@angular/platform-browser": "^21.0.3",
-    "@angular/platform-browser-dynamic": "^21.0.3",
+    "@angular/platform-browser-dynamic": "^21.0.5",
     "@angular/service-worker": "^21.0.3",
     "add": "2.0.6",
     "dwv": "^0.35.1",
