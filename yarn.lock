@@ -357,14 +357,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@angular/animations@npm:^21.0.5":
-  version: 21.0.5
-  resolution: "@angular/animations@npm:21.0.5"
+"@angular/animations@npm:^21.0.6":
+  version: 21.0.6
+  resolution: "@angular/animations@npm:21.0.6"
   dependencies:
     tslib: "npm:^2.3.0"
   peerDependencies:
-    "@angular/core": 21.0.5
-  checksum: 10c0/e1a316d07e6f136343738259030354c7efd6b14fd79209e940980fbf165c19fcc99c5fbdbd367506335a8326690767d558e37f9494761230ac9a3bda3ef170d7
+    "@angular/core": 21.0.6
+  checksum: 10c0/6a79080815cdbd61e362ad2cf35ff8b823174ba2ae4cb4fc24d190ee437ac7f76055bc352386b84c576bd9186a4312096502c8248fb2f01d61211053406503a8
   languageName: node
   linkType: hard
 
@@ -4121,7 +4121,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "dwv-angular@workspace:."
   dependencies:
-    "@angular/animations": "npm:^21.0.5"
+    "@angular/animations": "npm:^21.0.6"
     "@angular/build": "npm:^21.0.3"
     "@angular/cdk": "npm:^21.0.5"
     "@angular/cli": "npm:^21.0.3"
