@@ -41,7 +41,7 @@
   "devDependencies": {
     "@angular/build": "^21.0.3",
     "@angular/cli": "^21.0.3",
-    "@angular/compiler-cli": "^21.0.5",
+    "@angular/compiler-cli": "^21.0.6",
     "@types/jsdom": "^27",
     "@vitest/coverage-v8": "^4.0.16",
     "angular-eslint": "21.1.0",
