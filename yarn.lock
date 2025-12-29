@@ -4171,7 +4171,7 @@ __metadata:
     dwv: "npm:^0.35.1"
     eslint: "npm:^9.39.2"
     jsdom: "npm:^27.3.0"
-    ng-packagr: "npm:^21.0.0"
+    ng-packagr: "npm:^21.0.1"
     rxjs: "npm:~7.8.2"
     tslib: "npm:^2.8.1"
     typescript: "npm:~5.9.3"
@@ -6222,9 +6222,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ng-packagr@npm:^21.0.0":
-  version: 21.0.0
-  resolution: "ng-packagr@npm:21.0.0"
+"ng-packagr@npm:^21.0.1":
+  version: 21.0.1
+  resolution: "ng-packagr@npm:21.0.1"
   dependencies:
     "@ampproject/remapping": "npm:^2.3.0"
     "@rollup/plugin-json": "npm:^6.1.0"
@@ -6261,7 +6261,7 @@ __metadata:
       optional: true
   bin:
     ng-packagr: src/cli/main.js
-  checksum: 10c0/91713c1370dd65e66d2a2db1e7814ebc07c098dc5825f2e49aa992fdb771993e20259a92ad01a02d39ac781b75c0fd2a5496876cac924bc54bbc82f48a94ce33
+  checksum: 10c0/34f0cd03ae99dbae681034374e85d1dbec284cafdd9fde49ca0f47ac267c70230f49dbb599f025955246836b612f8d234a0e87a8edae56c3f5979b74ac885916
   languageName: node
   linkType: hard
 
