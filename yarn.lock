@@ -556,18 +556,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@angular/forms@npm:^21.0.8":
-  version: 21.0.8
-  resolution: "@angular/forms@npm:21.0.8"
+"@angular/forms@npm:^21.1.0":
+  version: 21.1.0
+  resolution: "@angular/forms@npm:21.1.0"
   dependencies:
     "@standard-schema/spec": "npm:^1.0.0"
     tslib: "npm:^2.3.0"
   peerDependencies:
-    "@angular/common": 21.0.8
-    "@angular/core": 21.0.8
-    "@angular/platform-browser": 21.0.8
+    "@angular/common": 21.1.0
+    "@angular/core": 21.1.0
+    "@angular/platform-browser": 21.1.0
     rxjs: ^6.5.3 || ^7.4.0
-  checksum: 10c0/1395ee28ec604948be483521b2dc4cf5b70507b4011d0bd0cab01243b5fee60bda2efa0803fa9c043d59259c0b76a6c168dc6eacccc7fcd98ffc2addbc72131b
+  checksum: 10c0/66e3db06b0951b3582020469b65f64cccdb10d84ef22ad34da80fa8f290e1eab893dd0516c8cef80718131cfa763721e17d29602520392249af9c3c071434a5a
   languageName: node
   linkType: hard
 
@@ -4246,7 +4246,7 @@ __metadata:
     "@angular/compiler": "npm:^21.0.7"
     "@angular/compiler-cli": "npm:^21.0.8"
     "@angular/core": "npm:^21.0.7"
-    "@angular/forms": "npm:^21.0.8"
+    "@angular/forms": "npm:^21.1.0"
     "@angular/material": "npm:^21.0.6"
     "@angular/platform-browser": "npm:^21.0.6"
     "@angular/platform-browser-dynamic": "npm:^21.0.6"
