@@ -43,7 +43,7 @@
     "@angular/cli": "^21.1.0",
     "@angular/compiler-cli": "^21.1.0",
     "@types/jsdom": "^27",
-    "@vitest/coverage-v8": "^4.0.17",
+    "@vitest/coverage-v8": "^4.0.18",
     "angular-eslint": "21.1.0",
     "canvas": "^3.2.1",
     "eslint": "^9.39.2",
