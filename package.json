@@ -40,7 +40,7 @@
   },
   "devDependencies": {
     "@angular/build": "^21.1.0",
-    "@angular/cli": "^21.1.0",
+    "@angular/cli": "^21.1.1",
     "@angular/compiler-cli": "^21.1.0",
     "@types/jsdom": "^27",
     "@vitest/coverage-v8": "^4.0.18",
