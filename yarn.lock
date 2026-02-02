@@ -482,9 +482,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@angular/cdk@npm:^21.1.0":
-  version: 21.1.0
-  resolution: "@angular/cdk@npm:21.1.0"
+"@angular/cdk@npm:^21.1.2":
+  version: 21.1.2
+  resolution: "@angular/cdk@npm:21.1.2"
   dependencies:
     parse5: "npm:^8.0.0"
     tslib: "npm:^2.3.0"
@@ -493,7 +493,7 @@ __metadata:
     "@angular/core": ^21.0.0 || ^22.0.0
     "@angular/platform-browser": ^21.0.0 || ^22.0.0
     rxjs: ^6.5.3 || ^7.4.0
-  checksum: 10c0/0fce61350488bcd4a8d9c15596b694a44530a71fb977a87254875adec7b96ec8248d7f69912772e13f8aa6852305c73c8deeec6964560690b4e5444b93156591
+  checksum: 10c0/970e3e8b269645df2f93eecc37573bb0c71681534a15a1f674557cead34470fa8c464e770a6ddb12df2548f7dc0f6d7a23ec5d5fa561faa06a88bd22bbb6a7c7
   languageName: node
   linkType: hard
 
@@ -4228,7 +4228,7 @@ __metadata:
   dependencies:
     "@angular/animations": "npm:^21.1.2"
     "@angular/build": "npm:^21.1.0"
-    "@angular/cdk": "npm:^21.1.0"
+    "@angular/cdk": "npm:^21.1.2"
     "@angular/cli": "npm:^21.1.1"
     "@angular/common": "npm:^21.1.1"
     "@angular/compiler": "npm:^21.1.1"
