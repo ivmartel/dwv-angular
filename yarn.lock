@@ -4255,7 +4255,7 @@ __metadata:
     add: "npm:2.0.6"
     angular-eslint: "npm:21.1.0"
     canvas: "npm:^3.2.1"
-    dwv: "npm:^0.35.1"
+    dwv: "npm:^0.36.0"
     eslint: "npm:^9.39.2"
     jsdom: "npm:^28.0.0"
     ng-packagr: "npm:^21.1.0"
@@ -4267,14 +4267,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"dwv@npm:^0.35.1":
-  version: 0.35.1
-  resolution: "dwv@npm:0.35.1"
+"dwv@npm:^0.36.0":
+  version: 0.36.0
+  resolution: "dwv@npm:0.36.0"
   dependencies:
     jszip: "npm:^3.10.1"
-    konva: "npm:~9.3.20"
+    konva: "npm:~10.2.0"
     magic-wand-tool: "npm:~1.1.7"
-  checksum: 10c0/715f31e9d12a10850e43521df3f7a2c0cb937b284558feedf96f817bc3601a38654ff75630e47a1f2c7afd8a8191557b58ff4d469cdaf4b5f9d985ae8f8eadd7
+  checksum: 10c0/2a5ee500d6025a850e8582634aa0314f70ed6027e9ef64fec885895f1a3d1412a34f2605a71819283d47817d37c7bbc5d4e856399d898364f31f68abef69ad64
   languageName: node
   linkType: hard
 
@@ -5756,10 +5756,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"konva@npm:~9.3.20":
-  version: 9.3.22
-  resolution: "konva@npm:9.3.22"
-  checksum: 10c0/d9bdaaffec95381e5f4225485a102b14971a3a8f6fd691a78ac55bf88104654cca876714265999eceb3bbb4fc50d1f34b0385e5876d6b918739456c2d7de37fa
+"konva@npm:~10.2.0":
+  version: 10.2.0
+  resolution: "konva@npm:10.2.0"
+  checksum: 10c0/afbb59a8a83c41c75f6e3103aa7f2ddb7f4f2132dab612d54e7dcefcd50f9b28b6b02fb88ce1387fe2b33905e67dc73ba2dba2cd1cb01abfc47250798f61c88f
   languageName: node
   linkType: hard
 
