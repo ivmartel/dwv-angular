@@ -15,6 +15,7 @@ import {
   ToolConfig,
   getDwvVersion
 } from 'dwv';
+import { overlayConfig } from './overlays';
 import { MatDialog } from '@angular/material/dialog';
 import { MatButtonToggleChange } from '@angular/material/button-toggle';
 
@@ -117,6 +118,7 @@ export class DwvComponent implements OnInit {
     const viewConfigs = {'*': [viewConfig0]};
     const options = new AppOptions(viewConfigs);
     options.tools = this.tools;
+    options.overlayConfig = overlayConfig;
     this.dwvApp.init(options);
     // handle load events
     let nLoadItem = 0;
