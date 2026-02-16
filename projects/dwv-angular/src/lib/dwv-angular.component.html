@@ -1,6 +1,6 @@
 <div id="dwv">
   <mat-progress-bar mode="determinate" value="{{ loadProgress }}"></mat-progress-bar>
-  <div class="button-row">
+  <div class="header">
     @for (tool of toolNames; track tool) {
       <div class="toolbar-item">
         @if (selectedTool === tool) {
@@ -49,11 +49,13 @@
       </button>
     </div>
   </div>
-  <div id="layerGroup0" class="layerGroup">
-    <div id="dropBox"></div>
+  <div class="content">
+    <div id="layerGroup0" class="layerGroup">
+      <div id="dropBox"></div>
+    </div>
   </div>
   @if (showLegend) {
-    <div class="legend mat-small">
+    <div class="footer mat-small">
       <p>Powered by
         <a href="https://github.com/ivmartel/dwv">dwv</a>
         {{ versions.dwv }}
