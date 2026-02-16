@@ -17,13 +17,11 @@ import {
 } from 'dwv';
 import { overlayConfig } from './overlays';
 import { MatDialog } from '@angular/material/dialog';
-import { MatButtonToggleChange } from '@angular/material/button-toggle';
 
 import { TagsDialogComponent } from './tags-dialog.component';
 
 
 import { MatButtonModule } from '@angular/material/button';
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -64,7 +62,6 @@ class DwvEvent {
   selector: 'dwv-angular',
   imports: [
     MatButtonModule,
-    MatButtonToggleModule,
     MatDialogModule,
     MatIconModule,
     MatProgressBarModule
@@ -268,16 +265,6 @@ export class DwvComponent implements OnInit {
       res = true;
     }
     return res;
-  }
-
-  /**
-   * For toogle button to not get selected.
-   *
-   * @param event The toogle change.
-   */
-  onSingleToogleChange = (event: MatButtonToggleChange) => {
-    // unset value -> do not select button
-    event.source.buttonToggleGroup.value = '';
   }
 
   /**

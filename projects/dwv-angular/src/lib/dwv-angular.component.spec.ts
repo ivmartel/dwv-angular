@@ -3,7 +3,6 @@ import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed, ComponentFixture } from '@angular/core/testing';
 
 import { MatButtonModule } from '@angular/material/button';
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -18,7 +17,6 @@ describe('DwvComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         MatButtonModule,
-        MatButtonToggleModule,
         MatDialogModule,
         MatIconModule,
         MatProgressBarModule

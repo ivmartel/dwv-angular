@@ -11,11 +11,24 @@ body {
 
 /* dwv-angular overrides */
 .button-row {
-  text-align: center;
-  padding: 5px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5px;
+  flex-wrap: wrap;
+
+  button {
+    padding: 0;
+    margin: 2px;
+    border-radius: 4px !important;
+  }
 }
-.mat-button-toggle-group {
-  margin: 0.2em;
+/* remove angular icon offset to the left */
+.mat-icon {
+  margin: 0 !important;
+}
+/* make buttons smaller */
+.mdc-button {
+  min-width: 20px !important;
 }
 
 /* themed drop box */
@@ -24,4 +37,18 @@ body {
 }
 .dropBoxBorder:hover {
   border: 5px dashed var(--mat-sys-primary);
+}
+
+.toolbar-item {
+  margin: 10px 3px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+.toolbar-item button {
+  height: 100%;
+  border-radius: 4px;
+  padding: 10px;
 }

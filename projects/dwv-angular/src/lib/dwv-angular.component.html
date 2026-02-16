@@ -1,43 +1,53 @@
 <div id="dwv">
   <mat-progress-bar mode="determinate" value="{{ loadProgress }}"></mat-progress-bar>
   <div class="button-row">
-    <mat-button-toggle-group name="tool" [disabled]="!dataLoaded" [value]="selectedTool">
-      @for (tool of toolNames; track tool) {
-        <mat-button-toggle value="{{ tool }}" color="primary"
-          title="{{ tool }}"
-          (click)="onChangeTool(tool)"
-          [disabled]="!dataLoaded || !canRunTool(tool)">
-          <mat-icon>{{ getToolIcon(tool) }}</mat-icon>
-        </mat-button-toggle>
-      }
-    </mat-button-toggle-group>
-
-    <mat-button-toggle-group name="reset" [disabled]="!dataLoaded"
-      (change)="onSingleToogleChange($event)">
-      <mat-button-toggle color="primary"
+    @for (tool of toolNames; track tool) {
+      <div class="toolbar-item">
+        @if (selectedTool === tool) {
+          <button value="{{ tool }}"
+            matButton="tonal"
+            title="{{ tool }}"
+            (click)="onChangeTool(tool)"
+            [disabled]="!dataLoaded || !canRunTool(tool)">
+            <mat-icon>{{ getToolIcon(tool) }}</mat-icon>
+          </button>
+        } @else {
+          <button value="{{ tool }}"
+            matButton="filled"
+            title="{{ tool }}"
+            (click)="onChangeTool(tool)"
+            [disabled]="!dataLoaded || !canRunTool(tool)">
+            <mat-icon>{{ getToolIcon(tool) }}</mat-icon>
+          </button>
+        }
+      </div>
+    }
+    <div class="toolbar-item">
+      <button color="primary" matButton="filled"
         title="Reset"
-        (click)="onReset()">
+        (click)="onReset()"
+        [disabled]="!dataLoaded" selected="true">
         <mat-icon>refresh</mat-icon>
-      </mat-button-toggle>
-    </mat-button-toggle-group>
+      </button>
+    </div>
 
-    <mat-button-toggle-group name="reset" [disabled]="!dataLoaded"
-      (change)="onSingleToogleChange($event)">
-      <mat-button-toggle color="primary"
+    <div class="toolbar-item">
+      <button color="primary" matButton="filled"
         title="Toggle Orientation"
-        (click)="toggleOrientation()">
+        (click)="toggleOrientation()"
+        [disabled]="!dataLoaded">
         <mat-icon>cameraswitch</mat-icon>
-      </mat-button-toggle>
-    </mat-button-toggle-group>
+      </button>
+    </div>
 
-    <mat-button-toggle-group name="tags" [disabled]="!dataLoaded"
-      (change)="onSingleToogleChange($event)">
-      <mat-button-toggle color="primary"
+    <div class="toolbar-item">
+      <button color="primary" matButton="filled"
         title="Tags"
-        (click)="openTagsDialog()">
+        (click)="openTagsDialog()"
+        [disabled]="!dataLoaded">
         <mat-icon>library_books</mat-icon>
-      </mat-button-toggle>
-    </mat-button-toggle-group>
+      </button>
+    </div>
   </div>
   <div id="layerGroup0" class="layerGroup">
     <div id="dropBox"></div>
