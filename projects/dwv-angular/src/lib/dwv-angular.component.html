@@ -20,6 +20,49 @@
             <mat-icon>{{ getToolIcon(tool) }}</mat-icon>
           </button>
         }
+        @if (tool === 'WindowLevel') {
+          <div class="select-wrapper">
+            <button value="WindowLevelPresets"
+              matButton="filled"
+              title="WindowLevel presets"
+              [disabled]="!dataLoaded || !canRunTool('WindowLevel')">
+              <mat-icon>keyboard_arrow_down</mat-icon>
+            </button>
+            <select
+              name="WindowLevelPresetsSelect"
+              title="Window level presets select"
+              [(ngModel)]="selectedPreset"
+              [disabled]="!dataLoaded || !canRunTool('WindowLevel')">
+              @for (preset of presetNames; track preset) {
+                <option
+                  [value]="preset">
+                  {{ preset }}
+                </option>
+              }
+            </select>
+          </div>
+        } @else if (tool === 'Draw') {
+          <div class="select-wrapper">
+            <button value="DrawShapes"
+              matButton="filled"
+              title="Draw shapes"
+              [disabled]="!dataLoaded || !canRunTool('Draw')">
+              <mat-icon>keyboard_arrow_down</mat-icon>
+            </button>
+            <select
+              name="DrawShapesSelect"
+              title="Draw shapes select"
+              [(ngModel)]="selectedShape"
+              [disabled]="!dataLoaded || !canRunTool('Draw')">
+              @for (shape of shapeNames; track shape) {
+                <option
+                  [value]="shape">
+                  {{ shape }}
+                </option>
+              }
+            </select>
+          </div>
+        }
       </div>
     }
     <div class="toolbar-item">

@@ -7,6 +7,7 @@ import {
   inject
 } from '@angular/core';
 import { VERSION } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import {
   App,
   AppOptions,
@@ -20,7 +21,6 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { TagsDialogComponent } from './tags-dialog.component';
 
-
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
@@ -28,6 +28,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 class DwvEvent {
   dataid!: string;
+  value!: (number|string)[];
 }
 
 /**
@@ -61,6 +62,7 @@ class DwvEvent {
 @Component({
   selector: 'dwv-angular',
   imports: [
+    FormsModule,
     MatButtonModule,
     MatDialogModule,
     MatIconModule,
@@ -83,18 +85,31 @@ export class DwvComponent implements OnInit {
     dwv: getDwvVersion(),
     angular: VERSION.full
   };
+  public shapeNames = [
+    'Ruler',
+    'Arrow',
+    'Rectangle',
+    'Circle',
+    'Ellipse',
+    'Protractor',
+    'Roi'
+  ];
   public tools = {
     Scroll: new ToolConfig(),
     ZoomAndPan: new ToolConfig(),
     WindowLevel: new ToolConfig(),
-    Draw: new ToolConfig(['Ruler']),
+    Draw: new ToolConfig(this.shapeNames),
   };
   public toolNames: string[] = Object.keys(this.tools);
   public canScroll = false;
   public canWindowLevel = false;
-  public selectedTool = 'Select Tool';
+  public presetNames: string[] = [];
   public loadProgress = 0;
   public dataLoaded = false;
+
+  private _selectedTool = '';
+  private _selectedPreset = '';
+  private _selectedShape = this.shapeNames[0];
 
   private dwvApp!: App;
   private metaData!: Record<string, DataElement>;
@@ -106,6 +121,69 @@ export class DwvComponent implements OnInit {
   private dropboxClassName = 'dropBox';
   private borderClassName = 'dropBoxBorder';
   private hoverClassName = 'hover';
+
+  /**
+   * Get the selected tool.
+   * @returns The selected tool.
+   */
+  get selectedTool(): string {
+    return this._selectedTool;
+  }
+
+  /**
+   * Set and apply the selected tool.
+   * @param name The selected tool.
+   */
+  set selectedTool(name: string) {
+    // draw case: could be a shape change
+    if (this._selectedTool !== name ||
+      this._selectedTool === 'Draw'
+    ) {
+      this._selectedTool = name;
+      // apply
+      this.applySelectedTool();
+    }
+  }
+
+  /**
+   * Get the selected preset.
+   * @returns The selected preset.
+   */
+  get selectedPreset(): string {
+    return this._selectedPreset;
+  }
+
+  /**
+   * Set and apply the selected preset.
+   * @param name The selected preset.
+   */
+  set selectedPreset(name: string) {
+    if (this._selectedPreset !== name) {
+      this._selectedPreset = name;
+      // apply
+      this.applySelectedPreset();
+    }
+  }
+
+  /**
+   * Get the selected shape.
+   * @returns The selected shape.
+   */
+  get selectedShape(): string {
+    return this._selectedShape;
+  }
+
+  /**
+   * Set and apply the selected shape.
+   * @param name The selected shape.
+   */
+  set selectedShape(name: string) {
+    if (this._selectedShape !== name) {
+      this._selectedShape = name;
+      // apply
+      this.applySelectedShape();
+    }
+  }
 
   ngOnInit() {
     // create app
@@ -143,18 +221,27 @@ export class DwvComponent implements OnInit {
         const vl = this.dwvApp.getViewLayersByDataId(event.dataid)[0];
         const vc = vl.getViewController();
         // available tools
-        if (vc.canScroll()) {
+        if (this.toolNames.includes('Scroll') && vc.canScroll()) {
           this.canScroll = true;
         }
-        if (vc.isMonochrome()) {
+        if (this.toolNames.includes('WindowLevel') && vc.isMonochrome()) {
           this.canWindowLevel = true;
         }
         // selected tool
-        let selectedTool = 'ZoomAndPan';
-        if (this.canScroll) {
-          selectedTool = 'Scroll';
+        let selectedTool = this.toolNames[0];
+        if (selectedTool === 'Scroll' &&
+          !vc.canScroll() &&
+          this.toolNames.length > 0) {
+          selectedTool = this.toolNames[1];
         }
-        this.onChangeTool(selectedTool);
+        // set and apply
+        this.selectedTool = selectedTool;
+
+        // get window level presets
+        if (this.toolNames.includes('WindowLevel')) {
+          this.presetNames = vc.getWindowLevelPresetsNames();
+          this._selectedPreset = this.presetNames[0];
+        }
       }
     });
     this.dwvApp.addEventListener('load', (event: DwvEvent) => {
@@ -195,6 +282,21 @@ export class DwvComponent implements OnInit {
     this.dwvApp.addEventListener('keydown', (event: KeyboardEvent) => {
         this.dwvApp.defaultOnKeydown(event);
     });
+    // listen to 'wlchange'
+    this.dwvApp.addEventListener('wlchange', (event: DwvEvent) => {
+      // value: [center, width, name]
+      const manualStr = 'manual';
+      if (event.value[2] === manualStr) {
+        if (!this.presetNames.includes(manualStr)) {
+          this.presetNames.push(manualStr);
+          // trigger angular update
+          this.changeDetectorRef.detectChanges();
+        }
+        if (this.selectedPreset !== manualStr) {
+          this._selectedPreset = manualStr;
+        }
+      }
+    });
     // handle window resize
     window.addEventListener('resize', this.dwvApp.onResize);
 
@@ -223,30 +325,73 @@ export class DwvComponent implements OnInit {
     } else if (tool === 'WindowLevel') {
       res = 'contrast';
     } else if (tool === 'Draw') {
-      res = 'straighten';
+      if (this._selectedShape === 'Ruler') {
+        res = 'straighten';
+      } else if (this._selectedShape === 'Arrow') {
+        res = 'call_made';
+      } else if (this._selectedShape === 'Rectangle') {
+        res = 'crop_landscape';
+      } else if (this._selectedShape === 'Circle') {
+        res = 'radio_button_unchecked';
+      } else if (this._selectedShape === 'Ellipse') {
+        res = 'sports_rugby';
+      } else if (this._selectedShape === 'Protractor') {
+        res = 'square_foot';
+      } else if (this._selectedShape === 'Roi') {
+        res = 'polyline';
+      }
     }
     return res;
   }
 
   /**
-   * Handle a change tool event.
+   * Handle a tool change event.
    * @param tool The new tool name.
    */
   onChangeTool = (tool: string) => {
+    // will apply selected tool
+    this.selectedTool = tool;
+  }
+
+  /**
+   * Apply the selected tool.
+   */
+  applySelectedTool = () => {
     if (this.dwvApp) {
-      this.selectedTool = tool;
-      this.dwvApp.setTool(tool);
-      if (tool === 'Draw') {
-        if (typeof this.tools.Draw.options !== 'undefined') {
-          this.onChangeShape(this.tools.Draw.options[0]);
+      this.dwvApp.setTool(this._selectedTool);
+      const lg = this.dwvApp.getActiveLayerGroup();
+      if (this._selectedTool === 'Draw') {
+        this.dwvApp.setToolFeatures({shapeName: this._selectedShape});
+        // reuse created draw layer
+        if (lg !== undefined && lg.getNumberOfLayers() > 1) {
+          lg?.setActiveLayer(1);
         }
       } else {
         // if draw was created, active is now a draw layer...
         // reset to view layer
-        const lg = this.dwvApp.getActiveLayerGroup();
         lg?.setActiveLayer(0);
       }
     }
+  }
+
+  /**
+   * Apply the selected window level preset.
+   */
+  applySelectedPreset = () => {
+    const lg = this.dwvApp.getActiveLayerGroup();
+    if (lg !== undefined) {
+      const vl = lg.getViewLayersFromActive()[0];
+      const vc = vl.getViewController();
+      vc.setWindowLevelPreset(this._selectedPreset);
+    }
+  }
+
+  /**
+   * Apply the selected draw shape.
+   */
+  applySelectedShape = () => {
+    // will apply selected tool and shape
+    this.selectedTool = 'Draw';
   }
 
   /**
@@ -292,16 +437,6 @@ export class DwvComponent implements OnInit {
     const dataIds = this.dwvApp.getDataIds();
     for (const dataId of dataIds) {
       this.dwvApp.render(dataId);
-    }
-  }
-
-  /**
-   * Handle a change draw shape event.
-   * @param shape The new shape name.
-   */
-  private onChangeShape = (shape: string) => {
-    if ( this.dwvApp && this.selectedTool === 'Draw') {
-      this.dwvApp.setToolFeatures({shapeName: shape});
     }
   }
 
