@@ -620,17 +620,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@angular/service-worker@npm:^21.1.4":
-  version: 21.1.4
-  resolution: "@angular/service-worker@npm:21.1.4"
+"@angular/service-worker@npm:^21.1.5":
+  version: 21.1.5
+  resolution: "@angular/service-worker@npm:21.1.5"
   dependencies:
     tslib: "npm:^2.3.0"
   peerDependencies:
-    "@angular/core": 21.1.4
+    "@angular/core": 21.1.5
     rxjs: ^6.5.3 || ^7.4.0
   bin:
     ngsw-config: ngsw-config.js
-  checksum: 10c0/a0fa2cf7ced79d4cdc8fe0ab7b1195c04477f1fb4f1559d21c0b6d8bc4a41415813119812a4ec7b89fc4dd255adbcc7c4d741ca11d4ad693f916ca802d2d10b4
+  checksum: 10c0/c4a1876db420c8fa958cb72de80a3203ee4b3ce872fc2a6443bb7f25e0d0cb31365956c255e6cc8e5bc55aaa75d7209a4b28d687cef8a19e57954a5bf6820a3e
   languageName: node
   linkType: hard
 
@@ -4230,7 +4230,7 @@ __metadata:
     "@angular/material": "npm:^21.1.4"
     "@angular/platform-browser": "npm:^21.1.4"
     "@angular/platform-browser-dynamic": "npm:^21.1.5"
-    "@angular/service-worker": "npm:^21.1.4"
+    "@angular/service-worker": "npm:^21.1.5"
     "@types/jsdom": "npm:^27"
     "@vitest/coverage-v8": "npm:^4.0.18"
     add: "npm:2.0.6"
