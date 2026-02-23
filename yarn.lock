@@ -590,17 +590,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@angular/platform-browser-dynamic@npm:^21.1.4":
-  version: 21.1.4
-  resolution: "@angular/platform-browser-dynamic@npm:21.1.4"
+"@angular/platform-browser-dynamic@npm:^21.1.5":
+  version: 21.1.5
+  resolution: "@angular/platform-browser-dynamic@npm:21.1.5"
   dependencies:
     tslib: "npm:^2.3.0"
   peerDependencies:
-    "@angular/common": 21.1.4
-    "@angular/compiler": 21.1.4
-    "@angular/core": 21.1.4
-    "@angular/platform-browser": 21.1.4
-  checksum: 10c0/4ac6cc30177c58d9172df7919b6e6ac103bb5e9a48a1da66de2551a07abc6e0ab6be73ec08a49795bede88e93f23376cbb0be505fa2449ec664106089c464452
+    "@angular/common": 21.1.5
+    "@angular/compiler": 21.1.5
+    "@angular/core": 21.1.5
+    "@angular/platform-browser": 21.1.5
+  checksum: 10c0/743d1b2d8e7f77c64797d5847d5228ce92a0529c26152444cdcbd24844454dfef968f264068540c2dd56b05f1f76d2501de0d1c3a2968015a656a7740c247fde
   languageName: node
   linkType: hard
 
@@ -4229,7 +4229,7 @@ __metadata:
     "@angular/forms": "npm:^21.1.4"
     "@angular/material": "npm:^21.1.4"
     "@angular/platform-browser": "npm:^21.1.4"
-    "@angular/platform-browser-dynamic": "npm:^21.1.4"
+    "@angular/platform-browser-dynamic": "npm:^21.1.5"
     "@angular/service-worker": "npm:^21.1.4"
     "@types/jsdom": "npm:^27"
     "@vitest/coverage-v8": "npm:^4.0.18"
