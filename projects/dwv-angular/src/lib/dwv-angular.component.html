@@ -1,14 +1,14 @@
 <div id="dwv">
-  <mat-progress-bar mode="determinate" value="{{ loadProgress }}"></mat-progress-bar>
+  <mat-progress-bar mode="determinate" value="{{ loadProgress() }}"></mat-progress-bar>
   <div class="header">
     @for (tool of toolNames; track tool) {
       <div class="toolbar-item">
-        @if (selectedTool === tool) {
+        @if (selectedTool() === tool) {
           <button value="{{ tool }}"
             matButton="tonal"
             title="{{ tool }}"
             (click)="onChangeTool(tool)"
-            [disabled]="!dataLoaded || !canRunTool(tool)">
+            [disabled]="!dataLoaded() || !canRunTool(tool)">
             <mat-icon>{{ getToolIcon(tool) }}</mat-icon>
           </button>
         } @else {
@@ -16,7 +16,7 @@
             matButton="filled"
             title="{{ tool }}"
             (click)="onChangeTool(tool)"
-            [disabled]="!dataLoaded || !canRunTool(tool)">
+            [disabled]="!dataLoaded()|| !canRunTool(tool)">
             <mat-icon>{{ getToolIcon(tool) }}</mat-icon>
           </button>
         }
@@ -25,17 +25,18 @@
             <button value="WindowLevelPresets"
               matButton="filled"
               title="WindowLevel presets"
-              [disabled]="!dataLoaded || !canRunTool('WindowLevel')">
+              [disabled]="!dataLoaded()|| !canRunTool('WindowLevel')">
               <mat-icon>keyboard_arrow_down</mat-icon>
             </button>
             <select
               name="WindowLevelPresetsSelect"
               title="Window level presets select"
-              [(ngModel)]="selectedPreset"
-              [disabled]="!dataLoaded || !canRunTool('WindowLevel')">
-              @for (preset of presetNames; track preset) {
+              (change)="onChangePreset($event)"
+              [disabled]="!dataLoaded()|| !canRunTool('WindowLevel')">
+              @for (preset of presetNames(); track preset) {
                 <option
-                  [value]="preset">
+                  [value]="preset"
+                  [selected]="selectedPreset() === preset">
                   {{ preset }}
                 </option>
               }
@@ -46,17 +47,18 @@
             <button value="DrawShapes"
               matButton="filled"
               title="Draw shapes"
-              [disabled]="!dataLoaded || !canRunTool('Draw')">
+              [disabled]="!dataLoaded()|| !canRunTool('Draw')">
               <mat-icon>keyboard_arrow_down</mat-icon>
             </button>
             <select
               name="DrawShapesSelect"
               title="Draw shapes select"
-              [(ngModel)]="selectedShape"
-              [disabled]="!dataLoaded || !canRunTool('Draw')">
+              (change)="onChangeShape($event)"
+              [disabled]="!dataLoaded()|| !canRunTool('Draw')">
               @for (shape of shapeNames; track shape) {
                 <option
-                  [value]="shape">
+                  [value]="shape"
+                  [selected]="selectedShape() === shape">
                   {{ shape }}
                 </option>
               }
@@ -69,7 +71,7 @@
       <button color="primary" matButton="filled"
         title="Reset"
         (click)="onReset()"
-        [disabled]="!dataLoaded" selected="true">
+        [disabled]="!dataLoaded()" selected="true">
         <mat-icon>refresh</mat-icon>
       </button>
     </div>
@@ -78,7 +80,7 @@
       <button color="primary" matButton="filled"
         title="Toggle Orientation"
         (click)="toggleOrientation()"
-        [disabled]="!dataLoaded">
+        [disabled]="!dataLoaded()">
         <mat-icon>cameraswitch</mat-icon>
       </button>
     </div>
@@ -87,7 +89,7 @@
       <button color="primary" matButton="filled"
         title="Tags"
         (click)="openTagsDialog()"
-        [disabled]="!dataLoaded">
+        [disabled]="!dataLoaded()">
         <mat-icon>library_books</mat-icon>
       </button>
     </div>
