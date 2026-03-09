@@ -23,13 +23,13 @@
     "clean": "ng cache clean"
   },
   "dependencies": {
-    "@angular/animations": "^21.2.0",
+    "@angular/animations": "^21.2.1",
     "@angular/cdk": "^21.2.1",
     "@angular/common": "^21.2.1",
-    "@angular/compiler": "^21.2.0",
-    "@angular/core": "^21.2.0",
-    "@angular/forms": "^21.2.0",
-    "@angular/material": "^21.2.0",
+    "@angular/compiler": "^21.2.1",
+    "@angular/core": "^21.2.1",
+    "@angular/forms": "^21.2.1",
+    "@angular/material": "^21.2.1",
     "@angular/platform-browser": "^21.2.1",
     "@angular/platform-browser-dynamic": "^21.2.1",
     "@angular/service-worker": "^21.2.1",
@@ -40,7 +40,7 @@
   },
   "devDependencies": {
     "@angular/build": "^21.2.1",
-    "@angular/cli": "^21.2.0",
+    "@angular/cli": "^21.2.1",
     "@angular/compiler-cli": "^21.2.1",
     "@types/jsdom": "^27",
     "@vitest/coverage-v8": "^4.0.18",
