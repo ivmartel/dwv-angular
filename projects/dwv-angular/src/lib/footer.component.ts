@@ -3,7 +3,8 @@ import {
   inject,
 } from '@angular/core';
 import { VERSION } from '@angular/core';
-import { DwvService } from './dwv.service';
+
+import { DwvService } from '../services/dwv.service';
 
 /**
  * Footer component.

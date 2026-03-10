@@ -6,15 +6,15 @@ import {
   untracked
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { DwvService } from './dwv.service';
 import { MatDialog } from '@angular/material/dialog';
-
-import { TagsDialogComponent } from './tags-dialog.component';
-
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+
+import { DwvService } from '../services/dwv.service';
+
+import { TagsDialogComponent } from './tags-dialog.component';
 
 /**
  * Header component.

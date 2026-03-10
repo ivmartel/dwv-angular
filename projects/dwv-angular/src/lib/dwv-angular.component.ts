@@ -4,7 +4,8 @@ import {
   OnInit,
   inject
 } from '@angular/core';
-import { DwvService } from './dwv.service';
+
+import { DwvService } from '../services/dwv.service';
 
 import { DwvHeaderComponent } from './header.component';
 import { DwvContentComponent } from './content.component';

@@ -4,7 +4,8 @@ import {
   inject,
   effect
 } from '@angular/core';
-import { DwvService } from './dwv.service';
+
+import { DwvService } from '../services/dwv.service';
 
 /**
  * Content component.
