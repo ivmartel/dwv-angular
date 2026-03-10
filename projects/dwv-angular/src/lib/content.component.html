@@ -1,0 +1,20 @@
+<div id="layerGroup0" class="layerGroup">
+  <div id="dropBox"
+    className="dropBox dropBoxBorder"
+    (dragOver)="onBoxDragOver($event)"
+    (dragLeave)="onBoxDragLeave($event)"
+    (drop)="onDrop($event)"
+    >
+    <p>Drag and drop data here or
+      <label htmlFor="input-file">
+        <a id="input-file-link"> click here</a>
+      <input
+        id="input-file"
+        type="file"
+        multiple
+        (change)="onInputFile($event)"
+        style="display: none"/>
+      </label>
+    </p>
+  </div>
+</div>

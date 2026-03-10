@@ -43,7 +43,7 @@ describe('DwvComponent', () => {
     fixture.detectChanges();
 
     const compiled = fixture.nativeElement as HTMLElement;
-    const footer = compiled.querySelector('.footer');
+    const footer = compiled.querySelector('dwv-footer');
     expect(footer?.textContent).toContain('Powered by');
   });
 });

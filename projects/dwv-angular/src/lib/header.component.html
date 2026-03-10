@@ -1,0 +1,95 @@
+<mat-progress-bar mode="determinate" value="{{ loadProgress() }}"></mat-progress-bar>
+
+@for (tool of toolNames; track tool) {
+  <div class="toolbar-item">
+    @if (selectedTool() === tool) {
+      <button value="{{ tool }}"
+        matButton="tonal"
+        title="{{ tool }}"
+        (click)="onChangeTool(tool)"
+        [disabled]="!dataLoaded() || !canRunTool(tool)">
+        <mat-icon>{{ getToolIcon(tool) }}</mat-icon>
+      </button>
+    } @else {
+      <button value="{{ tool }}"
+        matButton="filled"
+        title="{{ tool }}"
+        (click)="onChangeTool(tool)"
+        [disabled]="!dataLoaded() || !canRunTool(tool)">
+        <mat-icon>{{ getToolIcon(tool) }}</mat-icon>
+      </button>
+    }
+    @if (tool === 'WindowLevel') {
+      <div class="select-wrapper">
+        <button value="WindowLevelPresets"
+          matButton="filled"
+          title="WindowLevel presets"
+          [disabled]="!dataLoaded() || !canRunTool('WindowLevel')">
+          <mat-icon>keyboard_arrow_down</mat-icon>
+        </button>
+        <select
+          name="WindowLevelPresetsSelect"
+          title="Window level presets select"
+          (change)="onChangePreset($event)"
+          [disabled]="!dataLoaded() || !canRunTool('WindowLevel')">
+          @for (preset of presetNames(); track preset) {
+            <option
+              [value]="preset"
+              [selected]="selectedPreset() === preset">
+              {{ preset }}
+            </option>
+          }
+        </select>
+      </div>
+    } @else if (tool === 'Draw') {
+      <div class="select-wrapper">
+        <button value="DrawShapes"
+          matButton="filled"
+          title="Draw shapes"
+          [disabled]="!dataLoaded() || !canRunTool('Draw')">
+          <mat-icon>keyboard_arrow_down</mat-icon>
+        </button>
+        <select
+          name="DrawShapesSelect"
+          title="Draw shapes select"
+          (change)="onChangeShape($event)"
+          [disabled]="!dataLoaded() || !canRunTool('Draw')">
+          @for (shape of shapeNames; track shape) {
+            <option
+              [value]="shape"
+              [selected]="selectedShape() === shape">
+              {{ shape }}
+            </option>
+          }
+        </select>
+      </div>
+    }
+  </div>
+}
+
+<div class="toolbar-item">
+  <button color="primary" matButton="filled"
+    title="Reset"
+    (click)="onReset()"
+    [disabled]="!dataLoaded()">
+    <mat-icon>refresh</mat-icon>
+  </button>
+</div>
+
+<div class="toolbar-item">
+  <button color="primary" matButton="filled"
+    title="Toggle Orientation"
+    (click)="toggleOrientation()"
+    [disabled]="!dataLoaded()">
+    <mat-icon>cameraswitch</mat-icon>
+  </button>
+</div>
+
+<div class="toolbar-item">
+  <button color="primary" matButton="filled"
+    title="Tags"
+    (click)="openTagsDialog()"
+    [disabled]="!dataLoaded()">
+    <mat-icon>library_books</mat-icon>
+  </button>
+</div>
