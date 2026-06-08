@@ -604,19 +604,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@angular/material@npm:^21.2.1":
-  version: 21.2.1
-  resolution: "@angular/material@npm:21.2.1"
+"@angular/material@npm:^22.0.0":
+  version: 22.0.0
+  resolution: "@angular/material@npm:22.0.0"
   dependencies:
     tslib: "npm:^2.3.0"
   peerDependencies:
-    "@angular/cdk": 21.2.1
-    "@angular/common": ^21.0.0 || ^22.0.0
-    "@angular/core": ^21.0.0 || ^22.0.0
-    "@angular/forms": ^21.0.0 || ^22.0.0
-    "@angular/platform-browser": ^21.0.0 || ^22.0.0
+    "@angular/cdk": 22.0.0
+    "@angular/common": ^22.0.0 || ^23.0.0
+    "@angular/core": ^22.0.0 || ^23.0.0
+    "@angular/forms": ^22.0.0 || ^23.0.0
+    "@angular/platform-browser": ^22.0.0 || ^23.0.0
     rxjs: ^6.5.3 || ^7.4.0
-  checksum: 10c0/73d6cca98a0886f0226072c8e7dc148bef95dd26f7d4ce2c765843d3e2955810d7fec44a64e5983ee02bb27b65a064c32776616300840efa6fec36e5b57159d2
+  checksum: 10c0/035b6c97ae163c45337fc7187027167ab42f2d3917957d8631f64111fb35b10bc8ff4b3e6efa0fff4980bee825f759b7ea429b5a5ed793e98be44cda36499a47
   languageName: node
   linkType: hard
 
@@ -4470,7 +4470,7 @@ __metadata:
     "@angular/compiler-cli": "npm:^21.2.5"
     "@angular/core": "npm:^21.2.4"
     "@angular/forms": "npm:^21.2.1"
-    "@angular/material": "npm:^21.2.1"
+    "@angular/material": "npm:^22.0.0"
     "@angular/platform-browser": "npm:^21.2.1"
     "@angular/platform-browser-dynamic": "npm:^21.2.1"
     "@angular/service-worker": "npm:^21.2.1"

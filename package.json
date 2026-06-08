@@ -29,7 +29,7 @@
     "@angular/compiler": "^21.2.4",
     "@angular/core": "^21.2.4",
     "@angular/forms": "^21.2.1",
-    "@angular/material": "^21.2.1",
+    "@angular/material": "^22.0.0",
     "@angular/platform-browser": "^21.2.1",
     "@angular/platform-browser-dynamic": "^21.2.1",
     "@angular/service-worker": "^21.2.1",
