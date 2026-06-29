@@ -540,11 +540,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@angular/compiler-cli@npm:^22.0.2":
-  version: 22.0.2
-  resolution: "@angular/compiler-cli@npm:22.0.2"
+"@angular/compiler-cli@npm:^22.0.4":
+  version: 22.0.4
+  resolution: "@angular/compiler-cli@npm:22.0.4"
   dependencies:
-    "@babel/core": "npm:7.29.0"
+    "@babel/core": "npm:7.29.7"
     "@jridgewell/sourcemap-codec": "npm:^1.4.14"
     chokidar: "npm:^5.0.0"
     convert-source-map: "npm:^1.5.1"
@@ -553,7 +553,7 @@ __metadata:
     tslib: "npm:^2.3.0"
     yargs: "npm:^18.0.0"
   peerDependencies:
-    "@angular/compiler": 22.0.2
+    "@angular/compiler": 22.0.4
     typescript: ">=6.0 <6.1"
   peerDependenciesMeta:
     typescript:
@@ -561,7 +561,7 @@ __metadata:
   bin:
     ng-xi18n: bundles/src/bin/ng_xi18n.js
     ngc: bundles/src/bin/ngc.js
-  checksum: 10c0/f9f7c6564e71cbf165793aab433ac54b0bbb363fe655ef349beb4c51082eb459f964743cf26dd81f1cb18ce23c82ffe4d562a5392acd0b67adef63c8ace7c927
+  checksum: 10c0/13d58e362cb0b5dd3fe7492593c99b6620a8dd314a8bf4367db8ddb9d3fcf805c55cae98ac94aa6fe07f79c124e39b163bc7ee9fbba61c926a81c166d15228d6
   languageName: node
   linkType: hard
 
@@ -749,6 +749,29 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/core@npm:7.29.7":
+  version: 7.29.7
+  resolution: "@babel/core@npm:7.29.7"
+  dependencies:
+    "@babel/code-frame": "npm:^7.29.7"
+    "@babel/generator": "npm:^7.29.7"
+    "@babel/helper-compilation-targets": "npm:^7.29.7"
+    "@babel/helper-module-transforms": "npm:^7.29.7"
+    "@babel/helpers": "npm:^7.29.7"
+    "@babel/parser": "npm:^7.29.7"
+    "@babel/template": "npm:^7.29.7"
+    "@babel/traverse": "npm:^7.29.7"
+    "@babel/types": "npm:^7.29.7"
+    "@jridgewell/remapping": "npm:^2.3.5"
+    convert-source-map: "npm:^2.0.0"
+    debug: "npm:^4.1.0"
+    gensync: "npm:^1.0.0-beta.2"
+    json5: "npm:^2.2.3"
+    semver: "npm:^6.3.1"
+  checksum: 10c0/112fb09c24de7a1de64d1de2c31fe65c4e6af4cb2fb6e6d99ea5373e6fc51e75b88581c0efae4c4c68f119a02a988c7106e95011a41530a2fb8ed793c7eaa07b
+  languageName: node
+  linkType: hard
+
 "@babel/generator@npm:^7.29.0, @babel/generator@npm:^7.29.7":
   version: 7.29.7
   resolution: "@babel/generator@npm:7.29.7"
@@ -771,7 +794,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/helper-compilation-targets@npm:^7.28.6":
+"@babel/helper-compilation-targets@npm:^7.28.6, @babel/helper-compilation-targets@npm:^7.29.7":
   version: 7.29.7
   resolution: "@babel/helper-compilation-targets@npm:7.29.7"
   dependencies:
@@ -801,7 +824,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/helper-module-transforms@npm:^7.28.6":
+"@babel/helper-module-transforms@npm:^7.28.6, @babel/helper-module-transforms@npm:^7.29.7":
   version: 7.29.7
   resolution: "@babel/helper-module-transforms@npm:7.29.7"
   dependencies:
@@ -844,7 +867,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/helpers@npm:^7.28.6":
+"@babel/helpers@npm:^7.28.6, @babel/helpers@npm:^7.29.7":
   version: 7.29.7
   resolution: "@babel/helpers@npm:7.29.7"
   dependencies:
@@ -4405,7 +4428,7 @@ __metadata:
     "@angular/cli": "npm:^22.0.1"
     "@angular/common": "npm:^22.0.2"
     "@angular/compiler": "npm:^22.0.2"
-    "@angular/compiler-cli": "npm:^22.0.2"
+    "@angular/compiler-cli": "npm:^22.0.4"
     "@angular/core": "npm:^22.0.2"
     "@angular/forms": "npm:^22.0.2"
     "@angular/material": "npm:^22.0.2"
