@@ -114,6 +114,11 @@
               "buildTarget": "dwv-angular-app:build:development"
             }
           },
+          "options": {
+            "prebundle": {
+              "exclude": ["dwv"]
+            }
+          },
           "defaultConfiguration": "development"
         },
         "extract-i18n": {
