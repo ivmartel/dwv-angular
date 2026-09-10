@@ -51,7 +51,7 @@
     "ng-packagr": "^22.0.0",
     "typescript": "~6.0.3",
     "typescript-eslint": "^8.60.1",
-    "vitest": "^4.1.8"
+    "vitest": "^4.1.11"
   },
   "packageManager": "yarn@4.16.0"
 }
