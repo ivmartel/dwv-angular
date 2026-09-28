@@ -43,7 +43,7 @@
     "@angular/cli": "^22.2.0",
     "@angular/compiler-cli": "^22.2.0",
     "@types/jsdom": "^30",
-    "@vitest/coverage-v8": "^4.1.11",
+    "@vitest/coverage-v8": "^5.0.2",
     "angular-eslint": "22.0.0",
     "canvas": "^3.2.1",
     "eslint": "^9.39.2",
@@ -51,7 +51,8 @@
     "ng-packagr": "^22.0.0",
     "typescript": "~6.0.3",
     "typescript-eslint": "^8.60.1",
-    "vitest": "^4.1.11"
+    "vite": "^8.3.1",
+    "vitest": "^5.0.2"
   },
   "packageManager": "yarn@4.16.0"
 }
