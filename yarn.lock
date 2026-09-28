@@ -3212,10 +3212,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"add@npm:2.0.6":
-  version: 2.0.6
-  resolution: "add@npm:2.0.6"
-  checksum: 10c0/6b21d5f2e58cf5e15d56cc6f9ebce04f04f4c33ae25f09d600ddacf8df00036ba521f17feb1b3f81307b7c6d2ef0bed8b511a0f86f062eb90c2f909b48b588ae
+"add@npm:2.0.9":
+  version: 2.0.9
+  resolution: "add@npm:2.0.9"
+  checksum: 10c0/c04934ddf86773258bec8206ba980e3bc81fdbef8cc40ffe7c387793537e4815110970cf0d1ceb8f4aca7c6781dff3ec6de7956845e364de7f95c59befcbca5c
   languageName: node
   linkType: hard
 
@@ -3957,7 +3957,7 @@ __metadata:
     "@angular/service-worker": "npm:^22.1.7"
     "@types/jsdom": "npm:^30"
     "@vitest/coverage-v8": "npm:^4.1.9"
-    add: "npm:2.0.6"
+    add: "npm:2.0.9"
     angular-eslint: "npm:22.0.0"
     canvas: "npm:^3.2.1"
     dwv: "npm:^0.36.0"
