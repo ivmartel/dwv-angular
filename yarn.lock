@@ -461,17 +461,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@angular/service-worker@npm:^22.2.0":
-  version: 22.2.0
-  resolution: "@angular/service-worker@npm:22.2.0"
+"@angular/service-worker@npm:^22.2.1":
+  version: 22.2.1
+  resolution: "@angular/service-worker@npm:22.2.1"
   dependencies:
     tslib: "npm:^2.3.0"
   peerDependencies:
-    "@angular/core": 22.2.0
+    "@angular/core": 22.2.1
     rxjs: ^6.5.3 || ^7.4.0
   bin:
     ngsw-config: ngsw-config.js
-  checksum: 10c0/2f6f96217f0f015d4a097ad067d2e77efb5189486b5e78a3aeb4f3082b1863e84a5d33bf33415c9909f5d14d243fb7592eaa51511406a2d8cf0f3b1fe2fb809b
+  checksum: 10c0/cb94d1461fe2c8891f737d9e984a05683f24b0e185ecdb0bbafbad0bf2ae68cd0d9e49ea8ce94eca548ba67dd2e71bd09e155e812dd7abb511ead97178bc84c9
   languageName: node
   linkType: hard
 
@@ -3652,7 +3652,7 @@ __metadata:
     "@angular/material": "npm:^22.2.1"
     "@angular/platform-browser": "npm:^22.2.0"
     "@angular/platform-browser-dynamic": "npm:^22.2.1"
-    "@angular/service-worker": "npm:^22.2.0"
+    "@angular/service-worker": "npm:^22.2.1"
     "@eslint/js": "npm:^10.0.1"
     "@types/jsdom": "npm:^30"
     "@vitest/coverage-v8": "npm:^5.0.3"
