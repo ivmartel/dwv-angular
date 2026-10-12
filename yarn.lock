@@ -3690,7 +3690,7 @@ __metadata:
     add: "npm:2.0.9"
     angular-eslint: "npm:22.5.0"
     canvas: "npm:^3.2.1"
-    dwv: "npm:^0.36.0"
+    dwv: "npm:^0.36.4"
     eslint: "npm:^10.11.0"
     jsdom: "npm:^30.1.0"
     ng-packagr: "npm:^22.0.0"
@@ -3703,14 +3703,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"dwv@npm:^0.36.0":
-  version: 0.36.3
-  resolution: "dwv@npm:0.36.3"
+"dwv@npm:^0.36.4":
+  version: 0.36.4
+  resolution: "dwv@npm:0.36.4"
   dependencies:
     jszip: "npm:^3.10.1"
     konva: "npm:~10.2.0"
     magic-wand-tool: "npm:~1.1.7"
-  checksum: 10c0/da9c21c6c58ec22559209016a2be0d9d3e09cb22367cb500d3953e85c2e5621b9ac0e278d8c253ef3c7cffff333b96a98d9d34bbdfc7e2fb621c1d96a0861b76
+  checksum: 10c0/7b07be1e3ff70d09fc98eca497a912f613adbf3fc0718277b586897a8cf5c536bc4a448ecf8bb2db3906a18178e3d53ff39abe7fd636ccd2b797fb75bd182261
   languageName: node
   linkType: hard
 
