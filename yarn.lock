@@ -430,19 +430,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@angular/forms@npm:^22.2.2":
-  version: 22.2.2
-  resolution: "@angular/forms@npm:22.2.2"
+"@angular/forms@npm:^22.2.3":
+  version: 22.2.3
+  resolution: "@angular/forms@npm:22.2.3"
   dependencies:
     "@standard-schema/spec": "npm:^1.0.0"
     tslib: "npm:^2.3.0"
     zod: "npm:^4.0.10"
   peerDependencies:
-    "@angular/common": 22.2.2
-    "@angular/core": 22.2.2
-    "@angular/platform-browser": 22.2.2
+    "@angular/common": 22.2.3
+    "@angular/core": 22.2.3
+    "@angular/platform-browser": 22.2.3
     rxjs: ^6.5.3 || ^7.4.0
-  checksum: 10c0/e4d162e6da2273a958b26afbdb49c470aa347867f7c14aea91c93fbe5e73ba58ad16cfffe358477e7004edf74c0d789d8d740f4cfc8d3384394db7646c60b759
+  checksum: 10c0/91bd040e5d6775bf6f1845d4abb4c7834173bf4dbaf12d2dcf40eac834764b555cd07870ba07ec14d6e557716dd68b6ee941c84db1ad9af79d6279b986dd3a45
   languageName: node
   linkType: hard
 
@@ -3679,7 +3679,7 @@ __metadata:
     "@angular/compiler": "npm:^22.2.2"
     "@angular/compiler-cli": "npm:^22.2.2"
     "@angular/core": "npm:^22.2.2"
-    "@angular/forms": "npm:^22.2.2"
+    "@angular/forms": "npm:^22.2.3"
     "@angular/material": "npm:^22.2.1"
     "@angular/platform-browser": "npm:^22.2.0"
     "@angular/platform-browser-dynamic": "npm:^22.2.1"
