@@ -26,7 +26,7 @@
     "@angular/animations": "^22.2.1",
     "@angular/cdk": "^22.2.1",
     "@angular/common": "^22.2.3",
-    "@angular/compiler": "^22.2.2",
+    "@angular/compiler": "^22.2.3",
     "@angular/core": "^22.2.2",
     "@angular/forms": "^22.2.3",
     "@angular/material": "^22.2.1",
