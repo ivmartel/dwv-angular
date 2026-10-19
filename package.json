@@ -30,7 +30,7 @@
     "@angular/core": "^22.2.2",
     "@angular/forms": "^22.2.2",
     "@angular/material": "^22.2.1",
-    "@angular/platform-browser": "^22.2.0",
+    "@angular/platform-browser": "^22.2.3",
     "@angular/platform-browser-dynamic": "^22.2.1",
     "@angular/service-worker": "^22.2.1",
     "add": "2.0.9",
