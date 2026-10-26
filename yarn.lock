@@ -326,9 +326,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@angular/cdk@npm:^22.2.1":
-  version: 22.2.1
-  resolution: "@angular/cdk@npm:22.2.1"
+"@angular/cdk@npm:^22.2.4":
+  version: 22.2.4
+  resolution: "@angular/cdk@npm:22.2.4"
   dependencies:
     parse5: "npm:^8.0.0"
     tslib: "npm:^2.3.0"
@@ -338,7 +338,7 @@ __metadata:
     "@angular/forms": ^22.0.0 || ^23.0.0
     "@angular/platform-browser": ^22.0.0 || ^23.0.0
     rxjs: ^6.5.3 || ^7.4.0
-  checksum: 10c0/370e245e83d6cb400dfd1a8876c159bf4cc34d5a8bc30ad53f8d11191395a214d474c4342395d110cb7ccc0d44fb858cb854fb3546cc747178bfbf4fac2c2bcf
+  checksum: 10c0/4bf72ad66298b3c8ed1b19f1ab1bbe9323281ba3489142bc74773f7cbef3a9e50c30cdff9a559b09dd058f7044e10bf0347a711afe541f346ab009007e5583b4
   languageName: node
   linkType: hard
 
@@ -3785,7 +3785,7 @@ __metadata:
   dependencies:
     "@angular/animations": "npm:^22.2.1"
     "@angular/build": "npm:^22.2.1"
-    "@angular/cdk": "npm:^22.2.1"
+    "@angular/cdk": "npm:^22.2.4"
     "@angular/cli": "npm:^22.2.2"
     "@angular/common": "npm:^22.2.3"
     "@angular/compiler": "npm:^22.2.3"
