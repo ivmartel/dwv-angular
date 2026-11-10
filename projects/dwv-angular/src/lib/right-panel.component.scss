@@ -2,28 +2,77 @@
   display: flex;
   flex: 0 0 auto;
 }
+/* small toggle button */
 .toggle {
-  display: flex;
-  align-items: center;
+  --mat-icon-button-state-layer-size: 24px;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+}
+.toggle .mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+/* closed panel: narrow strip holding the toggle */
+.toggleStrip {
+  flex: 0 0 auto;
+  padding: 4px 2px 0;
+  border-left: 1px solid var(--mat-sys-outline-variant);
+  background: var(--mat-sys-surface-container);
 }
 .panel {
-  width: 0;
-  overflow: hidden;
+  position: relative;
+  /* clip, not hidden: hidden lets focus scroll the panel sideways
+    (for ex to show the toggle touch target), hiding the resize handle */
+  overflow: clip;
   border-left: 0 solid var(--mat-sys-outline-variant);
   /* same grey as the (disabled) filled buttons */
-  background: var(--mat-button-filled-disabled-container-color,
+  background: var(--mat-sys-surface-container,
     color-mix(in srgb, var(--mat-sys-on-surface) 12%, transparent));
   transition: width 200ms ease;
 }
 .panel.open {
-  width: 300px;
   border-left-width: 1px;
 }
+/* no animation while dragging */
+.panel.resizing {
+  transition: none;
+  user-select: none;
+}
+.resizeHandle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 6px;
+  z-index: 1;
+  cursor: col-resize;
+  touch-action: none;
+}
+.resizeHandle:hover,
+.resizeHandle:focus-visible,
+.panel.resizing .resizeHandle {
+  background: var(--mat-sys-primary);
+  outline: none;
+}
 .panelContent {
-  /* fixed width so the content does not reflow while animating */
-  width: 300px;
+  /* width set from the component (not the panel) so the content
+    does not reflow while animating */
   height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.panelHeader {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: flex-end;
+  padding: 4px 2px 0 0;
+}
+.panelBody {
+  flex: 1 1 auto;
+  min-height: 0;
   box-sizing: border-box;
-  padding: 8px;
+  padding: 0 8px 8px;
   overflow: auto;
 }

@@ -1,18 +1,52 @@
-<div class="toggle">
-  <button matIconButton
+<ng-template #toggleButton>
+  <button #toggleRef matIconButton
+    class="toggle"
     [title]="isOpen() ? 'Close panel' : 'Open panel'"
     [attr.aria-expanded]="isOpen()"
     aria-controls="rightPanel"
     (click)="toggle()">
     <mat-icon>{{ isOpen() ? 'chevron_right' : 'chevron_left' }}</mat-icon>
   </button>
-</div>
+</ng-template>
+
+<!-- closed: the toggle is in a narrow strip next to the image -->
+@if (!isOpen()) {
+  <div class="toggleStrip">
+    <ng-container *ngTemplateOutlet="toggleButton"></ng-container>
+  </div>
+}
 
 <aside id="rightPanel" class="panel"
   [class.open]="isOpen()"
+  [class.resizing]="isResizing()"
+  [style.width.px]="isOpen() ? width() : 0"
   [attr.aria-hidden]="!isOpen()"
   [inert]="!isOpen()">
-  <div class="panelContent">
-    <ng-content></ng-content>
+  <div class="resizeHandle"
+    role="separator"
+    tabindex="0"
+    title="Resize panel"
+    aria-label="Resize panel"
+    aria-orientation="vertical"
+    aria-controls="rightPanel"
+    [attr.aria-valuenow]="width()"
+    [attr.aria-valuemin]="minWidth"
+    [attr.aria-valuemax]="maxWidth()"
+    (pointerdown)="onResizeStart($event)"
+    (pointermove)="onResizeMove($event)"
+    (pointerup)="onResizeEnd($event)"
+    (pointercancel)="onResizeEnd($event)"
+    (keydown)="onResizeKeydown($event)">
+  </div>
+  <div class="panelContent" [style.width.px]="width()">
+    <!-- open: the toggle is in the panel header -->
+    <div class="panelHeader">
+      @if (isOpen()) {
+        <ng-container *ngTemplateOutlet="toggleButton"></ng-container>
+      }
+    </div>
+    <div class="panelBody">
+      <ng-content></ng-content>
+    </div>
   </div>
 </aside>
