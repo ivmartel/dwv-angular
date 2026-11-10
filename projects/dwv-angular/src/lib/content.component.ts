@@ -10,7 +10,7 @@ import {
   afterNextRender
 } from '@angular/core';
 
-import { DwvService } from '../services/dwv.service';
+import { DwvAppService } from '../services/dwv-app.service';
 
 import { DwvAnnotationListComponent } from './annotation-list.component';
 import { DwvRightPanelComponent } from './right-panel.component';
@@ -32,10 +32,10 @@ import { DwvRightPanelComponent } from './right-panel.component';
 
 export class DwvContentComponent {
 
-  private readonly dwvService = inject(DwvService);
-  // dwvService signals
-  public loadProgress = this.dwvService.loadProgress;
-  public dataLoaded = this.dwvService.dataLoaded;
+  private readonly dwvAppService = inject(DwvAppService);
+  // dwvAppService signals
+  public loadProgress = this.dwvAppService.loadProgress;
+  public dataLoaded = this.dwvAppService.dataLoaded;
 
   /**
    * Show the drop box when no data is loaded nor loading.
@@ -59,7 +59,7 @@ export class DwvContentComponent {
     const destroyRef = inject(DestroyRef);
     afterNextRender(() => {
       const observer = new ResizeObserver(() => {
-        this.dwvService.onResize();
+        this.dwvAppService.onResize();
       });
       observer.observe(this.layerGroup().nativeElement);
       destroyRef.onDestroy(() => observer.disconnect());
@@ -120,7 +120,7 @@ export class DwvContentComponent {
     if (event.dataTransfer) {
       const files = Array.from(event.dataTransfer.files);
       if (files.length !== 0) {
-        this.dwvService.loadFiles(files);
+        this.dwvAppService.loadFiles(files);
       }
     }
   }
@@ -133,7 +133,7 @@ export class DwvContentComponent {
     const target = event.target as HTMLInputElement;
     if (target && target.files) {
       const files = Array.from(target.files);
-      this.dwvService.loadFiles(files);
+      this.dwvAppService.loadFiles(files);
     }
   }
 

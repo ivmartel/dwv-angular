@@ -4,7 +4,7 @@ import {
 } from '@angular/core';
 import { VERSION } from '@angular/core';
 
-import { DwvService } from '../services/dwv.service';
+import { DwvAppService } from '../services/dwv-app.service';
 
 /**
  * Footer component.
@@ -18,10 +18,10 @@ import { DwvService } from '../services/dwv.service';
 
 export class DwvFooterComponent {
 
-  private readonly dwvService = inject(DwvService);
+  private readonly dwvAppService = inject(DwvAppService);
 
   public versions = {
-    dwv: this.dwvService.getDwvVersion(),
+    dwv: this.dwvAppService.getDwvVersion(),
     angular: VERSION.full
   };
 

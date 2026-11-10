@@ -3,7 +3,7 @@ import { provideZonelessChangeDetection } from '@angular/core';
 import { TestBed, ComponentFixture } from '@angular/core/testing';
 
 import { DwvContentComponent } from './content.component';
-import { DwvService } from '../services/dwv.service';
+import { DwvAppService } from '../services/dwv-app.service';
 
 /**
  * Create a drag event (jsdom does not provide DragEvent).
@@ -25,7 +25,7 @@ function createDragEvent(
 
 describe('DwvContentComponent', () => {
   let fixture: ComponentFixture<DwvContentComponent>;
-  let service: DwvService;
+  let service: DwvAppService;
   let layer: HTMLElement;
   let box: HTMLElement;
 
@@ -36,7 +36,7 @@ describe('DwvContentComponent', () => {
       ]
     });
     fixture = TestBed.createComponent(DwvContentComponent);
-    service = TestBed.inject(DwvService);
+    service = TestBed.inject(DwvAppService);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
     layer = compiled.querySelector('#layerGroup0') as HTMLElement;

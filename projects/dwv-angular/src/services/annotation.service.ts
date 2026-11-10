@@ -7,7 +7,7 @@ import {
   getUID
 } from 'dwv';
 
-import { DwvService } from './dwv.service';
+import { DwvAppService } from './dwv-app.service';
 
 /**
  * Annotation quantification value.
@@ -84,7 +84,7 @@ interface DwvEventDetail {
 /**
  * DWV service event.
  */
-type DwvServiceEvent = CustomEvent<DwvEventDetail>;
+type DwvAppServiceEvent = CustomEvent<DwvEventDetail>;
 
 /**
  * Get the state of an annotation.
@@ -119,7 +119,7 @@ function getAnnotationItemState(
 @Injectable({providedIn: 'root'})
 export class AnnotationService {
 
-  readonly #dwvService = inject(DwvService);
+  readonly #dwvAppService = inject(DwvAppService);
 
   /**
    * The group states indexed by data id (in order of addition).
@@ -145,7 +145,7 @@ export class AnnotationService {
   /**
    * The dwv service event handlers.
    */
-  readonly #handlers: Record<string, (event: DwvServiceEvent) => void> = {
+  readonly #handlers: Record<string, (event: DwvAppServiceEvent) => void> = {
     dataadd: (event) => this.#onDataAdd(event),
     dataremove: (event) => this.#onDataRemove(event),
     drawlayeradd: (event) => this.#onDrawLayerAdd(event),
@@ -158,8 +158,8 @@ export class AnnotationService {
   constructor() {
     // both services live as long as the app: no need to remove the listeners
     for (const [type, handler] of Object.entries(this.#handlers)) {
-      this.#dwvService.addEventListener(type,
-        (event) => handler(event as DwvServiceEvent));
+      this.#dwvAppService.addEventListener(type,
+        (event) => handler(event as DwvAppServiceEvent));
     }
   }
 
@@ -172,7 +172,7 @@ export class AnnotationService {
    * @returns False if no reference was found.
    */
   addAnnotationGroup() {
-    return this.#dwvService.addAnnotationGroup();
+    return this.#dwvAppService.addAnnotationGroup();
   }
 
   /**
@@ -194,7 +194,7 @@ export class AnnotationService {
       annotationId,
       {colour: annotation.colour},
       {colour},
-      this.#dwvService.addToUndoStack
+      this.#dwvAppService.addToUndoStack
     );
   }
 
@@ -212,7 +212,7 @@ export class AnnotationService {
     const drawController = new DrawController(annotationGroup);
     drawController.removeAnnotationWithCommand(
       annotationId,
-      this.#dwvService.addToUndoStack
+      this.#dwvAppService.addToUndoStack
     );
   }
 
@@ -224,7 +224,7 @@ export class AnnotationService {
    * @param visible True to show the annotation.
    */
   setAnnotationVisibility(dataId: string, annotationId: string, visible: boolean) {
-    const drawLayers = this.#dwvService.getDrawLayersByDataId(dataId);
+    const drawLayers = this.#dwvAppService.getDrawLayersByDataId(dataId);
     for (const layer of drawLayers) {
       layer.setAnnotationVisibility(annotationId, visible);
     }
@@ -240,7 +240,7 @@ export class AnnotationService {
    * @returns False if no draw layer was found.
    */
   setLabelsVisibility(dataId: string, visible: boolean) {
-    const drawLayer = this.#dwvService.getDrawLayersByDataId(dataId)[0];
+    const drawLayer = this.#dwvAppService.getDrawLayersByDataId(dataId)[0];
     if (drawLayer === undefined) {
       console.warn(`Cannot find draw layer with id ${dataId}`);
       return false;
@@ -274,7 +274,7 @@ export class AnnotationService {
       console.warn('No centroid for annotation');
       return;
     }
-    const drawLayers = this.#dwvService.getDrawLayersByDataId(dataId);
+    const drawLayers = this.#dwvAppService.getDrawLayersByDataId(dataId);
     for (const layer of drawLayers) {
       layer.setCurrentPosition(annotCentroid);
     }
@@ -348,7 +348,7 @@ export class AnnotationService {
    * @returns The annotation group.
    */
   #getAnnotationGroup(dataId: string) {
-    return this.#dwvService.getAnnotationGroup(dataId);
+    return this.#dwvAppService.getAnnotationGroup(dataId);
   }
 
   /**
@@ -416,7 +416,7 @@ export class AnnotationService {
    *
    * @param event The event.
    */
-  #onDataAdd(event: DwvServiceEvent) {
+  #onDataAdd(event: DwvAppServiceEvent) {
     const dataId = event.detail.dataid;
     const annotationGroup = this.#getAnnotationGroup(dataId);
     if (annotationGroup === undefined) {
@@ -446,7 +446,7 @@ export class AnnotationService {
    *
    * @param event The event.
    */
-  #onDataRemove(event: DwvServiceEvent) {
+  #onDataRemove(event: DwvAppServiceEvent) {
     const dataId = event.detail.dataid;
     if (!this.#groups.has(dataId)) {
       return;
@@ -465,7 +465,7 @@ export class AnnotationService {
    *
    * @param event The event.
    */
-  #onDrawLayerAdd(event: DwvServiceEvent) {
+  #onDrawLayerAdd(event: DwvAppServiceEvent) {
     const dataId = event.detail.dataid;
     const annotationGroup = this.#getAnnotationGroup(dataId);
     if (annotationGroup === undefined) {
@@ -486,7 +486,7 @@ export class AnnotationService {
    *
    * @param event The event.
    */
-  #onAnnotationAdd(event: DwvServiceEvent) {
+  #onAnnotationAdd(event: DwvAppServiceEvent) {
     const annotation = event.detail.data as Annotation;
     // reset selection
     this.#selected = undefined;
@@ -504,7 +504,7 @@ export class AnnotationService {
    *
    * @param event The event.
    */
-  #onAnnotationUpdate(event: DwvServiceEvent) {
+  #onAnnotationUpdate(event: DwvAppServiceEvent) {
     const annotation = event.detail.data as Annotation;
     this.#updateAnnotation(event.detail.dataid, annotation.trackingUid,
       (item) => getAnnotationItemState(annotation, item.visible));
@@ -515,7 +515,7 @@ export class AnnotationService {
    *
    * @param event The event.
    */
-  #onAnnotationRemove(event: DwvServiceEvent) {
+  #onAnnotationRemove(event: DwvAppServiceEvent) {
     const dataId = event.detail.dataid;
     const annotationId = (event.detail.data as Annotation).trackingUid;
     if (this.#selected?.dataId === dataId &&
@@ -534,7 +534,7 @@ export class AnnotationService {
    *
    * @param event The event.
    */
-  #onAnnotationSelect(event: DwvServiceEvent) {
+  #onAnnotationSelect(event: DwvAppServiceEvent) {
     if (event.detail.annotationid !== undefined) {
       this.selectAnnotation(event.detail.dataid, event.detail.annotationid);
     }

@@ -8,7 +8,7 @@ Medical (DICOM) viewer built on [DWV](https://github.com/ivmartel/dwv) and Angul
 
 - `projects/dwv-angular`: the reusable Angular library (`<dwv-angular>` component, selector prefix `dwv`).
   - `src/lib/`: standalone components (header, content, footer, right panel, annotation list, tags dialog/table) and helpers (`quantification.ts`, `shape-icons.ts`).
-  - `src/services/`: `DwvService` (wraps the dwv `App`, exposes state as signals and re-dispatches app events as `CustomEvent`s, since it extends `EventTarget`), `AnnotationService`, overlay config.
+  - `src/services/`: `DwvAppService` (wraps the dwv `App`, exposes state as signals and re-dispatches app events as `CustomEvent`s, since it extends `EventTarget`), `AnnotationService`, overlay config.
   - `src/public-api.ts`: public entry point of the library. Only export what consumers need.
 - `projects/dwv-angular-app`: demo application that consumes the library (selector prefix `app`).
 

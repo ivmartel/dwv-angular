@@ -5,7 +5,7 @@ import {
   inject
 } from '@angular/core';
 
-import { DwvService } from '../services/dwv.service';
+import { DwvAppService } from '../services/dwv-app.service';
 
 import { DwvHeaderComponent } from './header.component';
 import { DwvContentComponent } from './content.component';
@@ -56,14 +56,14 @@ export class DwvComponent implements OnInit {
   @Input() uri!: string;
   @Input() urls!: string[];
 
-  private readonly dwvService = inject(DwvService);
+  private readonly dwvAppService = inject(DwvAppService);
 
   ngOnInit() {
     // load or dropbox
     if (this.uri !== undefined) {
-      this.dwvService.loadFromUri(this.uri);
+      this.dwvAppService.loadFromUri(this.uri);
     } else if (this.urls !== undefined) {
-      this.dwvService.loadURLs(this.urls);
+      this.dwvAppService.loadURLs(this.urls);
     }
   }
 

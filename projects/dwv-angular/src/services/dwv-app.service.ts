@@ -39,7 +39,7 @@ const forwardedEventTypes = [
  *   re-dispatched as `CustomEvent`s with the app event as `detail`.
  */
 @Injectable({providedIn: 'root'})
-export class DwvService extends EventTarget {
+export class DwvAppService extends EventTarget {
   /**
    * List of annotation shape names.
    */
