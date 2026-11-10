@@ -1,14 +1,18 @@
 import {
   Component,
+  DestroyRef,
   ElementRef,
   ViewEncapsulation,
   computed,
   inject,
   signal,
-  viewChild
+  viewChild,
+  afterNextRender
 } from '@angular/core';
 
 import { DwvService } from '../services/dwv.service';
+
+import { DwvRightPanelComponent } from './right-panel.component';
 
 /**
  * Content component.
@@ -16,6 +20,9 @@ import { DwvService } from '../services/dwv.service';
 
 @Component({
   selector: 'dwv-content',
+  imports: [
+    DwvRightPanelComponent
+  ],
   templateUrl: './content.component.html',
   styleUrls: ['./content.component.scss'],
   encapsulation: ViewEncapsulation.None
@@ -42,6 +49,20 @@ export class DwvContentComponent {
   readonly isHover = signal(false);
 
   private readonly dropBox = viewChild.required<ElementRef<HTMLElement>>('dropBox');
+  private readonly layerGroup = viewChild.required<ElementRef<HTMLElement>>('layerGroup');
+
+  constructor() {
+    // refit the view when the layer group size changes
+    // (for example when the right panel is opened or closed)
+    const destroyRef = inject(DestroyRef);
+    afterNextRender(() => {
+      const observer = new ResizeObserver(() => {
+        this.dwvService.onResize();
+      });
+      observer.observe(this.layerGroup().nativeElement);
+      destroyRef.onDestroy(() => observer.disconnect());
+    });
+  }
 
   // drag and drop [begin] -----------------------------------------------------
 

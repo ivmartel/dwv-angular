@@ -1,4 +1,4 @@
-<div id="layerGroup0" class="layerGroup"
+<div #layerGroup id="layerGroup0" class="layerGroup"
   (dragover)="onDragOver($event)"
   (dragleave)="onDragLeave($event)"
   (drop)="onDrop($event)"
@@ -22,3 +22,7 @@
     </p>
   </div>
 </div>
+
+<dwv-right-panel>
+  <ng-content></ng-content>
+</dwv-right-panel>

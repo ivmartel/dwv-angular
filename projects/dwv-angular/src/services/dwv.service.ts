@@ -244,6 +244,14 @@ export class DwvService {
   }
 
   /**
+   * Fit the view to its container, to call when the container
+   * is resized (window resize is already handled).
+   */
+  onResize() {
+    this.#dwvApp.onResize();
+  }
+
+  /**
    * Load a list of urls.
    *
    * @param urls The urls.

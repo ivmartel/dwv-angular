@@ -1,0 +1,29 @@
+:host {
+  display: flex;
+  flex: 0 0 auto;
+}
+.toggle {
+  display: flex;
+  align-items: center;
+}
+.panel {
+  width: 0;
+  overflow: hidden;
+  border-left: 0 solid var(--mat-sys-outline-variant);
+  /* same grey as the (disabled) filled buttons */
+  background: var(--mat-button-filled-disabled-container-color,
+    color-mix(in srgb, var(--mat-sys-on-surface) 12%, transparent));
+  transition: width 200ms ease;
+}
+.panel.open {
+  width: 300px;
+  border-left-width: 1px;
+}
+.panelContent {
+  /* fixed width so the content does not reflow while animating */
+  width: 300px;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 8px;
+  overflow: auto;
+}

@@ -1,0 +1,18 @@
+<div class="toggle">
+  <button matIconButton
+    [title]="isOpen() ? 'Close panel' : 'Open panel'"
+    [attr.aria-expanded]="isOpen()"
+    aria-controls="rightPanel"
+    (click)="toggle()">
+    <mat-icon>{{ isOpen() ? 'chevron_right' : 'chevron_left' }}</mat-icon>
+  </button>
+</div>
+
+<aside id="rightPanel" class="panel"
+  [class.open]="isOpen()"
+  [attr.aria-hidden]="!isOpen()"
+  [inert]="!isOpen()">
+  <div class="panelContent">
+    <ng-content></ng-content>
+  </div>
+</aside>
