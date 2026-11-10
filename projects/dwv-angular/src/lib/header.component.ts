@@ -15,6 +15,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { DwvService } from '../services/dwv.service';
 
 import { TagsDialogComponent } from './tags-dialog.component';
+import { getShapeIcon } from './shape-icons';
 
 /**
  * Header component.
@@ -105,23 +106,7 @@ export class DwvHeaderComponent {
    * @returns The associated icon string.
    */
   getShapeIcon(shape: string) {
-    let res!: string;
-    if (shape === 'Ruler') {
-      res = 'straighten';
-    } else if (shape === 'Arrow') {
-      res = 'call_made';
-    } else if (shape === 'Rectangle') {
-      res = 'crop_landscape';
-    } else if (shape === 'Circle') {
-      res = 'radio_button_unchecked';
-    } else if (shape === 'Ellipse') {
-      res = 'sports_rugby';
-    } else if (shape === 'Protractor') {
-      res = 'square_foot';
-    } else if (shape === 'Roi') {
-      res = 'polyline';
-    }
-    return res;
+    return getShapeIcon(shape);
   }
 
   /**
