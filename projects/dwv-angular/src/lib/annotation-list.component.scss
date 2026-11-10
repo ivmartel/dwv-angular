@@ -1,0 +1,133 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font: var(--mat-sys-body-medium);
+}
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.title {
+  margin: 0;
+  font: var(--mat-sys-title-small);
+}
+.groupList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.groupHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0 0 8px;
+}
+.groupName {
+  font: var(--mat-sys-label-large);
+}
+.actions {
+  display: flex;
+  align-items: center;
+}
+.actions button {
+  --mat-icon-button-state-layer-size: 28px;
+  --mat-icon-button-icon-size: 18px;
+}
+.actions button mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+.actions button[aria-pressed="true"] {
+  color: var(--mat-sys-primary);
+}
+.actions input[type="color"] {
+  width: 20px;
+  height: 20px;
+  margin: 0 4px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+.annotationList {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.annotation {
+  border-radius: 4px;
+  background: var(--mat-sys-surface-container-high);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+.annotation:hover {
+  background: color-mix(in srgb, var(--mat-sys-on-surface) 8%,
+    var(--mat-sys-surface-container-high));
+}
+.annotation.selected {
+  background: var(--mat-sys-secondary-container);
+  color: var(--mat-sys-on-secondary-container);
+}
+.annotation.notViewable .label {
+  text-decoration-line: line-through;
+}
+.annotationContent {
+  flex: 1 1 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+  align-self: stretch;
+  padding: 0 0 0 8px;
+  border: none;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.shapeIcon {
+  flex: 0 0 auto;
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+.label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.details {
+  flex: 1 0 100%;
+  padding: 0 8px 8px 8px;
+  font: var(--mat-sys-body-small);
+}
+.quantGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 10px;
+}
+.quantGroup + .quantGroup {
+  margin-top: 2px;
+}
+.quantGroupTitle {
+  font: var(--mat-sys-label-medium);
+  white-space: nowrap;
+}
+.quantItem {
+  white-space: nowrap;
+}
+.quantLabel {
+  font-size: 0.9em;
+  color: color-mix(in srgb, var(--mat-sys-on-surface-variant) 70%, transparent);
+}
+.empty {
+  padding: 4px 8px;
+  color: var(--mat-sys-on-surface-variant);
+  font-style: italic;
+}

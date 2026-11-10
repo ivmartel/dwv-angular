@@ -1,0 +1,93 @@
+<ul class="groupList">
+  @for (group of state().groups; track group.dataId) {
+    <li class="group">
+      <div class="groupHeader">
+        <span class="groupName">group #{{ group.dataId }}</span>
+        <div class="actions">
+          <button matIconButton
+            [title]="group.editable ? 'Lock group' : 'Unlock group'"
+            [attr.aria-pressed]="!group.editable"
+            (click)="toggleLock(group)">
+            <mat-icon>{{ group.editable ? 'lock_open' : 'lock' }}</mat-icon>
+          </button>
+          <button matIconButton
+            title="Save annotation group"
+            (click)="saveAnnotationGroup(group.dataId)">
+            <mat-icon>save</mat-icon>
+          </button>
+          <button matIconButton
+            title="Show/hide annotation labels"
+            [attr.aria-pressed]="!group.labelsVisible"
+            (click)="toggleLabels(group)">
+            <mat-icon>{{ group.labelsVisible ? 'label' : 'label_off' }}</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <ul class="annotationList">
+        @for (annotation of group.annotations; track annotation.id) {
+          @let divId = getAnnotationDivId(group.dataId, annotation.id);
+          @let detailsOpen = isDetailsOpen(group.dataId, annotation.id);
+          <li class="annotation"
+            [id]="divId"
+            [class.selected]="isSelected(group.dataId, annotation.id)"
+            [class.notViewable]="!annotation.canView">
+            <button type="button" class="annotationContent"
+              title="Go to annotation"
+              (click)="gotoAnnotation(group.dataId, annotation)">
+              <mat-icon class="shapeIcon">{{ getShapeIcon(annotation.factoryName) }}</mat-icon>
+              <span class="label">{{ annotation.label }}</span>
+            </button>
+            <div class="actions">
+              <button matIconButton
+                title="Show/hide quantification"
+                [attr.aria-pressed]="detailsOpen"
+                [attr.aria-expanded]="detailsOpen"
+                [attr.aria-controls]="'qd-' + divId"
+                (click)="toggleDetails(group.dataId, annotation)">
+                <mat-icon>info</mat-icon>
+              </button>
+              <input type="color"
+                title="Change annotation colour"
+                [value]="annotation.colour"
+                [disabled]="!group.editable"
+                (change)="changeColour(group.dataId, annotation, $event)"/>
+              <button matIconButton
+                title="Show/hide annotation"
+                [attr.aria-pressed]="!annotation.visible"
+                (click)="toggleVisibility(group.dataId, annotation)">
+                <mat-icon>{{ annotation.visible ? 'visibility' : 'visibility_off' }}</mat-icon>
+              </button>
+              <button matIconButton
+                title="Delete annotation"
+                [disabled]="!group.editable"
+                (click)="deleteAnnotation(group.dataId, annotation)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+            @if (detailsOpen) {
+              <div class="details" [id]="'qd-' + divId">
+                @for (quantGroup of getQuantificationGroups(annotation.quantification);
+                  track quantGroup.title) {
+                  <div class="quantGroup">
+                    <span class="quantGroupTitle">{{ quantGroup.title }}</span>
+                    @for (item of quantGroup.items; track item.label) {
+                      <span class="quantItem" [title]="item.label">
+                        <span class="quantLabel">{{ item.shortLabel }}</span>
+                        {{ item.value }}
+                      </span>
+                    }
+                  </div>
+                } @empty {
+                  <div class="empty">No quantification</div>
+                }
+              </div>
+            }
+          </li>
+        } @empty {
+          <li class="empty">No annotation</li>
+        }
+      </ul>
+    </li>
+  }
+</ul>

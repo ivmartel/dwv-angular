@@ -12,6 +12,7 @@ import {
 
 import { DwvService } from '../services/dwv.service';
 
+import { DwvAnnotationListComponent } from './annotation-list.component';
 import { DwvRightPanelComponent } from './right-panel.component';
 
 /**
@@ -21,6 +22,7 @@ import { DwvRightPanelComponent } from './right-panel.component';
 @Component({
   selector: 'dwv-content',
   imports: [
+    DwvAnnotationListComponent,
     DwvRightPanelComponent
   ],
   templateUrl: './content.component.html',
