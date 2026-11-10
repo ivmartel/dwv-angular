@@ -1,12 +1,16 @@
-<div id="layerGroup0" class="layerGroup">
-  <div id="dropBox"
-    className="dropBox dropBoxBorder"
-    (dragOver)="onBoxDragOver($event)"
-    (dragLeave)="onBoxDragLeave($event)"
-    (drop)="onDrop($event)"
+<div id="layerGroup0" class="layerGroup"
+  (dragover)="onDragOver($event)"
+  (dragleave)="onDragLeave($event)"
+  (drop)="onDrop($event)"
+  >
+  <div #dropBox id="dropBox"
+    class="dropBox"
+    [class.dropBoxBorder]="showDropbox()"
+    [class.hover]="isHover()"
+    [style.display]="showDropbox() ? 'initial' : 'none'"
     >
     <p>Drag and drop data here or
-      <label htmlFor="input-file">
+      <label for="input-file">
         <a id="input-file-link"> click here</a>
       <input
         id="input-file"

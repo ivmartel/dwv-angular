@@ -1,8 +1,11 @@
 import {
   Component,
+  ElementRef,
   ViewEncapsulation,
+  computed,
   inject,
-  effect
+  signal,
+  viewChild
 } from '@angular/core';
 
 import { DwvService } from '../services/dwv.service';
@@ -25,31 +28,28 @@ export class DwvContentComponent {
   public loadProgress = this.dwvService.loadProgress;
   public dataLoaded = this.dwvService.dataLoaded;
 
-  // drop box class name
-  private dropboxDivId = 'dropBox';
-  private dropboxClassName = 'dropBox';
-  private borderClassName = 'dropBoxBorder';
-  private hoverClassName = 'hover';
+  /**
+   * Show the drop box when no data is loaded nor loading.
+   */
+  readonly showDropbox = computed(() => {
+    const progress = this.loadProgress();
+    const isLoading = progress !== 0 && progress !== 100;
+    return !isLoading && !this.dataLoaded();
+  });
+  /**
+   * Drag hover over the drop box flag.
+   */
+  readonly isHover = signal(false);
 
-  constructor() {
-    this.showDropbox(true);
-    // watch data load and progress
-    effect(() => {
-      const isLoaded = this.dataLoaded();
-      const progress = this.loadProgress();
-      const isLoading = progress !== 0 && progress !== 100;
-      this.showDropbox(!isLoading && !isLoaded);
-    });
-  }
+  private readonly dropBox = viewChild.required<ElementRef<HTMLElement>>('dropBox');
 
   // drag and drop [begin] -----------------------------------------------------
 
   /**
-   * Default drag event handling.
+   * Default drag event handling: prevent the browser from opening the files.
    * @param event The event to handle.
    */
-  defaultHandleDragEvent = (event: Event) => {
-    // prevent default handling
+  private defaultHandleDragEvent(event: Event) {
     event.stopPropagation();
     event.preventDefault();
   }
@@ -58,38 +58,47 @@ export class DwvContentComponent {
    * Handle a drag over.
    * @param event The event to handle.
    */
-  onBoxDragOver = (event: Event) => {
+  onDragOver(event: DragEvent) {
     this.defaultHandleDragEvent(event);
-    // update box border
-    const box = document.getElementById(this.dropboxDivId);
-    if (box && box.className.indexOf(this.hoverClassName) === -1) {
-        box.className += ' ' + this.hoverClassName;
-    }
+    this.isHover.set(this.showDropbox() && this.isInDropBox(event.target));
+  }
+
+  /**
+   * Check if an event target is inside the drop box.
+   * @param target The event target.
+   * @returns True if inside the drop box.
+   */
+  private isInDropBox(target: EventTarget | null) {
+    return target instanceof Node &&
+      this.dropBox().nativeElement.contains(target);
   }
 
   /**
    * Handle a drag leave.
    * @param event The event to handle.
    */
-  onBoxDragLeave = (event: Event) => {
+  onDragLeave(event: DragEvent) {
     this.defaultHandleDragEvent(event);
-    // update box border
-    const box = document.getElementById(this.dropboxDivId);
-    if (box && box.className.indexOf(this.hoverClassName) !== -1) {
-        box.className = box.className.replace(' ' + this.hoverClassName, '');
+    // ignore leave events towards a child of the drop box
+    if (this.isInDropBox(event.relatedTarget)) {
+      return;
     }
+    this.isHover.set(false);
   }
 
   /**
    * Handle a drop event.
    * @param event The event to handle.
    */
-  onDrop = (event: DragEvent) => {
+  onDrop(event: DragEvent) {
     this.defaultHandleDragEvent(event);
+    this.isHover.set(false);
     // load files
     if (event.dataTransfer) {
       const files = Array.from(event.dataTransfer.files);
-      this.dwvService.loadFiles(files);
+      if (files.length !== 0) {
+        this.dwvService.loadFiles(files);
+      }
     }
   }
 
@@ -97,55 +106,11 @@ export class DwvContentComponent {
    * Handle a an input[type:file] change event.
    * @param event The event to handle.
    */
-  onInputFile = (event: Event) => {
+  onInputFile(event: Event) {
     const target = event.target as HTMLInputElement;
     if (target && target.files) {
       const files = Array.from(target.files);
       this.dwvService.loadFiles(files);
-    }
-  }
-
-  /**
-   * Show/hide the data load drop box.
-   * @param show True to show the drop box.
-   */
-  private showDropbox(show: boolean) {
-    const box = document.getElementById(this.dropboxDivId);
-    if (!box) {
-      return;
-    }
-    const layerDiv = document.getElementById('layerGroup0');
-
-    if (show) {
-      // reset css class
-      box.className = this.dropboxClassName + ' ' + this.borderClassName;
-      // show box
-      box.setAttribute('style', 'display:initial');
-      // stop layer listening
-      if (layerDiv) {
-        layerDiv.removeEventListener('dragover', this.defaultHandleDragEvent);
-        layerDiv.removeEventListener('dragleave', this.defaultHandleDragEvent);
-        layerDiv.removeEventListener('drop', this.onDrop);
-      }
-      // listen to box events
-      box.addEventListener('dragover', this.onBoxDragOver);
-      box.addEventListener('dragleave', this.onBoxDragLeave);
-      box.addEventListener('drop', this.onDrop);
-    } else {
-      // remove border css class
-      box.className = this.dropboxClassName;
-      // hide box
-      box.setAttribute('style', 'display:none');
-      // stop box listening
-      box.removeEventListener('dragover', this.onBoxDragOver);
-      box.removeEventListener('dragleave', this.onBoxDragLeave);
-      box.removeEventListener('drop', this.onDrop);
-      // listen to layer events
-      if (layerDiv) {
-        layerDiv.addEventListener('dragover', this.defaultHandleDragEvent);
-        layerDiv.addEventListener('dragleave', this.defaultHandleDragEvent);
-        layerDiv.addEventListener('drop', this.onDrop);
-      }
     }
   }
 
