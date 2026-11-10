@@ -8,6 +8,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTableModule } from '@angular/material/table';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'dwv-tags-table',
@@ -16,7 +18,9 @@ import { MatSliderModule } from '@angular/material/slider';
     MatInputModule,
     MatFormFieldModule,
     MatTableModule,
-    MatSliderModule
+    MatSliderModule,
+    MatSortModule,
+    MatTooltipModule
   ],
   styleUrls: ['./tags-table.component.scss'],
   templateUrl: './tags-table.component.html'
@@ -25,10 +29,10 @@ import { MatSliderModule } from '@angular/material/slider';
 export class TagsTableComponent {
   private _fullMetaData!: Record<string, DataElement>;
 
-  public min!: number;
-  public max!: number;
+  public min = 0;
+  public max = 0;
   public instanceNumber = 0;
-  private instanceNumbers!: number[];
+  public instanceNumbers: number[] = [];
   private keys!: string[];
 
   @Input()
@@ -36,6 +40,12 @@ export class TagsTableComponent {
     this._fullMetaData = value;
     // store keys (to not recreate them)
     this.keys = Object.keys(this._fullMetaData);
+
+    // reset instance numbers (data may not have any)
+    this.instanceNumbers = [];
+    this.min = 0;
+    this.max = 0;
+    this.instanceNumber = 0;
 
     const instanceElement = this._fullMetaData['00200013'];
     if (typeof instanceElement !== 'undefined') {
@@ -94,7 +104,10 @@ export class TagsTableComponent {
 
   onsliderchange(event: Event) {
     const sliderValue = parseInt((event.target as HTMLInputElement).value, 10);
-    this.setDataSource(this.instanceNumbers[sliderValue]);
+    const instanceNumber = this.instanceNumbers[sliderValue];
+    if (typeof instanceNumber !== 'undefined') {
+      this.setDataSource(instanceNumber);
+    }
   }
 
   getMetaArray(instanceNumber: number): SimpleDataElement[] {
