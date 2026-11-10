@@ -1,5 +1,6 @@
 import { Injectable, signal } from '@angular/core';
 import {
+  AnnotationGroup,
   App,
   AppOptions,
   DataElement,
@@ -18,10 +19,27 @@ class DwvEvent {
 }
 
 /**
+ * App events re-dispatched by the service as `CustomEvent`s,
+ *   with the app event as `detail`.
+ */
+const forwardedEventTypes = [
+  'dataadd',
+  'dataremove',
+  'drawlayeradd',
+  'annotationadd',
+  'annotationupdate',
+  'annotationremove',
+  'annotationselect'
+];
+
+/**
  * DWV service.
+ *
+ * Events: the app events listed in `forwardedEventTypes` are
+ *   re-dispatched as `CustomEvent`s with the app event as `detail`.
  */
 @Injectable({providedIn: 'root'})
-export class DwvService {
+export class DwvService extends EventTarget {
   /**
    * List of annotation shape names.
    */
@@ -107,6 +125,7 @@ export class DwvService {
   readonly isManualPreset = this.#isManualPreset.asReadonly();
 
   constructor() {
+    super();
     // initialise app
     this.#layerGroupName = 'layerGroup0';
     const viewConfig0 = new ViewConfig(this.#layerGroupName);
@@ -118,6 +137,7 @@ export class DwvService {
     // setup listeners
     this.#setupLoadListeners();
     this.#setupListeners();
+    this.#setupForwardListeners();
   }
 
   /**
@@ -214,6 +234,18 @@ export class DwvService {
     this.#dwvApp.addEventListener('loadabort', (/*event*/) => {
       ++nReceivedLoadAbort;
     });
+  }
+
+  /**
+   * Setup the DWV app listeners that re-dispatch app events
+   *   as service events.
+   */
+  #setupForwardListeners() {
+    for (const type of forwardedEventTypes) {
+      this.#dwvApp.addEventListener(type, (event: object) => {
+        this.dispatchEvent(new CustomEvent(type, {detail: event}));
+      });
+    }
   }
 
   /**
@@ -372,6 +404,56 @@ export class DwvService {
     for (const dataId of dataIds) {
       this.#dwvApp.render(dataId);
     }
+  }
+
+  /**
+   * Get the annotation group of a data.
+   *
+   * @param dataId The data id.
+   * @returns The annotation group, undefined if none.
+   */
+  getAnnotationGroup(dataId: string): AnnotationGroup | undefined {
+    return this.#dwvApp.getData(dataId)?.annotationGroup;
+  }
+
+  /**
+   * Get the draw layers associated to a data.
+   *
+   * @param dataId The data id.
+   * @returns The draw layers.
+   */
+  getDrawLayersByDataId(dataId: string) {
+    return this.#dwvApp.getDrawLayersByDataId(dataId);
+  }
+
+  /**
+   * Add a command to the app undo stack (to use as callback).
+   *
+   * @param cmd The command.
+   */
+  readonly addToUndoStack = (cmd: Parameters<App['addToUndoStack']>[0]) => {
+    this.#dwvApp.addToUndoStack(cmd);
+  };
+
+  /**
+   * Add an annotation group on the active view layer of the
+   *   main layer group, triggers a 'dataadd' event once added.
+   *
+   * @returns False if there is no active view layer.
+   */
+  addAnnotationGroup() {
+    const divId = this.#layerGroupName;
+    const viewLayer = this.#dwvApp.getLayerGroupByDivId(divId)
+      ?.getActiveViewLayer();
+    if (viewLayer === undefined) {
+      console.warn('No active view layer to add an annotation group to');
+      return false;
+    }
+    const refDataId = viewLayer.getDataId();
+    const data = this.#dwvApp.createAnnotationData(refDataId);
+    // render (will create draw layer and trigger 'dataadd')
+    this.#dwvApp.addAndRenderAnnotationData(data, divId, refDataId);
+    return true;
   }
 
   /**
