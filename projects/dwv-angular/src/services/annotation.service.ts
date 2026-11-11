@@ -114,10 +114,13 @@ function getAnnotationItemState(
  *   dwv service, exposed as a signal. Actions are keyed by
  *   data id and annotation id; dwv objects are not exposed.
  *
+ * Events: `error`, dispatched as a `CustomEvent` with the `Error`
+ *   as `detail` when an action fails.
+ *
  * Adapted from the dwv viewer `annot.service.js`.
  */
 @Injectable({providedIn: 'root'})
-export class AnnotationService {
+export class AnnotationService extends EventTarget {
 
   readonly #dwvAppService = inject(DwvAppService);
 
@@ -156,6 +159,7 @@ export class AnnotationService {
   };
 
   constructor() {
+    super();
     // both services live as long as the app: no need to remove the listeners
     for (const [type, handler] of Object.entries(this.#handlers)) {
       this.#dwvAppService.addEventListener(type,
@@ -315,10 +319,30 @@ export class AnnotationService {
    * Get an annotation group as a DICOM SR blob.
    *
    * @param dataId The annotation group data id.
+   * @returns The DICOM SR blob, or undefined if the group is not found
+   *   or the writing fails, in which case an `error` event is dispatched.
+   */
+  getAnnotationGroupAsDicom(dataId: string): Blob | undefined {
+    try {
+      return this.#getAnnotationGroupAsDicom(dataId);
+    } catch (error) {
+      const err = error instanceof Error ? error : new Error(String(error));
+      console.error(err);
+      this.dispatchEvent(new CustomEvent('error', {detail: err}));
+      return undefined;
+    }
+  }
+
+  // internals
+
+  /**
+   * Get an annotation group as a DICOM SR blob.
+   *
+   * @param dataId The annotation group data id.
    * @returns The DICOM SR blob.
    * @throws {Error} If the group is not found or the writing fails.
    */
-  getAnnotationGroupAsDicom(dataId: string) {
+  #getAnnotationGroupAsDicom(dataId: string) {
     const annotationGroup = this.#getAnnotationGroup(dataId);
     if (annotationGroup === undefined) {
       throw new Error(`Cannot find annotation group with id ${dataId}`);
@@ -338,8 +362,6 @@ export class AnnotationService {
     const dicomBuffer = writer.getBuffer(dicomElements);
     return new Blob([dicomBuffer], {type: 'application/dicom'});
   }
-
-  // internals
 
   /**
    * Get an annotation group from the app.

@@ -35,8 +35,12 @@ const forwardedEventTypes = [
 /**
  * DWV service.
  *
- * Events: the app events listed in `forwardedEventTypes` are
- *   re-dispatched as `CustomEvent`s with the app event as `detail`.
+ * Events:
+ * - the app events listed in `forwardedEventTypes` are
+ *   re-dispatched as `CustomEvent`s with the app event as `detail`,
+ * - `loaderror` and `loadabort`: dispatched once at the end of a load
+ *   that received errors or was aborted, as `CustomEvent`s with
+ *   the app `loadend` event as `detail`.
  */
 @Injectable({providedIn: 'root'})
 export class DwvAppService extends EventTarget {
@@ -217,14 +221,14 @@ export class DwvAppService extends EventTarget {
       // set data loaded flag
       this.#dataLoaded.set(true);
     });
-    this.#dwvApp.addEventListener('loadend', (/*event*/) => {
+    this.#dwvApp.addEventListener('loadend', (event: object) => {
       if (nReceivedLoadError) {
         this.#loadProgress.set(0);
-        alert('Received errors during load. Check log for details.');
+        this.dispatchEvent(new CustomEvent('loaderror', {detail: event}));
       }
       if (nReceivedLoadAbort) {
         this.#loadProgress.set(0);
-        alert('Load was aborted.');
+        this.dispatchEvent(new CustomEvent('loadabort', {detail: event}));
       }
     });
     this.#dwvApp.addEventListener('loaderror', (event: ErrorEvent) => {

@@ -1,11 +1,14 @@
 import {
   Component,
+  DestroyRef,
   Input,
   OnInit,
   inject
 } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { DwvAppService } from '../services/dwv-app.service';
+import { AnnotationService } from '../services/annotation.service';
 
 import { DwvHeaderComponent } from './header.component';
 import { DwvContentComponent } from './content.component';
@@ -57,6 +60,31 @@ export class DwvComponent implements OnInit {
   @Input() urls!: string[];
 
   private readonly dwvAppService = inject(DwvAppService);
+  private readonly annotService = inject(AnnotationService);
+  private readonly snackBar = inject(MatSnackBar);
+
+  constructor() {
+    // notify the user of service problems
+    const onLoadError = () => {
+      this.snackBar.open(
+        'Received errors during load. Check log for details.', 'Close');
+    };
+    const onLoadAbort = () => {
+      this.snackBar.open('Load was aborted.', 'Close', {duration: 5000});
+    };
+    const onAnnotationError = (event: Event) => {
+      const error = (event as CustomEvent<Error>).detail;
+      this.snackBar.open(error.message, 'Close');
+    };
+    this.dwvAppService.addEventListener('loaderror', onLoadError);
+    this.dwvAppService.addEventListener('loadabort', onLoadAbort);
+    this.annotService.addEventListener('error', onAnnotationError);
+    inject(DestroyRef).onDestroy(() => {
+      this.dwvAppService.removeEventListener('loaderror', onLoadError);
+      this.dwvAppService.removeEventListener('loadabort', onLoadAbort);
+      this.annotService.removeEventListener('error', onAnnotationError);
+    });
+  }
 
   ngOnInit() {
     // load or dropbox

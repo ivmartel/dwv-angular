@@ -123,13 +123,9 @@ export class DwvAnnotationListComponent {
    * @param dataId The annotation group data id.
    */
   saveAnnotationGroup(dataId: string) {
-    let blob;
-    try {
-      blob = this.annotService.getAnnotationGroupAsDicom(dataId);
-    } catch (error) {
-      const message = error instanceof Error ? error.message : String(error);
-      console.error(message);
-      alert(message);
+    // errors are dispatched as service events
+    const blob = this.annotService.getAnnotationGroupAsDicom(dataId);
+    if (blob === undefined) {
       return;
     }
     // temporary link to download
