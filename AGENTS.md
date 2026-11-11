@@ -68,5 +68,6 @@ CI (`.github/workflows/nodejs-ci.yml`) runs, in order: `yarn install --immutable
 
 ## Notes
 
+- Do not patch dwv (no edits in `node_modules/dwv`, no `patch-package` or Yarn patches, no monkey-patching at runtime). If a fix or feature is needed in dwv itself, propose a pull request to the [dwv repository](https://github.com/ivmartel/dwv) instead.
 - dwv-angular is not certified for diagnostic use; do not add claims or features implying clinical use.
 - License is GPL-3.0.
