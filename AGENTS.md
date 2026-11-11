@@ -4,7 +4,8 @@ Guidance for coding agents working in this repository.
 
 ## Project overview
 
-Medical (DICOM) viewer built on [DWV](https://github.com/ivmartel/dwv) and Angular. Its layout and features are inspired by the dwv development viewer ([`dev/viewer`](https://github.com/ivmartel/dwv/tree/develop/dev/viewer) in the dwv repository); look there for reference behaviour when adding features.
+Medical (DICOM) viewer built on [DWV](https://github.com/ivmartel/dwv) and Angular. Its layout and features are inspired by the dwv development viewer ([`dev/viewer`](https://github.com/ivmartel/dwv/tree/develop/dev/viewer) in the dwv repository); look there for reference behaviour when adding features. Not certified for diagnostic
+use. License: GPL-3.0.
 
 It is an Angular CLI workspace with two projects:
 
@@ -69,5 +70,4 @@ CI (`.github/workflows/nodejs-ci.yml`) runs, in order: `yarn install --immutable
 ## Notes
 
 - Do not patch dwv (no edits in `node_modules/dwv`, no `patch-package` or Yarn patches, no monkey-patching at runtime). If a fix or feature is needed in dwv itself, propose a pull request to the [dwv repository](https://github.com/ivmartel/dwv) instead.
-- dwv-angular is not certified for diagnostic use; do not add claims or features implying clinical use.
-- License is GPL-3.0.
+
