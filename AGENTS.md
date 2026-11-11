@@ -4,7 +4,9 @@ Guidance for coding agents working in this repository.
 
 ## Project overview
 
-Medical (DICOM) viewer built on [DWV](https://github.com/ivmartel/dwv) and Angular. It is an Angular CLI workspace with two projects:
+Medical (DICOM) viewer built on [DWV](https://github.com/ivmartel/dwv) and Angular. Its layout and features are inspired by the dwv development viewer ([`dev/viewer`](https://github.com/ivmartel/dwv/tree/develop/dev/viewer) in the dwv repository); look there for reference behaviour when adding features.
+
+It is an Angular CLI workspace with two projects:
 
 - `projects/dwv-angular`: the reusable Angular library (`<dwv-angular>` component, selector prefix `dwv`).
   - `src/lib/`: standalone components (header, content, footer, right panel, annotation list, tags dialog/table) and helpers (`quantification.ts`, `shape-icons.ts`).
@@ -44,7 +46,7 @@ CI (`.github/workflows/nodejs-ci.yml`) runs, in order: `yarn install --immutable
   ```
 - Use ES private fields (`#field`) for private service members.
 - Templates use the built-in control flow (`@if`, `@for ... track`), not `*ngIf` / `*ngFor`.
-- UI components come from Angular Material / CDK.
+- UI components come from Angular Material / CDK. Keep custom styling to a minimum and follow Material Design guidelines; prefer Material components, theming and tokens over custom CSS.
 - Library component class names are prefixed with `Dwv` (e.g. `DwvContentComponent`), selectors with `dwv-`.
 - Formatting (see `.editorconfig`): 2-space indent, single quotes in TS, final newline, no trailing whitespace.
 - Document classes, methods and non-obvious members with JSDoc comments (`/** ... */`), including `@param` and `@returns` for functions.
