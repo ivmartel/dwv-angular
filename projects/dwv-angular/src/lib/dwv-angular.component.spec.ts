@@ -67,7 +67,7 @@ describe('DwvComponent', () => {
   it('shows a snack bar on annotation error', () => {
     const snackBar = TestBed.inject(MatSnackBar);
     const openSpy = vi.spyOn(snackBar, 'open');
-    const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+    const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => undefined);
     const annotService = TestBed.inject(AnnotationService);
 
     expect(annotService.getAnnotationGroupAsDicom('unknown')).toBeUndefined();
