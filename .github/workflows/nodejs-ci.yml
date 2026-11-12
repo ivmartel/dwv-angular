@@ -50,7 +50,7 @@ jobs:
       uses: actions/upload-artifact@v7
       with:
         name: dwv-angular-app
-        path: ./dist/dwv-angular-app/browser
+        path: dist/dwv-angular-app/browser
         if-no-files-found: error
         retention-days: 1
 
@@ -70,7 +70,7 @@ jobs:
       uses: actions/checkout@v7
       with:
         ref: gh-pages
-    - name: Download app build
+    - name: Download demo
       uses: actions/download-artifact@v8
       with:
         name: dwv-angular-app
@@ -78,12 +78,12 @@ jobs:
     - name: Push to gh-pages
       env:
         BUILD_TYPE: ${{ needs.build.outputs.build-type }}
-        DEMO_DIR: ${{ runner.temp }}/dwv-angular-app/
+        DEMO_DIR: ${{ runner.temp }}/dwv-angular-app
       run: |
-        # ':?' aborts if BUILD_TYPE is empty or unset (avoids 'rm -Rf demo/*')
-        DEPLOY_DIR="./demo/${BUILD_TYPE:?}"
         git config user.email github-actions@github.com
         git config user.name github-actions
+        # ':?' aborts if BUILD_TYPE is empty or unset (avoids 'rm -Rf demo/*')
+        DEPLOY_DIR="./demo/${BUILD_TYPE:?}"
         mkdir -p "$DEPLOY_DIR"
         rm -Rf "${DEPLOY_DIR:?}"/*
         cp -Rf "$DEMO_DIR"/* "$DEPLOY_DIR"
