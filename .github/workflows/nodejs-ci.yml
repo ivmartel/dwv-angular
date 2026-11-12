@@ -1,4 +1,5 @@
 # Node.js CI workflow
+
 # The base href is set in the npm build script
 
 name: Node.js CI
