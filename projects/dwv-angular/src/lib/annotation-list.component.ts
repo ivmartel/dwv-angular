@@ -20,7 +20,7 @@ import { getQuantificationGroups } from './quantification';
 /**
  * Annotation list component: renders the annotation service state.
  *
- * Adapted from the dwv viewer `annotationComponent.js`.
+ * Adapted from the dwv-simplistic `annotationComponent.js`.
  */
 
 @Component({

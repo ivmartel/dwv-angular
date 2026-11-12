@@ -4,7 +4,7 @@ Guidance for coding agents working in this repository.
 
 ## Project overview
 
-Medical (DICOM) viewer built on [DWV](https://github.com/ivmartel/dwv) and Angular. Its layout and features are inspired by the dwv development viewer ([`dev/viewer`](https://github.com/ivmartel/dwv/tree/develop/dev/viewer) in the dwv repository); look there for reference behaviour when adding features. Not certified for diagnostic
+Medical (DICOM) viewer built on [DWV](https://github.com/ivmartel/dwv) and Angular. Its layout and features are inspired by [dwv-simplistic](https://github.com/ivmartel/dwv-simplistic); look there for reference behaviour when adding features. Not certified for diagnostic
 use. License: GPL-3.0.
 
 It is an Angular CLI workspace with two projects:

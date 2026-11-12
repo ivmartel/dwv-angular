@@ -1,8 +1,8 @@
 # Annotation list: design spec
 
-Reference: dwv viewer
-[`annotationComponent.js`](https://github.com/ivmartel/dwv/blob/develop/dev/viewer/src/annotationComponent.js)
-(dwv `dev/viewer`)
+Reference: dwv-simplistic
+[`annotationComponent.js`](https://github.com/ivmartel/dwv-simplistic/blob/main/src/lib/annotationComponent.js)
+(spec: [`annotationComponent.md`](https://github.com/ivmartel/dwv-simplistic/blob/main/doc/design/annotationComponent.md))
 
 ## Purpose
 

@@ -117,7 +117,7 @@ function getAnnotationItemState(
  * Events: `error`, dispatched as a `CustomEvent` with the `Error`
  *   as `detail` when an action fails.
  *
- * Adapted from the dwv viewer `annotationService.js`.
+ * Adapted from the dwv-simplistic `annotationService.js`.
  */
 @Injectable({providedIn: 'root'})
 export class AnnotationService extends EventTarget {
