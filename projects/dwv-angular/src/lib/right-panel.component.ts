@@ -81,7 +81,7 @@ export class DwvRightPanelComponent {
    * @returns The width, in pixels.
    */
   maxWidth() {
-    return Math.max(this.minWidth, Math.round(window.innerWidth * 0.6));
+    return Math.max(this.minWidth, Math.round(window.innerWidth * 0.5));
   }
 
   /**

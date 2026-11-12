@@ -15,13 +15,6 @@ Right of the image view, in the same horizontal row, taking the full height
 of the content area. The view takes the remaining width and refits whenever
 its size changes, for example when the panel opens, closes or is resized.
 
-## Content
-
-In order:
-
-1. The annotation list.
-2. Any content projected by the consumer of the viewer.
-
 ## Data
 
 Local view state only, not persisted and not shared:
@@ -35,7 +28,7 @@ Local view state only, not persisted and not shared:
 Width limits:
 
 - Minimum: 200px.
-- Maximum: 60% of the window width, rounded, and never below the minimum.
+- Maximum: 50% of the window width, rounded, and never below the minimum.
 - Every width change is rounded and clamped to these limits.
 
 ## Structure
@@ -52,9 +45,9 @@ panel                       (id rightPanel)
       └─ content
 ```
 
-The panel element is always present; when closed its width is 0 so it can
-animate. The panel content keeps the open width while animating, so it does
-not reflow.
+The panel element is always present; when closed its width is 0. The panel
+content keeps the open width, so it does not reflow when the panel closes.
+Opening and closing are not animated.
 
 ## Toggle
 
@@ -94,8 +87,7 @@ The resize handle is a vertical strip on the left edge of the open panel.
 | --- | --- | --- |
 | Closed | initial, or toggle | Panel width 0, no border; toggle strip shown |
 | Open | toggle | Panel at its width, 1px left border |
-| Opening / closing | toggle | Width animated over 200ms, ease |
-| Resizing | pointer drag on the handle | No width animation, no text selection, handle highlighted |
+| Resizing | pointer drag on the handle | No text selection, handle highlighted |
 | Handle hover / focus | pointer over or keyboard focus on the handle | Handle filled with the primary colour, no focus outline |
 
 ## Visual style

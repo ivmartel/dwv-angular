@@ -30,14 +30,12 @@
   /* same grey as the (disabled) filled buttons */
   background: var(--mat-sys-surface-container,
     color-mix(in srgb, var(--mat-sys-on-surface) 12%, transparent));
-  transition: width 200ms ease;
 }
 .panel.open {
   border-left-width: 1px;
 }
-/* no animation while dragging */
+/* no text selection while dragging */
 .panel.resizing {
-  transition: none;
   user-select: none;
 }
 .resizeHandle {
@@ -58,7 +56,7 @@
 }
 .panelContent {
   /* width set from the component (not the panel) so the content
-    does not reflow while animating */
+    does not reflow when the panel closes */
   height: 100%;
   display: flex;
   flex-direction: column;
