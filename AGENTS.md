@@ -13,6 +13,7 @@ It is an Angular CLI workspace with two projects:
   - `src/lib/`: standalone components (header, content, footer, right panel, annotation list, tags dialog/table) and helpers (`quantification.ts`, `shape-icons.ts`).
   - `src/services/`: `DwvAppService` (wraps the dwv `App`, exposes state as signals and re-dispatches app events as `CustomEvent`s, since it extends `EventTarget`), `AnnotationService`, overlay config.
   - `src/public-api.ts`: public entry point of the library. Only export what consumers need.
+  - `doc/design/`: component design specs, framework agnostic. Read the spec before changing a component and keep it up to date with behaviour or style changes.
 - `projects/dwv-angular-app`: demo application that consumes the library (selector prefix `app`).
 
 The app imports `dwv-angular` through a `tsconfig.json` path mapping to `dist/dwv-angular`, so **the library must be built before serving, building or testing the app**.

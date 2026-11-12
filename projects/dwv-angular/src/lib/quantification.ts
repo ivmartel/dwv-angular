@@ -20,12 +20,10 @@ const quantificationLabels: Record<string, string> = {
 };
 
 /**
- * Short quantification labels for compact display, others use the
- *   full label (lowercase keys, compared case insensitive).
+ * Specific short quantification labels for compact display, others use
+ *   the lowercase key (lowercase keys, compared case insensitive).
  */
 const quantificationShortLabels: Record<string, string> = {
-  stddev: 'sd',
-  median: 'med',
   surface: 'area'
 };
 
@@ -45,11 +43,7 @@ export interface QuantificationGroup {
  */
 function getQuantificationShortLabel(key: string) {
   const lowerKey = key.toLowerCase();
-  // percentile: keep 'p25'
-  if (/^p\d+$/.test(lowerKey)) {
-    return lowerKey;
-  }
-  return quantificationShortLabels[lowerKey] ?? getQuantificationLabel(key);
+  return quantificationShortLabels[lowerKey] ?? lowerKey;
 }
 
 /**
