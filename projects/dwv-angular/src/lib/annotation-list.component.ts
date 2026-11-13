@@ -13,6 +13,7 @@ import {
   AnnotationItemState,
   AnnotationService
 } from '../services/annotation.service';
+import { DWV_VIEWER_ID } from '../services/viewer-id';
 
 import { getShapeIcon } from './shape-icons';
 import { getQuantificationGroups } from './quantification';
@@ -37,6 +38,7 @@ export class DwvAnnotationListComponent {
 
   private readonly annotService = inject(AnnotationService);
   private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
+  readonly #viewerId = inject(DWV_VIEWER_ID);
 
   readonly state = this.annotService.state;
 
@@ -63,14 +65,15 @@ export class DwvAnnotationListComponent {
   }
 
   /**
-   * Get the annotation div id.
+   * Get the annotation div id, prefixed with the viewer id to be
+   *   unique on the page.
    *
    * @param dataId The annotation group data id.
    * @param annotationId The annotation tracking UID.
    * @returns The div id.
    */
   getAnnotationDivId(dataId: string, annotationId: string) {
-    return `annotationgroup${dataId}-annotation${annotationId}`;
+    return `${this.#viewerId}-annotationgroup${dataId}-annotation${annotationId}`;
   }
 
   /**
