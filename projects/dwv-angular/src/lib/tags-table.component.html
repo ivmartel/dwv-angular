@@ -3,11 +3,11 @@
     <input class="searchinput" matInput (keyup)="onkeyup($event)" placeholder="Filter">
   </mat-form-field>
   @if (instanceNumbers.length !== 0) {
-    <mat-slider class="instanceslider" [id]="sliderId"
+    <mat-slider class="instanceslider"
       [min]="min" [max]="max" step="1" showTickMarks="true" matTooltip="Instance number">
-      <input class="instanceinput" matSliderThumb (input)="onsliderchange($event)">
+      <input class="instanceinput" matSliderThumb aria-label="Instance number" (input)="onsliderchange($event)">
     </mat-slider>
-    <label [for]="sliderId" class="instancelabel" matTooltip="Instance number">{{instanceNumber}}</label>
+    <span class="instancelabel" matTooltip="Instance number">{{instanceNumber}}</span>
   }
 
   <section class="container mat-elevation-z8">

@@ -8,7 +8,6 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DataElement } from 'dwv';
 
 import { TagsDialogComponent } from './tags-dialog.component';
-import { DWV_VIEWER_ID } from '../services/viewer-id';
 
 describe('TagsDialogComponent', () => {
   let component: TagsDialogComponent;
@@ -37,7 +36,6 @@ describe('TagsDialogComponent', () => {
           }
         },
         { provide: MatDialogRef, useValue: {} },
-        { provide: DWV_VIEWER_ID, useValue: 'test' },
         provideZonelessChangeDetection()
       ]
     });

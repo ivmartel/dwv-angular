@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, inject } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { DataElement, getTagFromKey } from 'dwv';
@@ -10,8 +10,6 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTooltipModule } from '@angular/material/tooltip';
-
-import { DWV_VIEWER_ID } from '../services/viewer-id';
 
 @Component({
   selector: 'dwv-tags-table',
@@ -29,10 +27,6 @@ import { DWV_VIEWER_ID } from '../services/viewer-id';
 })
 
 export class TagsTableComponent {
-  /**
-   * Id of the instance slider, built from the viewer id.
-   */
-  readonly sliderId = inject(DWV_VIEWER_ID) + '-instanceslider';
   private _fullMetaData!: Record<string, DataElement>;
 
   public min = 0;

@@ -26,11 +26,9 @@
 
       <ul class="annotationList">
         @for (annotation of group.annotations; track annotation.id) {
-          @let divId = getAnnotationDivId(group.dataId, annotation.id);
           @let detailsOpen = isDetailsOpen(group.dataId, annotation.id);
           @let detailsId = getDetailsDivId(group.dataId, annotation.id);
           <li class="annotation"
-            [id]="divId"
             [class.selected]="isSelected(group.dataId, annotation.id)"
             [class.notViewable]="!annotation.canView">
             <button type="button" class="annotationContent"

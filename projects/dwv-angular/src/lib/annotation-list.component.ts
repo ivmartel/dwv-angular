@@ -58,27 +58,25 @@ export class DwvAnnotationListComponent {
       if (selected === undefined) {
         return;
       }
-      const id = this.getAnnotationDivId(selected.dataId, selected.annotationId);
-      this.host.nativeElement.querySelector(`[id="${CSS.escape(id)}"]`)
+      this.host.nativeElement.querySelector('.annotation.selected')
         ?.scrollIntoView({block: 'nearest'});
     });
   }
 
   /**
-   * Get the annotation div id, prefixed with the viewer id to be
-   *   unique on the page.
+   * Get the key of an annotation in the open details set.
    *
    * @param dataId The annotation group data id.
    * @param annotationId The annotation tracking UID.
-   * @returns The div id.
+   * @returns The key.
    */
-  getAnnotationDivId(dataId: string, annotationId: string) {
-    return `${this.#viewerId}-annotationgroup${dataId}-annotation${annotationId}`;
+  #getAnnotationKey(dataId: string, annotationId: string) {
+    return `${dataId}/${annotationId}`;
   }
 
   /**
-   * Get the annotation details div id: the annotation div id with
-   *   `qd-` inserted after the viewer id.
+   * Get the annotation details div id, prefixed with the viewer id to be
+   *   unique on the page (referenced by the details button `aria-controls`).
    *
    * @param dataId The annotation group data id.
    * @param annotationId The annotation tracking UID.
@@ -109,7 +107,7 @@ export class DwvAnnotationListComponent {
    * @returns True if open.
    */
   isDetailsOpen(dataId: string, annotationId: string) {
-    return this.openDetails().has(this.getAnnotationDivId(dataId, annotationId));
+    return this.openDetails().has(this.#getAnnotationKey(dataId, annotationId));
   }
 
   // actions
@@ -169,11 +167,11 @@ export class DwvAnnotationListComponent {
    * @param annotation The annotation state.
    */
   toggleDetails(dataId: string, annotation: AnnotationItemState) {
-    const divId = this.getAnnotationDivId(dataId, annotation.id);
+    const key = this.#getAnnotationKey(dataId, annotation.id);
     this.openDetails.update((set) => {
       const res = new Set(set);
-      if (!res.delete(divId)) {
-        res.add(divId);
+      if (!res.delete(key)) {
+        res.add(key);
       }
       return res;
     });

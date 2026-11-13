@@ -11,7 +11,6 @@ import { MatSliderModule } from '@angular/material/slider';
 import { DataElement } from 'dwv';
 
 import { TagsTableComponent } from './tags-table.component';
-import { DWV_VIEWER_ID } from '../services/viewer-id';
 
 describe('TagsTableComponent', () => {
   let component: TagsTableComponent;
@@ -28,8 +27,7 @@ describe('TagsTableComponent', () => {
         MatSliderModule
       ],
       providers: [
-        provideZonelessChangeDetection(),
-        {provide: DWV_VIEWER_ID, useValue: 'test'}
+        provideZonelessChangeDetection()
       ]
     });
     fixture = TestBed.createComponent(TagsTableComponent);
