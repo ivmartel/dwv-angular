@@ -39,8 +39,14 @@ describe('DwvContentComponent', () => {
     service = TestBed.inject(DwvAppService);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    layer = compiled.querySelector('#layerGroup0') as HTMLElement;
+    layer = compiled.querySelector(
+      '#' + service.getLayerGroupDivId()) as HTMLElement;
     box = compiled.querySelector('#dropBox') as HTMLElement;
+  });
+
+  it('sets the layer group div id from the service', () => {
+    expect(layer).not.toBeNull();
+    expect(layer.id).toBe(service.getLayerGroupDivId());
   });
 
   it('shows the drop box with border when no data', () => {

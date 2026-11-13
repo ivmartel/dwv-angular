@@ -36,6 +36,10 @@ export class DwvContentComponent {
   // dwvAppService signals
   public loadProgress = this.dwvAppService.loadProgress;
   public dataLoaded = this.dwvAppService.dataLoaded;
+  /**
+   * Id of the HTML div element of the main layer group.
+   */
+  public layerGroupDivId = this.dwvAppService.getLayerGroupDivId();
 
   /**
    * Show the drop box when no data is loaded nor loading.

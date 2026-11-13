@@ -154,6 +154,15 @@ export class DwvAppService extends EventTarget {
   }
 
   /**
+   * Get the id of the HTML div element of the main layer group.
+   *
+   * @returns The div id.
+   */
+  getLayerGroupDivId() {
+    return this.#layerGroupDivId;
+  }
+
+  /**
    * Get the list of tool names.
    *
    * @returns The list of names.
