@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { DwvComponent } from 'dwv-angular';
 
 @Component({
@@ -8,14 +8,6 @@ import { DwvComponent } from 'dwv-angular';
   ],
   templateUrl: './app.component.html'
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   title = 'dwv-angular-app';
-  uri!: string;
-
-  ngOnInit() {
-    // pass window location if there are search parameters
-    if (window.location.search !== '') {
-      this.uri = window.location.href;
-    }
-  }
 }

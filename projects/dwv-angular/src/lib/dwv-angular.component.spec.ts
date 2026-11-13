@@ -97,6 +97,44 @@ describe('DwvComponent', () => {
     other.destroy();
   });
 
+  it('loads from the window location if asked and with search args', () => {
+    const service = fixture.debugElement.injector.get(DwvAppService);
+    const loadSpy = vi.spyOn(service, 'loadFromUri')
+      .mockImplementation(() => undefined);
+    const href = 'http://localhost/index.html?input=file.dcm';
+    vi.spyOn(window, 'location', 'get').mockReturnValue(
+      new URL(href) as unknown as Location);
+
+    fixture.componentRef.setInput('loadFromWindowLocation', true);
+    fixture.detectChanges();
+    expect(loadSpy).toHaveBeenCalledWith(href);
+    vi.restoreAllMocks();
+  });
+
+  it('does not load from the window location without search args', () => {
+    const service = fixture.debugElement.injector.get(DwvAppService);
+    const loadSpy = vi.spyOn(service, 'loadFromUri');
+
+    fixture.componentRef.setInput('loadFromWindowLocation', true);
+    fixture.detectChanges();
+    expect(loadSpy).not.toHaveBeenCalled();
+  });
+
+  it('gives priority to the uri input over the window location', () => {
+    const service = fixture.debugElement.injector.get(DwvAppService);
+    const loadSpy = vi.spyOn(service, 'loadFromUri')
+      .mockImplementation(() => undefined);
+    vi.spyOn(window, 'location', 'get').mockReturnValue(
+      new URL('http://localhost/?input=other.dcm') as unknown as Location);
+
+    fixture.componentRef.setInput('uri', 'http://localhost/?input=file.dcm');
+    fixture.componentRef.setInput('loadFromWindowLocation', true);
+    fixture.detectChanges();
+    expect(loadSpy).toHaveBeenCalledTimes(1);
+    expect(loadSpy).toHaveBeenCalledWith('http://localhost/?input=file.dcm');
+    vi.restoreAllMocks();
+  });
+
   it('stops listening to service events when destroyed', () => {
     const snackBar = TestBed.inject(MatSnackBar);
     const openSpy = vi.spyOn(snackBar, 'open');

@@ -21,9 +21,12 @@ import { DwvFooterComponent } from './footer.component';
  * local system. The arguments are
  * - uri: string, an input URI to load the data from
  * - urls: string[], a list of urls to load the data from
+ * - loadFromWindowLocation: boolean, use the window location as input uri
+ *   if it contains search arguments, defaults to false
  * - showLegend: boolean, defaults to false
  *
- * The dropbox is shown if no uri nor urls are provided.
+ * Inputs are checked in order: uri, urls then loadFromWindowLocation.
+ * The dropbox is shown if no data is loaded.
  *
  * ref: {@link https://github.com/ivmartel/dwv}.
  *
@@ -41,6 +44,8 @@ import { DwvFooterComponent } from './footer.component';
  *     'https://www.demo.com/file1.dcm'
  *   ]">
  * </dwv-angular>
+ * @example
+ * <dwv-angular [loadFromWindowLocation]="true"></dwv-angular>
  */
 
 @Component({
@@ -61,6 +66,7 @@ export class DwvComponent implements OnInit {
   @Input() showLegend = false;
   @Input() uri!: string;
   @Input() urls!: string[];
+  @Input() loadFromWindowLocation = false;
 
   private readonly dwvAppService = inject(DwvAppService);
   private readonly annotService = inject(AnnotationService);
@@ -95,6 +101,9 @@ export class DwvComponent implements OnInit {
       this.dwvAppService.loadFromUri(this.uri);
     } else if (this.urls !== undefined) {
       this.dwvAppService.loadURLs(this.urls);
+    } else if (this.loadFromWindowLocation &&
+      window.location.search !== '') {
+      this.dwvAppService.loadFromUri(window.location.href);
     }
   }
 
