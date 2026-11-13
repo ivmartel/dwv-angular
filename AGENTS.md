@@ -6,9 +6,9 @@ The first part (up to [Angular implementation](#angular-implementation)) is fram
 
 ## Project overview
 
-Medical (DICOM) viewer built on [DWV](https://github.com/ivmartel/dwv). Its layout and features are inspired by [dwv-simplistic](https://github.com/ivmartel/dwv-simplistic); look there for reference behaviour when adding features. Not certified for diagnostic use. License: GPL-3.0.
+Medical (DICOM) image viewer Angular component built on [DWV](https://github.com/ivmartel/dwv), shipped with a demo application. Its layout and features are inspired by [dwv-simplistic](https://github.com/ivmartel/dwv-simplistic); look there for reference behaviour when adding features. Not certified for diagnostic use. License: GPL-3.0.
 
-It is made of a reusable viewer component library and a demo application that consumes it. The library only exposes what consumers need. The dwv web workers are served by the app, not by the library.
+The main deliverable is the reusable viewer component library; the demo application consumes it and shows how to integrate it. The library only exposes what consumers need. The dwv web workers are served by the app, not by the library.
 
 Component behaviour and style are described in framework agnostic design specs (`projects/dwv-angular/doc/design/`). Read the spec before changing a component and keep it up to date with behaviour or style changes.
 
