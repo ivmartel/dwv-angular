@@ -16,17 +16,11 @@ import { DwvContentComponent } from './content.component';
 import { DwvFooterComponent } from './footer.component';
 
 /**
- * DWV component: display DICOM data using DWV (DICOM Web Viewer). Default
- * (no arguments) shows a dropbox to manually load dicom data from the
- * local system. The arguments are
- * - uri: string, an input URI to load the data from
- * - urls: string[], a list of urls to load the data from
- * - loadFromWindowLocation: boolean, use the window location as input uri
- *   if it contains search arguments, defaults to false
- * - showLegend: boolean, defaults to false
+ * DWV component: display DICOM data using DWV (DICOM Web Viewer).
  *
- * Inputs are checked in order: uri, urls then loadFromWindowLocation.
- * The dropbox is shown if no data is loaded.
+ * The data inputs are checked in order: uri, urls then
+ * loadFromWindowLocation; the first one that is set is used. They are only
+ * read on init. A dropbox to load local data is shown if no data is loaded.
  *
  * ref: {@link https://github.com/ivmartel/dwv}.
  *
@@ -35,7 +29,7 @@ import { DwvFooterComponent } from './footer.component';
  * <dwv-angular [showLegend]="true"></dwv-angular>
  * @example
  * <dwv-angular
- *   [uri]="https://www.demo.com/index.html?input=file.dcm">
+ *   uri="https://www.demo.com/index.html?input=file.dcm">
  * </dwv-angular>
  * @example
  * <dwv-angular
@@ -63,9 +57,25 @@ import { DwvFooterComponent } from './footer.component';
 
 export class DwvComponent implements OnInit {
 
+  /**
+   * Show the footer legend ("Powered by" dwv and Angular, with their
+   * versions), defaults to false.
+   */
   @Input() showLegend = false;
+  /**
+   * URI with search arguments describing the data to load, for example
+   * `https://www.demo.com/index.html?input=file.dcm`
+   * (see the dwv `App.loadFromUri` method).
+   */
   @Input() uri!: string;
+  /**
+   * List of urls of the data to load.
+   */
   @Input() urls!: string[];
+  /**
+   * Use the window location as input URI if it contains search arguments,
+   * defaults to false.
+   */
   @Input() loadFromWindowLocation = false;
 
   private readonly dwvAppService = inject(DwvAppService);
