@@ -86,9 +86,9 @@ export class DwvAppService extends EventTarget {
   #orientation!: string;
 
   /**
-   * Name of the main layer group.
+   * Id of the HTML div element of the main layer group.
    */
-  #layerGroupName!: string;
+  #layerGroupDivId!: string;
 
   /**
    * DWV app.
@@ -131,8 +131,8 @@ export class DwvAppService extends EventTarget {
   constructor() {
     super();
     // initialise app
-    this.#layerGroupName = 'layerGroup0';
-    const viewConfig0 = new ViewConfig(this.#layerGroupName);
+    this.#layerGroupDivId = 'layerGroup0';
+    const viewConfig0 = new ViewConfig(this.#layerGroupDivId);
     const viewConfigs = {'*': [viewConfig0]};
     const appOptions = new AppOptions(viewConfigs);
     appOptions.tools = this.#tools;
@@ -399,7 +399,7 @@ export class DwvAppService extends EventTarget {
       this.#orientation = 'coronal';
     }
     // update data view config
-    const viewConfig0 = new ViewConfig(this.#layerGroupName);
+    const viewConfig0 = new ViewConfig(this.#layerGroupDivId);
     viewConfig0.orientation = this.#orientation;
     const viewConfigs = {'*': [viewConfig0]};
     this.#dwvApp.setDataViewConfigs(viewConfigs);
@@ -446,7 +446,7 @@ export class DwvAppService extends EventTarget {
    * @returns False if there is no active view layer.
    */
   addAnnotationGroup() {
-    const divId = this.#layerGroupName;
+    const divId = this.#layerGroupDivId;
     const viewLayer = this.#dwvApp.getLayerGroupByDivId(divId)
       ?.getActiveViewLayer();
     if (viewLayer === undefined) {
