@@ -27,4 +27,9 @@ describe('DwvAnnotationListComponent', () => {
     expect(fixture.componentInstance.getAnnotationDivId('0', '1.2.3'))
       .toBe('test-annotationgroup0-annotation1.2.3');
   });
+
+  it('inserts qd- after the viewer id in the details div id', () => {
+    expect(fixture.componentInstance.getDetailsDivId('0', '1.2.3'))
+      .toBe('test-qd-annotationgroup0-annotation1.2.3');
+  });
 });

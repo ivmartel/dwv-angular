@@ -77,6 +77,18 @@ export class DwvAnnotationListComponent {
   }
 
   /**
+   * Get the annotation details div id: the annotation div id with
+   *   `qd-` inserted after the viewer id.
+   *
+   * @param dataId The annotation group data id.
+   * @param annotationId The annotation tracking UID.
+   * @returns The details div id.
+   */
+  getDetailsDivId(dataId: string, annotationId: string) {
+    return `${this.#viewerId}-qd-annotationgroup${dataId}-annotation${annotationId}`;
+  }
+
+  /**
    * Check if an annotation is selected.
    *
    * @param dataId The annotation group data id.
