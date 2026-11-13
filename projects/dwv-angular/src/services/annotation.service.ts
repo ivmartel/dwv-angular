@@ -117,9 +117,11 @@ function getAnnotationItemState(
  * Events: `error`, dispatched as a `CustomEvent` with the `Error`
  *   as `detail` when an action fails.
  *
+ * Provided with the `DwvAppService`, by each `<dwv-angular>` component.
+ *
  * Adapted from the dwv-simplistic `annotationService.js`.
  */
-@Injectable({providedIn: 'root'})
+@Injectable()
 export class AnnotationService extends EventTarget {
 
   readonly #dwvAppService = inject(DwvAppService);
@@ -160,7 +162,7 @@ export class AnnotationService extends EventTarget {
 
   constructor() {
     super();
-    // both services live as long as the app: no need to remove the listeners
+    // both services share the same lifetime: no need to remove the listeners
     for (const [type, handler] of Object.entries(this.#handlers)) {
       this.#dwvAppService.addEventListener(type,
         (event) => handler(event as DwvAppServiceEvent));

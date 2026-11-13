@@ -4,6 +4,8 @@ import { TestBed, ComponentFixture } from '@angular/core/testing';
 
 import { DwvContentComponent } from './content.component';
 import { DwvAppService } from '../services/dwv-app.service';
+import { AnnotationService } from '../services/annotation.service';
+import { DWV_VIEWER_ID } from '../services/viewer-id';
 
 /**
  * Create a drag event (jsdom does not provide DragEvent).
@@ -32,7 +34,10 @@ describe('DwvContentComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        provideZonelessChangeDetection()
+        provideZonelessChangeDetection(),
+        {provide: DWV_VIEWER_ID, useValue: 'test'},
+        DwvAppService,
+        AnnotationService
       ]
     });
     fixture = TestBed.createComponent(DwvContentComponent);
@@ -41,12 +46,13 @@ describe('DwvContentComponent', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     layer = compiled.querySelector(
       '#' + service.getLayerGroupDivId()) as HTMLElement;
-    box = compiled.querySelector('#dropBox') as HTMLElement;
+    box = compiled.querySelector('.dropBox') as HTMLElement;
   });
 
   it('sets the layer group div id from the service', () => {
     expect(layer).not.toBeNull();
     expect(layer.id).toBe(service.getLayerGroupDivId());
+    expect(layer.id).toBe('test-layerGroup');
   });
 
   it('shows the drop box with border when no data', () => {

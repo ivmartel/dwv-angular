@@ -1,5 +1,6 @@
 import {
   Component,
+  ViewContainerRef,
   inject,
   effect,
   model,
@@ -38,6 +39,7 @@ export class DwvHeaderComponent {
   dialog = inject(MatDialog);
 
   private readonly dwvAppService = inject(DwvAppService);
+  readonly #viewContainerRef = inject(ViewContainerRef);
   public toolNames = this.dwvAppService.getToolNames();
   public shapeNames = this.dwvAppService.getShapeNames();
   // dwvAppService signals
@@ -198,11 +200,13 @@ export class DwvHeaderComponent {
   }
 
   /**
-   * Open the DICOM tags dialog.
+   * Open the DICOM tags dialog, attached to this view so that it
+   *   uses the viewer injector (and its `DWV_VIEWER_ID`).
    */
   openTagsDialog() {
     this.dialog.open(TagsDialogComponent,
       {
+        viewContainerRef: this.#viewContainerRef,
         data: {
           title: 'DICOM Tags',
           value: this.dwvAppService.getMetaData()

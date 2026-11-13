@@ -11,6 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { DwvComponent } from './dwv-angular.component';
 import { DwvAppService } from '../services/dwv-app.service';
 import { AnnotationService } from '../services/annotation.service';
+import { DWV_VIEWER_ID } from '../services/viewer-id';
 
 describe('DwvComponent', () => {
   let component: DwvComponent;
@@ -53,7 +54,7 @@ describe('DwvComponent', () => {
   it('shows a snack bar on load error and abort', () => {
     const snackBar = TestBed.inject(MatSnackBar);
     const openSpy = vi.spyOn(snackBar, 'open');
-    const service = TestBed.inject(DwvAppService);
+    const service = fixture.debugElement.injector.get(DwvAppService);
 
     service.dispatchEvent(new CustomEvent('loaderror'));
     expect(openSpy).toHaveBeenLastCalledWith(
@@ -68,7 +69,7 @@ describe('DwvComponent', () => {
     const snackBar = TestBed.inject(MatSnackBar);
     const openSpy = vi.spyOn(snackBar, 'open');
     const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => undefined);
-    const annotService = TestBed.inject(AnnotationService);
+    const annotService = fixture.debugElement.injector.get(AnnotationService);
 
     expect(annotService.getAnnotationGroupAsDicom('unknown')).toBeUndefined();
     expect(openSpy).toHaveBeenLastCalledWith(
@@ -76,14 +77,35 @@ describe('DwvComponent', () => {
     errorSpy.mockRestore();
   });
 
+  it('uses one service instance and unique ids per viewer', () => {
+    const other = TestBed.createComponent(DwvComponent);
+    fixture.detectChanges();
+    other.detectChanges();
+
+    const service = fixture.debugElement.injector.get(DwvAppService);
+    const otherService = other.debugElement.injector.get(DwvAppService);
+    expect(otherService).not.toBe(service);
+    expect(otherService.getLayerGroupDivId())
+      .not.toBe(service.getLayerGroupDivId());
+    const viewerId = fixture.debugElement.injector.get(DWV_VIEWER_ID);
+    expect(service.getLayerGroupDivId()).toBe(viewerId + '-layerGroup');
+
+    const ids = [fixture, other].flatMap(f =>
+      Array.from((f.nativeElement as HTMLElement).querySelectorAll('[id]'),
+        el => el.id));
+    expect(new Set(ids).size).toBe(ids.length);
+    other.destroy();
+  });
+
   it('stops listening to service events when destroyed', () => {
     const snackBar = TestBed.inject(MatSnackBar);
     const openSpy = vi.spyOn(snackBar, 'open');
-    const service = TestBed.inject(DwvAppService);
+    const service = fixture.debugElement.injector.get(DwvAppService);
+    const annotService = fixture.debugElement.injector.get(AnnotationService);
 
     fixture.destroy();
     service.dispatchEvent(new CustomEvent('loaderror'));
-    TestBed.inject(AnnotationService).dispatchEvent(
+    annotService.dispatchEvent(
       new CustomEvent('error', {detail: new Error('test')}));
     expect(openSpy).not.toHaveBeenCalled();
   });

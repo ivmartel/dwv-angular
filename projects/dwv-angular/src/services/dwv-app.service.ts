@@ -1,4 +1,4 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, OnDestroy, inject, signal } from '@angular/core';
 import {
   AnnotationGroup,
   App,
@@ -9,6 +9,7 @@ import {
   getDwvVersion
 } from 'dwv';
 import { overlayConfig } from './overlays';
+import { DWV_VIEWER_ID } from './viewer-id';
 
 /**
  * DWV event.
@@ -41,9 +42,13 @@ const forwardedEventTypes = [
  * - `loaderror` and `loadabort`: dispatched once at the end of a load
  *   that received errors or was aborted, as `CustomEvent`s with
  *   the app `loadend` event as `detail`.
+ *
+ * Not provided in root: each `<dwv-angular>` component provides its own
+ *   instance (with a `DWV_VIEWER_ID`), so that several viewers can live
+ *   on the same page.
  */
-@Injectable({providedIn: 'root'})
-export class DwvAppService extends EventTarget {
+@Injectable()
+export class DwvAppService extends EventTarget implements OnDestroy {
   /**
    * List of annotation shape names.
    */
@@ -86,7 +91,8 @@ export class DwvAppService extends EventTarget {
   #orientation!: string;
 
   /**
-   * Id of the HTML div element of the main layer group.
+   * Id of the HTML div element of the main layer group,
+   *   built from the viewer id.
    */
   #layerGroupDivId!: string;
 
@@ -131,7 +137,7 @@ export class DwvAppService extends EventTarget {
   constructor() {
     super();
     // initialise app
-    this.#layerGroupDivId = 'layerGroup0';
+    this.#layerGroupDivId = inject(DWV_VIEWER_ID) + '-layerGroup';
     const viewConfig0 = new ViewConfig(this.#layerGroupDivId);
     const viewConfigs = {'*': [viewConfig0]};
     const appOptions = new AppOptions(viewConfigs);
@@ -286,6 +292,15 @@ export class DwvAppService extends EventTarget {
     });
     // handle window resize
     window.addEventListener('resize', this.#dwvApp.onResize);
+  }
+
+  /**
+   * Release the app: called when the providing component is destroyed.
+   */
+  ngOnDestroy() {
+    window.removeEventListener('resize', this.#dwvApp.onResize);
+    this.#dwvApp.abortAllLoads();
+    this.#dwvApp.reset();
   }
 
   /**

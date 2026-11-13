@@ -9,6 +9,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { DwvAppService } from '../services/dwv-app.service';
 import { AnnotationService } from '../services/annotation.service';
+import { provideViewerId } from '../services/viewer-id';
 
 import { DwvHeaderComponent } from './header.component';
 import { DwvContentComponent } from './content.component';
@@ -49,6 +50,8 @@ import { DwvFooterComponent } from './footer.component';
     DwvContentComponent,
     DwvFooterComponent
   ],
+  // one id and service instance per viewer
+  providers: [provideViewerId(), DwvAppService, AnnotationService],
   templateUrl: './dwv-angular.component.html',
   styleUrls: ['./dwv-angular.component.scss']
 })

@@ -11,6 +11,8 @@ import { NgTemplateOutlet } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
+import { DWV_VIEWER_ID } from '../services/viewer-id';
+
 /**
  * Foldable and resizable right panel component.
  */
@@ -29,6 +31,11 @@ import { MatIconModule } from '@angular/material/icon';
 export class DwvRightPanelComponent {
 
   readonly #injector = inject(Injector);
+
+  /**
+   * Id of the panel element, built from the viewer id.
+   */
+  readonly panelId = inject(DWV_VIEWER_ID) + '-rightPanel';
 
   /**
    * The toggle button: there is one when closed (over the image)

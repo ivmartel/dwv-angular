@@ -3,7 +3,7 @@
     class="toggle"
     [title]="isOpen() ? 'Close panel' : 'Open panel'"
     [attr.aria-expanded]="isOpen()"
-    aria-controls="rightPanel"
+    [attr.aria-controls]="panelId"
     (click)="toggle()">
     <mat-icon>{{ isOpen() ? 'chevron_right' : 'chevron_left' }}</mat-icon>
   </button>
@@ -16,7 +16,7 @@
   </div>
 }
 
-<aside id="rightPanel" class="panel"
+<aside [id]="panelId" class="panel"
   [class.open]="isOpen()"
   [class.resizing]="isResizing()"
   [style.width.px]="isOpen() ? width() : 0"
@@ -28,7 +28,7 @@
     title="Resize panel"
     aria-label="Resize panel"
     aria-orientation="vertical"
-    aria-controls="rightPanel"
+    [attr.aria-controls]="panelId"
     [attr.aria-valuenow]="width()"
     [attr.aria-valuemin]="minWidth"
     [attr.aria-valuemax]="maxWidth()"
