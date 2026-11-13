@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1794595422181,
+  "timestamp": 1794596027694,
   "index": "/dwv-angular/demo/trunk/index.html",
   "assetGroups": [
     {
@@ -13,7 +13,7 @@
       "urls": [
         "/dwv-angular/demo/trunk/favicon.ico",
         "/dwv-angular/demo/trunk/index.html",
-        "/dwv-angular/demo/trunk/main-Z2VK2WLR.js",
+        "/dwv-angular/demo/trunk/main-NLLW2SAP.js",
         "/dwv-angular/demo/trunk/manifest.webmanifest",
         "/dwv-angular/demo/trunk/styles-5V2NYM5Z.css"
       ],
@@ -50,8 +50,8 @@
     "/dwv-angular/demo/trunk/assets/icons/icon-72x72.png": "675cc26a88e1ff781f540b4ace55c04aba7c7987",
     "/dwv-angular/demo/trunk/assets/icons/icon-96x96.png": "506f85975d19d0879a4a25984270c7613c3baad8",
     "/dwv-angular/demo/trunk/favicon.ico": "f2c13e666b0fd4a3239df69e908221fb37ea24ed",
-    "/dwv-angular/demo/trunk/index.html": "796ab164fafbb46be8a4334d4ca81e5e4831d2b2",
-    "/dwv-angular/demo/trunk/main-Z2VK2WLR.js": "99a5e7d55df6823866aaded8a1de1495fe559dde",
+    "/dwv-angular/demo/trunk/index.html": "49fe47a7eedd5674618d1d7759c91eb054a11f28",
+    "/dwv-angular/demo/trunk/main-NLLW2SAP.js": "707d1fbb12d13714f1462492d579d206e67bcafc",
     "/dwv-angular/demo/trunk/manifest.webmanifest": "e334505c421973bfbaaa72af91a80be6bf7f3b5a",
     "/dwv-angular/demo/trunk/styles-5V2NYM5Z.css": "5d0afffe58910f089176174389c991d768d03b4c"
   },
