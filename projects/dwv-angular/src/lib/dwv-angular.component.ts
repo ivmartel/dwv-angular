@@ -21,8 +21,9 @@ import { DwvFooterComponent } from './footer.component';
  *
  * The data inputs are checked in order: uri, urls then
  * loadFromWindowLocation; the first one that is set is used. The uri and
- * urls inputs are watched: data is loaded again when one of them changes,
- * loadFromWindowLocation is only read on init. A dropbox to load local data
+ * urls inputs are watched: when one changes to a new value, it is loaded on
+ * top of the existing data (loadFromWindowLocation is only read on init).
+ * A dropbox to load local data
  * is shown if no data is loaded.
  *
  * ref: {@link https://github.com/ivmartel/dwv}.
