@@ -1,9 +1,10 @@
 import {
   Component,
   DestroyRef,
-  Input,
-  OnInit,
-  inject
+  effect,
+  inject,
+  input,
+  untracked
 } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -19,8 +20,10 @@ import { DwvFooterComponent } from './footer.component';
  * DWV component: display DICOM data using DWV (DICOM Web Viewer).
  *
  * The data inputs are checked in order: uri, urls then
- * loadFromWindowLocation; the first one that is set is used. They are only
- * read on init. A dropbox to load local data is shown if no data is loaded.
+ * loadFromWindowLocation; the first one that is set is used. The uri and
+ * urls inputs are watched: data is loaded again when one of them changes,
+ * loadFromWindowLocation is only read on init. A dropbox to load local data
+ * is shown if no data is loaded.
  *
  * ref: {@link https://github.com/ivmartel/dwv}.
  *
@@ -55,28 +58,28 @@ import { DwvFooterComponent } from './footer.component';
   styleUrls: ['./dwv-angular.component.scss']
 })
 
-export class DwvComponent implements OnInit {
+export class DwvComponent {
 
   /**
    * Show the footer legend ("Powered by" dwv and Angular, with their
    * versions), defaults to false.
    */
-  @Input() showLegend = false;
+  readonly showLegend = input(false);
   /**
    * URI with search arguments describing the data to load, for example
    * `https://www.demo.com/index.html?input=file.dcm`
    * (see the dwv `App.loadFromUri` method).
    */
-  @Input() uri!: string;
+  readonly uri = input<string>();
   /**
    * List of urls of the data to load.
    */
-  @Input() urls!: string[];
+  readonly urls = input<string[]>();
   /**
    * Use the window location as input URI if it contains search arguments,
    * defaults to false.
    */
-  @Input() loadFromWindowLocation = false;
+  readonly loadFromWindowLocation = input(false);
 
   private readonly dwvAppService = inject(DwvAppService);
   private readonly annotService = inject(AnnotationService);
@@ -103,18 +106,29 @@ export class DwvComponent implements OnInit {
       this.dwvAppService.removeEventListener('loadabort', onLoadAbort);
       this.annotService.removeEventListener('error', onAnnotationError);
     });
-  }
 
-  ngOnInit() {
-    // load or dropbox
-    if (this.uri !== undefined) {
-      this.dwvAppService.loadFromUri(this.uri);
-    } else if (this.urls !== undefined) {
-      this.dwvAppService.loadURLs(this.urls);
-    } else if (this.loadFromWindowLocation &&
-      window.location.search !== '') {
-      this.dwvAppService.loadFromUri(window.location.href);
-    }
+    // load the data inputs, then again when uri or urls change
+    let isFirstRun = true;
+    let previousUri: string | undefined;
+    let previousUrls: string[] | undefined;
+    effect(() => {
+      const uri = this.uri();
+      const urls = this.urls();
+      // load a set input that changed (all set inputs on init),
+      //   uri has priority over urls
+      if (uri !== undefined && uri !== previousUri) {
+        this.dwvAppService.loadFromUri(uri);
+      } else if (urls !== undefined && urls !== previousUrls) {
+        this.dwvAppService.loadURLs(urls);
+      } else if (isFirstRun &&
+        untracked(this.loadFromWindowLocation) &&
+        window.location.search !== '') {
+        this.dwvAppService.loadFromUri(window.location.href);
+      }
+      isFirstRun = false;
+      previousUri = uri;
+      previousUrls = urls;
+    });
   }
 
 }

@@ -135,6 +135,59 @@ describe('DwvComponent', () => {
     vi.restoreAllMocks();
   });
 
+  it('loads again when the uri input changes', () => {
+    const service = fixture.debugElement.injector.get(DwvAppService);
+    const loadSpy = vi.spyOn(service, 'loadFromUri')
+      .mockImplementation(() => undefined);
+
+    fixture.componentRef.setInput('uri', 'http://localhost/?input=a.dcm');
+    fixture.detectChanges();
+    expect(loadSpy).toHaveBeenLastCalledWith('http://localhost/?input=a.dcm');
+
+    fixture.componentRef.setInput('uri', 'http://localhost/?input=b.dcm');
+    fixture.detectChanges();
+    expect(loadSpy).toHaveBeenCalledTimes(2);
+    expect(loadSpy).toHaveBeenLastCalledWith('http://localhost/?input=b.dcm');
+
+    // no change, no load
+    fixture.detectChanges();
+    expect(loadSpy).toHaveBeenCalledTimes(2);
+  });
+
+  it('loads again when the urls input changes', () => {
+    const service = fixture.debugElement.injector.get(DwvAppService);
+    const loadSpy = vi.spyOn(service, 'loadURLs')
+      .mockImplementation(() => undefined);
+
+    fixture.componentRef.setInput('urls', ['http://localhost/a.dcm']);
+    fixture.detectChanges();
+    expect(loadSpy).toHaveBeenLastCalledWith(['http://localhost/a.dcm']);
+
+    fixture.componentRef.setInput('urls', ['http://localhost/b.dcm']);
+    fixture.detectChanges();
+    expect(loadSpy).toHaveBeenCalledTimes(2);
+    expect(loadSpy).toHaveBeenLastCalledWith(['http://localhost/b.dcm']);
+  });
+
+  it('gives priority to uri on init and loads the changed input after', () => {
+    const service = fixture.debugElement.injector.get(DwvAppService);
+    const uriSpy = vi.spyOn(service, 'loadFromUri')
+      .mockImplementation(() => undefined);
+    const urlsSpy = vi.spyOn(service, 'loadURLs')
+      .mockImplementation(() => undefined);
+
+    fixture.componentRef.setInput('uri', 'http://localhost/?input=a.dcm');
+    fixture.componentRef.setInput('urls', ['http://localhost/a.dcm']);
+    fixture.detectChanges();
+    expect(uriSpy).toHaveBeenCalledTimes(1);
+    expect(urlsSpy).not.toHaveBeenCalled();
+
+    fixture.componentRef.setInput('urls', ['http://localhost/b.dcm']);
+    fixture.detectChanges();
+    expect(uriSpy).toHaveBeenCalledTimes(1);
+    expect(urlsSpy).toHaveBeenCalledWith(['http://localhost/b.dcm']);
+  });
+
   it('stops listening to service events when destroyed', () => {
     const snackBar = TestBed.inject(MatSnackBar);
     const openSpy = vi.spyOn(snackBar, 'open');
