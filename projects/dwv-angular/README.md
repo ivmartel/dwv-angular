@@ -11,11 +11,11 @@ dwv-angular is not certified for diagnostic use. Released under GNU GPL-3.0 lice
 | Input | Type | Default | Description |
 | --- | --- | --- | --- |
 | `uri` | `string` | - | URI with search arguments describing the data to load, for example `https://www.demo.com/index.html?input=file.dcm` (see the dwv `App.loadFromUri` method). |
-| `urls` | `string[]` | - | List of urls of the data to load. |
+| `urls` | `string` | - | White space separated urls of the data to load. |
 | `loadFromWindowLocation` | `boolean` | `false` | Use the window location as input URI if it contains search arguments. |
 | `showLegend` | `boolean` | `false` | Show the footer legend ("Powered by" dwv and Angular, with their versions). |
 
-The data inputs are checked in order: `uri`, `urls` then `loadFromWindowLocation`; the first one that is set is used. They are only read when the component is initialised. If no data is loaded, a dropbox is shown to load data from the local system.
+The data inputs are checked in order: `uri`, `urls` then `loadFromWindowLocation`; the first one that is set is used. `uri` and `urls` are watched: when one changes to a new value, it is loaded on top of the existing data (`loadFromWindowLocation` is only read on init). If no data is loaded, a dropbox is shown to load data from the local system.
 
 Examples:
 
@@ -28,7 +28,7 @@ Examples:
 
 <!-- load a list of urls -->
 <dwv-angular
-  [urls]="['https://www.demo.com/file0.dcm', 'https://www.demo.com/file1.dcm']">
+  urls="https://www.demo.com/file0.dcm https://www.demo.com/file1.dcm">
 </dwv-angular>
 
 <!-- load from the page URL, for example http://localhost:4200/?input=file.dcm -->

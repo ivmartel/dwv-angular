@@ -37,10 +37,7 @@ import { DwvFooterComponent } from './footer.component';
  * </dwv-angular>
  * @example
  * <dwv-angular
- *   [urls]="[
- *     'https://www.demo.com/file0.dcm',
- *     'https://www.demo.com/file1.dcm'
- *   ]">
+ *   urls="https://www.demo.com/file0.dcm https://www.demo.com/file1.dcm">
  * </dwv-angular>
  * @example
  * <dwv-angular [loadFromWindowLocation]="true"></dwv-angular>
@@ -73,9 +70,9 @@ export class DwvComponent {
    */
   readonly uri = input<string>();
   /**
-   * List of urls of the data to load.
+   * White space separated urls of the data to load.
    */
-  readonly urls = input<string[]>();
+  readonly urls = input<string>();
   /**
    * Use the window location as input URI if it contains search arguments,
    * defaults to false.
@@ -111,7 +108,7 @@ export class DwvComponent {
     // load the data inputs, then again when uri or urls change
     let isFirstRun = true;
     let previousUri: string | undefined;
-    let previousUrls: string[] | undefined;
+    let previousUrls: string | undefined;
     effect(() => {
       const uri = this.uri();
       const urls = this.urls();
@@ -120,7 +117,10 @@ export class DwvComponent {
       if (uri !== undefined && uri !== previousUri) {
         this.dwvAppService.loadFromUri(uri);
       } else if (urls !== undefined && urls !== previousUrls) {
-        this.dwvAppService.loadURLs(urls);
+        const urlList = urls.split(/\s+/).filter(url => url !== '');
+        if (urlList.length !== 0) {
+          this.dwvAppService.loadURLs(urlList);
+        }
       } else if (isFirstRun &&
         untracked(this.loadFromWindowLocation) &&
         window.location.search !== '') {
