@@ -2,25 +2,80 @@
 
 Guidance for coding agents working in this repository.
 
-The first part (up to [Angular implementation](#angular-implementation)) is framework independent: it applies to any dwv based viewer. The second part describes the Angular specifics.
-
 ## Project overview
 
-Medical (DICOM) image viewer Angular component built on [DWV](https://github.com/ivmartel/dwv), shipped with a demo application. Its layout and features are inspired by [dwv-simplistic](https://github.com/ivmartel/dwv-simplistic); look there for reference behaviour when adding features. Not certified for diagnostic use. License: GPL-3.0.
+Medical (DICOM) image viewer Angular component built on [DWV](https://github.com/ivmartel/dwv), shipped with a demo application. Not certified for diagnostic use. License: GPL-3.0.
 
-The main deliverable is the reusable viewer component library; the demo application consumes it and shows how to integrate it. The library only exposes what consumers need. The dwv web workers are served by the app, not by the library.
+The main deliverable is the reusable viewer component library; the demo application consumes it and shows how to integrate it. The library only exposes what consumers need.
 
-Component behaviour and style are described in framework agnostic design specs (`projects/dwv-angular/doc/design/`). Read the spec before changing a component and keep it up to date with behaviour or style changes.
+## Requirements
 
-## Viewer requirements
+- Viewer inputs:
+  - `uri` (string, watched): URI with search arguments describing the data to load
+    (for ex. `https://www.demo.com/index.html?input=file.dcm`, see the dwv
+    `App.loadFromUri` method),
+  - `urls` (string[], watched): urls of the data to load,
+  - `loadFromWindowLocation` (boolean, default false): use the window
+    location as input URI if it has search arguments,
+  - `showLegend` (boolean, default false): show the footer legend
+    ("Powered by" dwv and Angular, with their versions).
 
+  The data inputs are checked in order `uri`, `urls`, then
+  `loadFromWindowLocation`; the first one that is set is used.
+- Toolbar: load progress, the dwv tools (scroll, zoom and pan, window level
+  with presets, draw with shapes), reset, orientation toggle and DICOM tags
+  dialog. Tools are disabled until data is loaded and when they cannot run
+  on it (for ex. window level on colour images).
+- Image window: renders the loaded data with dwv and its overlays; data is
+  loaded from the viewer inputs, or by drag and drop or file selection
+  (local files) through a drop box shown while no data is loaded. It refits when its size changes (for ex. when
+  the right panel opens, closes or is resized).
+- Annotation list: in the right panel, lists the annotation groups and their
+  annotations and lets the user navigate to, inspect and edit them, and save
+  a group as DICOM SR. It only displays the annotation state, every action
+  goes through the annotation service.
 - Several viewers must work on the same page:
-  - each viewer owns its own dwv app and state, no global singletons for viewer state,
-  - HTML element ids are built from a unique viewer id (e.g. `<viewerId>-layerGroup`),
-  - DOM queries are done within the viewer root element rather than `document`,
+  - each viewer owns its own dwv app and state, no global singletons for
+    viewer state,
+  - HTML element ids are built from a unique viewer id
+    (e.g. `<viewerId>-layerGroup`),
+  - DOM queries are done within the viewer root element rather than
+    `document`,
   - dialogs are attached to their viewer context.
-- Services keep their state private and expose it read only. The dwv service re-dispatches the dwv app events as `CustomEvent`s (it extends `EventTarget`).
-- The UI follows Material Design guidelines; keep custom styling to a minimum.
+
+## Design specs
+
+Component behaviour and style are described in framework-agnostic design
+specs (`projects/dwv-angular/doc/design/`: purpose, placement, data, structure,
+actions, accessibility). Read the spec before changing a component and update
+it in the same change; add one for any significant new component. The viewer is
+modelled on [dwv-simplistic](https://github.com/ivmartel/dwv-simplistic);
+some modules are ports of it (see the notes at the top of files and the
+specs): keep their behaviour aligned unless the spec says otherwise, and
+look there for reference behaviour when adding features.
+
+## Architecture
+
+- **Services hold the logic, components display state.**
+  `DwvComponent` (`dwv-angular.component.ts`) creates one `DwvAppService`
+  and one `AnnotationService` per viewer by listing them in its
+  `providers`. Child components get them with `inject(...)`. Do not provide
+  services in child components (or with `providedIn: 'root'`) and do not
+  call the dwv `App` directly from components. Services keep their state in
+  private signals and expose it read only (`asReadonly()`): components never
+  mutate it (for ex. the plain data annotation `state` of
+  `AnnotationService`), every change goes through a service method.
+- Services extend `EventTarget` and notify events with `CustomEvent`s
+  (`DwvAppService` re-dispatches the dwv app events and adds its own,
+  `AnnotationService` dispatches `error`); components add their listeners in
+  the constructor and remove them in `inject(DestroyRef).onDestroy(...)`.
+- `DwvComponent` creates the viewer id with `provideViewerId()`
+  (`services/viewer-id.ts`, ids `dwv-0`, `dwv-1`...) and provides it as the
+  `DWV_VIEWER_ID` token; `DwvAppService` and components get it with
+  `inject(DWV_VIEWER_ID)`, without a fallback: components are always created
+  inside a `DwvComponent`. Element ids are `<viewerId>-<name>`, never
+  hard-coded. Only add an id when something references it
+  (`getElementById`, `<label for>`, `aria-controls`, dwv's layer group...).
 
 ## General conventions
 
@@ -29,6 +84,7 @@ Component behaviour and style are described in framework agnostic design specs (
 - Document classes, methods and non-obvious members with JSDoc comments (`/** ... */`), including `@param` and `@returns` for functions.
 - Unit tests sit next to the code and run in jsdom (`canvas` package provides canvas support). jsdom lacks some browser APIs (e.g. `DragEvent`); build them from `Event` in a helper as done in `content.component.spec.ts`. Add or update tests when changing component or service behaviour.
 - Package manager is Yarn 4 (via Corepack). Do not use npm to install or add dependencies, and do not edit `yarn.lock` by hand.
+- The dwv web workers are served by the app, not by the library.
 - Do not patch dwv (no edits in `node_modules/dwv`, no `patch-package` or Yarn patches, no monkey-patching at runtime). If a fix or feature is needed in dwv itself, propose a pull request to the [dwv repository](https://github.com/ivmartel/dwv) instead.
 
 ## Commits and PRs
@@ -78,11 +134,12 @@ yarn run test dwv-angular   # tests for one project, in watch mode
   readonly dataReady = this.#dataReady.asReadonly();
   ```
 - Use ES private fields (`#field`) for private service members.
-- Multiple viewers: `DwvComponent` provides its own `DwvAppService`, `AnnotationService` and `DWV_VIEWER_ID` (see `src/services/viewer-id.ts`). Do not use `providedIn: 'root'` for viewer state, build element ids from the injected `DWV_VIEWER_ID`, query the DOM from the component host `ElementRef`, and open dialogs that need viewer services with the viewer's `viewContainerRef`.
+- Multiple viewers (see [Architecture](#architecture)): query the DOM from the component host `ElementRef`, and open dialogs that need viewer services with the viewer's `viewContainerRef`.
 - Templates use the built-in control flow (`@if`, `@for ... track`), not `*ngIf` / `*ngFor`.
 - UI components come from Angular Material / CDK; prefer Material components, theming and tokens over custom CSS.
 - Library component class names are prefixed with `Dwv` (e.g. `DwvContentComponent`), selectors with `dwv-`.
 - `strictTemplates` is enabled.
+- The UI follows Material Design guidelines; keep custom styling to a minimum.
 
 ### Testing
 
