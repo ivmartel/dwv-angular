@@ -4,17 +4,21 @@ Guidance for coding agents working in this repository.
 
 ## Project overview
 
-Medical (DICOM) image viewer Angular component built on [DWV](https://github.com/ivmartel/dwv), shipped with a demo application. Not certified for diagnostic use. License: GPL-3.0.
+Medical (DICOM) image viewer Angular component built on
+[DWV](https://github.com/ivmartel/dwv), shipped with a demo application. 
+Not certified for diagnostic use. License: GPL-3.0.
 
-The main deliverable is the reusable viewer component library; the demo application consumes it and shows how to integrate it. The library only exposes what consumers need.
+The main deliverable is the reusable viewer component library; 
+the demo application consumes it and shows how to integrate it. The library 
+only exposes what consumers need.
 
 ## Requirements
 
 - Viewer inputs:
-  - `uri` (string, watched): URI with search arguments describing the data to load
-    (for ex. `https://www.demo.com/index.html?input=file.dcm`, see the dwv
-    `App.loadFromUri` method),
-  - `urls` (string[], watched): urls of the data to load,
+  - `uri` (string, watched): URI with search arguments describing the data
+    to load (for ex. `https://www.demo.com/index.html?input=file.dcm`, see
+    the dwv `App.loadFromUri` method),
+  - `urls` (string[], watched): white space separated urls of the data to load,
   - `loadFromWindowLocation` (boolean, default false): use the window
     location as input URI if it has search arguments,
   - `showLegend` (boolean, default false): show the footer legend
@@ -25,13 +29,14 @@ The main deliverable is the reusable viewer component library; the demo applicat
   `urls` are watched: when one changes to a new value, it is loaded on top
   of the existing data (`loadFromWindowLocation` is only read on init).
 - Toolbar: load progress, the dwv tools (scroll, zoom and pan, window level
-  with presets, draw with shapes), reset, orientation toggle and DICOM tags
-  dialog. Tools are disabled until data is loaded and when they cannot run
-  on it (for ex. window level on colour images).
+  with presets, draw with shapes), reset, orientation toggle and
+  DICOM tags dialog. Tools are disabled until data is loaded and when they
+  cannot run on it (for ex. window level on colour images).
 - Image window: renders the loaded data with dwv and its overlays; data is
   loaded from the viewer inputs, or by drag and drop or file selection
-  (local files) through a drop box shown while no data is loaded. It refits when its size changes (for ex. when
-  the right panel opens, closes or is resized).
+  (local files) through a drop box shown while no data is loaded. It refits
+  when its size changes (window resize, right panel opened, closed or
+  resized).
 - Annotation list: in the right panel, lists the annotation groups and their
   annotations and lets the user navigate to, inspect and edit them, and save
   a group as DICOM SR. It only displays the annotation state, every action
@@ -41,8 +46,8 @@ The main deliverable is the reusable viewer component library; the demo applicat
     viewer state,
   - HTML element ids are built from a unique viewer id
     (e.g. `<viewerId>-layerGroup`),
-  - DOM queries are done within the viewer root element rather than
-    `document`,
+  - DOM queries are done within the viewer root element 
+    rather than `document`,
   - dialogs are attached to their viewer context.
 
 ## Design specs
