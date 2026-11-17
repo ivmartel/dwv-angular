@@ -1,7 +1,7 @@
 import { InjectionToken, Provider } from '@angular/core';
 
 /**
- * Id of a viewer (`<dwv-angular>` instance), shared with its services
+ * Id of a viewer (`<dwv-viewer>` instance), shared with its services
  *   and child components to build unique HTML element ids
  *   (for example `dwv-0-layerGroup`).
  */

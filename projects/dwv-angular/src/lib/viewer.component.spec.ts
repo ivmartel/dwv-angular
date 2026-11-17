@@ -8,14 +8,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-import { DwvComponent } from './dwv-angular.component';
+import { DwvViewerComponent } from './viewer.component';
 import { DwvAppService } from '../services/dwv-app.service';
 import { AnnotationService } from '../services/annotation.service';
 import { DWV_VIEWER_ID } from '../services/viewer-id';
 
-describe('DwvComponent', () => {
-  let component: DwvComponent;
-  let fixture: ComponentFixture<DwvComponent>;
+describe('DwvViewerComponent', () => {
+  let component: DwvViewerComponent;
+  let fixture: ComponentFixture<DwvViewerComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -29,7 +29,7 @@ describe('DwvComponent', () => {
         provideZonelessChangeDetection()
       ]
     });
-    fixture = TestBed.createComponent(DwvComponent);
+    fixture = TestBed.createComponent(DwvViewerComponent);
     component = fixture.componentInstance;
 
     fixture.componentRef.setInput('showLegend', true);
@@ -78,7 +78,7 @@ describe('DwvComponent', () => {
   });
 
   it('uses one service instance and unique ids per viewer', () => {
-    const other = TestBed.createComponent(DwvComponent);
+    const other = TestBed.createComponent(DwvViewerComponent);
     fixture.detectChanges();
     other.detectChanges();
 

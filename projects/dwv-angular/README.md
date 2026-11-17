@@ -21,23 +21,23 @@ Examples:
 
 ```html
 <!-- dropbox to load local data -->
-<dwv-angular [showLegend]="true"></dwv-angular>
+<dwv-viewer [showLegend]="true"></dwv-viewer>
 
 <!-- load from a URI -->
-<dwv-angular uri="https://www.demo.com/index.html?input=file.dcm"></dwv-angular>
+<dwv-viewer uri="https://www.demo.com/index.html?input=file.dcm"></dwv-viewer>
 
 <!-- load a list of urls -->
-<dwv-angular
+<dwv-viewer
   urls="https://www.demo.com/file0.dcm https://www.demo.com/file1.dcm">
-</dwv-angular>
+</dwv-viewer>
 
 <!-- load from the page URL, for example http://localhost:4200/?input=file.dcm -->
-<dwv-angular [loadFromWindowLocation]="true"></dwv-angular>
+<dwv-viewer [loadFromWindowLocation]="true"></dwv-viewer>
 ```
 
 ## Sizing
 
-The `<dwv-angular>` component fills its container (`height: 100%`): its parent element needs a definite height, otherwise the image view collapses. For example, for a full page viewer:
+The `<dwv-viewer>` component fills its container (`height: 100%`): its parent element needs a definite height, otherwise the image view collapses. For example, for a full page viewer:
 
 ```css
 html, body, app-root {
@@ -48,7 +48,7 @@ app-root {
 }
 ```
 
-The size can also be set directly on the element (`dwv-angular { height: 600px; }`), or with `flex: 1` when it is inside a flex container.
+The size can also be set directly on the element (`dwv-viewer { height: 600px; }`), or with `flex: 1` when it is inside a flex container.
 
 ## NPM
 [![npm](https://img.shields.io/npm/v/dwv-angular.svg)](https://www.npmjs.com/package/dwv-angular)

@@ -117,7 +117,7 @@ function getAnnotationItemState(
  * Events: `error`, dispatched as a `CustomEvent` with the `Error`
  *   as `detail` when an action fails.
  *
- * Provided with the `DwvAppService`, by each `<dwv-angular>` component.
+ * Provided with the `DwvAppService`, by each `<dwv-viewer>` component.
  *
  * Adapted from the dwv-simplistic `annotationService.js`.
  */

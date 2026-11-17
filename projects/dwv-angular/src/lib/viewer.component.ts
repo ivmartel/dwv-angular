@@ -30,21 +30,21 @@ import { DwvFooterComponent } from './footer.component';
  *
  * Usage example:
  * @example
- * <dwv-angular [showLegend]="true"></dwv-angular>
+ * <dwv-viewer [showLegend]="true"></dwv-viewer>
  * @example
- * <dwv-angular
+ * <dwv-viewer
  *   uri="https://www.demo.com/index.html?input=file.dcm">
- * </dwv-angular>
+ * </dwv-viewer>
  * @example
- * <dwv-angular
+ * <dwv-viewer
  *   urls="https://www.demo.com/file0.dcm https://www.demo.com/file1.dcm">
- * </dwv-angular>
+ * </dwv-viewer>
  * @example
- * <dwv-angular [loadFromWindowLocation]="true"></dwv-angular>
+ * <dwv-viewer [loadFromWindowLocation]="true"></dwv-viewer>
  */
 
 @Component({
-  selector: 'dwv-angular',
+  selector: 'dwv-viewer',
   imports: [
     DwvHeaderComponent,
     DwvContentComponent,
@@ -52,11 +52,11 @@ import { DwvFooterComponent } from './footer.component';
   ],
   // one id and service instance per viewer
   providers: [provideViewerId(), DwvAppService, AnnotationService],
-  templateUrl: './dwv-angular.component.html',
-  styleUrls: ['./dwv-angular.component.scss']
+  templateUrl: './viewer.component.html',
+  styleUrls: ['./viewer.component.scss']
 })
 
-export class DwvComponent {
+export class DwvViewerComponent {
 
   /**
    * Show the footer legend ("Powered by" dwv and Angular, with their

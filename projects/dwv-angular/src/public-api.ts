@@ -2,4 +2,4 @@
  * Public API Surface of dwv-angular
  */
 
-export * from './lib/dwv-angular.component';
+export * from './lib/viewer.component';

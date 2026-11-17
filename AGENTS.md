@@ -64,7 +64,7 @@ look there for reference behaviour when adding features.
 ## Architecture
 
 - **Services hold the logic, components display state.**
-  `DwvComponent` (`dwv-angular.component.ts`) creates one `DwvAppService`
+  `DwvViewerComponent` (`viewer.component.ts`) creates one `DwvAppService`
   and one `AnnotationService` per viewer by listing them in its
   `providers`. Child components get them with `inject(...)`. Do not provide
   services in child components (or with `providedIn: 'root'`) and do not
@@ -76,11 +76,11 @@ look there for reference behaviour when adding features.
   (`DwvAppService` re-dispatches the dwv app events and adds its own,
   `AnnotationService` dispatches `error`); components add their listeners in
   the constructor and remove them in `inject(DestroyRef).onDestroy(...)`.
-- `DwvComponent` creates the viewer id with `provideViewerId()`
+- `DwvViewerComponent` creates the viewer id with `provideViewerId()`
   (`services/viewer-id.ts`, ids `dwv-0`, `dwv-1`...) and provides it as the
   `DWV_VIEWER_ID` token; `DwvAppService` and components get it with
   `inject(DWV_VIEWER_ID)`, without a fallback: components are always created
-  inside a `DwvComponent`. Element ids are `<viewerId>-<name>`, never
+  inside a `DwvViewerComponent`. Element ids are `<viewerId>-<name>`, never
   hard-coded. Only add an id when something references it
   (`getElementById`, `<label for>`, `aria-controls`, dwv's layer group...).
 
@@ -107,7 +107,7 @@ look there for reference behaviour when adding features.
 
 Angular CLI workspace with two projects:
 
-- `projects/dwv-angular`: the library (`<dwv-angular>` component, selector prefix `dwv`).
+- `projects/dwv-angular`: the library (`<dwv-viewer>` component, selector prefix `dwv`).
   - `src/lib/`: standalone components (header, content, footer, right panel, annotation list, tags dialog/table) and helpers (`quantification.ts`, `shape-icons.ts`).
   - `src/services/`: `DwvAppService` (wraps the dwv `App`, exposes state as signals and re-dispatches app events), `AnnotationService`, viewer id token (`viewer-id.ts`), overlay config.
   - `src/public-api.ts`: public entry point of the library.
@@ -152,4 +152,4 @@ yarn run test dwv-angular   # tests for one project, in watch mode
 
 - Unit tests use Vitest via `@angular/build:unit-test`.
 - Spec files: `*.component.spec.ts`. Import test helpers explicitly from `vitest` (`describe`, `it`, `expect`, `vi`, `beforeEach`).
-- Configure `TestBed` with `provideZonelessChangeDetection()`. Components tested outside `DwvComponent` need the viewer providers (`DWV_VIEWER_ID`, services) in `TestBed`.
+- Configure `TestBed` with `provideZonelessChangeDetection()`. Components tested outside `DwvViewerComponent` need the viewer providers (`DWV_VIEWER_ID`, services) in `TestBed`.

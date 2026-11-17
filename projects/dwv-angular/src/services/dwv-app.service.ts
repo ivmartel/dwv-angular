@@ -43,7 +43,7 @@ const forwardedEventTypes = [
  *   that received errors or was aborted, as `CustomEvent`s with
  *   the app `loadend` event as `detail`.
  *
- * Not provided in root: each `<dwv-angular>` component provides its own
+ * Not provided in root: each `<dwv-viewer>` component provides its own
  *   instance (with a `DWV_VIEWER_ID`), so that several viewers can live
  *   on the same page.
  */

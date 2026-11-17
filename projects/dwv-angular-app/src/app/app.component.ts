@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { DwvComponent } from 'dwv-angular';
+import { DwvViewerComponent } from 'dwv-angular';
 
 @Component({
   selector: 'app-root',
   imports: [
-    DwvComponent
+    DwvViewerComponent
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
