@@ -114,7 +114,7 @@ Angular CLI workspace with two projects:
   - `doc/design/`: the component design specs.
 - `projects/dwv-angular-app`: demo application (selector prefix `app`).
 
-The app imports `dwv-angular` through a `tsconfig.json` path mapping to `dist/dwv-angular`, so **the library must be built before serving, building or testing the app**.
+The app imports `@ivmartel/dwv-angular` through a `tsconfig.json` path mapping to `dist/dwv-angular`, so **the library must be built before serving, building or testing the app**.
 
 dwv web workers are copied from `node_modules/dwv/dist/assets` to `/assets` in the app build (see `angular.json`).
 

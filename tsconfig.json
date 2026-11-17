@@ -6,7 +6,7 @@
     "outDir": "./dist/out-tsc",
     "rootDir": ".",
     "paths": {
-      "dwv-angular": [
+      "@ivmartel/dwv-angular": [
         "./dist/dwv-angular"
       ]
     },

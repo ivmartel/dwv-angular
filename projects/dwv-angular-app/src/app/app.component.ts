@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DwvViewerComponent } from 'dwv-angular';
+import { DwvViewerComponent } from '@ivmartel/dwv-angular';
 
 @Component({
   selector: 'app-root',
