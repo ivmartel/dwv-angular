@@ -1,7 +1,7 @@
 import { Component, Input, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { DataElement, getTagFromKey } from 'dwv';
+import { DataElement, getDicomTagInfo, getTagFromKey } from 'dwv';
 
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
@@ -137,7 +137,7 @@ export class TagsTableComponent {
   private getDicomTagReducer(tagData: Record<string, DataElement>, instanceNumber: number, prefix: string) {
     return (accumulator: SimpleDataElement[], currentValue: string) => {
       const tag = getTagFromKey(currentValue);
-      let key = tag.getNameFromDictionary();
+      let key = getDicomTagInfo(tag)?.getName();
       if (typeof key === 'undefined') {
         // add 'x' to help sorting
         key = 'x' + tag.getKey();

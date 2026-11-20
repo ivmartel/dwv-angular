@@ -12,16 +12,30 @@ import { overlayConfig } from './overlays';
 import { DWV_VIEWER_ID } from './viewer-id';
 
 /**
- * DWV event.
+ * DWV app event detail.
  */
-class DwvEvent {
-  dataid!: string;
-  value!: (number|string)[];
+interface DwvEventDetail {
+  dataid: string;
+  value: (number|string)[];
+}
+
+/**
+ * DWV app load progress event detail.
+ */
+interface DwvProgressEventDetail {
+  loaded: number;
+}
+
+/**
+ * DWV app error event detail.
+ */
+interface DwvErrorEventDetail {
+  error: unknown;
 }
 
 /**
  * App events re-dispatched by the service as `CustomEvent`s,
- *   with the app event as `detail`.
+ *   with the app event detail as `detail`.
  */
 const forwardedEventTypes = [
   'dataadd',
@@ -38,10 +52,10 @@ const forwardedEventTypes = [
  *
  * Events:
  * - the app events listed in `forwardedEventTypes` are
- *   re-dispatched as `CustomEvent`s with the app event as `detail`,
+ *   re-dispatched as `CustomEvent`s with the app event detail as `detail`,
  * - `loaderror` and `loadabort`: dispatched once at the end of a load
  *   that received errors or was aborted, as `CustomEvent`s with
- *   the app `loadend` event as `detail`.
+ *   the app `loadend` event detail as `detail`.
  *
  * Not provided in root: each `<dwv-viewer>` component provides its own
  *   instance (with a `DWV_VIEWER_ID`), so that several viewers can live
@@ -211,13 +225,15 @@ export class DwvAppService extends EventTarget implements OnDestroy {
       nReceivedLoadAbort = 0;
       isFirstRender = true;
     });
-    this.#dwvApp.addEventListener('loadprogress', (event: ProgressEvent) => {
-      this.#loadProgress.set(event.loaded);
+    this.#dwvApp.addEventListener('loadprogress', (event: Event) => {
+      const detail = (event as CustomEvent<DwvProgressEventDetail>).detail;
+      this.#loadProgress.set(detail.loaded);
     });
-    this.#dwvApp.addEventListener('renderend', (event: DwvEvent) => {
+    this.#dwvApp.addEventListener('renderend', (event: Event) => {
       if (isFirstRender) {
         isFirstRender = false;
-        const vl = this.#dwvApp.getViewLayersByDataId(event.dataid)[0];
+        const detail = (event as CustomEvent<DwvEventDetail>).detail;
+        const vl = this.#dwvApp.getViewLayersByDataId(detail.dataid)[0];
         const vc = vl.getViewController();
         // available tools
         this.#canScroll = vc.canScroll();
@@ -228,29 +244,31 @@ export class DwvAppService extends EventTarget implements OnDestroy {
         this.#dataReady.set(true);
       }
     });
-    this.#dwvApp.addEventListener('load', (event: DwvEvent) => {
+    this.#dwvApp.addEventListener('load', (event: Event) => {
+      const detail = (event as CustomEvent<DwvEventDetail>).detail;
       // set dicom tags
-      this.#metaData = this.#dwvApp.getMetaData(event.dataid) as Record<string, DataElement>;
+      this.#metaData = this.#dwvApp.getMetaData(detail.dataid) as Record<string, DataElement>;
       // force progress
       this.#loadProgress.set(100);
       // set data loaded flag
       this.#dataLoaded.set(true);
     });
-    this.#dwvApp.addEventListener('loadend', (event: object) => {
+    this.#dwvApp.addEventListener('loadend', (event: Event) => {
+      const detail = (event as CustomEvent).detail;
       if (nReceivedLoadError) {
         this.#loadProgress.set(0);
-        this.dispatchEvent(new CustomEvent('loaderror', {detail: event}));
+        this.dispatchEvent(new CustomEvent('loaderror', {detail}));
       }
       if (nReceivedLoadAbort) {
         this.#loadProgress.set(0);
-        this.dispatchEvent(new CustomEvent('loadabort', {detail: event}));
+        this.dispatchEvent(new CustomEvent('loadabort', {detail}));
       }
     });
-    this.#dwvApp.addEventListener('loaderror', (event: ErrorEvent) => {
-      console.error(event.error);
+    this.#dwvApp.addEventListener('error', (event: Event) => {
+      console.error((event as CustomEvent<DwvErrorEventDetail>).detail.error);
       ++nReceivedLoadError;
     });
-    this.#dwvApp.addEventListener('loadabort', (/*event*/) => {
+    this.#dwvApp.addEventListener('abort', (/*event*/) => {
       ++nReceivedLoadAbort;
     });
   }
@@ -261,8 +279,9 @@ export class DwvAppService extends EventTarget implements OnDestroy {
    */
   #setupForwardListeners() {
     for (const type of forwardedEventTypes) {
-      this.#dwvApp.addEventListener(type, (event: object) => {
-        this.dispatchEvent(new CustomEvent(type, {detail: event}));
+      this.#dwvApp.addEventListener(type, (event: Event) => {
+        const detail = (event as CustomEvent).detail;
+        this.dispatchEvent(new CustomEvent(type, {detail}));
       });
     }
   }
@@ -273,10 +292,11 @@ export class DwvAppService extends EventTarget implements OnDestroy {
   #setupListeners() {
     // listen to 'wlchange' to flag a manual change
     // and update the presets if necessary
-    this.#dwvApp.addEventListener('wlchange', (event: DwvEvent) => {
+    this.#dwvApp.addEventListener('wlchange', (event: Event) => {
+      const detail = (event as CustomEvent<DwvEventDetail>).detail;
       // value: [center, width, name]
       const manualStr = 'manual';
-      if (event.value[2] === manualStr) {
+      if (detail.value[2] === manualStr) {
         if (!this.presetNames().includes(manualStr)) {
           this.#presetNames.update(values => [...values, manualStr]);
         }
@@ -287,8 +307,10 @@ export class DwvAppService extends EventTarget implements OnDestroy {
     });
 
     // handle key events
-    this.#dwvApp.addEventListener('keydown', (event: KeyboardEvent) => {
-      this.#dwvApp.defaultOnKeydown(event);
+    this.#dwvApp.addEventListener('keydown', (event: Event) => {
+      // the detail holds the key event properties
+      this.#dwvApp.defaultOnKeydown(
+        (event as CustomEvent<KeyboardEvent>).detail);
     });
     // handle window resize
     window.addEventListener('resize', this.#dwvApp.onResize);

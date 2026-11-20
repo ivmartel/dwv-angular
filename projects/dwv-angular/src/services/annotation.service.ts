@@ -134,7 +134,7 @@ export class AnnotationService extends EventTarget {
   /**
    * The editable change listeners indexed by data id.
    */
-  readonly #editableListeners = new Map<string, (event: {data: boolean}) => void>();
+  readonly #editableListeners = new Map<string, (event: Event) => void>();
 
   /**
    * The selected annotation.
@@ -446,9 +446,10 @@ export class AnnotationService extends EventTarget {
     if (annotationGroup === undefined) {
       return;
     }
-    const listener = (editEvent: {data: boolean}) => {
+    const listener = (editEvent: Event) => {
+      const editable = (editEvent as CustomEvent<{data: boolean}>).detail.data;
       this.#updateGroup(dataId,
-        (group) => ({...group, editable: editEvent.data}));
+        (group) => ({...group, editable}));
     };
     annotationGroup.addEventListener(
       'annotationgroupeditablechange', listener);
