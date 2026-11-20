@@ -28,7 +28,10 @@
           "builder": "@angular/build:unit-test",
           "options": {
             "coverageReporters": ["html", "text-summary"],
-            "tsConfig": "projects/dwv-angular/tsconfig.spec.json"
+            "tsConfig": "projects/dwv-angular/tsconfig.spec.json",
+            "setupFiles": [
+              "projects/dwv-angular/src/test-setup.ts"
+            ]
           }
         },
         "lint": {
@@ -128,7 +131,10 @@
           "builder": "@angular/build:unit-test",
           "options": {
             "coverageReporters": ["html", "text-summary"],
-            "tsConfig": "projects/dwv-angular-app/tsconfig.spec.json"
+            "tsConfig": "projects/dwv-angular-app/tsconfig.spec.json",
+            "setupFiles": [
+              "projects/dwv-angular-app/src/test-setup.ts"
+            ]
           }
         },
         "lint": {
