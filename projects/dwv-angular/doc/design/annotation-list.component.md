@@ -57,8 +57,9 @@ where the viewer id is unique per viewer on the page.
 
 ## Annotation row
 
-- **Content button** (shape icon and label): selects the annotation and moves
-  the view to its centroid.
+- **Content button** (shape icon and label): selects the annotation, moves
+  the view to its centroid and briefly highlights it on the canvas (one
+  opacity pulse, dwv `highlightAnnotation`).
 - **Shape icon**: depends on the shape; unknown shapes use a question mark.
 
   | Shape | Icon |
@@ -91,6 +92,9 @@ where the viewer id is unique per viewer on the page.
 | Toggle on | lock / labels / visibility / info pressed | Primary container background, icon in the on primary container colour (through `aria-pressed="true"`) |
 | Empty group | no annotations | Italic "No annotation" in the secondary text colour |
 | No quantification | details open, no numeric values | Italic "No quantification" |
+
+Tapping the canvas (scroll or zoom and pan tool) selects the top most
+annotation under the pointer, or clears the selection if there is none.
 
 When the selection changes, from the list or from the canvas, the selected row
 is scrolled into view (`scrollIntoView({block: 'nearest'})`) after rendering.

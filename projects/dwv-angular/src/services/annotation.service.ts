@@ -79,6 +79,8 @@ interface DwvEventDetail {
   dataid: string;
   data?: unknown;
   annotationid?: string;
+  /** The tapped annotations, top most first ('tap' event). */
+  annotations?: {dataid: string; annotationid: string}[];
 }
 
 /**
@@ -157,7 +159,8 @@ export class AnnotationService extends EventTarget {
     annotationadd: (event) => this.#onAnnotationAdd(event),
     annotationupdate: (event) => this.#onAnnotationUpdate(event),
     annotationremove: (event) => this.#onAnnotationRemove(event),
-    annotationselect: (event) => this.#onAnnotationSelect(event)
+    annotationselect: (event) => this.#onAnnotationSelect(event),
+    tap: (event) => this.#onTap(event)
   };
 
   constructor() {
@@ -268,7 +271,8 @@ export class AnnotationService extends EventTarget {
   }
 
   /**
-   * Go to an annotation: set the view position to its centroid.
+   * Go to an annotation: set the view position to its centroid
+   *   and highlight it.
    *
    * @param dataId The annotation group data id.
    * @param annotationId The annotation tracking UID.
@@ -283,6 +287,7 @@ export class AnnotationService extends EventTarget {
     const drawLayers = this.#dwvAppService.getDrawLayersByDataId(dataId);
     for (const layer of drawLayers) {
       layer.setCurrentPosition(annotCentroid);
+      layer.highlightAnnotation(annotationId);
     }
   }
 
@@ -562,6 +567,20 @@ export class AnnotationService extends EventTarget {
   #onAnnotationSelect(event: DwvAppServiceEvent) {
     if (event.detail.annotationid !== undefined) {
       this.selectAnnotation(event.detail.dataid, event.detail.annotationid);
+    }
+  }
+
+  /**
+   * Handle 'tap' event: select the tapped annotation,
+   *   or clear the selection if no annotation was tapped.
+   *
+   * @param event The event.
+   */
+  #onTap(event: DwvAppServiceEvent) {
+    const hit = event.detail.annotations?.[0];
+    if (hit === undefined ||
+      !this.selectAnnotation(hit.dataid, hit.annotationid)) {
+      this.clearSelection();
     }
   }
 

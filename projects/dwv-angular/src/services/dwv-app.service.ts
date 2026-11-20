@@ -44,7 +44,8 @@ const forwardedEventTypes = [
   'annotationadd',
   'annotationupdate',
   'annotationremove',
-  'annotationselect'
+  'annotationselect',
+  'tap'
 ];
 
 /**
