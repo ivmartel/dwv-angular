@@ -10,7 +10,7 @@ dwv-angular is not certified for diagnostic use. Released under GNU GPL-3.0 lice
 
 | Input | Type | Default | Description |
 | --- | --- | --- | --- |
-| `uri` | `string` | - | URI with search arguments describing the data to load, for example `https://www.demo.com/index.html?input=file.dcm` (see the dwv `App.loadFromUri` method). |
+| `uri` | `string` | - | URI with search arguments describing the data to load, for example `https://www.demo.com/index.html?input=file.dcm` (see the dwv `getURLsFromKeyValueUri` function). |
 | `urls` | `string` | - | White space separated urls of the data to load. |
 | `loadFromWindowLocation` | `boolean` | `false` | Use the window location as input URI if it contains search arguments. |
 | `showLegend` | `boolean` | `false` | Show the footer legend ("Powered by" dwv and Angular, with their versions). |

@@ -66,7 +66,7 @@ export class DwvViewerComponent {
   /**
    * URI with search arguments describing the data to load, for example
    * `https://www.demo.com/index.html?input=file.dcm`
-   * (see the dwv `App.loadFromUri` method).
+   * (see the dwv `getURLsFromKeyValueUri` function).
    */
   readonly uri = input<string>();
   /**

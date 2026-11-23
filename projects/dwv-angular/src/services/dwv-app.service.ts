@@ -6,7 +6,9 @@ import {
   DataElement,
   ViewConfig,
   ToolConfig,
-  getDwvVersion
+  UndoController,
+  getDwvVersion,
+  getURLsFromKeyValueUri
 } from 'dwv';
 import { overlayConfig } from './overlays';
 import { DWV_VIEWER_ID } from './viewer-id';
@@ -234,7 +236,8 @@ export class DwvAppService extends EventTarget implements OnDestroy {
       if (isFirstRender) {
         isFirstRender = false;
         const detail = (event as CustomEvent<DwvEventDetail>).detail;
-        const vl = this.#dwvApp.getViewLayersByDataId(detail.dataid)[0];
+        const vl = this.#dwvApp.getStageController()
+          .getViewLayersByDataId(detail.dataid)[0];
         const vc = vl.getViewController();
         // available tools
         this.#canScroll = vc.canScroll();
@@ -345,12 +348,16 @@ export class DwvAppService extends EventTarget implements OnDestroy {
   }
 
   /**
-   * Load a from uri.
+   * Load the data described by an uri: its `input` search argument
+   *   holds the data url or a key-value uri.
    *
    * @param uri The uri.
    */
   loadFromUri(uri: string) {
-    this.#dwvApp.loadFromUri(uri);
+    const urls = getURLsFromKeyValueUri(uri);
+    if (urls !== undefined) {
+      this.loadURLs(urls);
+    }
   }
 
   /**
@@ -403,7 +410,7 @@ export class DwvAppService extends EventTarget implements OnDestroy {
       this.#dwvApp.setToolFeatures(features);
     }
 
-    const lg = this.#dwvApp.getActiveLayerGroup();
+    const lg = this.#dwvApp.getStageController().getActiveLayerGroup();
     if (toolName === 'Draw') {
       // reuse created draw layer
       if (lg !== undefined && lg.getNumberOfLayers() > 1) {
@@ -422,7 +429,7 @@ export class DwvAppService extends EventTarget implements OnDestroy {
    * @param presetName The preset name.
    */
   applyPreset(presetName: string) {
-    const lg = this.#dwvApp.getActiveLayerGroup();
+    const lg = this.#dwvApp.getStageController().getActiveLayerGroup();
     if (lg !== undefined) {
       const vl = lg.getViewLayersFromActive()[0];
       const vc = vl.getViewController();
@@ -450,11 +457,12 @@ export class DwvAppService extends EventTarget implements OnDestroy {
     const viewConfig0 = new ViewConfig(this.#layerGroupDivId);
     viewConfig0.orientation = this.#orientation;
     const viewConfigs = {'*': [viewConfig0]};
-    this.#dwvApp.setDataViewConfigs(viewConfigs);
+    const stageController = this.#dwvApp.getStageController();
+    stageController.setDataViewConfigs(viewConfigs);
     // render data
-    const dataIds = this.#dwvApp.getDataIds();
+    const dataIds = this.#dwvApp.getDataController().getDataIds();
     for (const dataId of dataIds) {
-      this.#dwvApp.render(dataId);
+      stageController.render(dataId);
     }
   }
 
@@ -465,7 +473,7 @@ export class DwvAppService extends EventTarget implements OnDestroy {
    * @returns The annotation group, undefined if none.
    */
   getAnnotationGroup(dataId: string): AnnotationGroup | undefined {
-    return this.#dwvApp.getData(dataId)?.annotationGroup;
+    return this.#dwvApp.getDataController().get(dataId)?.annotationGroup;
   }
 
   /**
@@ -475,7 +483,7 @@ export class DwvAppService extends EventTarget implements OnDestroy {
    * @returns The draw layers.
    */
   getDrawLayersByDataId(dataId: string) {
-    return this.#dwvApp.getDrawLayersByDataId(dataId);
+    return this.#dwvApp.getStageController().getDrawLayersByDataId(dataId);
   }
 
   /**
@@ -483,8 +491,9 @@ export class DwvAppService extends EventTarget implements OnDestroy {
    *
    * @param cmd The command.
    */
-  readonly addToUndoStack = (cmd: Parameters<App['addToUndoStack']>[0]) => {
-    this.#dwvApp.addToUndoStack(cmd);
+  readonly addToUndoStack = (
+    cmd: Parameters<UndoController['addToUndoStack']>[0]) => {
+    this.#dwvApp.getUndoController().addToUndoStack(cmd);
   };
 
   /**
@@ -495,7 +504,8 @@ export class DwvAppService extends EventTarget implements OnDestroy {
    */
   addAnnotationGroup() {
     const divId = this.#layerGroupDivId;
-    const viewLayer = this.#dwvApp.getLayerGroupByDivId(divId)
+    const viewLayer = this.#dwvApp.getStageController()
+      .getLayerGroupByDivId(divId)
       ?.getActiveViewLayer();
     if (viewLayer === undefined) {
       console.warn('No active view layer to add an annotation group to');
@@ -509,9 +519,9 @@ export class DwvAppService extends EventTarget implements OnDestroy {
   }
 
   /**
-   * Reset the layout.
+   * Reset the zoom and pan.
    */
   reset() {
-    this.#dwvApp.resetLayout();
+    this.#dwvApp.getStageController().resetZoomPan();
   }
 }
