@@ -248,7 +248,8 @@ export class DwvAppService extends EventTarget implements OnDestroy {
     this.#dwvApp.addEventListener('load', (event: Event) => {
       const detail = (event as CustomEvent<DwvEventDetail>).detail;
       // set dicom tags
-      this.#metaData = this.#dwvApp.getMetaData(detail.dataid) as Record<string, DataElement>;
+      this.#metaData =
+        this.#dwvApp.getDataController().get(detail.dataid)?.meta ?? {};
       // force progress
       this.#loadProgress.set(100);
       // set data loaded flag
