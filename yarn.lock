@@ -434,17 +434,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@angular/platform-browser-dynamic@npm:^22.2.6":
-  version: 22.2.6
-  resolution: "@angular/platform-browser-dynamic@npm:22.2.6"
+"@angular/platform-browser-dynamic@npm:^22.3.0":
+  version: 22.3.0
+  resolution: "@angular/platform-browser-dynamic@npm:22.3.0"
   dependencies:
     tslib: "npm:^2.3.0"
   peerDependencies:
-    "@angular/common": 22.2.6
-    "@angular/compiler": 22.2.6
-    "@angular/core": 22.2.6
-    "@angular/platform-browser": 22.2.6
-  checksum: 10c0/82a839e67fb282f401684054e900f60348218fd0494f180198a32efbfabb81f40707f7093e647d7f372088b307b702b8629d2165746f098aecdf14265c8a275f
+    "@angular/common": 22.3.0
+    "@angular/compiler": 22.3.0
+    "@angular/core": 22.3.0
+    "@angular/platform-browser": 22.3.0
+  checksum: 10c0/ba58d49c6c55efad983426790be0985827c8dd2defb6f87f44a4f96027058a5e6eed84002546f40eef6ccf00973b2f4fd0209dab1b7ea74b241781b1f5549bc5
   languageName: node
   linkType: hard
 
@@ -3730,7 +3730,7 @@ __metadata:
     "@angular/forms": "npm:^22.2.6"
     "@angular/material": "npm:^22.2.7"
     "@angular/platform-browser": "npm:^22.2.6"
-    "@angular/platform-browser-dynamic": "npm:^22.2.6"
+    "@angular/platform-browser-dynamic": "npm:^22.3.0"
     "@angular/service-worker": "npm:^22.2.6"
     "@eslint/js": "npm:^10.0.1"
     "@types/jsdom": "npm:^30"

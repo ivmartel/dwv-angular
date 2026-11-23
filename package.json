@@ -32,7 +32,7 @@
     "@angular/forms": "^22.2.6",
     "@angular/material": "^22.2.7",
     "@angular/platform-browser": "^22.2.6",
-    "@angular/platform-browser-dynamic": "^22.2.6",
+    "@angular/platform-browser-dynamic": "^22.3.0",
     "@angular/service-worker": "^22.2.6",
     "add": "2.0.9",
     "dwv": "^0.37.0",
